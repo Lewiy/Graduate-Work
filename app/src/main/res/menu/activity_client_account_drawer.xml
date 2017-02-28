@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/add_order"
+            android:icon="@drawable/ic_add_rule_100"
+            android:title="Add order" />
+        <item
+            android:id="@+id/order_list"
+            android:icon="@drawable/ic_purchase_order_100"
+            android:title="Order List" />
+
+        <item
+            android:id="@+id/edit_profile"
+            android:icon="@drawable/ic_edit_user_male_100"
+            android:title="Edit profile" />
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_settings_100"
+            android:title="Settings" />
+        <item
+            android:id="@+id/log_out"
+            android:icon="@drawable/ic_exit_100"
+            android:title="Log out" />
+
+    </group>
+
+</menu>

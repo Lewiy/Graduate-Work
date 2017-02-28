@@ -1,0 +1,162 @@
+<resources>
+    <string name="app_name">TaxiService</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password or email is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <!-- Registration -->
+    <string name="name_registration">Name</string>
+    <string name="password_registration"> Password </string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="numbre_registration">Number (phone1)</string>
+    <string name="second_number_registration">Second number (phone2)</string>
+    <string name="registration">Register</string>
+    <string name="model_registration">Model</string>
+    <string name="manufacturer_registration">Brend</string>
+    <string name="plate_number">Plate number</string>
+    <string name="sign_up">Sign up</string>
+    <string name="text_lable_num_passenger">Num passenger</string>
+    <string name="text_lable_car_type">Car type</string>
+    <!--spinner resurses-->
+    <string name="car_type_title">type car</string>
+    <string-array name="set_num_passenger">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string name="num_passenger_title">number passenger</string>
+    <string-array name="set_car_type">
+        <item>PASSENGER_CAR</item>
+        <item>TRUCK</item>
+        <item>MINIBUS</item>
+    </string-array>
+
+    <!--reset password -->
+    <string name="title_reset_password_activity">Forgot password?</string>
+    <string name="email_reset_password_activity">Email</string>
+    <string name="button_reset_password_activity">Reset Password</string>
+    <string name="title_activity_client_account">ClientAccount</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!--fragment add order client-->
+    <string name="order_name"></string>
+    <string name="start_point"> start point</string>
+    <string name="end_point">end point</string>
+    <string name="price">price</string>
+    <string name="statis">status</string>
+    <string name="time_ride">time ride</string>
+    <string name="date_ride">date ride</string>
+
+    <!--fragment personal page (edit) -->
+    <string name="name_personal_page">Name</string>
+    <string name="password_personal_page"> Password </string>
+    <string name="repeat_personal_page">Repeat password</string>
+    <string name="numbre_personal_page">Number</string>
+    <string name="second_number_personal_page">Second number</string>
+    <string name="update_personal_page">update</string>
+    <string name="ok_personal_page">Ok</string>
+    <string name="model_personal_page">Model</string>
+    <string name="manufacturer_personal_page">Brend</string>
+    <string name="plate_personal_page">Plate number</string>
+    <string name="text_lable_num_passenger_personal_page">Num passenger</string>
+    <string name="text_lable_car_type_personal_page">Car type</string>
+    <string name="car_characteristics"> Car characteristics </string>
+
+    <!-- oreder list client -->
+    <string name="title_item_list">Time and date of order</string>
+
+    <!-- edit order client -->
+    <string name="calculate_price"> culculate price</string>
+    <string name="km_distance">distance</string>
+    <string name="customer_name"> customer </string>
+    <string name="driver_name"> driver </string>
+    <string name="value"> 0 </string>
+    <string name="accept">accept</string>
+    <string name="decline">decline</string>
+    <string name="type_status_order"> Status order </string>
+    <string name="change_order_status_lable">Change order status</string>
+    <string name="type_status_reckoning"> type reckoning </string>
+    <string name="taxi_driver">taxi driver</string>
+    <string name="duration">duration</string>
+    <!--spinner resurses-->
+    <string name="set_car_type">Status</string>
+    <!-- add order -->
+    <string-array name="change_status_client_add">
+        <item>New</item>
+    </string-array>
+    <string-array name="change_status_client_new_accepted">
+        <item>Nothing selected</item>
+        <item>Cancelled</item>
+    </string-array>
+    <!-- update order -->
+
+    <string-array name="set_type_reckoning">
+        <item>Cash</item>
+        <item>Credit Card</item>
+    </string-array>
+
+
+    <!--google map -->
+    <string name="button_ok"> OK </string>
+
+    <!-- list of order -->
+    <string-array name="sort_value">
+        <item>All</item>
+        <item>Accepted</item>
+        <item>Cancelled</item>
+        <item>Done</item>
+        <item>New</item>
+    </string-array>
+    <!-- driver accaunt -->
+    <string name="title_activity_driver_account">DriverAccount</string>
+    <!-- order information driver -->
+    <string name="value_order">Inform order</string>
+    <string name="without_requirement">Without additional requir</string>
+    <string name="spinner_change_sing">Change status menu</string>
+    <string name="title_info_order_driver"> ORDER INFO </string>
+    <string name="customer_account_info">Customer info</string>
+    <string-array name="change_status_driver_new">
+        <item>Nothing selected</item>
+        <item>Accepted</item>
+    </string-array>
+    <string-array name="change_status_driver_accept">
+        <item>Nothing selected</item>
+        <item>Cancel</item>
+        <item>Done</item>
+    </string-array>
+
+    <string-array name="change_status_driver_done">
+        <item>Nothing selected</item>
+    </string-array>
+
+    <!-- account info customer driver taxi -->
+    <string name="name_info">Name:</string>
+    <string name="email_info">Email:</string>
+    <string name="mobile_number_inf">Mobile:</string>
+    <string name="manufacturer_inf">Brand:</string>
+    <string name="model_inf">Model:</string>
+    <string name="plate_number_inf">Plate number:</string>
+    <string name="seats_number_inf">Seats number:</string>
+    <string name="car_type_inf">car type:</string>
+</resources>

@@ -1,0 +1,23 @@
+{
+  "orderId": 125,
+  "startTime": "DateTime",
+  "startPoint": "ул. лоховская 12",
+  "endPoint": "ул. лоховская 13",
+  "status": "DONE",
+  "customer": {
+    "customerId": 123531,
+    "name": "Пупсик"
+  },
+  "taxiDriver": {
+    "taxiDriverId": 642134,
+    "name": "пупсовод"
+  },
+  "price": 12,
+  "additionalRequirements": [
+    {
+      "id": 1253,
+      "name": "Розовые ушки у водителя",
+      "description": "Водитель должен быть с розовыми ушками на голове"
+    }
+  ]
+}
