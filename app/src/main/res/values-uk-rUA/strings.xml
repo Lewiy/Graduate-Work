@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Сервіс таксі</string>
+    <string name="title_activity_login">Вхід</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Пошта</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="action_sign_in">Вхід</string>
+    <string name="action_sign_in_short">Вхід</string>
+    <string name="error_invalid_email">Помилкова адреса пошти</string>
+    <string name="error_invalid_password">Цей пароль занадто короткий</string>
+    <string name="error_incorrect_password">Пароль або пошта неправильні</string>
+    <string name="error_field_required">Це поле обовязкове</string>
+    <string name="permission_rationale">"Доступ до ваших контактів необхідний для автодоповнення"
+    </string>
+
+    <!-- Registration -->
+    <string name="name_registration">Ім`я</string>
+    <string name="button_back_to_personal_registration">Назад</string>
+    <string name="button_next_to_driver_registration">Далі</string>
+    <string name="password_registration">Пароль</string>
+    <string name="repeat_password">Підтвердження паролю</string>
+    <string name="numbre_registration">Телефон 1</string>
+    <string name="second_number_registration">Телефо 2</string>
+    <string name="model_registration">Модель</string>
+    <string name="manufacturer_registration">Марка</string>
+    <string name="plate_number">Номер автомобіля</string>
+    <string name="sign_up">Реєстрація</string>
+    <string name="text_lable_num_passenger">Кількість місць</string>
+    <string name="text_lable_car_type">Тип автомобіля</string>
+    <string name="driver_license">Водійські права</string>
+    <string name="license_expiration_date">Строк придатності</string>
+    <string name="category_license">Категорії</string>
+    <string name="front_foto_license">Зробити фото лицьової сторони</string>
+    <string name="back_foto_license">Зробити фото тільної сторони</string>
+    <!--spinner resurses-->
+    <string name="car_type_title">Тип автомобіля</string>
+    <string-array name="set_num_passenger">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string name="num_passenger_title">Число пасажирів</string>
+    <string-array name="set_car_type">
+        <item>Легковий автомобіль</item>
+        <item>Вантажний</item>
+        <item>Мікроавтобус</item>
+    </string-array>
+
+    <!--reset password -->
+    <string name="title_reset_password_activity">Забули пароль?</string>
+    <string name="email_reset_password_activity">Пошта</string>
+    <string name="button_reset_password_activity">Скинути налаштування</string>
+    <string name="title_activity_client_account">Кабінет пасажира</string>
+
+    <string name="navigation_drawer_open">Відкрити шторку навігації</string>
+    <string name="navigation_drawer_close">Сховати шторку навігації</string>
+
+    <string name="action_settings">Налаштування</string>
+
+    <!--fragment add order client-->
+    <string name="order_name"></string>
+    <string name="start_point">Звідки</string>
+    <string name="end_point">Куди</string>
+    <string name="price">Вартість</string>
+    <string name="statis">Статус</string>
+    <string name="time_ride">Тривалість поїздки</string>
+    <string name="date_ride">Дата поїздки</string>
+
+    <!--fragment personal page (edit) -->
+    <string name="name_personal_page">Ім`я</string>
+    <string name="password_personal_page">Пароль</string>
+    <string name="repeat_personal_page">Підтвердити пароль</string>
+    <string name="numbre_personal_page">Телефон 1</string>
+    <string name="second_number_personal_page">Телефон 2</string>
+    <string name="update_personal_page">Оновити</string>
+    <string name="ok_personal_page">Ок</string>
+    <string name="model_personal_page">Модель</string>
+    <string name="manufacturer_personal_page">Марка</string>
+    <string name="plate_personal_page">Номер автомобіля</string>
+    <string name="text_lable_num_passenger_personal_page">Кількість місць</string>
+    <string name="text_lable_car_type_personal_page">Тип автомобіля</string>
+    <string name="car_characteristics">Характеристики автомобіля</string>
+
+    <!-- oreder list client -->
+    <string name="title_item_list">Час та дата поїздки</string>
+
+    <!-- edit order client -->
+    <string name="calculate_price">Порахувати ціну</string>
+    <string name="km_distance">Відстань</string>
+    <string name="customer_name">Пасажир</string>
+    <string name="driver_name">Водій</string>
+    <string name="value">За замовчуванням</string>
+    <string name="accept">Підтвердити</string>
+    <string name="decline">Скасувати</string>
+    <string name="type_status_order">Статус замовлення</string>
+    <string name="change_order_status_lable">Змінити статус замовлення</string>
+    <string name="type_status_reckoning">Тип оплати</string>
+    <string name="taxi_driver">Водій таксі</string>
+    <string name="duration">Тривалість</string>
+    <!--spinner resurses-->
+    <string name="set_car_type">Статус</string>
+    <!-- add order -->
+    <string-array name="change_status_client_add">
+        <item>Новий</item>
+    </string-array>
+    <string-array name="change_status_client_new_accepted">
+        <item>Не вибрано</item>
+        <item>Скасований</item>
+    </string-array>
+    <!-- update order -->
+
+    <string-array name="set_type_reckoning">
+        <item>Готівка</item>
+        <item>Кредитка</item>
+    </string-array>
+
+
+    <!--google map -->
+    <string name="button_ok">ОК</string>
+
+    <!-- list of order -->
+    <string-array name="sort_value">
+        <item>Всі</item>
+        <item>Підтверджені</item>
+        <item>Скасовані</item>
+        <item>Виконані</item>
+        <item>Нові</item>
+    </string-array>
+    <!-- driver accaunt -->
+    <string name="title_activity_driver_account">Кабінет водія</string>
+    <!-- order information driver -->
+    <string name="value_order">Про замовлення</string>
+    <string name="without_requirement">Без додаткових опцій</string>
+    <string name="spinner_change_sing">Змінити статус</string>
+    <string name="title_info_order_driver">Про замовлення</string>
+    <string name="customer_account_info">Пасажир</string>
+    <string-array name="change_status_driver_new">
+        <item>Не вибрано</item>
+        <item>Підтверджені</item>
+    </string-array>
+    <string-array name="change_status_driver_accept">
+        <item>Не вибрано</item>
+        <item>Скасовані</item>
+        <item>Виконані</item>
+    </string-array>
+
+    <string-array name="change_status_driver_done">
+        <item>Не вибрано</item>
+    </string-array>
+
+    <!-- account info customer driver taxi -->
+    <string name="name_info">Ім`я:</string>
+    <string name="email_info">Пошта:</string>
+    <string name="mobile_number_inf">Телефон:</string>
+    <string name="manufacturer_inf">Марка:</string>
+    <string name="model_inf">Model:</string>
+    <string name="plate_number_inf">Номер автомобіля:</string>
+    <string name="seats_number_inf">Кількість місць:</string>
+    <string name="car_type_inf">Тип автомобіля:</string>
+</resources>

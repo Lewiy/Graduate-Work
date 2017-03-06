@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mRegisterCustomer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(LoginActivity.this, RegistrationActivity.class);
+                Intent myIntent = new Intent(LoginActivity.this, RegistrationActivityFragm.class);
                 myIntent.putExtra("key", value); //Optional parameters
                 LoginActivity.this.startActivity(myIntent);
             }

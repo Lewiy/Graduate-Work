@@ -62,6 +62,10 @@
             android:name=".view.ViewDriver.OrderInf"
             android:label="@string/title_activity_client_account" />
 
+        <activity
+            android:name=".view.activity.RegistrationActivityFragm"
+            android:label="@string/button_back_to_personal_registration" />
+
     </application>
 
 </manifest>

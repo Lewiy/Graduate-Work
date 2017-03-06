@@ -8,4 +8,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="lev_distance">15dp</dimen>
     <dimen name="lev_distance_signat_element">10dp</dimen>
+
+    <dimen name="container_height">400dp</dimen>
+    <dimen name="container_widht">67dp</dimen>
 </resources>
