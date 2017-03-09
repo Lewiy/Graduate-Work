@@ -12,5 +12,5 @@ public interface UserOperationInterface {
 
     void showError(String error);
 
-    void doneOperation(String done);
+    void doneOperation(int code, String done);
 }

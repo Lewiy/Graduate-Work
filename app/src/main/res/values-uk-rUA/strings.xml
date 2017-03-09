@@ -34,6 +34,7 @@
     <string name="category_license">Категорії</string>
     <string name="front_foto_license">Зробити фото лицьової сторони</string>
     <string name="back_foto_license">Зробити фото тільної сторони</string>
+    <string name="i_am_driver">Я водій</string>
     <!--spinner resurses-->
     <string name="car_type_title">Тип автомобіля</string>
     <string-array name="set_num_passenger">

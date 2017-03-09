@@ -5,4 +5,5 @@ package com.lewgmail.romanenko.taxiservice.view.fragments;
  */
 
 public interface OperationFragment {
+   boolean validitionFields();
 }

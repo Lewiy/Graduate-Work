@@ -1,24 +1,22 @@
 package com.lewgmail.romanenko.taxiservice.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UserRegistration;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UserRegistrationCar;
-import com.lewgmail.romanenko.taxiservice.view.fragmentClient.OrderListFragment;
+import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
 import com.lewgmail.romanenko.taxiservice.view.fragments.FragmentDriverRegist;
 import com.lewgmail.romanenko.taxiservice.view.fragments.FragmentDriverRegistLicen;
 import com.lewgmail.romanenko.taxiservice.view.fragments.FragmentPersonRegist;
+import com.lewgmail.romanenko.taxiservice.view.fragments.OperationFragment;
 import com.lewgmail.romanenko.taxiservice.view.fragments.ReadInform;
 
 import java.util.ArrayList;
@@ -28,15 +26,26 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.R.attr.value;
+
 /**
  * Created by Lev on 03.03.2017.
  */
 
-public class RegistrationActivityFragm extends AppCompatActivity implements ReadInform {
-     @BindView(R.id.registration_button_person)
-     Button registrationButton;
-    Fragment fragment = null;
-    Class fragmentClass = null;
+public class RegistrationActivityFragm extends AppCompatActivity implements ReadInform, UserOperationInterface {
+
+    @BindView(R.id.registration_button_person)
+    Button registrationButton;
+
+    private Fragment fragment = null;
+    private Class fragmentClass = null;
+
+    private boolean checkBoxDriver = false;
+
+    private UserPresenter userPresenter;
+    UserRegistration userRegistration = new UserRegistration();
+    private int indexCurrentFragment = 1;
+    private boolean flagRunActivity = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,80 +53,62 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
         setContentView(R.layout.container_fragment_registration);
         ButterKnife.bind(this);
         initializationFragments();
+        userPresenter = new UserPresenter(this);
     }
 
 
     @OnClick(R.id.button_registration_back)
     public void onClickButtonBack() {
         if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            fragment = getSupportFragmentManager().findFragmentByTag(Integer.toString(--indexCurrentFragment));
             getSupportFragmentManager().popBackStack();
+            if (getSupportFragmentManager().getBackStackEntryCount() == 2
+                    || getSupportFragmentManager().getBackStackEntryCount() == 3)
+                registrationButton.setText(R.string.button_next_to_driver_registration);
         }
     }
 
     @OnClick(R.id.registration_button_person)
     public void onClickButtonRegestNext() {
-            switch (getSupportFragmentManager().getBackStackEntryCount()) {
-                case 1:
+        createUser(fragment);
+        switch (getSupportFragmentManager().getBackStackEntryCount()) {
+            case 1:
+                if (!checkBoxDriver && validationFragment(fragment)) {
+                    submit();
+                    flagRunActivity = true;
+                } else
                     fragmentClass = FragmentDriverRegist.class;
-                    break;
-                case 2:
-                    fragmentClass = FragmentDriverRegistLicen.class;
-                    break;
-                case 3:
-                    registrationButton.setText(R.string.sign_up);
-                    break;
-            }
-        if (getSupportFragmentManager().getBackStackEntryCount()< 3) {
+                break;
+            case 2:
+                fragmentClass = FragmentDriverRegistLicen.class;
+                break;
+            case 3:
+                if (validationFragment(fragment)) {
+                    submit();
+                    flagRunActivity = true;
+                }
+                break;
+        }
+        if (getSupportFragmentManager().getBackStackEntryCount() < 3
+                && validationFragment(fragment) && flagRunActivity == false) {
             try {
                 fragment = (Fragment) fragmentClass.newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            if (fragment instanceof FragmentDriverRegistLicen)
+                registrationButton.setText(R.string.sign_up);
+
             // Вставляем фрагмент, заменяя текущий фрагмент
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.conteiner_registration, fragment)
-                    .addToBackStack(null).commit();
+            ++indexCurrentFragment;
+            fragmentManager.beginTransaction().replace(R.id.conteiner_registration,
+                    fragment,Integer.toString(indexCurrentFragment))
+                    .addToBackStack(Integer.toString(indexCurrentFragment)).commit();
+
         }
     }
-
-    private void initializationFragments() {
-
-        fragment = new FragmentPersonRegist();
-
-        // Вставляем фрагмент, заменяя текущий фрагмент
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.conteiner_registration, fragment)
-                .addToBackStack(null).commit();
-    }
-
-   /* private UserRegistration createUser() {
-        UserRegistration userRegistration = new UserRegistration();
-
-        userRegistration.setName(nameRegistration.getText().toString());
-        userRegistration.setUsername(emailRegistration.getText().toString());
-        userRegistration.setPassword(passwordRegistration.getText().toString());
-        List<String> mobiles = new ArrayList();
-        mobiles.add(mobNamberRegistration.getText().toString());
-        mobiles.add(mobSecondNamber.getText().toString());
-        userRegistration.setMobileNumbers(mobiles);
-
-        if (checkBoxDriverUser.isChecked()) {
-            userRegistration.setUserType("TAXI_DRIVER");
-            UserRegistrationCar car = new UserRegistrationCar();
-            //  car.setCarId(0);
-            car.setManufacturer(brendRegistration.getText().toString());
-            car.setModel(modelRegistration.getText().toString());
-            car.setPlateNumber(plateNumberRegistration.getText().toString());
-            car.setSeatsNumber(Integer.parseInt(mSpinnerNumPassenger.getSelectedItem().toString()));
-            car.setCarType(mSpinnerCarType.getSelectedItem().toString());
-
-            userRegistration.setCar(car);
-        } else
-            userRegistration.setUserType("CUSTOMER");
-
-
-        return userRegistration;
-    }*/
 
     @Override
     public void onBackPressed() {
@@ -127,34 +118,114 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
         }
     }
 
+    /**
+     * Interface for communicate activity with fragments
+     */
 
     @Override
-    public void readField1(String text) {
+    public void readFieldOther(boolean checkBox) {
+        checkBoxDriver = checkBox;
+        if (checkBoxDriver)
+            registrationButton.setText(R.string.button_next_to_driver_registration);
+        else
+            registrationButton.setText(R.string.sign_up);
+    }
+
+    private void submit() {
+        userPresenter.registerUser(userRegistration);
+    }
+
+    @Override
+    public void setNameSideBar(String name) {
 
     }
 
     @Override
-    public void readField2(String text) {
+    public void setEmailSideBar(String email) {
 
     }
 
     @Override
-    public void readField3(String text) {
-
+    public void showError(String error) {
+        Toast.makeText(this,error,Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void readField4(String text) {
+    public void doneOperation(int responceCod,String done) {
+        Toast.makeText(this,done,Toast.LENGTH_SHORT).show();
+        if(responceCod == 200)
+            runLogInActyvity();
+    }
+
+    /**
+     * Interface for communicate activity with userPresenter
+     */
+
+    private void initializationFragments() {
+
+        fragment = new FragmentPersonRegist();
+
+        // Вставляем фрагмент, заменяя текущий фрагмент
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ++indexCurrentFragment;
+        fragmentManager.beginTransaction().replace(R.id.conteiner_registration, fragment,Integer.toString(indexCurrentFragment))
+                .addToBackStack(Integer.toString(indexCurrentFragment)).commit();
+    }
+
+    private void createUser(Fragment fragment) {
+
+        if (fragment instanceof FragmentPersonRegist) {
+            FragmentPersonRegist fragmentPassengerRegist = (FragmentPersonRegist) fragment;
+            userRegistration.setName(fragmentPassengerRegist.getName());
+            userRegistration.setUsername(fragmentPassengerRegist.getEmail());
+            userRegistration.setPassword(fragmentPassengerRegist.getPassword());
+            List<String> mobiles = new ArrayList();
+            mobiles.add(fragmentPassengerRegist.getPhone1());
+            mobiles.add(fragmentPassengerRegist.getPhone2());
+            userRegistration.setMobileNumbers(mobiles);
+            userRegistration.setUserType("CUSTOMER");
+        }
+
+        if (fragment instanceof FragmentDriverRegist) {
+            userRegistration.setUserType("TAXI_DRIVER");
+            FragmentDriverRegist fragmentDriverRegist = (FragmentDriverRegist) fragment;
+            UserRegistrationCar car = new UserRegistrationCar();
+            car.setManufacturer(fragmentDriverRegist.getBrand());
+            car.setModel(fragmentDriverRegist.getModel());
+            car.setPlateNumber(fragmentDriverRegist.getPlateNumber());
+            car.setSeatsNumber(Integer.parseInt(fragmentDriverRegist.getNumPassengers()));
+            //car.setCarType(fragmentDriverRegist.getTypeCar());
+            fragmentDriverRegist.getTypeCar();
+            userRegistration.setCar(car);
+        }
+
+        if (fragment instanceof FragmentDriverRegistLicen) {
+            FragmentDriverRegistLicen fragmentDriverRegistLicen
+                    = (FragmentDriverRegistLicen) fragment;
+
+        }
+    }
+
+
+    private void runLogInActyvity() {
+        Intent myIntent = new Intent(this, LoginActivity.class);
+        myIntent.putExtra("key", value); //Optional parameters
+        this.startActivity(myIntent);
 
     }
 
-    @Override
-    public void readField5(String text) {
+    private boolean validationFragment(Fragment fragment) {
+        if (fragment instanceof OperationFragment) {
 
+            OperationFragment operationFragment = (OperationFragment) fragment;
+
+            if (operationFragment.validitionFields())
+                return true;
+            else
+                return false;
+        } else
+            return false;
     }
 
-    @Override
-    public void readFieldOther() {
-
-    }
 }

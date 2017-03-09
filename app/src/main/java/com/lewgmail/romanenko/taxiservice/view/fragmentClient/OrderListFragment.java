@@ -16,6 +16,7 @@ import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.presenter.BasePresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.adapters.TestDataForList;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterForListOrderClient;
+import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterSpinnerLocalization;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -103,11 +104,11 @@ public class OrderListFragment extends android.support.v4.app.Fragment implement
                                        long id) {
 
                 progress = new ProgressDialog(getActivity());
-                progress.setTitle("Loading");
-                progress.setMessage("Wait while loading...");
+                progress.setTitle(R.string.main_theme_loading);
+                progress.setMessage(getResources().getString(R.string.text_of_loading));
                 progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
                 progress.show();
-                basePresenter.loadOrdersList(sortSpinner.getSelectedItem().toString());
+                basePresenter.loadOrdersList(AdapterSpinnerLocalization.adaptSpinnerTypeOrder(sortSpinner.getSelectedItemPosition()));
             }
 
             @Override

@@ -33,6 +33,7 @@
     <string name="category_license">Категории</string>
     <string name="front_foto_license">Сделать фото лицевой части</string>
     <string name="back_foto_license">Сделать фото тыльной части</string>
+    <string name="i_am_driver">Я водитель</string>
     <!--spinner resurses-->
     <string name="car_type_title">Тип машины</string>
     <string-array name="set_num_passenger">

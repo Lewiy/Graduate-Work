@@ -187,7 +187,7 @@ public class ClientAccount extends AppCompatActivity
     }
 
     @Override
-    public void doneOperation(String done) {
+    public void doneOperation(int responseCode, String done) {
         Toast.makeText(this, done, Toast.LENGTH_SHORT).show();
     }
 }

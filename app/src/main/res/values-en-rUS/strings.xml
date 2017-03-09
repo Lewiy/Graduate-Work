@@ -35,6 +35,7 @@
     <string name="category_license">Category license</string>
     <string name="front_foto_license">Make foto of front your license</string>
     <string name="back_foto_license">make foto of back yor license</string>
+    <string name="i_am_driver">I am driver</string>
     <!--spinner resurses-->
     <string name="car_type_title">type car</string>
     <string-array name="set_num_passenger">

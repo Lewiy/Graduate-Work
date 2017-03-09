@@ -334,7 +334,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     @Override
-    public void doneOperation(String done) {
+    public void doneOperation(int responseCod, String done) {
         Toast.makeText(this, done, Toast.LENGTH_SHORT).show();
     }
 
