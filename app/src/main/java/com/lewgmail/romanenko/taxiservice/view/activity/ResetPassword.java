@@ -69,7 +69,7 @@ public class ResetPassword extends AppCompatActivity implements UserOperationInt
     }
 
     @Override
-    public void doneOperation(int responseCod,String done) {
+    public void doneOperation(int responseCod, String done) {
         Toast.makeText(this, done, Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,6 +1,5 @@
 package com.lewgmail.romanenko.taxiservice.view.fragments;
 
-import android.graphics.Path;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

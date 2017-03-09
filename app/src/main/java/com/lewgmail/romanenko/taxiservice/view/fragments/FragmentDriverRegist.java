@@ -22,15 +22,15 @@ import butterknife.ButterKnife;
 public class FragmentDriverRegist extends android.support.v4.app.Fragment implements OperationFragment {
 
     @BindView(R.id.plate_number_field)
-     EditText plateNumberRegistration;
+    EditText plateNumberRegistration;
     @BindView(R.id.brend_registration_field)
     EditText brendRegistration;
     @BindView(R.id.model_registration)
-     EditText modelRegistration;
+    EditText modelRegistration;
     @BindView(R.id.set_car_type)
-     Spinner mSpinnerCarType;
+    Spinner mSpinnerCarType;
     @BindView(R.id.set_num_passenger)
-     Spinner mSpinnerNumPassenger;
+    Spinner mSpinnerNumPassenger;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class FragmentDriverRegist extends android.support.v4.app.Fragment implem
     }
 
     public String getTypeCar() {
-       return AdapterSpinnerLocalization.adaptSpinnerTypeCar(mSpinnerCarType.getSelectedItemPosition());
+        return AdapterSpinnerLocalization.adaptSpinnerTypeCar(mSpinnerCarType.getSelectedItemPosition());
     }
 
     @Override

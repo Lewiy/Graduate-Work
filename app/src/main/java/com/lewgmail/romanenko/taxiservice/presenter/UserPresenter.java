@@ -67,7 +67,7 @@ public class UserPresenter {
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         Integer.toString(responseBodyResponse.code());
                         responseBodyResponse.message().toString();
-                        view2.doneOperation(responseBodyResponse.code(),Integer.toString(responseBodyResponse.code()) + "successfully");
+                        view2.doneOperation(responseBodyResponse.code(), Integer.toString(responseBodyResponse.code()) + "successfully");
                     }
                 });
     }
@@ -154,7 +154,7 @@ public class UserPresenter {
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         Integer.toString(responseBodyResponse.code());
                         responseBodyResponse.message().toString();
-                        view2.doneOperation(responseBodyResponse.code(),Integer.toString(responseBodyResponse.code()) + "Done");
+                        view2.doneOperation(responseBodyResponse.code(), Integer.toString(responseBodyResponse.code()) + "Done");
                     }
                 });
     }

@@ -256,7 +256,7 @@ public class RegistrationActivity extends AppCompatActivity implements UserOpera
     }
 
     @Override
-    public void doneOperation(int responseCod,String done) {
+    public void doneOperation(int responseCod, String done) {
         progress.dismiss();
         Toast.makeText(this, done, Toast.LENGTH_LONG).show();
     }

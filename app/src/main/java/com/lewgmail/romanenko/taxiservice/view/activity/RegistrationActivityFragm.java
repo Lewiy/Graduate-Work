@@ -36,14 +36,11 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
 
     @BindView(R.id.registration_button_person)
     Button registrationButton;
-
+    UserRegistration userRegistration = new UserRegistration();
     private Fragment fragment = null;
     private Class fragmentClass = null;
-
     private boolean checkBoxDriver = false;
-
     private UserPresenter userPresenter;
-    UserRegistration userRegistration = new UserRegistration();
     private int indexCurrentFragment = 1;
     private boolean flagRunActivity = false;
 
@@ -104,7 +101,7 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
             FragmentManager fragmentManager = getSupportFragmentManager();
             ++indexCurrentFragment;
             fragmentManager.beginTransaction().replace(R.id.conteiner_registration,
-                    fragment,Integer.toString(indexCurrentFragment))
+                    fragment, Integer.toString(indexCurrentFragment))
                     .addToBackStack(Integer.toString(indexCurrentFragment)).commit();
 
         }
@@ -147,13 +144,13 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
 
     @Override
     public void showError(String error) {
-        Toast.makeText(this,error,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void doneOperation(int responceCod,String done) {
-        Toast.makeText(this,done,Toast.LENGTH_SHORT).show();
-        if(responceCod == 200)
+    public void doneOperation(int responceCod, String done) {
+        Toast.makeText(this, done, Toast.LENGTH_SHORT).show();
+        if (responceCod == 200)
             runLogInActyvity();
     }
 
@@ -169,7 +166,7 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         ++indexCurrentFragment;
-        fragmentManager.beginTransaction().replace(R.id.conteiner_registration, fragment,Integer.toString(indexCurrentFragment))
+        fragmentManager.beginTransaction().replace(R.id.conteiner_registration, fragment, Integer.toString(indexCurrentFragment))
                 .addToBackStack(Integer.toString(indexCurrentFragment)).commit();
     }
 

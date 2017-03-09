@@ -1,12 +1,6 @@
 package com.lewgmail.romanenko.taxiservice.model.api;
 
-import android.util.Log;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -16,7 +10,6 @@ import okio.Buffer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
 
 /**
  * Created by Lev on 13.11.2016.
@@ -30,9 +23,9 @@ public class Services {
              "http://77.47.218.163:8081/taxiservice/";*/
     public static final String API_ENDPOINT =
             "https://taxiserviceserver.herokuapp.com/";
-  //  private static final int TIMEOUT = 60;
-  //  private static final int WRITE_TIMEOUT = 120;
-  //  private static final int CONNECT_TIMEOUT = 10;
+    //  private static final int TIMEOUT = 60;
+    //  private static final int WRITE_TIMEOUT = 120;
+    //  private static final int CONNECT_TIMEOUT = 10;
     private static final OkHttpClient.Builder CLIENT = new OkHttpClient
             .Builder();
 
@@ -47,21 +40,21 @@ public class Services {
         public Response intercept(Chain chain) throws IOException {
             Request original = chain.request();
 
-           //  String str= bodyToString(original);
+            //  String str= bodyToString(original);
 
 
-           //     Response response = chain.proceed(chain.request());
-          // Log.w("Retrofit@Response", response.body().string());
-           //  String string = original.body().toString();
+            //     Response response = chain.proceed(chain.request());
+            // Log.w("Retrofit@Response", response.body().string());
+            //  String string = original.body().toString();
             Request request = original.newBuilder()
                     .header("Accept", "application/json")
                     .header("Content-Type", "application/json;Charset=UTF-8")
                     .method(original.method(), original.body())
                     .build();
-          //   Log.w("Retrofit@Response", request.body().toString());
-        //   String str = bodyToString(response);
-        //    Log.i("req",bodyToString(request));
-           // String req = request.body().;
+            //   Log.w("Retrofit@Response", request.body().toString());
+            //   String str = bodyToString(response);
+            //    Log.i("req",bodyToString(request));
+            // String req = request.body().;
           /*  try {
                 final Request copy = request.newBuilder().build();
                 final Buffer buffer = new Buffer();
@@ -76,7 +69,7 @@ public class Services {
 
     };
 
-    private static String bodyToString(final Request request){
+    private static String bodyToString(final Request request) {
 
         try {
             final Request copy = request.newBuilder().build();
