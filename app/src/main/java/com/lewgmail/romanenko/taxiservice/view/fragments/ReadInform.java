@@ -5,10 +5,17 @@ package com.lewgmail.romanenko.taxiservice.view.fragments;
  */
 
 public interface ReadInform {
-     void readField1(String text);
-     void readField2(String text);
-     void readField3(String text);
-     void readField4(String text);
-     void readField5(String text);
-     void readFieldOther();
+    void readName(String text);
+
+    void readEmail(String text);
+
+    void readPassword(String text);
+
+    void readPassword2(String text);
+
+    void readPhone1(String text);
+
+    void readPhone2(String text);
+
+    void readFieldOther(boolean checkBox);
 }
