@@ -166,4 +166,21 @@
     <string name="plate_number_inf">Номер автомобіля:</string>
     <string name="seats_number_inf">Кількість місць:</string>
     <string name="car_type_inf">Тип автомобіля:</string>
+
+
+    <!-- errors of validation -->
+    <string name="error_not_equals_passwords">Паролі не співпадають</string>
+    <string name="dont_inputed_fields">Не всі поля заповнені</string>
+    <string name="input_all_fields">Будь-ласка заповніть всі поля</string>
+
+    <!-- elments of loading -->
+    <string name="main_theme_loading">Завантаження</string>
+    <string name="text_of_loading">Почекайте, йде завантаження...</string>
+
+    <!-- elment menu navigationDrawer -->
+    <string name="add_order">Зробити замовлення</string>
+    <string name="order_list">Список замовлень</string>
+    <string name="edit_profile">Редагувати профіль</string>
+    <string name="settings">Налаштування</string>
+    <string name="log_out">Вийти</string>
 </resources>

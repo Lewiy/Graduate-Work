@@ -98,8 +98,8 @@ public class EditOrderActivity extends FragmentActivity implements
         driverAccountButton.setEnabled(false);
         if (intentMy.getStringExtra("keyUpdate") != null) {
             progress = new ProgressDialog(this);
-            progress.setTitle("Loading");
-            progress.setMessage("Wait while loading...");
+            progress.setTitle(R.string.main_theme_loading);
+            progress.setMessage(getResources().getString(R.string.text_of_loading));
             progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
             progress.show();
             basePresenter.loadOrderSpecificId(Integer.parseInt(intentMy.getStringExtra("keyNumberOfOrder")));
@@ -294,7 +294,7 @@ public class EditOrderActivity extends FragmentActivity implements
                 endPointAct.getText().toString().matches("") ||
                 mSpinnerReckoning.getSelectedItem() == null ||
                 mSpinnerCarType.getSelectedItem() == null) {
-            Toast.makeText(this, "Please, input all required fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.input_all_fields), Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -305,7 +305,7 @@ public class EditOrderActivity extends FragmentActivity implements
                 dateRideAct.getText().toString().matches("") ||
                 timeRideAct.getText().toString().matches("") ||
                 mSpinnerStatusType.getSelectedItem() == null) {
-            Toast.makeText(this, "Please, input all required fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.input_all_fields), Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

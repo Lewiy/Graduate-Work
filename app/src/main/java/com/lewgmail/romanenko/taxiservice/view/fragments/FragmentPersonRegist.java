@@ -77,6 +77,11 @@ public class FragmentPersonRegist extends android.support.v4.app.Fragment implem
     }
 
     public String getName() {
+        /*try {
+            return URLEncoder.encode(, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }*/
         return nameRegistration.getText().toString();
     }
 

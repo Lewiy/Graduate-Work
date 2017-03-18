@@ -165,4 +165,19 @@
     <string name="plate_number_inf">Номер автомобиля:</string>
     <string name="seats_number_inf">Количество мест:</string>
     <string name="car_type_inf">Тип машины:</string>
+
+    <string name="error_not_equals_passwords">Пароли не совпадают</string>
+    <string name="dont_inputed_fields">Не все поля заполнены</string>
+    <string name="input_all_fields">Пожалуйста заполните все поля</string>
+
+    <!-- elments of loading -->
+    <string name="main_theme_loading">Загрузка</string>
+    <string name="text_of_loading">Подождите, идет загрузка...</string>
+
+    <!-- elment menu navigationDrawer -->
+    <string name="add_order">Сделать заказ</string>
+    <string name="order_list">Список заказов</string>
+    <string name="edit_profile">Редактировать профиль</string>
+    <string name="settings">Настройки</string>
+    <string name="log_out">Выйти</string>
 </resources>

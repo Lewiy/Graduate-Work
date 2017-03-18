@@ -96,11 +96,11 @@ public class RegistrationActivity extends AppCompatActivity implements UserOpera
     private boolean checkInputedFields() {
         if (checkBoxDriverUser.isChecked()) {
             if (checkInputedFieldsDriver()) {
-                Toast.makeText(this, "Please input all fields", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getResources().getString(R.string.input_all_fields), Toast.LENGTH_LONG).show();
                 return false;
             }
         } else if (checkInputedFieldsCustomer()) {
-            Toast.makeText(this, "Please input all fields", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.input_all_fields), Toast.LENGTH_LONG).show();
             return false;
         }
 

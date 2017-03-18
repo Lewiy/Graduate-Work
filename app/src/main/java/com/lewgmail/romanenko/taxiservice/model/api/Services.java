@@ -48,12 +48,12 @@ public class Services {
             //  String string = original.body().toString();
             Request request = original.newBuilder()
                     .header("Accept", "application/json")
-                    .header("Content-Type", "application/json;Charset=UTF-8")
+                    .header("Content-Type", "application/json; charset=utf-8")
                     .method(original.method(), original.body())
                     .build();
             //   Log.w("Retrofit@Response", request.body().toString());
-            //   String str = bodyToString(response);
-            //    Log.i("req",bodyToString(request));
+            // String str = bodyToString(request);
+            //   Log.i("req",bodyToString(request));
             // String req = request.body().;
           /*  try {
                 final Request copy = request.newBuilder().build();

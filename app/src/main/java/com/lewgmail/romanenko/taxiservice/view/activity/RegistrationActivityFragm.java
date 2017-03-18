@@ -192,7 +192,7 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
             car.setModel(fragmentDriverRegist.getModel());
             car.setPlateNumber(fragmentDriverRegist.getPlateNumber());
             car.setSeatsNumber(Integer.parseInt(fragmentDriverRegist.getNumPassengers()));
-            //car.setCarType(fragmentDriverRegist.getTypeCar());
+            car.setCarType(fragmentDriverRegist.getTypeCar());
             fragmentDriverRegist.getTypeCar();
             userRegistration.setCar(car);
         }
