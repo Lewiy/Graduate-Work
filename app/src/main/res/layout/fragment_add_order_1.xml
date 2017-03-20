@@ -76,8 +76,8 @@
 
             <ImageButton
                 android:id="@+id/time_button_picker"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/ic_time_picker" />
@@ -97,6 +97,9 @@
                 android:id="@+id/addresses_liner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical">
 
 
@@ -105,15 +108,21 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:src="@drawable/ic_point_not_picked" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="2">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/ic_point_not_picked" />
+                    </LinearLayout>
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <EditText
@@ -127,13 +136,35 @@
 
                     </android.support.design.widget.TextInputLayout>
 
-                    <ImageButton
-                        android:id="@+id/point1_map"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="2"
-                        android:background="@drawable/ic_pick_point" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="2">
+
+                        <ImageButton
+                            android:id="@+id/my_location_button"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/ic_location"
+                            android:tint="@color/colorPrimary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="2">
+
+                        <ImageButton
+                            android:id="@+id/point1_map"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@drawable/ic_pick_point" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -142,11 +173,17 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:src="@drawable/ic_point_picked" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="3">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/ic_point_picked" />
+                    </LinearLayout>
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -164,31 +201,30 @@
 
                     </android.support.design.widget.TextInputLayout>
 
-                    <ImageButton
-                        android:id="@+id/point2_map"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="2"
-                        android:background="@drawable/ic_pick_point" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="3">
+
+                        <ImageButton
+                            android:id="@+id/point2_map"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/ic_pick_point" />
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
 
-            <Button
+
+            <ImageButton
                 android:id="@+id/add_address_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/button_oval"
-                android:shadowColor="#A8A8A8"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="5"
-                android:text="+"
-                android:textColor="@color/colorPrimary"
-                android:textSize="30sp" />
+                android:background="@drawable/ic_plus" />
         </LinearLayout>
     </ScrollView>
 
