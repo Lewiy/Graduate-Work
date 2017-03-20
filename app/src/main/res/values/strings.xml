@@ -191,4 +191,8 @@
     <string name="time_text">00:00:00</string>
     <string name="prise_label_add_order">Total price:</string>
     <string name="additional_request">Additional request</string>
+    <string name="title_activity_add_order">AddOrder</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="tab_main_settings">Main settings</string>
+    <string name="tab_addition_requirest">Additional</string>
 </resources>

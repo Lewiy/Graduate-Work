@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:checked="true"
             android:text="@string/radio_button_now" />
 
         <RadioButton
@@ -55,9 +56,10 @@
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/frame_clock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
                 android:text="@string/time_text"
                 android:textSize="30dp" />
 
@@ -77,104 +79,117 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/ic_time_picker" />
         </LinearLayout>
     </FrameLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:src="@drawable/ic_point_not_picked" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <EditText
-                    android:id="@+id/start_point_act"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/start_point"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <ImageButton
-                android:id="@+id/point1_map"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="2"
-                android:background="@drawable/ic_pick_point" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:src="@drawable/ic_point_picked" />
-
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
+                android:id="@+id/addresses_liner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/end_point_act"
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/end_point"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+                    android:orientation="horizontal">
 
-            </android.support.design.widget.TextInputLayout>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:src="@drawable/ic_point_not_picked" />
 
-            <ImageButton
-                android:id="@+id/point2_map"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="2"
-                android:background="@drawable/ic_pick_point" />
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/start_point_act"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/start_point"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <ImageButton
+                        android:id="@+id/point1_map"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/ic_pick_point" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/address_linear_point"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:src="@drawable/ic_point_picked" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/end_point_act"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/end_point"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <ImageButton
+                        android:id="@+id/point2_map"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/ic_pick_point" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/add_address_btn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/button_oval"
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="+"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30sp" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/angry_btn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/button_oval"
-            android:shadowColor="#A8A8A8"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5"
-            android:text="+"
-            android:textColor="@color/colorPrimary"
-            android:textSize="30sp" />
-    </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>

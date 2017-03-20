@@ -122,7 +122,7 @@ public class ClientAccount extends AppCompatActivity
 
         if (id == R.id.add_order) {
             // fragmentClass = AddOrderFragment.class;
-            Intent myIntent = new Intent(this, EditOrderActivity.class);
+            Intent myIntent = new Intent(this, AddOrder.class);
             //myIntent.putExtra("keyAddressFromMarker", "EndPoint"); //Optional parameters
             item.setChecked(true);
             // Выводим выбранный пункт в заголовке

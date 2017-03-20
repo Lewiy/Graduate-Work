@@ -116,6 +116,7 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView {
                                             addresses.get(0).getAddressLine(0) +
                                             addresses.get(0).getAdminArea() +
                                             addresses.get(0).getLocality(), Toast.LENGTH_LONG).show();
+                            //addresses.get(0).getSub
 
                             addressFromMarker = addresses.get(0).getAddressLine(0) +
                                     addresses.get(0).getAdminArea() +

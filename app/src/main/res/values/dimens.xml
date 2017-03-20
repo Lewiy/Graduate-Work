@@ -11,4 +11,5 @@
 
     <dimen name="container_height">400dp</dimen>
     <dimen name="container_widht">67dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
 </resources>
