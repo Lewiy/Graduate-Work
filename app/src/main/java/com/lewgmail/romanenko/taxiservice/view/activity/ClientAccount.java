@@ -20,8 +20,8 @@ import android.widget.Toast;
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
-import com.lewgmail.romanenko.taxiservice.view.ViewDriver.EditProfileFragmentDriver;
 import com.lewgmail.romanenko.taxiservice.view.fragmentClient.OrderListFragment;
+import com.lewgmail.romanenko.taxiservice.view.viewDriver.EditProfileFragmentDriver;
 
 import butterknife.ButterKnife;
 

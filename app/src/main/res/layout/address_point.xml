@@ -2,7 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="-10dp"
     android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="-30dp"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_gray_dots" />
 
     <LinearLayout
         android:id="@+id/address_linear_point"
@@ -14,41 +23,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_weight="3">
+            android:layout_weight="5">
 
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:src="@drawable/ic_point_picked" />
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_ocherednoy_address" />
         </LinearLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <EditText
-                android:id="@+id/end_point_act"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/end_point"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true" />
-
-        </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_weight="3">
+            android:layout_weight="1">
 
-            <ImageButton
-                android:id="@+id/point2_map"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:background="@drawable/ic_pick_point" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/end_point_act"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/end_point"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:paddingRight="30dp"
+                        android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/point1_map"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/ic_pick_point" />
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

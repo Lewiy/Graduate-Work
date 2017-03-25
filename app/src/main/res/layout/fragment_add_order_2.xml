@@ -21,8 +21,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:background="@drawable/ic_road" />
 
@@ -43,8 +43,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@drawable/ic_duration" />
@@ -68,8 +68,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@drawable/ic_money" />
@@ -87,7 +87,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:layout_gravity="bottom"
             android:background="@color/more_light_gray"
             android:orientation="vertical">
@@ -103,7 +103,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -112,12 +112,13 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="40dp"
+                    <ImageButton
+                        android:id="@+id/icon_addit_baggage"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:background="@drawable/ic_black_money" />
+                        android:background="@drawable/ic_bagets" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -126,12 +127,13 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="40dp"
+                    <ImageButton
+                        android:id="@+id/icon_type_reckoning"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:background="@drawable/ic_money" />
+                        android:background="@drawable/ic_card_in_use" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -140,23 +142,84 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="40dp"
+                    <ImageButton
+                        android:id="@+id/icon_extra_price"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:background="@drawable/ic_money" />
+                        android:background="@drawable/ic_extra_price" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/icon_pets"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_pets" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/icon_driver_service"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_driver" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/icon_type_car"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_car_type" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/icon_number_passengers"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_passengers" />
+                </LinearLayout>
             </LinearLayout>
 
+
             <Spinner
-                android:id="@+id/set_status_order_act"
+                android:id="@+id/spinner_addit_requirem"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="@dimen/lev_distance"
-                android:backgroundTint="@color/colorPrimary"
+                android:layout_marginTop="5dp"
+                android:popupBackground="@color/common_google_signin_btn_text_dark_default"
                 android:prompt="@string/set_car_type">
 
             </Spinner>

@@ -195,4 +195,51 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="tab_main_settings">Main settings</string>
     <string name="tab_addition_requirest">Additional</string>
+
+    <!-- additional  requirements-->
+    <string-array name="type_car">
+        <item>Type of car</item>
+        <item>Track</item>
+        <item>Passenger car</item>
+        <item>Mini bus</item>
+    </string-array>
+    <string-array name="type_reconing">
+        <item>Type payment</item>
+        <item>Cash</item>
+        <item>Card</item>
+    </string-array>
+    <string-array name="type_pets">
+        <item>Pets</item>
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="type_baggage">
+        <item>Big baggage</item>
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="type_extra_price">
+        <item>Extra price</item>
+        <item>30</item>
+        <item>50</item>
+        <item>70</item>
+        <item>90</item>
+        <item>100</item>
+        <item>150</item>
+    </string-array>
+    <string-array name="type_driver_services">
+        <item>Driver services</item>
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="type_number_passengers">
+        <item>Number of passengers</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
 </resources>

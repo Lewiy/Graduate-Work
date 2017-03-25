@@ -33,7 +33,7 @@ import android.widget.Toast;
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
-import com.lewgmail.romanenko.taxiservice.view.ViewDriver.DriverAccount;
+import com.lewgmail.romanenko.taxiservice.view.viewDriver.DriverAccount;
 
 import java.util.ArrayList;
 import java.util.List;

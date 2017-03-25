@@ -67,6 +67,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/time_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -84,9 +85,6 @@
         </LinearLayout>
     </FrameLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,9 +113,9 @@
                         android:layout_weight="2">
 
                         <ImageView
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:src="@drawable/ic_point_not_picked" />
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/ic_first_point" />
                     </LinearLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -144,10 +142,10 @@
 
                         <ImageButton
                             android:id="@+id/my_location_button"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:layout_marginLeft="5dp"
-                            android:background="@drawable/ic_location"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginLeft="15dp"
+                            android:background="@drawable/ic_my_location"
                             android:tint="@color/colorPrimary" />
                     </LinearLayout>
 
@@ -159,18 +157,26 @@
 
                         <ImageButton
                             android:id="@+id/point1_map"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
                             android:layout_marginRight="20dp"
                             android:background="@drawable/ic_pick_point" />
                     </LinearLayout>
 
                 </LinearLayout>
 
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginBottom="-20dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/ic_gray_dots" />
+
                 <LinearLayout
                     android:id="@+id/address_linear_point"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="-10dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -180,9 +186,9 @@
                         android:layout_weight="3">
 
                         <ImageView
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:src="@drawable/ic_point_picked" />
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/ic_ocherednoy_address" />
                     </LinearLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -209,8 +215,8 @@
 
                         <ImageButton
                             android:id="@+id/point2_map"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
                             android:background="@drawable/ic_pick_point" />
                     </LinearLayout>
                 </LinearLayout>
@@ -218,14 +224,19 @@
             </LinearLayout>
 
 
+            <ListView
+                android:id="@+id/route"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"></ListView>
             <ImageButton
                 android:id="@+id/add_address_btn"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/ic_plus" />
         </LinearLayout>
-    </ScrollView>
+
 
 </LinearLayout>

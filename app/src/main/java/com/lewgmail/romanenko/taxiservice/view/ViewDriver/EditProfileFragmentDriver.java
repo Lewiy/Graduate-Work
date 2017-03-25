@@ -1,4 +1,4 @@
-package com.lewgmail.romanenko.taxiservice.view.ViewDriver;
+package com.lewgmail.romanenko.taxiservice.view.viewDriver;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;

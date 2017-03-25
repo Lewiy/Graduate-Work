@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
-import com.lewgmail.romanenko.taxiservice.view.ViewDriver.OrderInf;
 import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderActivity;
+import com.lewgmail.romanenko.taxiservice.view.viewDriver.OrderInf;
 
 import java.util.HashMap;
 import java.util.List;

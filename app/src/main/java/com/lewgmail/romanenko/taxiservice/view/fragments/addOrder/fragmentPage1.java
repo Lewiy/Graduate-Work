@@ -1,16 +1,24 @@
 package com.lewgmail.romanenko.taxiservice.view.fragments.addOrder;
 
-import android.content.Context;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.lewgmail.romanenko.taxiservice.R;
+import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
+import com.lewgmail.romanenko.taxiservice.view.adapters.SwipeDismissListViewTouchListener;
+import com.lewgmail.romanenko.taxiservice.view.dialogFragment.TimePickerFragment;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +28,7 @@ import butterknife.OnClick;
  * Created by Lev on 18.03.2017.
  */
 
-public class FragmentPage1 extends Fragment {
+public class FragmentPage1 extends android.support.v4.app.Fragment {
 
     @BindView(R.id.radio_button_now)
     RadioButton radioButtonNow;
@@ -34,7 +42,13 @@ public class FragmentPage1 extends Fragment {
     LinearLayout addressLinear;
     @BindView(R.id.addresses_liner)
     LinearLayout addressesLinear;
+    @BindView(R.id.route)
+    ListView route;
+    @BindView((R.id.time_text))
+    TextView time_text;
 
+    private ArrayAdapter<String> addresessAdapter;
+    private ArrayList<String> addresess;
     public FragmentPage1() {
     }
 
@@ -51,6 +65,7 @@ public class FragmentPage1 extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_add_order_1, container, false);
         ButterKnife.bind(this, rootView);
+       // init();
         return rootView;
     }
 
@@ -77,8 +92,53 @@ public class FragmentPage1 extends Fragment {
         addAddressPoint();
     }
 
+    @OnClick(R.id.time_button_picker)
+    public void onClickTimePicker(){
+        showTimePicker();
+    }
+
+    private void showTimePicker(){
+        TimePickerDialog.OnTimeSetListener onTimeListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                time_text.setText(Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
+            }
+        };
+        TimePickerFragment time = new TimePickerFragment();
+        time.setCallBack(onTimeListener);
+        time.show(getFragmentManager(),"Time Picker");
+    }
     private void initializeView() {
 
+    }
+
+    private void init(){
+        addresess = new ArrayList<>();
+        addresess.add("sdfklnfg");
+        addresess.add("sdfklnfg");
+       addresessAdapter = new AdapterAddPointOfRoute(getActivity(),R.layout.address_point,addresess);
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        route,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+
+                                    addresess.remove(position);
+                                    addresessAdapter.notifyDataSetChanged();
+
+                                }
+                            }
+                        });
+
+        route.setAdapter(addresessAdapter);
+        route.setOnTouchListener(touchListener);
     }
 
     private void showHideClock() {
@@ -105,11 +165,12 @@ public class FragmentPage1 extends Fragment {
     }
 
     private void addAddressPoint() {
-        LayoutInflater vi = (LayoutInflater) getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = vi.inflate(R.layout.address_point, null);
-        addressesLinear.addView(view);
+        addresessAdapter.add("sdfklnfg");
     }
 
-
+    @Override
+   public void  onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+        init();
+    }
 }

@@ -22,10 +22,10 @@ import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
 import com.lewgmail.romanenko.taxiservice.presenter.BasePresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.MapGooglePresenter;
-import com.lewgmail.romanenko.taxiservice.view.ViewDriver.PassengerAccountInfFragment;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterStatusController;
 import com.lewgmail.romanenko.taxiservice.view.dialogFragment.DatePickerFragment;
 import com.lewgmail.romanenko.taxiservice.view.dialogFragment.TimePickerFragment;
+import com.lewgmail.romanenko.taxiservice.view.viewDriver.PassengerAccountInfFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -157,7 +157,7 @@ public class EditOrderActivity extends FragmentActivity implements
     @OnClick(R.id.time_ride_act)
     public void onClickTimePicker() {
         TimePickerFragment dialog = new TimePickerFragment();
-        dialog.show(getFragmentManager(), "timePicker");
+        dialog.show(getSupportFragmentManager(), "timePicker");
     }
 
     @OnClick(R.id.customer_button_profile)
@@ -204,7 +204,7 @@ public class EditOrderActivity extends FragmentActivity implements
     @OnClick(R.id.time_button_picker)
     public void onClickTimeButton() {
         TimePickerFragment dialog = new TimePickerFragment();
-        dialog.show(getFragmentManager(), "timePicker");
+        // dialog.show(getFragmentManager(), "timePicker");
     }
 
     @OnClick(R.id.point1_map)
