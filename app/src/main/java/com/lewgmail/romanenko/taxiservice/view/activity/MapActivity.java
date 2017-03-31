@@ -92,6 +92,8 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView {
 
             @Override
             public void onMarkerDragEnd(Marker marker) {
+
+                Locale aLocale = new Locale.Builder().setLanguage("ru").setScript("Latn").setRegion("RS").build();
                 position = marker.getPosition(); //
                 try {
                     geo = new Geocoder(MapActivity.this.getApplicationContext(), Locale.getDefault());

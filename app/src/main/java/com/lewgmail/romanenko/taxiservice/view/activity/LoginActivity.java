@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.R.attr.value;
@@ -131,6 +132,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+    }
+
+    @OnClick(R.id.notification)
+    public void Onclick() {
+        new Notification(this).showSimpleNotification("Повідомлення", "заглушка повідомлень");
     }
 
     private void populateAutoComplete() {

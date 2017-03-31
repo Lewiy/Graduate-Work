@@ -183,4 +183,64 @@
     <string name="edit_profile">Редагувати профіль</string>
     <string name="settings">Налаштування</string>
     <string name="log_out">Вийти</string>
+
+    <!-- element -->
+    <!-- element menu addOrder -->
+    <string name="radio_button_now">Зараз</string>
+    <string name="radio_button_today">Сьогодні</string>
+    <string name="radio_button_tomorrow">Завтра</string>
+    <string name="time_text">00:00:00</string>
+    <string name="prise_label_add_order">Загальна ціна</string>
+    <string name="additional_request">Додатковий сервіс</string>
+    <string name="title_activity_add_order">Замовити</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="tab_main_settings">Головні налаштування</string>
+    <string name="tab_addition_requirest">Додаткові</string>
+
+    <!-- additional  requirements-->
+    <string-array name="type_car">
+        <item>Тип автомобіля</item>
+        <item>Вантажний</item>
+        <item>Легкова</item>
+        <item>Мікроавтобус</item>
+    </string-array>
+    <string-array name="type_reconing">
+        <item>Тип оплати</item>
+        <item>Готівка</item>
+        <item>Картка</item>
+    </string-array>
+    <string-array name="type_pets">
+        <item>Улюбленець</item>
+        <item>Так</item>
+        <item>Ні</item>
+    </string-array>
+    <string-array name="type_baggage">
+        <item>Великогабаритний багаж</item>
+        <item>Так</item>
+        <item>Ні</item>
+    </string-array>
+    <string-array name="type_extra_price">
+        <item>Екстра ціна</item>
+        <item>30</item>
+        <item>50</item>
+        <item>70</item>
+        <item>90</item>
+        <item>100</item>
+        <item>150</item>
+    </string-array>
+    <string-array name="type_driver_services">
+        <item>Виклик водія</item>
+        <item>Так</item>
+        <item>Ні</item>
+    </string-array>
+    <string-array name="type_number_passengers">
+        <item>Кількість пасажирів</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
 </resources>

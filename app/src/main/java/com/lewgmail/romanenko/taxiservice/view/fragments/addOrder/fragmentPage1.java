@@ -1,6 +1,7 @@
 package com.lewgmail.romanenko.taxiservice.view.fragments.addOrder;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.lewgmail.romanenko.taxiservice.R;
+import com.lewgmail.romanenko.taxiservice.view.activity.MapActivity;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
 import com.lewgmail.romanenko.taxiservice.view.adapters.SwipeDismissListViewTouchListener;
 import com.lewgmail.romanenko.taxiservice.view.dialogFragment.TimePickerFragment;
@@ -49,6 +51,7 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
 
     private ArrayAdapter<String> addresessAdapter;
     private ArrayList<String> addresess;
+
     public FragmentPage1() {
     }
 
@@ -65,7 +68,7 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_add_order_1, container, false);
         ButterKnife.bind(this, rootView);
-       // init();
+        // init();
         return rootView;
     }
 
@@ -73,6 +76,15 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     public void onClickButtonNow() {
         uncheckOtherButton(1);
         showHideClock();
+    }
+
+    @OnClick(R.id.point1_map)
+    public void onClickMap() {
+
+        Intent myIntent = new Intent(getActivity(), MapActivity.class);
+        myIntent.putExtra("keyAddressFromMarker", "StartPoint"); //Optional parameters
+        getActivity().startActivity(myIntent);
+
     }
 
     @OnClick(R.id.radio_button_today)
@@ -93,11 +105,11 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     }
 
     @OnClick(R.id.time_button_picker)
-    public void onClickTimePicker(){
+    public void onClickTimePicker() {
         showTimePicker();
     }
 
-    private void showTimePicker(){
+    private void showTimePicker() {
         TimePickerDialog.OnTimeSetListener onTimeListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -106,17 +118,16 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         };
         TimePickerFragment time = new TimePickerFragment();
         time.setCallBack(onTimeListener);
-        time.show(getFragmentManager(),"Time Picker");
+        time.show(getFragmentManager(), "Time Picker");
     }
+
     private void initializeView() {
 
     }
 
-    private void init(){
+    private void init() {
         addresess = new ArrayList<>();
-        addresess.add("sdfklnfg");
-        addresess.add("sdfklnfg");
-       addresessAdapter = new AdapterAddPointOfRoute(getActivity(),R.layout.address_point,addresess);
+        addresessAdapter = new AdapterAddPointOfRoute(getActivity(), R.layout.address_point, addresess);
         SwipeDismissListViewTouchListener touchListener =
                 new SwipeDismissListViewTouchListener(
                         route,
@@ -169,7 +180,7 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     }
 
     @Override
-   public void  onActivityCreated(Bundle savedInstanceState){
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         init();
     }
