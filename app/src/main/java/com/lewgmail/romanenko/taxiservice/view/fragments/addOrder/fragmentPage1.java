@@ -2,6 +2,9 @@ package com.lewgmail.romanenko.taxiservice.view.fragments.addOrder;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +28,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static android.content.Context.LOCATION_SERVICE;
 
 /**
  * Created by Lev on 18.03.2017.
@@ -51,6 +56,9 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
 
     private ArrayAdapter<String> addresessAdapter;
     private ArrayList<String> addresess;
+
+    private LocationManager locationManager;
+    private LocationListener locationListener;
 
     public FragmentPage1() {
     }
@@ -85,6 +93,13 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         myIntent.putExtra("keyAddressFromMarker", "StartPoint"); //Optional parameters
         getActivity().startActivity(myIntent);
 
+    }
+
+    @OnClick(R.id.my_location_button)
+    public void onClickMyLocation() {
+        //  Location location = new Location();
+        // location.init();
+        initLocationManager();
     }
 
     @OnClick(R.id.radio_button_today)
@@ -122,6 +137,32 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     }
 
     private void initializeView() {
+
+    }
+
+    public void initLocationManager() {
+        locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(android.location.Location location) {
+                location.getLatitude();
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
 
     }
 
@@ -183,5 +224,18 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         init();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+
+        switch (requestCode) {
+            case 10:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    // getLocation();
+                    locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+                return;
+        }
     }
 }

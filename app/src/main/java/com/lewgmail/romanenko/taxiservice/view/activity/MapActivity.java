@@ -4,14 +4,24 @@ package com.lewgmail.romanenko.taxiservice.view.activity;
  * Created by Lev on 28.11.2016.
  */
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -24,6 +34,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.presenter.MapGooglePresenter;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -33,10 +44,16 @@ import butterknife.OnClick;
 
 public class MapActivity extends Activity implements OnMapReadyCallback, IView {
 
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private final static String FIRST_CORD = "longitude", SECONF_CORD = "latitude";
     @BindView(R.id.button_ok)
     Button buttonOK;
 
+    //@BindView(R.id.place_autocomplete_fragment)
+    // PlaceAutocompleteFragment placeAutocompleteFragment;
+    @BindView(R.id.text_location)
+    EditText searchText;
+    GoogleMap mGoogleMap;
     // Technical Object
     private MapFragment googleMap;
     private LatLng position;
@@ -44,9 +61,10 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView {
     private MapGooglePresenter mapGooglePresenter;
     private SharedPreferences sPref;
     private Intent intentMy;
-
     // Business object
     private String addressFromMarker;
+    private LocationManager locationManager;
+    private LocationListener locationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +73,29 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView {
         ButterKnife.bind(this);
         intentMy = getIntent();
         createMapView();
+        setElementLocationOnMapActivity();
+        initializeSearchPlaceFragment();
         //  mapGooglePresenter = new MapGooglePresenter(this);
         // addMarker();
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        mGoogleMap = googleMap;
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(50.44854153, 30.50714493), 10));
+                new LatLng(50.448541, 30.507144), 10));
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //User has previously accepted this permission
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                mGoogleMap.setMyLocationEnabled(true);
+            }
+        } else {
+            //Not in api-23, no need to prompt
+            mGoogleMap.setMyLocationEnabled(true);
+        }
         //  googleMap.setMyLocationEnabled(true);
         googleMap.setTrafficEnabled(true);
         googleMap.setIndoorEnabled(true);
@@ -93,10 +124,11 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView {
             @Override
             public void onMarkerDragEnd(Marker marker) {
 
-                Locale aLocale = new Locale.Builder().setLanguage("ru").setScript("Latn").setRegion("RS").build();
+                // Locale aLocale = new Locale.Builder().setLanguage("ru").build();
+                //   Locale asd = new Locale("ru");
                 position = marker.getPosition(); //
                 try {
-                    geo = new Geocoder(MapActivity.this.getApplicationContext(), Locale.getDefault());
+                    geo = new Geocoder(MapActivity.this.getApplicationContext(), new Locale("ru"));
                     List<Address> addresses = geo.getFromLocation(position.latitude, position.longitude, 1);
                     if (addresses.isEmpty()) {
                         Toast.makeText(
@@ -165,14 +197,15 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView {
 
     @OnClick(R.id.button_ok)
     public void buttonOk() {
-        Intent returnIntent = getIntent();
+       /* Intent returnIntent = getIntent();
         returnIntent.putExtra(getDataFromPreviousActivity(intentMy), addressFromMarker);
         returnIntent.putExtra(FIRST_CORD, position.longitude);
         returnIntent.putExtra(SECONF_CORD, position.latitude);
         // returnIntent.putExtra(FIRST_CORD,50.4546600 );
         //  returnIntent.putExtra(SECONF_CORD, 30.5238000);
         setResult(Activity.RESULT_OK, returnIntent);
-        finish();
+        finish();*/
+        checkLocationPermission();
     }
 
 
@@ -189,8 +222,109 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView {
                 Toast.LENGTH_LONG).show();
     }
 
-    public void setPrice() {
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                //  TODO: Prompt with explanation!
+
+                //Prompt the user once explanation has been shown
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay!
+                    if (ActivityCompat.checkSelfPermission(this,
+                            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        mGoogleMap.setMyLocationEnabled(true);
+                    }
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+
+        }
+    }
+
+    public void onMapSearch(View view) {
+        //EditText locationSearch = (EditText) findViewById(R.id.editText);
+        String location = searchText.getText().toString();
+        List<Address> addressList = null;
+
+        if (location != null || !location.equals("")) {
+            Geocoder geocoder = new Geocoder(this);
+            try {
+                addressList = geocoder.getFromLocationName(location, 1);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Address address = addressList.get(0);
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            mGoogleMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
+            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        }
+    }
+
+    private void setElementLocationOnMapActivity() {
+        View mapView = (View) findViewById(R.id.mapView);
+        View locationButton = ((View) mapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
+        RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
+
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+        rlp.setMargins(0, 1250, 180, 0);
+    }
+
+    private void initializeSearchPlaceFragment() {
+       /* PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+               getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+               // Log.i(TAG, "Place: " + place.getName());
+                searchText.setText(place.getName());
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+              //  Log.i(TAG, "An error occurred: " + status);
+            }
+        });*/
+    }
 }
+
