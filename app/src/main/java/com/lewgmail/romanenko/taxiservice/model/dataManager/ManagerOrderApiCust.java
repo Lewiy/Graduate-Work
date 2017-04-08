@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.lewgmail.romanenko.taxiservice.model.api.Services;
 import com.lewgmail.romanenko.taxiservice.model.api.apiMain.OrderApiCust;
-import com.lewgmail.romanenko.taxiservice.model.pojo.AddOrder;
+import com.lewgmail.romanenko.taxiservice.model.pojo.AddOrderN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.CalculatePrice;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Price;
 import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
@@ -39,7 +39,7 @@ public class ManagerOrderApiCust {
         this.mapGooglePresenter = mapGooglePresenter;
     }
 
-    public String addOrder(AddOrder addOrder) {
+    public String addOrder(AddOrderN addOrder) {
       /*  RxAndroidPlugins.getInstance().registerSchedulersHook(new RxAndroidSchedulersHook() {
             @Override
             public Scheduler getMainThreadScheduler() {
@@ -55,7 +55,7 @@ public class ManagerOrderApiCust {
                 .subscribe(new Observer<Response<ResponseBody>>() {
                     @Override
                     public void onCompleted() {
-
+                        error = new String("sdf");
                     }
 
                     @Override
@@ -82,7 +82,7 @@ public class ManagerOrderApiCust {
         return observer;
     }
 
-    public void updateOrder(AddOrder updateOrder, long orderId) {
+    public void updateOrder(AddOrderN updateOrder, long orderId) {
 
         OrderApiCust servises = Services.createService(OrderApiCust.class);
         Observable<Response<ResponseBody>> observer = servises.updateOrder(LoggedUser.getmInstance().getToken(),

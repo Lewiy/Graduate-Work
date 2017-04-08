@@ -3,11 +3,9 @@ package com.lewgmail.romanenko.taxiservice.api;
 import com.lewgmail.romanenko.taxiservice.model.api.apiMain.UserServices;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerOrderApiCust;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerOrderApiDrivCust;
-import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirAddOrderSend;
 import com.lewgmail.romanenko.taxiservice.model.pojo.MarkOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.OrderStatus;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Token;
-import com.lewgmail.romanenko.taxiservice.model.pojo.UpdateOrder;
 import com.lewgmail.romanenko.taxiservice.presenter.BasePresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
 import com.squareup.okhttp.HttpUrl;
@@ -20,11 +18,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import rx.Scheduler;
@@ -85,7 +78,7 @@ public class TestOrderApi extends BaseTest {
                             "    \"name\" : \"пупсовод\"\n" +
                             "  },\n" +
                             "  \"price\" : 12,\n" +
-                            "\"additionalRequirements\" : [{  \n" +
+                            "\"AdditionalRequirementsViewTransfer\" : [{  \n" +
                             " \"reqId\" : 123,\n" +
                             " \"reqValueId\":321\n" +
                             "    }]" +
@@ -188,7 +181,7 @@ public class TestOrderApi extends BaseTest {
     @Test
     public void addOrder() throws Exception {
         // Configuration request "add order"
-     /*   AddOrder addOrder = new AddOrder();
+     /*   AddOrderN addOrder = new AddOrderN();
         addOrder.setCustomerId(123421);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm",
                 Locale.getDefault());
@@ -231,7 +224,7 @@ public class TestOrderApi extends BaseTest {
                 "\"startTime\":\"2016-11-24T20:10\"," +
                 "\"startPoint\":\"Вул. лоховська 12\"," +
                 "\"endPoint\":\"Вул. татата\"," +
-                "\"additionalRequirements\":" +
+                "\"AdditionalRequirementsViewTransfer\":" +
                 "[{\"reqId\":567,\"reqValueId\":12}," +
                 "{\"reqId\":123,\"reqValueId\":34}]" +
                 "}", request.getBody().readUtf8());
@@ -305,7 +298,7 @@ public class TestOrderApi extends BaseTest {
                 "\"startTime\":\"2016-11-24T20:10\"," +
                 "\"startPoint\":\"Вул. Лалка\"," +
                 "\"endPoint\":\"Вул. Крарыр\"," +
-                "\"additionalRequirements\":" +
+                "\"AdditionalRequirementsViewTransfer\":" +
                 "[{\"reqId\":567,\"reqValueId\":12}," +
                 "{\"reqId\":123,\"reqValueId\":34}]" +
                 "}", request.getBody().readUtf8());

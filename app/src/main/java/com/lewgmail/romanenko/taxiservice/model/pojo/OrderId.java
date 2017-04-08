@@ -36,9 +36,9 @@ public class OrderId {
     @SerializedName("price")
     @Expose
     private double price;
-    @SerializedName("additionalRequirements")
+    @SerializedName("AdditionalRequirementsViewTransfer")
     @Expose
-    private List<AdditionalRequirement> additionalRequirements = new ArrayList<AdditionalRequirement>();
+    private List<AdditionalRequirementN> additionalRequirements = new ArrayList<AdditionalRequirementN>();
 
     /**
      * @return The orderId
@@ -160,21 +160,21 @@ public class OrderId {
     }
 
     /**
-     * @return The additionalRequirements
+     * @return The AdditionalRequirementsViewTransfer
      */
-    public List<AdditionalRequirement> getAdditionalRequirements() {
+    public List<AdditionalRequirementN> getAdditionalRequirements() {
         if (additionalRequirements.size() == 0) {
-            AdditionalRequirement additionalRequirement = new AdditionalRequirement();
+            AdditionalRequirementN additionalRequirement = new AdditionalRequirementN();
             additionalRequirement.setReqId(0);
             additionalRequirement.setReqValueId(-1);
-            AdditionalRequirement additionalRequirement2 = new AdditionalRequirement();
+            AdditionalRequirementN additionalRequirement2 = new AdditionalRequirementN();
             additionalRequirement2.setReqId(1);
             additionalRequirement2.setReqValueId(-1);
             additionalRequirements.add(additionalRequirement);
             additionalRequirements.add(additionalRequirement2);
         }
         if (additionalRequirements.size() == 1) {
-            AdditionalRequirement additionalRequirement = new AdditionalRequirement();
+            AdditionalRequirementN additionalRequirement = new AdditionalRequirementN();
             additionalRequirement.setReqId(0);
             additionalRequirement.setReqValueId(-1);
             additionalRequirements.add(additionalRequirement);
@@ -184,9 +184,9 @@ public class OrderId {
     }
 
     /**
-     * @param additionalRequirements The additionalRequirements
+     * @param additionalRequirements The AdditionalRequirementsViewTransfer
      */
-    public void setAdditionalRequirements(List<AdditionalRequirement> additionalRequirements) {
+    public void setAdditionalRequirements(List<AdditionalRequirementN> additionalRequirements) {
         this.additionalRequirements = additionalRequirements;
     }
 

@@ -21,7 +21,7 @@ public class UpdateOrder {
     @SerializedName("endPoint")
     @Expose
     private String endPoint;
-    @SerializedName("additionalRequirements")
+    @SerializedName("AdditionalRequirementsViewTransfer")
     @Expose
     private List<AdditionalRequirAddOrderSend> additionalRequirements = new ArrayList<AdditionalRequirAddOrderSend>();
 
@@ -68,14 +68,14 @@ public class UpdateOrder {
     }
 
     /**
-     * @return The additionalRequirements
+     * @return The AdditionalRequirementsViewTransfer
      */
     public List<AdditionalRequirAddOrderSend> getAdditionalRequirements() {
         return additionalRequirements;
     }
 
     /**
-     * @param additionalRequirements The additionalRequirements
+     * @param additionalRequirements The AdditionalRequirementsViewTransfer
      */
     public void setAdditionalRequirements(List<AdditionalRequirAddOrderSend> additionalRequirements) {
         this.additionalRequirements = additionalRequirements;

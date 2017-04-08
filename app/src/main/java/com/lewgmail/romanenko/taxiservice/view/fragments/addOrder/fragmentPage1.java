@@ -53,13 +53,10 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     ListView route;
     @BindView((R.id.time_text))
     TextView time_text;
-
     private ArrayAdapter<String> addresessAdapter;
     private ArrayList<String> addresess;
-
     private LocationManager locationManager;
     private LocationListener locationListener;
-
     public FragmentPage1() {
     }
 
@@ -237,5 +234,22 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
                     locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
                 return;
         }
+    }
+
+    public interface AddOrderGatherDataFirstWindow {
+        void setActivityStartTime(String startTime);
+
+        void setActivityAdminArea(String adminArea);
+
+        void setActivityLatitude(String latitude);
+
+        void setActivityLongetude(String longetude);
+
+        void setActivityStreet(String street);
+
+        void setActivityHouseNumber(String houseNumber);
+
+        void setActivityCity(String city);
+
     }
 }

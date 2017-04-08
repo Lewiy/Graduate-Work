@@ -1,6 +1,6 @@
 package com.lewgmail.romanenko.taxiservice.model.api.apiMain;
 
-import com.lewgmail.romanenko.taxiservice.model.pojo.AddOrder;
+import com.lewgmail.romanenko.taxiservice.model.pojo.AddOrderN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.CalculatePrice;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Price;
 
@@ -20,7 +20,7 @@ import rx.Observable;
 
 public interface OrderApiCust {
     @POST("order")
-    Observable<Response<ResponseBody>> addOrder(@Header("Authorization") String authorization, @Body() AddOrder addOrder);
+    Observable<Response<ResponseBody>> addOrder(@Header("Authorization") String authorization, @Body() AddOrderN addOrder);
 
 
     @DELETE("order/{orderId}")
@@ -28,7 +28,7 @@ public interface OrderApiCust {
                                                    @Path("orderId") long orderId);
 
     @PUT("/order/{orderId}")
-    Observable<Response<ResponseBody>> updateOrder(@Header("Authorization") String authorization, @Path("orderId") long orderId, @Body AddOrder updateOrder);
+    Observable<Response<ResponseBody>> updateOrder(@Header("Authorization") String authorization, @Path("orderId") long orderId, @Body AddOrderN updateOrder);
 
     @POST("order/price")
     Observable<Price> calculatePrice(@Header("Authorization") String authorization, @Body CalculatePrice calculatePrice);

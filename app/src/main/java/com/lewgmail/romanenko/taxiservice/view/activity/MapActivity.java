@@ -17,18 +17,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.lewgmail.romanenko.taxiservice.R;
@@ -42,17 +47,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MapActivity extends Activity implements OnMapReadyCallback, IView {
+public class MapActivity extends Activity implements OnMapReadyCallback, IView, PlaceSelectionListener {
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private final static String FIRST_CORD = "longitude", SECONF_CORD = "latitude";
+    private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
+            new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     @BindView(R.id.button_ok)
     Button buttonOK;
-
     //@BindView(R.id.place_autocomplete_fragment)
     // PlaceAutocompleteFragment placeAutocompleteFragment;
-    @BindView(R.id.text_location)
-    EditText searchText;
+    //@BindView(R.id.text_location)
+    //  EditText searchText;
     GoogleMap mGoogleMap;
     // Technical Object
     private MapFragment googleMap;
@@ -65,6 +71,7 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView {
     private String addressFromMarker;
     private LocationManager locationManager;
     private LocationListener locationListener;
+    private MarkerOptions markerOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,11 +110,11 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView {
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
-        googleMap.addMarker(new MarkerOptions()
+        /*googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(50.44854153, 30.50714493))
                 .title("Marker")
                 .draggable(true)
-                .snippet("Hello"));
+                .snippet("Hello"));*/
 
 
         googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
@@ -278,9 +285,9 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView {
         }
     }
 
-    public void onMapSearch(View view) {
+    public void onMapSearch(String location) {
         //EditText locationSearch = (EditText) findViewById(R.id.editText);
-        String location = searchText.getText().toString();
+        //  String location = searchText.getText().toString();
         List<Address> addressList = null;
 
         if (location != null || !location.equals("")) {
@@ -309,14 +316,19 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView {
     }
 
     private void initializeSearchPlaceFragment() {
-       /* PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
-               getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_fragment);
+        autocompleteFragment.setBoundsBias(BOUNDS_MOUNTAIN_VIEW);
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
                // Log.i(TAG, "Place: " + place.getName());
-                searchText.setText(place.getName());
+                // searchText.setText(place.getName());
+                //  onMapSearch(place.getAddress().toString());
+                markerOptions = new MarkerOptions().position(place.getLatLng()).title("Marker");
+                mGoogleMap.addMarker(markerOptions);
+                mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
             }
 
             @Override
@@ -324,7 +336,29 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView {
                 // TODO: Handle the error.
               //  Log.i(TAG, "An error occurred: " + status);
             }
-        });*/
+        });
+    }
+
+    @Override
+    public void onPlaceSelected(Place place) {
+        //   Log.i(LOG_TAG, "Place Selected: " + place.getName());
+       /* locationTextView.setText(getString(R.string.formatted_place_data, place
+                .getName(), place.getAddress(), place.getPhoneNumber(), place
+                .getWebsiteUri(), place.getRating(), place.getId()));*/
+     /*  searchText.setText(getString(R.string.formatted_place_data, place
+               .getName(), place.getAddress(), place.getPhoneNumber(), place
+               .getWebsiteUri(), place.getRating(), place.getId()));*/
+        onMapSearch(place.getName().toString());
+        if (!TextUtils.isEmpty(place.getAttributions())) {
+            // attributionsTextView.setText(Html.fromHtml(place.getAttributions().toString()));
+        }
+    }
+
+    @Override
+    public void onError(Status status) {
+        Log.e("error", "onError: Status = " + status.toString());
+        Toast.makeText(this, "Place selection failed: " + status.getStatusMessage(),
+                Toast.LENGTH_SHORT).show();
     }
 }
 

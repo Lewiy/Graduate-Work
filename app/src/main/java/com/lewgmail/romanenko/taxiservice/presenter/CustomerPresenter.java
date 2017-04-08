@@ -3,14 +3,14 @@ package com.lewgmail.romanenko.taxiservice.presenter;
 import android.util.Log;
 
 import com.lewgmail.romanenko.taxiservice.model.DTO.DataGoogleMapDTO;
-import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerGoogleMaps;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerOrderApiCust;
-import com.lewgmail.romanenko.taxiservice.model.pojo.AddOrder;
-import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirement;
-import com.lewgmail.romanenko.taxiservice.model.pojo.OrderPrice;
+import com.lewgmail.romanenko.taxiservice.model.pojo.AddOrderN;
+import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
+import com.lewgmail.romanenko.taxiservice.model.pojo.OrderPriceN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Price;
-import com.lewgmail.romanenko.taxiservice.presenter.adapters.AdapterAdditionalRequiremnets;
+import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointN;
+import com.lewgmail.romanenko.taxiservice.view.activity.AddOrder;
 import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderInterface;
 
 import java.text.ParseException;
@@ -37,6 +37,7 @@ public class CustomerPresenter {
     private int codeMsg;
     private String responseMsg;
     private EditOrderInterface view;
+    private AddOrder viewAddOrder;
     private ManagerOrderApiCust managerOrderApiCust = new ManagerOrderApiCust(this);
     private DataGoogleMapDTO dataGoogleMapDTOPres;
 
@@ -46,6 +47,10 @@ public class CustomerPresenter {
 
     public CustomerPresenter() {
 
+    }
+
+    public CustomerPresenter(AddOrder viewAddOrder) {
+        this.viewAddOrder = viewAddOrder;
     }
 
     public EditOrderInterface getView() {
@@ -73,13 +78,14 @@ public class CustomerPresenter {
 
                     @Override
                     public void onNext(DataGoogleMapDTO dataGoogleMapDTO) {
-                        dataGoogleMapDTOPres = dataGoogleMapDTO;
-                        view.setDistance(dataGoogleMapDTO.getDistanceTx());
-                        view.setDuration(dataGoogleMapDTO.getDuration());
+                        //   dataGoogleMapDTOPres = dataGoogleMapDTO;
+                        //  view.setDistance(dataGoogleMapDTO.getDistanceTx());
+                        //  view.setDuration(dataGoogleMapDTO.getDuration());
                         // managerOrderApiCust.calculatePrice(createRequestCalcPrice(dataGoogleMapDTO.getDistance()),customerPresenter);
                         try {
-                            String error = managerOrderApiCust.addOrder(createObjectAddOrder(dataGoogleMapDTO.getDistance()));
-                            view.showError(error);
+                            String error = managerOrderApiCust.addOrder(createObjectAddOrder(/*dataGoogleMapDTO.getDistance()*/));
+                            // view.showError(error);
+                            //  Log.i("sdf",error);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -125,7 +131,7 @@ public class CustomerPresenter {
 
     public void updateOrder() {
         try {
-            managerOrderApiCust.updateOrder(createObjectAddOrder(1000.0), 7);
+            managerOrderApiCust.updateOrder(createObjectAddOrder(), 7);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -171,33 +177,80 @@ public class CustomerPresenter {
                 });
     }
 
-    private AddOrder createObjectAddOrder(double distanse) throws ParseException {
+    private AddOrderN createObjectAddOrder(/*double distanse*/) throws ParseException {
 
-        List<AdditionalRequirement> list = new ArrayList<>();
-        AdditionalRequirement additionalRequirementCar = new AdditionalRequirement();
+        //   List<AdditionalRequirementN> list = new ArrayList<>();
+
+
+        //   AddOrderN addOrderN = new AddOrderN();
+
+
+
+       /* List<AdditionalRequirementN> list = new ArrayList<>();
+        AdditionalRequirementN additionalRequirementCar = new AdditionalRequirementN();
         additionalRequirementCar.setReqId(1);
         additionalRequirementCar.setReqValueId(new AdapterAdditionalRequiremnets().getCarRev(getTypeCar()));
         list.add(additionalRequirementCar);
 
-        AdditionalRequirement additionalRequirementReckoning = new AdditionalRequirement();
+        AdditionalRequirementN additionalRequirementReckoning = new AdditionalRequirementN();
         additionalRequirementReckoning.setReqId(2);
         additionalRequirementReckoning.setReqValueId(new AdapterAdditionalRequiremnets().getRecRev(getTypeReckoning()));
         list.add(additionalRequirementReckoning);
 
-        OrderPrice orderPrice = new OrderPrice();
+        OrderPriceN orderPrice = new OrderPriceN();
         orderPrice.setAdditionalRequirements(list);
         double distanse1 = distanse / 1000;
         orderPrice.setDistance(distanse1);
 
         String dateString = convertDateTime(getDate() + " " + getTime());
-        AddOrder addOrder = new AddOrder();
+        AddOrderN addOrder = new AddOrderN();
         addOrder.setCustomerId(LoggedUser.getmInstance().getUserId());
         String string = getDate() + " " + getTime();
         String dateTime = convertDateTime(string);
         addOrder.setStartTime(dateTime);
         addOrder.setStartPoint(getStartPoint());
         addOrder.setEndPoint(getEndPoint());
+        addOrder.setOrderPrice(orderPrice);*/
+
+        List<AdditionalRequirementN> list = new ArrayList<>();
+        AdditionalRequirementN additionalRequirementCar = new AdditionalRequirementN();
+        additionalRequirementCar.setReqId(1);
+        additionalRequirementCar.setReqValueId(2);
+        list.add(additionalRequirementCar);
+        AdditionalRequirementN additionalRequirementC = new AdditionalRequirementN();
+        additionalRequirementC.setReqId(2);
+        additionalRequirementC.setReqValueId(1);
+        list.add(additionalRequirementC);
+
+
+        OrderPriceN orderPrice = new OrderPriceN();
+        orderPrice.setAdditionalRequirements(list);
+        double distanse1 = 1000;
+        orderPrice.setDistance(distanse1);
+
+
+        // String dateString = convertDateTime(getDate() + " " + getTime());
+        AddOrderN addOrder = new AddOrderN();
+        //  String string = getDate() + " " + getTime();
+        //  String dateTime = convertDateTime(string);
+        addOrder.setStartTime("2017-08-09T18:31:42");
+        addOrder.setComment("dlfgjkldnfgdfklgjdlkgjklfg");
         addOrder.setOrderPrice(orderPrice);
+
+        RoutePointN routePointN = new RoutePointN();
+        routePointN.setAdminArea("dfgdfgfg");
+        routePointN.setLongtitude("34.123");
+        routePointN.setLatitude("34.1233");
+        routePointN.setStreet("sdfsdfsdf");
+        routePointN.setCity("sdfsdf");
+        routePointN.setHouseNumber("3");
+
+        List<RoutePointN> listRoute = new ArrayList<>();
+
+        listRoute.add(routePointN);
+        listRoute.add(routePointN);
+        addOrder.setRoutePoint(listRoute);
+        // return null;
         return addOrder;
     }
 
@@ -215,7 +268,7 @@ public class CustomerPresenter {
     }
     /////////////////////////////////////////get data from fields////////////////////////////
 
-    private String getTime() {
+   /* private String getTime() {
         return view.getTime();
     }
 
@@ -237,5 +290,5 @@ public class CustomerPresenter {
 
     private String getTypeReckoning() {
         return view.getTypeReckoning();
-    }
+    }*/
 }

@@ -33,11 +33,7 @@
         <activity
             android:name=".view.activity.LoginActivity"
             android:label="@string/title_activity_login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".view.activity.RegistrationActivity" />
         <activity android:name=".view.activity.ResetPassword" />
@@ -66,7 +62,11 @@
         <activity
             android:name=".view.activity.AddOrder"
             android:label="@string/title_activity_add_order">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -11,9 +11,9 @@ public class CalculatePrice {
     @SerializedName("distance")
     @Expose
     private double distance;
-    @SerializedName("additionalRequirements")
+    @SerializedName("AdditionalRequirementsViewTransfer")
     @Expose
-    private List<AdditionalRequirement> additionalRequirements = null;
+    private List<AdditionalRequirementN> additionalRequirements = null;
 
     /**
      * @return The distance
@@ -30,16 +30,16 @@ public class CalculatePrice {
     }
 
     /**
-     * @return The additionalRequirements
+     * @return The AdditionalRequirementsViewTransfer
      */
-    public List<AdditionalRequirement> getAdditionalRequirements() {
+    public List<AdditionalRequirementN> getAdditionalRequirements() {
         return additionalRequirements;
     }
 
     /**
-     * @param additionalRequirements The additionalRequirements
+     * @param additionalRequirements The AdditionalRequirementsViewTransfer
      */
-    public void setAdditionalRequirements(List<AdditionalRequirement> additionalRequirements) {
+    public void setAdditionalRequirements(List<AdditionalRequirementN> additionalRequirements) {
         this.additionalRequirements = additionalRequirements;
     }
 

@@ -1,12 +1,8 @@
 package com.lewgmail.romanenko.taxiservice.view.activity;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -16,11 +12,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.lewgmail.romanenko.taxiservice.R;
+import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
 import com.lewgmail.romanenko.taxiservice.view.activity.elementsOfActivity.SlidingTabLayout;
 import com.lewgmail.romanenko.taxiservice.view.fragments.addOrder.FragmentPage1;
 import com.lewgmail.romanenko.taxiservice.view.fragments.addOrder.FragmentPage2;
 
-public class AddOrder extends AppCompatActivity {
+import java.util.HashMap;
+
+public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrderGatherDataFirstWindow, FragmentPage2.AddOrderGatherDataSecondWindow {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -36,6 +35,9 @@ public class AddOrder extends AppCompatActivity {
     private LocationManager locationManager;
     private LocationListener locationListener;
 
+
+    private CustomerPresenter customerPresenter;
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -45,59 +47,37 @@ public class AddOrder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_order_);
-
+        customerPresenter = new CustomerPresenter();
+        customerPresenter.addOrder(12.23, 23.34, 123.34, 1234.3);
         //   Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(android.location.Location location) {
-                location.getLatitude();
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        };
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                ActivityCompat.requestPermissions(this, new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.INTERNET
-                }, 10);
-                return;
-            }
-        } else {
-            //getLocation();
-            locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
-        }
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                int a = 10;
+            }
+        });
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
         // Setting Custom Color for the Scroll bar indicator of the Tab View
@@ -136,6 +116,57 @@ public class AddOrder extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void setActivityComment(String Comment) {
+
+    }
+
+    @Override
+    public void setActivityAdditionalRequirements(HashMap<Integer, Integer> AdditionalRequirements) {
+
+    }
+
+    @Override
+    public void setActivityaddOrder() {
+
+    }
+
+    @Override
+    public void setActivityStartTime(String startTime) {
+
+    }
+
+    @Override
+    public void setActivityAdminArea(String adminArea) {
+
+    }
+
+    @Override
+    public void setActivityLatitude(String latitude) {
+
+    }
+
+    @Override
+    public void setActivityLongetude(String longetude) {
+
+    }
+
+    @Override
+    public void setActivityStreet(String street) {
+
+    }
+
+    @Override
+    public void setActivityHouseNumber(String houseNumber) {
+
+    }
+
+    @Override
+    public void setActivityCity(String city) {
+
+    }
+
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -180,4 +211,6 @@ public class AddOrder extends AppCompatActivity {
             return null;
         }
     }
+
+
 }

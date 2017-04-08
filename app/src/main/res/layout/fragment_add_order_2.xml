@@ -4,14 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/information_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
+            android:layout_weight="4"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -87,8 +90,25 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_gravity="bottom"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <EditText
+                android:id="@+id/comment_element"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/tab_color_scrol"
+                android:ellipsize="start"
+                android:hint="Search.."
+                android:maxLines="1"
+                android:textAlignment="gravity" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
             android:background="@color/more_light_gray"
             android:orientation="vertical">
 
@@ -260,6 +280,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/add_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -268,6 +289,6 @@
                 android:text="@string/add_order"
                 android:textColor="@color/black" />
         </LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>

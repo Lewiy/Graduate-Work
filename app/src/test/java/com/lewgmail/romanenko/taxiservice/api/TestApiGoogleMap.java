@@ -64,7 +64,7 @@ public class TestApiGoogleMap extends BaseTest {
                             "    \"name\" : \"пупсовод\"\n" +
                             "  },\n" +
                             "  \"price\" : 12,\n" +
-                            "  \"additionalRequirements\" : [\n" +
+                            "  \"AdditionalRequirementsViewTransfer\" : [\n" +
                             "    {\"id\" : 1253,\n" +
                             "      \"name\" : \"Розовые ушки у водителя\",\n" +
                             "      \"description\" : \"Водитель должен быть с розовыми ушками на голове\"\n" +
