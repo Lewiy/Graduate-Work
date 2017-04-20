@@ -72,6 +72,7 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
     private LocationListener locationListener;
     private MarkerOptions markerOptions;
     private String transferAddress;
+    private String longitude, latitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +105,10 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
 
                 // Setting the title for the marker.
                 // This will be displayed on taping the marker
+
                 markerOptions.title(latLng.latitude + " : " + latLng.longitude);
+                longitude = Double.toString(latLng.longitude);
+                latitude = Double.toString(latLng.latitude);
 
                 // Clears the previously touched position
                 mGoogleMap.clear();
@@ -212,6 +216,8 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
 
         Intent returnIntent = getIntent();
         intentMy.putExtra("addressFromMap", transferAddress);
+        intentMy.putExtra("longitude", longitude);
+        intentMy.putExtra("latitude", latitude);
         setResult(RESULT_OK, returnIntent);
         finish();
         //  checkLocationPermission();
@@ -302,6 +308,8 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
             }
             Address address = addressList.get(0);
             transferAddress = address.getAddressLine(0);
+            longitude = Double.toString(address.getLatitude());
+            latitude = Double.toString(address.getLongitude());
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
             mGoogleMap.clear();
             mGoogleMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
@@ -327,7 +335,7 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
             @Override
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
-               // Log.i(TAG, "Place: " + place.getName());
+                // Log.i(TAG, "Place: " + place.getName());
                 // searchText.setText(place.getName());
                 //  onMapSearch(place.getAddress().toString());
                 markerOptions = new MarkerOptions().position(place.getLatLng()).title("Marker");
@@ -339,7 +347,7 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
             @Override
             public void onError(Status status) {
                 // TODO: Handle the error.
-              //  Log.i(TAG, "An error occurred: " + status);
+                //  Log.i(TAG, "An error occurred: " + status);
             }
         });
     }

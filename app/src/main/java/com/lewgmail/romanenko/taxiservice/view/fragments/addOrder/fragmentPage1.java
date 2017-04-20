@@ -139,12 +139,12 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     @OnClick(R.id.start_point_act)
     public void onClickStartPoint() {
         //startAutocompleteFragment();
-        addOrderGatherDataFirstWindow.runAutoComplete(R.id.start_point_act);
+        addOrderGatherDataFirstWindow.runAutoComplete(R.id.start_point_act, 0);
     }
 
     @OnClick(R.id.end_point_act)
     public void onClickEndPoint() {
-        addOrderGatherDataFirstWindow.runAutoComplete(R.id.end_point_act);
+        addOrderGatherDataFirstWindow.runAutoComplete(R.id.end_point_act, 1);
     }
 
 
@@ -163,6 +163,7 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 time_text.setText(Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
+                addOrderGatherDataFirstWindow.setActivityStartTime(Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
             }
         };
         TimePickerFragment time = new TimePickerFragment();
@@ -218,6 +219,7 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
 
                                     addresess.remove(position);
                                     addresessAdapter.notifyDataSetChanged();
+                                    addOrderGatherDataFirstWindow.removeAddress(position);
 
                                 }
                             }
@@ -299,7 +301,7 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
 
         void setActivityCity(String city);
 
-        void runAutoComplete(int viewId);
+        void runAutoComplete(int viewId, int position);
 
         void runAutoComplete(AdapterAddPointOfRoute addapterListAddresses);
 
@@ -308,6 +310,8 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         void startActivityForResultMap(int editTextId);
 
         void startActivityForResultMapRoute(int position);
+
+        void removeAddress(int position);
 
     }
 }

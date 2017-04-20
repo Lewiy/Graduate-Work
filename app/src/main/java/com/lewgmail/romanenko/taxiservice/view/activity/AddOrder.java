@@ -20,13 +20,15 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.lewgmail.romanenko.taxiservice.R;
+import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
+import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointN;
 import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
 import com.lewgmail.romanenko.taxiservice.view.activity.elementsOfActivity.SlidingTabLayout;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
 import com.lewgmail.romanenko.taxiservice.view.fragments.addOrder.FragmentPage1;
 import com.lewgmail.romanenko.taxiservice.view.fragments.addOrder.FragmentPage2;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrderGatherDataFirstWindow, FragmentPage2.AddOrderGatherDataSecondWindow {
 
@@ -55,11 +57,20 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     private Fragment fragment1;
     private String typeOfViewElement;
     private int position;
+    // position first s
+    private int positionFirsSeconAdd;
 
+    private String startTime;
+    private String comment;
+    private ArrayList<RoutePointN> routePoints;
+
+    // private String
+    // private String
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_order_);
+        routePoints = new ArrayList<>();
         customerPresenter = new CustomerPresenter(this);
         customerPresenter.addOrder(12.23, 23.34, 123.34, 1234.3);
         //   Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -135,13 +146,17 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     }
 
     @Override
-    public void setActivityAdditionalRequirements(HashMap<Integer, Integer> AdditionalRequirements) {
+    public void setActivityAdditionalRequirements(ArrayList<AdditionalRequirementN> AdditionalRequirements) {
 
     }
 
     @Override
     public void setActivityaddOrder() {
-
+        RoutePointN routePointN = new RoutePointN();
+        // routePointN.setLongtitude("sdf");
+        // routePointN.setLatitude("sdf");
+        routePoints.add(routePointN);
+        int a = 0;
     }
 
     @Override
@@ -180,8 +195,9 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     }
 
     @Override
-    public void runAutoComplete(int viewId) {
+    public void runAutoComplete(int viewId, int position) {
         viewIdEditText = viewId;
+        positionFirsSeconAdd = position;
         startAutocompleteFragment("fragment");
     }
 
@@ -231,18 +247,44 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     }
 
     @Override
+    public void removeAddress(int position) {
+        routePoints.remove(position + 2);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(this, data);
                 Fragment frag1 = getSupportFragmentManager().findFragmentByTag("android:switcher:2131558517:0");
-                //    if (data.getStringExtra("typeOfViewElement") != null) {
+
                 if (typeOfViewElement.equals("fragment")) {
-                    ((EditText) frag1.getView().findViewById(viewIdEditText)).setText(place.getAddress());
+
+                    EditText editText = ((EditText) frag1.getView().findViewById(viewIdEditText));
+                    RoutePointN routePointN = new RoutePointN();
+                    routePointN.setLongtitude(Double.toString(place.getLatLng().longitude));
+                    routePointN.setLatitude(Double.toString(place.getLatLng().latitude));
+                    if (editText.getText().toString().matches(""))
+                        routePoints.add(routePointN);
+                    else routePoints.set(positionFirsSeconAdd, routePointN);
+                    editText.setText(place.getAddress());
+
                 } else if (typeOfViewElement.equals("List")) {
+
                     addapterListAddresses.myAddList(place.getAddress().toString());
+                    RoutePointN routePointN = new RoutePointN();
+                    routePointN.setLongtitude(Double.toString(place.getLatLng().longitude));
+                    routePointN.setLatitude(Double.toString(place.getLatLng().latitude));
+                    routePoints.add(routePointN);
+
                 } else {
+
                     addapterListAddresses.replaseItem(place.getAddress().toString(), position);
+                    RoutePointN routePointN = new RoutePointN();
+                    routePointN.setLongtitude(Double.toString(place.getLatLng().longitude));
+                    routePointN.setLatitude(Double.toString(place.getLatLng().latitude));
+                    routePoints.set(position + 2, routePointN);
+
                 }
                 //  }
                 Log.i("", "Place: " + place.getName());
@@ -259,15 +301,49 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case MAP_SEARCH_ADDRESS_CODE:
-                    String address = data.getStringExtra("addressFromMap");
+                   /* String address = data.getStringExtra("addressFromMap");
+                    String latitude = data.getStringExtra("latitude");
+                    String longitude = data.getStringExtra("longitude");*/
                     Fragment frag1 = getSupportFragmentManager().findFragmentByTag("android:switcher:2131558517:0");
-                    ((EditText) frag1.getView().findViewById(viewIdEditText)).setText(address);
+                    EditText editText = ((EditText) frag1.getView().findViewById(viewIdEditText));
+                    if (editText.getText().toString().matches("")) {
+                        RoutePointN routePointN = new RoutePointN();
+                        routePointN.setLongtitude(data.getStringExtra("longitude"));
+                        routePointN.setLatitude(data.getStringExtra("latitude"));
+                        routePoints.add(routePointN);
+                    } else {
+                        RoutePointN routePointN = new RoutePointN();
+                        routePointN.setLongtitude(data.getStringExtra("longitude"));
+                        routePointN.setLatitude(data.getStringExtra("latitude"));
+                        routePoints.set(positionFirsSeconAdd, routePointN);
+                    }
+                    editText.setText(data.getStringExtra("addressFromMap"));
                     break;
                 case MAP_SEARCH_ADDRESS_CODE_ROUTE:
                     addapterListAddresses.replaseItem(data.getStringExtra("addressFromMap"), position);
+                    RoutePointN routePointN = new RoutePointN();
+                    routePointN.setLongtitude(data.getStringExtra("longitude"));
+                    routePointN.setLatitude(data.getStringExtra("latitude"));
+                    routePoints.set(position + 2, routePointN);
 
             }
         }
+    }
+
+    public String getTime() {
+        return null;
+    }
+
+    public String getComment() {
+        return null;
+    }
+
+    public ArrayList getLatit() {
+        return null;
+    }
+
+    public String getLong() {
+        return null;
     }
 
     /**
@@ -319,5 +395,4 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
             return null;
         }
     }
-
 }

@@ -6,14 +6,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.lewgmail.romanenko.taxiservice.R;
+import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,7 +56,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
     private int lastPressed = 0;
     private ImageButton lastPressedB = null;
     private int lastPressedDraw = 0;
-    private HashMap<Integer, Integer> additionalRequirements;
+    private ArrayList<AdditionalRequirementN> additionalRequirements;
     public FragmentPage2() {
     }
     // private Context context;
@@ -72,8 +74,8 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_add_order_2, container, false);
         ButterKnife.bind(this, rootView);
-        initializeSpinner(R.array.type_baggage);
-        additionalRequirements = new HashMap<Integer, Integer>();
+        // initializeSpinner(R.array.type_baggage,4);
+        additionalRequirements = new ArrayList<>();
         return rootView;
     }
 
@@ -93,13 +95,14 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
     @OnClick(R.id.add_order)
     public void onClickAddOrder() {
         addOrderGatherDataSecondWindow.setActivityaddOrder();
+        addOrderGatherDataSecondWindow.setActivityAdditionalRequirements(additionalRequirements);
     }
 
     public String getComment() {
         return commentField.getText().toString();
     }
 
-    public HashMap<Integer, Integer> getAdditionalRequirements() {
+    public ArrayList<AdditionalRequirementN> getAdditionalRequirements() {
         return additionalRequirements;
     }
 
@@ -109,7 +112,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
         onlyOnePaint(lastPressedB, lastPressedDraw);
         lastPressedB = baggage;
         lastPressedDraw = R.drawable.ic_bagets;
-        initializeSpinner(R.array.type_baggage);
+        initializeSpinner(R.array.type_baggage, 4);
     }
 
     @OnClick(R.id.icon_type_reckoning)
@@ -118,7 +121,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
         onlyOnePaint(lastPressedB, lastPressedDraw);
         lastPressedB = typeReckoning;
         lastPressedDraw = R.drawable.ic_card_in_use;
-        initializeSpinner(R.array.type_reconing);
+        initializeSpinner(R.array.type_reconing, 2);
     }
 
     @OnClick(R.id.icon_extra_price)
@@ -127,7 +130,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
         onlyOnePaint(lastPressedB, lastPressedDraw);
         lastPressedB = extraPrice;
         lastPressedDraw = R.drawable.ic_extra_price;
-        initializeSpinner(R.array.type_extra_price);
+        initializeSpinner(R.array.type_extra_price, 5);
     }
 
     @OnClick(R.id.icon_pets)
@@ -137,7 +140,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
         onlyOnePaint(lastPressedB, lastPressedDraw);
         lastPressedB = pets;
         lastPressedDraw = R.drawable.ic_pets;
-        initializeSpinner(R.array.type_pets);
+        initializeSpinner(R.array.type_pets, 3);
     }
 
     @OnClick(R.id.icon_driver_service)
@@ -147,7 +150,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
         onlyOnePaint(lastPressedB, lastPressedDraw);
         lastPressedB = driverService;
         lastPressedDraw = R.drawable.ic_driver;
-        initializeSpinner(R.array.type_driver_services);
+        initializeSpinner(R.array.type_driver_services, 6);
     }
 
     @OnClick(R.id.icon_type_car)
@@ -157,7 +160,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
         onlyOnePaint(lastPressedB, lastPressedDraw);
         lastPressedB = typeCar;
         lastPressedDraw = R.drawable.ic_car_type;
-        initializeSpinner(R.array.type_car);
+        initializeSpinner(R.array.type_car, 1);
     }
 
     @OnClick(R.id.icon_number_passengers)
@@ -167,14 +170,35 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
         onlyOnePaint(lastPressedB, lastPressedDraw);
         lastPressedB = numberPassengers;
         lastPressedDraw = R.drawable.ic_passengers;
-        initializeSpinner(R.array.type_number_passengers);
+        initializeSpinner(R.array.type_number_passengers, 7);
     }
 
-    private void initializeSpinner(int arrayType) {
+    private void initializeSpinner(int arrayType, final int typeRequirements) {
         ArrayAdapter<CharSequence> adapterSpinner =
                 ArrayAdapter.createFromResource(getActivity(), arrayType, android.R.layout.simple_spinner_item);
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         additionRequirm.setAdapter(adapterSpinner);
+        additionRequirm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos,
+                                       long id) {
+                // basePresenter.loadOrdersList(parent.getItemAtPosition(pos).toString());
+                // basePresenter.changeStatusOrder(7);
+                //Log.d("My loooooog","clic
+                //if(pos==0)
+
+                AdditionalRequirementN additionalRequirementN = new AdditionalRequirementN();
+                additionalRequirementN.setReqId(typeRequirements);
+                additionalRequirementN.setReqValueId(pos);
+                additionalRequirements.add(additionalRequirementN);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
     }
 
     private void onlyOnePaint(int index) {
@@ -214,7 +238,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
 
         void setActivityComment(String Comment);
 
-        void setActivityAdditionalRequirements(HashMap<Integer, Integer> AdditionalRequirements);
+        void setActivityAdditionalRequirements(ArrayList<AdditionalRequirementN> AdditionalRequirements);
 
         void setActivityaddOrder();
     }

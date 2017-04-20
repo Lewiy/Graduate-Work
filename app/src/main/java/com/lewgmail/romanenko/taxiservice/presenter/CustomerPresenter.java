@@ -238,12 +238,12 @@ public class CustomerPresenter {
         addOrder.setOrderPrice(orderPrice);
 
         RoutePointN routePointN = new RoutePointN();
-        routePointN.setAdminArea("dfgdfgfg");
+        // routePointN.setAdminArea("dfgdfgfg");
         routePointN.setLongtitude("34.123");
         routePointN.setLatitude("34.1233");
-        routePointN.setStreet("sdfsdfsdf");
-        routePointN.setCity("sdfsdf");
-        routePointN.setHouseNumber("3");
+        // routePointN.setStreet("sdfsdfsdf");
+        //  routePointN.setCity("sdfsdf");
+        //  routePointN.setHouseNumber("3");
 
         List<RoutePointN> listRoute = new ArrayList<>();
 
