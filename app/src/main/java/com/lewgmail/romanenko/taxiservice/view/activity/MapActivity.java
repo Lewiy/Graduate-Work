@@ -34,7 +34,6 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.presenter.MapGooglePresenter;
@@ -72,6 +71,7 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
     private LocationManager locationManager;
     private LocationListener locationListener;
     private MarkerOptions markerOptions;
+    private String transferAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +93,32 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
                 new LatLng(50.448541, 30.507144), 10));
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                // Creating a marker
+                MarkerOptions markerOptions = new MarkerOptions();
+
+                // Setting the position for the marker
+                markerOptions.position(latLng);
+
+                // Setting the title for the marker.
+                // This will be displayed on taping the marker
+                markerOptions.title(latLng.latitude + " : " + latLng.longitude);
+
+                // Clears the previously touched position
+                mGoogleMap.clear();
+
+                // Animating to the touched position
+                mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                // Placing a marker on the touched position
+                mGoogleMap.addMarker(markerOptions);
+                getAddressFromLatLog(latLng);
+
+            }
+        });
+
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //User has previously accepted this permission
             if (ActivityCompat.checkSelfPermission(this,
@@ -109,41 +135,19 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
         googleMap.setBuildingsEnabled(true);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+    }
 
-        /*googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(50.44854153, 30.50714493))
-                .title("Marker")
-                .draggable(true)
-                .snippet("Hello"));*/
-
-
-        googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-            @Override
-            public void onMarkerDragStart(Marker marker) {
-
-            }
-
-            @Override
-            public void onMarkerDrag(Marker marker) {
-
-            }
-
-            @Override
-            public void onMarkerDragEnd(Marker marker) {
-
-                // Locale aLocale = new Locale.Builder().setLanguage("ru").build();
-                //   Locale asd = new Locale("ru");
-                position = marker.getPosition(); //
-                try {
-                    geo = new Geocoder(MapActivity.this.getApplicationContext(), new Locale("ru"));
-                    List<Address> addresses = geo.getFromLocation(position.latitude, position.longitude, 1);
-                    if (addresses.isEmpty()) {
-                        Toast.makeText(
-                                MapActivity.this,
-                                "Please wait",
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (addresses.size() > 0) {
+    private void getAddressFromLatLog(LatLng latLng) {
+        try {
+            geo = new Geocoder(MapActivity.this.getApplicationContext(), new Locale("ru"));
+            List<Address> addresses = geo.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            if (addresses.isEmpty()) {
+                Toast.makeText(
+                        MapActivity.this,
+                        "Please wait",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                if (addresses.size() > 0) {
                           /*  Toast.makeText(getApplicationContext(),
                                     "Address:- " + addresses.get(0).getFeatureName() +
                                             addresses.get(0).getAddressLine(0)+
@@ -152,29 +156,22 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
                             addressFromMarker = addresses.get(0).getFeatureName() +
                                     addresses.get(0).getAdminArea() +
                                     addresses.get(0).getLocality();*/
-                            Toast.makeText(getApplicationContext(),
-                                    "Address:- " +
-                                            addresses.get(0).getAddressLine(0) +
-                                            addresses.get(0).getAdminArea() +
-                                            addresses.get(0).getLocality(), Toast.LENGTH_LONG).show();
-                            //addresses.get(0).getSub
-
-                            addressFromMarker = addresses.get(0).getAddressLine(0) +
+                    Toast.makeText(getApplicationContext(),
+                            "Address:- " +
+                                    addresses.get(0).getAddressLine(0) +
                                     addresses.get(0).getAdminArea() +
-                                    addresses.get(0).getLocality();
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace(); // getFromLocation() may sometimes fail
+                                    addresses.get(0).getLocality(), Toast.LENGTH_LONG).show();
+                    //addresses.get(0).getSub
+
+                    transferAddress = addresses.get(0).getAddressLine(0) +
+                            addresses.get(0).getAdminArea() +
+                            addresses.get(0).getLocality();
                 }
             }
-        });
-
+        } catch (Exception e) {
+            e.printStackTrace(); // getFromLocation() may sometimes fail
+        }
     }
-
-   /* public LatLng culculateDistance() {
-
-    }*/
 
     private void createMapView() {
         /**
@@ -212,7 +209,12 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
         //  returnIntent.putExtra(SECONF_CORD, 30.5238000);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();*/
-        checkLocationPermission();
+
+        Intent returnIntent = getIntent();
+        intentMy.putExtra("addressFromMap", transferAddress);
+        setResult(RESULT_OK, returnIntent);
+        finish();
+        //  checkLocationPermission();
     }
 
 
@@ -299,7 +301,9 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
                 e.printStackTrace();
             }
             Address address = addressList.get(0);
+            transferAddress = address.getAddressLine(0);
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            mGoogleMap.clear();
             mGoogleMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
             mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         }
@@ -327,6 +331,7 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
                 // searchText.setText(place.getName());
                 //  onMapSearch(place.getAddress().toString());
                 markerOptions = new MarkerOptions().position(place.getLatLng()).title("Marker");
+                getAddressFromLatLog(place.getLatLng());
                 mGoogleMap.addMarker(markerOptions);
                 mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
             }

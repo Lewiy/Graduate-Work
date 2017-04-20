@@ -123,13 +123,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
-                        <fragment
-                            android:id="@+id/place_fragment"
-                            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                        <EditText
+                            android:id="@+id/start_point_act"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/end_point"></fragment>
-
+                            android:hint="@string/start_point"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:singleLine="true" />
                     </android.support.design.widget.TextInputLayout>
 
                     <LinearLayout

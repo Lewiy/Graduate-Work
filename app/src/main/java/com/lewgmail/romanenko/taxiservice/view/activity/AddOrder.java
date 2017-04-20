@@ -1,5 +1,6 @@
 package com.lewgmail.romanenko.taxiservice.view.activity;
 
+import android.content.Intent;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -8,12 +9,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
 import com.lewgmail.romanenko.taxiservice.view.activity.elementsOfActivity.SlidingTabLayout;
+import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
 import com.lewgmail.romanenko.taxiservice.view.fragments.addOrder.FragmentPage1;
 import com.lewgmail.romanenko.taxiservice.view.fragments.addOrder.FragmentPage2;
 
@@ -21,6 +30,10 @@ import java.util.HashMap;
 
 public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrderGatherDataFirstWindow, FragmentPage2.AddOrderGatherDataSecondWindow {
 
+    final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1,
+            MAP_SEARCH_ADDRESS_CODE = 2,
+            MAP_SEARCH_ADDRESS_CODE_ROUTE = 3;
+    AdapterAddPointOfRoute addapterListAddresses;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -31,23 +44,23 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private SlidingTabLayout tabs;
-
     private LocationManager locationManager;
     private LocationListener locationListener;
-
-
+    private int viewIdEditText;
     private CustomerPresenter customerPresenter;
-
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private Fragment fragment1;
+    private String typeOfViewElement;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_order_);
-        customerPresenter = new CustomerPresenter();
+        customerPresenter = new CustomerPresenter(this);
         customerPresenter.addOrder(12.23, 23.34, 123.34, 1234.3);
         //   Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().setElevation(0);
@@ -92,7 +105,6 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(mViewPager);
-
     }
 
 
@@ -167,6 +179,96 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
 
     }
 
+    @Override
+    public void runAutoComplete(int viewId) {
+        viewIdEditText = viewId;
+        startAutocompleteFragment("fragment");
+    }
+
+    @Override
+    public void runAutoComplete(AdapterAddPointOfRoute addapterListAddresses) {
+        this.addapterListAddresses = addapterListAddresses;
+        this.addapterListAddresses.setActivityCallBack(this);
+        startAutocompleteFragment("List");
+    }
+
+    @Override
+    public void runAutoCompliteReplaceAddress(int position) {
+        this.position = position;
+        startAutocompleteFragment("ListReplace");
+
+    }
+
+    private void startAutocompleteFragment(String idParameter) {
+
+        try {
+            Intent intent =
+                    new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                            .build(this);
+            // intent.putExtra("typeOfViewElement", idParameter);
+            typeOfViewElement = new String(idParameter);
+            startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+            // setResult();
+        } catch (GooglePlayServicesRepairableException e) {
+            // TODO: Handle the error.
+        } catch (GooglePlayServicesNotAvailableException e) {
+            // TODO: Handle the error.
+        }
+    }
+
+    @Override
+    public void startActivityForResultMap(int viewId) {
+        viewIdEditText = viewId;
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivityForResult(intent, MAP_SEARCH_ADDRESS_CODE);
+    }
+
+    @Override
+    public void startActivityForResultMapRoute(int position) {
+        this.position = position;
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivityForResult(intent, MAP_SEARCH_ADDRESS_CODE_ROUTE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                Fragment frag1 = getSupportFragmentManager().findFragmentByTag("android:switcher:2131558517:0");
+                //    if (data.getStringExtra("typeOfViewElement") != null) {
+                if (typeOfViewElement.equals("fragment")) {
+                    ((EditText) frag1.getView().findViewById(viewIdEditText)).setText(place.getAddress());
+                } else if (typeOfViewElement.equals("List")) {
+                    addapterListAddresses.myAddList(place.getAddress().toString());
+                } else {
+                    addapterListAddresses.replaseItem(place.getAddress().toString(), position);
+                }
+                //  }
+                Log.i("", "Place: " + place.getName());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                // TODO: Handle the error.
+                Log.i("", status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
+
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case MAP_SEARCH_ADDRESS_CODE:
+                    String address = data.getStringExtra("addressFromMap");
+                    Fragment frag1 = getSupportFragmentManager().findFragmentByTag("android:switcher:2131558517:0");
+                    ((EditText) frag1.getView().findViewById(viewIdEditText)).setText(address);
+                    break;
+                case MAP_SEARCH_ADDRESS_CODE_ROUTE:
+                    addapterListAddresses.replaseItem(data.getStringExtra("addressFromMap"), position);
+
+            }
+        }
+    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -184,9 +286,15 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return FragmentPage1.newInstance(position);
+                    Fragment fragment1 = FragmentPage1.newInstance(position);
+                    // FragmentManager fragmentManager = getSupportFragmentManager();
+                    // fragmentManager.beginTransaction().add(fragment1,"fragmentAddOrder1").commit();
+                    return fragment1;
                 case 1:
-                    return FragmentPage2.newInstance(position);
+                    Fragment fragment2 = FragmentPage2.newInstance(position);
+                    // FragmentManager fragmentManager2 = getSupportFragmentManager();
+                    //  fragmentManager2.beginTransaction().add(fragment2,"fragmentAddOrder2").commit();
+                    return fragment2;
                 default:
                     return new Fragment();
             }
@@ -211,6 +319,5 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
             return null;
         }
     }
-
 
 }

@@ -1,7 +1,8 @@
 package com.lewgmail.romanenko.taxiservice.view.fragments.addOrder;
 
+import android.app.Activity;
 import android.app.TimePickerDialog;
-import android.content.Intent;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -9,7 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -18,7 +19,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.lewgmail.romanenko.taxiservice.R;
-import com.lewgmail.romanenko.taxiservice.view.activity.MapActivity;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
 import com.lewgmail.romanenko.taxiservice.view.adapters.SwipeDismissListViewTouchListener;
 import com.lewgmail.romanenko.taxiservice.view.dialogFragment.TimePickerFragment;
@@ -51,20 +51,31 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     LinearLayout addressesLinear;
     @BindView(R.id.route)
     ListView route;
-    @BindView((R.id.time_text))
+    @BindView(R.id.time_text)
     TextView time_text;
-    private ArrayAdapter<String> addresessAdapter;
+
+    @BindView(R.id.start_point_act)
+    EditText startPointText;
+
+
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
+
+    private AddOrderGatherDataFirstWindow addOrderGatherDataFirstWindow;
+    private AdapterAddPointOfRoute addresessAdapter;
     private ArrayList<String> addresess;
     private LocationManager locationManager;
     private LocationListener locationListener;
     public FragmentPage1() {
     }
 
+
     public static FragmentPage1 newInstance(int sectionNumber) {
         FragmentPage1 fragment = new FragmentPage1();
-     /*   Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);*/
+        Bundle args = new Bundle();
+        args.putInt("key", sectionNumber);
+        fragment.setArguments(args);
+        // FragmentManager fragmentManager =  getFragmentManager();
+        // fragmentManager.beginTransaction().add(fragment1,"fragmentAddOrder1").commit();
         return fragment;
     }
 
@@ -77,6 +88,17 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         return rootView;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        Activity addOrder;
+        if (context instanceof Activity) {
+            addOrder = (Activity) context;
+            addOrderGatherDataFirstWindow = (AddOrderGatherDataFirstWindow) addOrder;
+        }
+    }
+
     @OnClick(R.id.radio_button_now)
     public void onClickButtonNow() {
         uncheckOtherButton(1);
@@ -85,10 +107,13 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
 
     @OnClick(R.id.point1_map)
     public void onClickMap() {
+        startMapActivity(R.id.start_point_act);
 
-        Intent myIntent = new Intent(getActivity(), MapActivity.class);
-        myIntent.putExtra("keyAddressFromMarker", "StartPoint"); //Optional parameters
-        getActivity().startActivity(myIntent);
+    }
+
+    @OnClick(R.id.point2_map)
+    public void onClickMap2() {
+        startMapActivity(R.id.end_point_act);
 
     }
 
@@ -110,6 +135,18 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         uncheckOtherButton(3);
         showHideClock();
     }
+
+    @OnClick(R.id.start_point_act)
+    public void onClickStartPoint() {
+        //startAutocompleteFragment();
+        addOrderGatherDataFirstWindow.runAutoComplete(R.id.start_point_act);
+    }
+
+    @OnClick(R.id.end_point_act)
+    public void onClickEndPoint() {
+        addOrderGatherDataFirstWindow.runAutoComplete(R.id.end_point_act);
+    }
+
 
     @OnClick(R.id.add_address_btn)
     public void addAddress() {
@@ -165,7 +202,7 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
 
     private void init() {
         addresess = new ArrayList<>();
-        addresessAdapter = new AdapterAddPointOfRoute(getActivity(), R.layout.address_point, addresess);
+        addresessAdapter = new AdapterAddPointOfRoute(getActivity(), R.layout.address_point, addresess, route);
         SwipeDismissListViewTouchListener touchListener =
                 new SwipeDismissListViewTouchListener(
                         route,
@@ -185,9 +222,10 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
                                 }
                             }
                         });
-
+        //  addresessAdapter.setActivityCallBack();
         route.setAdapter(addresessAdapter);
         route.setOnTouchListener(touchListener);
+
     }
 
     private void showHideClock() {
@@ -214,8 +252,11 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     }
 
     private void addAddressPoint() {
-        addresessAdapter.add("sdfklnfg");
+        //run
+        //  addresessAdapter.add("sdfklnfg");
+        addOrderGatherDataFirstWindow.runAutoComplete(addresessAdapter);
     }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -236,6 +277,13 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         }
     }
 
+    private void startMapActivity(int editTextId) {
+       /* Intent myIntent = new Intent(getActivity(), MapActivity.class);
+        myIntent.putExtra("keyAddressFromMarker", "StartPoint"); //Optional parameters
+        getActivity().startActivity(myIntent);*/
+        addOrderGatherDataFirstWindow.startActivityForResultMap(editTextId);
+    }
+
     public interface AddOrderGatherDataFirstWindow {
         void setActivityStartTime(String startTime);
 
@@ -250,6 +298,16 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         void setActivityHouseNumber(String houseNumber);
 
         void setActivityCity(String city);
+
+        void runAutoComplete(int viewId);
+
+        void runAutoComplete(AdapterAddPointOfRoute addapterListAddresses);
+
+        void runAutoCompliteReplaceAddress(int position);
+
+        void startActivityForResultMap(int editTextId);
+
+        void startActivityForResultMapRoute(int position);
 
     }
 }

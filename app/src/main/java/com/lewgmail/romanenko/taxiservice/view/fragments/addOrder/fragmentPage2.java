@@ -32,7 +32,6 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
             DRIVERSERVICE = 5,
             TYPECAR = 6,
             NUMBERPASSENGERS = 7;
-    AddOrderGatherDataSecondWindow addOrderGatherDataSecondWindow;
     @BindView(R.id.icon_addit_baggage)
     ImageButton baggage;
     @BindView(R.id.icon_type_reckoning)
@@ -51,6 +50,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
     Spinner additionRequirm;
     @BindView(R.id.comment_element)
     EditText commentField;
+    private AddOrderGatherDataSecondWindow addOrderGatherDataSecondWindow;
     private int lastPressed = 0;
     private ImageButton lastPressedB = null;
     private int lastPressedDraw = 0;
@@ -61,9 +61,9 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
 
     public static FragmentPage2 newInstance(int sectionNumber) {
         FragmentPage2 fragment = new FragmentPage2();
-       /* Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);*/
+        Bundle args = new Bundle();
+        args.putInt("key", sectionNumber);
+        fragment.setArguments(args);
         return fragment;
     }
 

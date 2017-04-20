@@ -2,21 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="5dp"
-    android:layout_marginTop="-10dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="1dp"
     android:orientation="vertical">
 
     <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginBottom="-30dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:src="@drawable/ic_gray_dots" />
 
     <LinearLayout
         android:id="@+id/address_linear_point"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -41,22 +41,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/address_point"
+                    android:layout_width="270dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:id="@+id/end_point_act"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/end_point"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:paddingRight="30dp"
-                        android:singleLine="true" />
-
-                </android.support.design.widget.TextInputLayout>
+                    android:maxLines="1" />
 
                 <ImageButton
                     android:id="@+id/point1_map"
