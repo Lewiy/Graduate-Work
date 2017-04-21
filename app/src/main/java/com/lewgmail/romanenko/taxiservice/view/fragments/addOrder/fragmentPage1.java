@@ -60,6 +60,8 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
 
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
 
+    private String dateAndTime;
+
     private AddOrderGatherDataFirstWindow addOrderGatherDataFirstWindow;
     private AdapterAddPointOfRoute addresessAdapter;
     private ArrayList<String> addresess;
@@ -153,7 +155,7 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         addAddressPoint();
     }
 
-    @OnClick(R.id.time_button_picker)
+    @OnClick(R.id.time_text)
     public void onClickTimePicker() {
         showTimePicker();
     }

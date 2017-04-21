@@ -63,6 +63,7 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     private String startTime;
     private String comment;
     private ArrayList<RoutePointN> routePoints;
+    private ArrayList<AdditionalRequirementN> additionalRequirementNs;
 
     // private String
     // private String
@@ -72,7 +73,7 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
         setContentView(R.layout.activity_add_order_);
         routePoints = new ArrayList<>();
         customerPresenter = new CustomerPresenter(this);
-        customerPresenter.addOrder(12.23, 23.34, 123.34, 1234.3);
+        // customerPresenter.addOrder(12.23, 23.34, 123.34, 1234.3);
         //   Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -141,27 +142,30 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     }
 
     @Override
-    public void setActivityComment(String Comment) {
-
+    public void setActivityComment(String comment) {
+        this.comment = comment;
     }
 
     @Override
-    public void setActivityAdditionalRequirements(ArrayList<AdditionalRequirementN> AdditionalRequirements) {
-
+    public void setActivityAdditionalRequirements(ArrayList<AdditionalRequirementN> additionalRequirements) {
+        this.additionalRequirementNs = additionalRequirements;
     }
 
     @Override
     public void setActivityaddOrder() {
-        RoutePointN routePointN = new RoutePointN();
+        //  RoutePointN routePointN = new RoutePointN();
         // routePointN.setLongtitude("sdf");
         // routePointN.setLatitude("sdf");
-        routePoints.add(routePointN);
-        int a = 0;
+        // routePoints.add(routePointN);
+        // int a = 0;
+
+        customerPresenter.addOrder();
+
     }
 
     @Override
     public void setActivityStartTime(String startTime) {
-
+        this.startTime = startTime;
     }
 
     @Override
@@ -331,19 +335,19 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     }
 
     public String getTime() {
-        return null;
+        return startTime;
     }
 
     public String getComment() {
-        return null;
+        return comment;
     }
 
-    public ArrayList getLatit() {
-        return null;
+    public ArrayList getRoute() {
+        return routePoints;
     }
 
-    public String getLong() {
-        return null;
+    public ArrayList getAdditionalRequirementNs() {
+        return additionalRequirementNs;
     }
 
     /**

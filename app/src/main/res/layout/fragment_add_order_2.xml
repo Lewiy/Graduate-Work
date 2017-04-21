@@ -22,11 +22,14 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/tab_color_scrol"
-                android:ellipsize="start"
                 android:gravity="top"
                 android:hint="Comments..."
                 android:textAlignment="gravity" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></LinearLayout>
 
         <LinearLayout
             android:id="@+id/information_bar"
@@ -34,6 +37,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_weight="5"
+            android:focusableInTouchMode="false"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -112,6 +116,8 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:background="@color/more_light_gray"
+            android:focusableInTouchMode="false"
+            android:isScrollContainer="false"
             android:orientation="vertical">
 
             <TextView
@@ -280,6 +286,16 @@
                     android:textColor="@color/black"
                     android:textSize="20dp" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/calculate_price_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="@string/calculate_price"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/add_order"

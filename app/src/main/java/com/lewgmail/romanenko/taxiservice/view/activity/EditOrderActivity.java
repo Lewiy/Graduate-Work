@@ -223,7 +223,7 @@ public class EditOrderActivity extends FragmentActivity implements
 
     @OnClick(R.id.accept_edit_order)
     public void onClickAcceptOrder() {
-        if (intentMy.getStringExtra("keyUpdate") != null) {
+       /* if (intentMy.getStringExtra("keyUpdate") != null) {
             if (intentMy.getStringExtra("keyUpdate").equals("update")) {
                 if (chekInputedFieldAll())
                     customerPresenter.updateOrder();
@@ -235,7 +235,7 @@ public class EditOrderActivity extends FragmentActivity implements
                 else customerPresenter.addOrder(longetude1, latitude1, longetude2, latitude2);
 
 
-        }
+        }*/
     }
 
     @OnClick(R.id.ok_edit_order)

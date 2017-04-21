@@ -2,6 +2,8 @@ package com.lewgmail.romanenko.taxiservice.model.api;
 
 import android.util.Log;
 
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -31,10 +33,14 @@ public class Services {
     private static final OkHttpClient.Builder CLIENT = new OkHttpClient
             .Builder();
 
+    private static final GsonBuilder gsonBuilder = new GsonBuilder().serializeNulls();
+
+    //Gson gson = gsonBuilder.create();
+
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
                     .baseUrl(API_ENDPOINT)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
 
     private static Interceptor interceptor = new Interceptor() {

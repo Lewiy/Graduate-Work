@@ -3,7 +3,6 @@ package com.lewgmail.romanenko.taxiservice.presenter;
 import android.util.Log;
 
 import com.lewgmail.romanenko.taxiservice.model.DTO.DataGoogleMapDTO;
-import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerGoogleMaps;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerOrderApiCust;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AddOrderN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
@@ -57,7 +56,7 @@ public class CustomerPresenter {
         return view;
     }
 
-    public void addOrder(double longetude1, double latitude1, double longetude2, double latitude2) {
+    /*public void addOrder(double longetude1, double latitude1, double longetude2, double latitude2) {
 
         ManagerGoogleMaps managerGoogleMaps = new ManagerGoogleMaps();
         Observable<DataGoogleMapDTO> observer = managerGoogleMaps.getDistance(longetude1, latitude1, longetude2, latitude2);
@@ -83,7 +82,7 @@ public class CustomerPresenter {
                         //  view.setDuration(dataGoogleMapDTO.getDuration());
                         // managerOrderApiCust.calculatePrice(createRequestCalcPrice(dataGoogleMapDTO.getDistance()),customerPresenter);
                         try {
-                            String error = managerOrderApiCust.addOrder(createObjectAddOrder(/*dataGoogleMapDTO.getDistance()*/));
+                            String error = managerOrderApiCust.addOrder(createObjectAddOrder());
                             // view.showError(error);
                             //  Log.i("sdf",error);
                         } catch (ParseException e) {
@@ -91,11 +90,12 @@ public class CustomerPresenter {
                         }
                     }
                 });
-       /* try {
-            managerOrderApiCust.addOrder(createObjectAddOrder());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
+    }*/
+
+    public void addOrder() {
+
+        String error = managerOrderApiCust.addOrder(createOrder());
+
     }
 
     public void addOrderResponse() {
@@ -177,6 +177,17 @@ public class CustomerPresenter {
                 });
     }
 
+    private AddOrderN createOrder() {
+        AddOrderN addOrderN = new AddOrderN();
+        addOrderN.setComment(viewAddOrder.getComment());
+        // addOrderN.setStartTime(viewAddOrder.getTime());
+        addOrderN.setStartTime(null);
+        addOrderN.setAdditionalRequirementN(viewAddOrder.getAdditionalRequirementNs());
+        addOrderN.setRoutePoint(viewAddOrder.getRoute());
+
+        return addOrderN;
+    }
+
     private AddOrderN createObjectAddOrder(/*double distanse*/) throws ParseException {
 
         //   List<AdditionalRequirementN> list = new ArrayList<>();
@@ -235,7 +246,7 @@ public class CustomerPresenter {
         //  String dateTime = convertDateTime(string);
         addOrder.setStartTime("2017-08-09T18:31:42");
         addOrder.setComment("dlfgjkldnfgdfklgjdlkgjklfg");
-        addOrder.setOrderPrice(orderPrice);
+        //addOrder.setOrderPrice(orderPrice);
 
         RoutePointN routePointN = new RoutePointN();
         // routePointN.setAdminArea("dfgdfgfg");

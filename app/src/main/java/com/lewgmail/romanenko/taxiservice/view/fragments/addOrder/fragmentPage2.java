@@ -57,6 +57,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
     private ImageButton lastPressedB = null;
     private int lastPressedDraw = 0;
     private ArrayList<AdditionalRequirementN> additionalRequirements;
+
     public FragmentPage2() {
     }
     // private Context context;
@@ -94,8 +95,9 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
 
     @OnClick(R.id.add_order)
     public void onClickAddOrder() {
-        addOrderGatherDataSecondWindow.setActivityaddOrder();
         addOrderGatherDataSecondWindow.setActivityAdditionalRequirements(additionalRequirements);
+        addOrderGatherDataSecondWindow.setActivityComment(commentField.getText().toString());
+        addOrderGatherDataSecondWindow.setActivityaddOrder();
     }
 
     public String getComment() {
@@ -113,6 +115,11 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
         lastPressedB = baggage;
         lastPressedDraw = R.drawable.ic_bagets;
         initializeSpinner(R.array.type_baggage, 4);
+    }
+
+    @OnClick(R.id.calculate_price_button)
+    public void onClickCalculatePrice() {
+
     }
 
     @OnClick(R.id.icon_type_reckoning)
@@ -178,6 +185,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
                 ArrayAdapter.createFromResource(getActivity(), arrayType, android.R.layout.simple_spinner_item);
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         additionRequirm.setAdapter(adapterSpinner);
+
         additionRequirm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos,
                                        long id) {
@@ -186,10 +194,22 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
                 //Log.d("My loooooog","clic
                 //if(pos==0)
 
-                AdditionalRequirementN additionalRequirementN = new AdditionalRequirementN();
-                additionalRequirementN.setReqId(typeRequirements);
-                additionalRequirementN.setReqValueId(pos);
-                additionalRequirements.add(additionalRequirementN);
+
+                if ((pos - 1) != -1) {
+                    boolean flag = true;
+                    AdditionalRequirementN additionalRequirementN = new AdditionalRequirementN();
+                    additionalRequirementN.setReqId(typeRequirements);
+                    additionalRequirementN.setReqValueId(pos - 1);
+                    for (AdditionalRequirementN i : additionalRequirements) {
+                        if (i.getReqId() == typeRequirements)
+                            flag = false;
+                    }
+                    if (flag)
+                        additionalRequirements.add(additionalRequirementN);
+                    // else
+                    // additionalRequirements.set(additionalRequirements.indexOf(additionalRequirementN),additionalRequirementN);
+                }
+
 
             }
 

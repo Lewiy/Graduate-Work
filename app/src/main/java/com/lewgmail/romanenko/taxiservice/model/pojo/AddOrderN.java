@@ -14,12 +14,12 @@ public class AddOrderN {
     @SerializedName("comment")
     @Expose
     private String comment;
-    @SerializedName("routePoint")
+    @SerializedName("routePoints")
     @Expose
     private List<RoutePointN> routePoint = null;
-    @SerializedName("orderPrice")
+    @SerializedName("additionalRequirements")
     @Expose
-    private OrderPriceN orderPrice;
+    private List<AdditionalRequirementN> additionalRequirementN;
 
     public String getStartTime() {
         return startTime;
@@ -45,12 +45,12 @@ public class AddOrderN {
         this.routePoint = routePoint;
     }
 
-    public OrderPriceN getOrderPrice() {
-        return orderPrice;
+    public List<AdditionalRequirementN> getAdditionalRequirementN() {
+        return additionalRequirementN;
     }
 
-    public void setOrderPrice(OrderPriceN orderPrice) {
-        this.orderPrice = orderPrice;
+    public void setAdditionalRequirementN(List<AdditionalRequirementN> additionalRequirementN) {
+        this.additionalRequirementN = additionalRequirementN;
     }
 
 }

@@ -61,7 +61,8 @@
             android:label="@string/button_back_to_personal_registration" />
         <activity
             android:name=".view.activity.AddOrder"
-            android:label="@string/title_activity_add_order">
+            android:label="@string/title_activity_add_order"
+            android:windowSoftInputMode="stateVisible|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
