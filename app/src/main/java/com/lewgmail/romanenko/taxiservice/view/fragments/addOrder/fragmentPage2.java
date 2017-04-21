@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
@@ -52,6 +53,10 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
     Spinner additionRequirm;
     @BindView(R.id.comment_element)
     EditText commentField;
+
+    @BindView(R.id.value_price)
+    TextView valuePrice;
+
     private AddOrderGatherDataSecondWindow addOrderGatherDataSecondWindow;
     private int lastPressed = 0;
     private ImageButton lastPressedB = null;
@@ -97,7 +102,13 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
     public void onClickAddOrder() {
         addOrderGatherDataSecondWindow.setActivityAdditionalRequirements(additionalRequirements);
         addOrderGatherDataSecondWindow.setActivityComment(commentField.getText().toString());
-        addOrderGatherDataSecondWindow.setActivityaddOrder();
+        addOrderGatherDataSecondWindow.runReqaddOrder(getContext());
+    }
+
+    @OnClick(R.id.calculate_price_button)
+    public void onClickCalculatePrice() {
+        addOrderGatherDataSecondWindow.setActivityAdditionalRequirements(additionalRequirements);
+        addOrderGatherDataSecondWindow.runReqCalculayePrice(valuePrice);
     }
 
     public String getComment() {
@@ -117,10 +128,6 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
         initializeSpinner(R.array.type_baggage, 4);
     }
 
-    @OnClick(R.id.calculate_price_button)
-    public void onClickCalculatePrice() {
-
-    }
 
     @OnClick(R.id.icon_type_reckoning)
     public void onClickTypeReckoning() {
@@ -260,6 +267,8 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
 
         void setActivityAdditionalRequirements(ArrayList<AdditionalRequirementN> AdditionalRequirements);
 
-        void setActivityaddOrder();
+        void runReqaddOrder(Context contextFragm2);
+
+        void runReqCalculayePrice(TextView valuePrice);
     }
 }

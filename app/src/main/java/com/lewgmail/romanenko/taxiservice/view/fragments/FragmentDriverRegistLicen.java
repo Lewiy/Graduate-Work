@@ -22,8 +22,6 @@ public class FragmentDriverRegistLicen extends android.support.v4.app.Fragment i
     EditText driverLicense;
     @BindView(R.id.license_expiration_date)
     EditText licenseExpirationDate;
-    @BindView(R.id.category_license)
-    EditText categoryLicense;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,9 +38,6 @@ public class FragmentDriverRegistLicen extends android.support.v4.app.Fragment i
         return licenseExpirationDate.getText().toString();
     }
 
-    public String getCategoryLicense() {
-        return categoryLicense.getText().toString();
-    }
 
     @Override
     public boolean validitionFields() {
@@ -53,8 +48,7 @@ public class FragmentDriverRegistLicen extends android.support.v4.app.Fragment i
 
     private boolean checkInputedFields() {
         if (!driverLicense.getText().toString().equals("")
-                && !licenseExpirationDate.getText().toString().equals("")
-                && !categoryLicense.getText().toString().equals(""))
+                && !licenseExpirationDate.getText().toString().equals(""))
             return true;
         else {
             Toast.makeText(this.getActivity(), R.string.dont_inputed_fields, Toast.LENGTH_SHORT).show();

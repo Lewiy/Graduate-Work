@@ -34,39 +34,24 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/category_license"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/category_license"
-            android:inputType="textCapCharacters"
-            android:maxLines="1"
-            android:singleLine="true" />
-
-    </android.support.design.widget.TextInputLayout>
-
     <Button
         android:id="@+id/front_driver_license"
         android:layout_width="150dp"
         android:layout_height="90dp"
-        android:text="@string/front_foto_license"
-        android:background="@drawable/default_license"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:background="@drawable/default_license"
+        android:text="@string/front_foto_license" />
 
     <Button
         android:id="@+id/back_driver_license"
         android:layout_width="150dp"
         android:layout_height="90dp"
-        android:text="@string/back_foto_license"
-        android:background="@drawable/default_license"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:background="@drawable/default_license"
+        android:text="@string/back_foto_license" />
 
 </LinearLayout>

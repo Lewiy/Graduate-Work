@@ -23,7 +23,13 @@ import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
 import com.lewgmail.romanenko.taxiservice.view.adapters.SwipeDismissListViewTouchListener;
 import com.lewgmail.romanenko.taxiservice.view.dialogFragment.TimePickerFragment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,12 +67,16 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
 
     private String dateAndTime;
+    // 0 - naw, 1- today, 2- tomorrow;
+    private int date;
 
     private AddOrderGatherDataFirstWindow addOrderGatherDataFirstWindow;
+
     private AdapterAddPointOfRoute addresessAdapter;
     private ArrayList<String> addresess;
     private LocationManager locationManager;
     private LocationListener locationListener;
+
     public FragmentPage1() {
     }
 
@@ -103,6 +113,7 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
 
     @OnClick(R.id.radio_button_now)
     public void onClickButtonNow() {
+        date = 0;
         uncheckOtherButton(1);
         showHideClock();
     }
@@ -128,12 +139,14 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
 
     @OnClick(R.id.radio_button_today)
     public void onClickButtonToday() {
+        date = 1;
         uncheckOtherButton(2);
         showHideClock();
     }
 
     @OnClick(R.id.radio_button_tomorrow)
     public void onClickButtonTonorrow() {
+        date = 2;
         uncheckOtherButton(3);
         showHideClock();
     }
@@ -160,12 +173,15 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         showTimePicker();
     }
 
+
     private void showTimePicker() {
         TimePickerDialog.OnTimeSetListener onTimeListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 time_text.setText(Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
-                addOrderGatherDataFirstWindow.setActivityStartTime(Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
+
+                addOrderGatherDataFirstWindow.setActivityStartTime(
+                        convertDateTime(Integer.toString(hourOfDay) + ":" + Integer.toString(minute), date));
             }
         };
         TimePickerFragment time = new TimePickerFragment();
@@ -173,8 +189,38 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         time.show(getFragmentManager(), "Time Picker");
     }
 
-    private void initializeView() {
+    private String convertDateTime(String dateTime, int dateFlag) {
+        String date = null;
+        Calendar calendar = new GregorianCalendar();
 
+        if (dateFlag == 0)
+            return null;
+
+        if (dateFlag == 1) {
+            // today
+            SimpleDateFormat dateToday = new SimpleDateFormat("yyyy-MM-dd");
+            date = dateToday.format(calendar.getTime());
+        }
+
+        if (dateFlag == 2) {
+            // tomorrow
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+            SimpleDateFormat dateToday = new SimpleDateFormat("yyyy-MM-dd");
+            date = dateToday.format(calendar.getTime());
+        }
+
+        SimpleDateFormat formatOne = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date dateTransfer = null;
+        try {
+            dateTransfer = formatOne.parse(date + " " + dateTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        SimpleDateFormat formatTwo = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        String result = formatTwo.format(dateTransfer).toString();
+
+        return result;
     }
 
     public void initLocationManager() {

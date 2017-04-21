@@ -7,40 +7,27 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class CalculatePrice {
-
-    @SerializedName("distance")
+    @SerializedName("routePoints")
     @Expose
-    private double distance;
-    @SerializedName("AdditionalRequirementsViewTransfer")
+    private List<RoutePointN> routePoint = null;
+    @SerializedName("additionalRequirements")
     @Expose
-    private List<AdditionalRequirementN> additionalRequirements = null;
+    private List<AdditionalRequirementN> additionalRequirementN;
 
-    /**
-     * @return The distance
-     */
-    public double getDistance() {
-        return distance;
+    public List<RoutePointN> getRoutePoint() {
+        return routePoint;
     }
 
-    /**
-     * @param distance The distance
-     */
-    public void setDistance(double distance) {
-        this.distance = distance;
+    public void setRoutePoint(List<RoutePointN> routePoint) {
+        this.routePoint = routePoint;
     }
 
-    /**
-     * @return The AdditionalRequirementsViewTransfer
-     */
-    public List<AdditionalRequirementN> getAdditionalRequirements() {
-        return additionalRequirements;
+    public List<AdditionalRequirementN> getAdditionalRequirementN() {
+        return additionalRequirementN;
     }
 
-    /**
-     * @param additionalRequirements The AdditionalRequirementsViewTransfer
-     */
-    public void setAdditionalRequirements(List<AdditionalRequirementN> additionalRequirements) {
-        this.additionalRequirements = additionalRequirements;
+    public void setAdditionalRequirementN(List<AdditionalRequirementN> additionalRequirementN) {
+        this.additionalRequirementN = additionalRequirementN;
     }
 
 }

@@ -11,7 +11,7 @@ public class UserRegistration {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("username")
+    @SerializedName("email")
     @Expose
     private String username;
     @SerializedName("password")
@@ -19,13 +19,24 @@ public class UserRegistration {
     private String password;
     @SerializedName("mobileNumbers")
     @Expose
-    private List<String> mobileNumbers = null;
+    private List<MobileNumber> mobileNumbers = null;
     @SerializedName("userType")
     @Expose
     private String userType;
     @SerializedName("car")
     @Expose(serialize = false)
     private UserRegistrationCar car;
+    @SerializedName("driverLicense")
+    @Expose(serialize = false)
+    private DriverLicense driverLicense;
+
+    public DriverLicense getDriverLicense() {
+        return driverLicense;
+    }
+
+    public void setDriverLicense(DriverLicense driverLicense) {
+        this.driverLicense = driverLicense;
+    }
 
     public String getName() {
         return name;
@@ -51,11 +62,11 @@ public class UserRegistration {
         this.password = password;
     }
 
-    public List<String> getMobileNumbers() {
+    public List<MobileNumber> getMobileNumbers() {
         return mobileNumbers;
     }
 
-    public void setMobileNumbers(List<String> mobileNumbers) {
+    public void setMobileNumbers(List<MobileNumber> mobileNumbers) {
         this.mobileNumbers = mobileNumbers;
     }
 

@@ -67,7 +67,7 @@ public class MapGooglePresenter implements BasePresenterInterface {
                         dataGoogleMapDTOPres = dataGoogleMapDTO;
                         view.setDistance(dataGoogleMapDTO.getDistanceTx());
                         view.setDuration(dataGoogleMapDTO.getDuration());
-                        managerOrderApiCust.calculatePrice(createRequestCalcPrice(dataGoogleMapDTO.getDistance(), customerPresenter.getView()), customerPresenter);
+                        //  managerOrderApiCust.calculatePrice(createRequestCalcPrice(dataGoogleMapDTO.getDistance(), customerPresenter.getView()), customerPresenter);
                     }
                 });
 
@@ -97,7 +97,7 @@ public class MapGooglePresenter implements BasePresenterInterface {
     private CalculatePrice createRequestCalcPrice(double distance, EditOrderInterface editOrderView) {
         CalculatePrice calculatePrice = new CalculatePrice();
         double distanceKm = distance / 1000;
-        calculatePrice.setDistance(distanceKm);
+        // calculatePrice.setDistance(distanceKm);
         AdditionalRequirementN additionalRequirement = new AdditionalRequirementN();
         additionalRequirement.setReqId(1);
         String sdf = editOrderView.getTypeCar();
@@ -108,7 +108,7 @@ public class MapGooglePresenter implements BasePresenterInterface {
         List<AdditionalRequirementN> list = new ArrayList<>();
         list.add(additionalRequirement);
         list.add(additionalRequirement2);
-        calculatePrice.setAdditionalRequirements(list);
+        //  calculatePrice.setAdditionalRequirements(list);
         return calculatePrice;
     }
 

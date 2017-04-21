@@ -1,5 +1,6 @@
 package com.lewgmail.romanenko.taxiservice.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -13,6 +14,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -65,6 +68,13 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     private ArrayList<RoutePointN> routePoints;
     private ArrayList<AdditionalRequirementN> additionalRequirementNs;
 
+
+    // view element from fragment2
+    private TextView valuePrice;
+    private Context contextFragm2;
+    //  private Fragment fragment2res;
+
+
     // private String
     // private String
     @Override
@@ -73,6 +83,10 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
         setContentView(R.layout.activity_add_order_);
         routePoints = new ArrayList<>();
         customerPresenter = new CustomerPresenter(this);
+
+
+        // fragment2res = getSupportFragmentManager().findFragmentByTag("android:switcher:2131558517:1");
+
         // customerPresenter.addOrder(12.23, 23.34, 123.34, 1234.3);
         //   Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().setElevation(0);
@@ -152,15 +166,15 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     }
 
     @Override
-    public void setActivityaddOrder() {
-        //  RoutePointN routePointN = new RoutePointN();
-        // routePointN.setLongtitude("sdf");
-        // routePointN.setLatitude("sdf");
-        // routePoints.add(routePointN);
-        // int a = 0;
-
+    public void runReqaddOrder(Context contextFragm2) {
+        this.contextFragm2 = contextFragm2;
         customerPresenter.addOrder();
+    }
 
+    @Override
+    public void runReqCalculayePrice(TextView valuePrice) {
+        this.valuePrice = valuePrice;
+        customerPresenter.calculatePrice();
     }
 
     @Override
@@ -350,6 +364,19 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
         return additionalRequirementNs;
     }
 
+    // Response update view
+    public void responseCalculatePrice(String text) {
+        // TextView textView = (TextView)fragment2res.getView().findViewById(R.id.value_price);
+        //textView.setText(text);
+        valuePrice.setText(text);
+    }
+
+    public void responseAddorder(String text) {
+
+        Toast.makeText(contextFragm2, "Code of Operation:" + text, Toast.LENGTH_SHORT).show();
+
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -372,8 +399,8 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
                     return fragment1;
                 case 1:
                     Fragment fragment2 = FragmentPage2.newInstance(position);
-                    // FragmentManager fragmentManager2 = getSupportFragmentManager();
-                    //  fragmentManager2.beginTransaction().add(fragment2,"fragmentAddOrder2").commit();
+                    //  FragmentManager fragmentManager2 = getSupportFragmentManager();
+                    // fragmentManager2.beginTransaction().add(fragment2,"fragmentAddOrder2").commit();
                     return fragment2;
                 default:
                     return new Fragment();

@@ -220,7 +220,7 @@ public class RegistrationActivity extends AppCompatActivity implements UserOpera
         List<String> mobiles = new ArrayList();
         mobiles.add(mobNamberRegistration.getText().toString());
         mobiles.add(mobSecondNamber.getText().toString());
-        userRegistration.setMobileNumbers(mobiles);
+        // userRegistration.setMobileNumbers(mobiles);
 
         if (checkBoxDriverUser.isChecked()) {
             userRegistration.setUserType("TAXI_DRIVER");

@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
+import com.lewgmail.romanenko.taxiservice.model.pojo.DriverLicense;
+import com.lewgmail.romanenko.taxiservice.model.pojo.MobileNumber;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UserRegistration;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UserRegistrationCar;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
@@ -177,9 +179,13 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
             userRegistration.setName(fragmentPassengerRegist.getName());
             userRegistration.setUsername(fragmentPassengerRegist.getEmail());
             userRegistration.setPassword(fragmentPassengerRegist.getPassword());
-            List<String> mobiles = new ArrayList();
-            mobiles.add(fragmentPassengerRegist.getPhone1());
-            mobiles.add(fragmentPassengerRegist.getPhone2());
+            List<MobileNumber> mobiles = new ArrayList();
+            MobileNumber mobileNumber1 = new MobileNumber();
+            MobileNumber mobileNumber2 = new MobileNumber();
+            mobileNumber1.setMobileNumber(fragmentPassengerRegist.getPhone1());
+            mobiles.add(mobileNumber1);
+            mobileNumber2.setMobileNumber(fragmentPassengerRegist.getPhone2());
+            mobiles.add(mobileNumber2);
             userRegistration.setMobileNumbers(mobiles);
             userRegistration.setUserType("CUSTOMER");
         }
@@ -200,7 +206,10 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
         if (fragment instanceof FragmentDriverRegistLicen) {
             FragmentDriverRegistLicen fragmentDriverRegistLicen
                     = (FragmentDriverRegistLicen) fragment;
-
+            DriverLicense driverLicense = new DriverLicense();
+            driverLicense.setCode(fragmentDriverRegistLicen.getDriverLicense());
+            driverLicense.setExpirationTime(fragmentDriverRegistLicen.getLicenseExpirationDate());
+            userRegistration.setDriverLicense(driverLicense);
         }
     }
 

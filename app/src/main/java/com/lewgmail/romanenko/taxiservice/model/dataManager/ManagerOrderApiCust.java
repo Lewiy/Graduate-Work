@@ -30,7 +30,9 @@ public class ManagerOrderApiCust {
     private MapGooglePresenter mapGooglePresenter;
     private Subscription subscription = Subscriptions.empty();
   //  private EditOrderInterface view;
+
     private String error;
+
     public ManagerOrderApiCust(CustomerPresenter customerPresenter) {
         this.mCustomerPresenter = customerPresenter;
     }
@@ -39,40 +41,17 @@ public class ManagerOrderApiCust {
         this.mapGooglePresenter = mapGooglePresenter;
     }
 
-    public String addOrder(AddOrderN addOrder) {
+    public Observable<Response<ResponseBody>> addOrder(AddOrderN addOrder) {
       /*  RxAndroidPlugins.getInstance().registerSchedulersHook(new RxAndroidSchedulersHook() {
             @Override
             public Scheduler getMainThreadScheduler() {
                 return Schedulers.immediate();
             }
         });*/
-
         OrderApiCust servises = Services.createService(OrderApiCust.class);
         Observable<Response<ResponseBody>> observer = servises.addOrder(LoggedUser.getmInstance().getToken(), addOrder);
 
-        observer.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Response<ResponseBody>>() {
-                    @Override
-                    public void onCompleted() {
-                        error = new String("sdf");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        if (e instanceof HttpException)
-                           error = new String(e.getMessage());
-
-                        else
-                            error = new String( e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        error = new String(Integer.toString(responseBodyResponse.code()));
-                    }
-                });
-        return error;
+        return observer;
     }
 
     public Observable<Response<ResponseBody>> deleteOrder(long orderId) {
@@ -112,10 +91,10 @@ public class ManagerOrderApiCust {
 
     }
 
-    public void calculatePrice(CalculatePrice calculatePrice, CustomerPresenter customerPresenter) {
+    public Observable<Price> calculatePrice(CalculatePrice calculatePrice) {
         OrderApiCust servises = Services.createService(OrderApiCust.class);
         Observable<Price> observer = servises.calculatePrice(LoggedUser.getmInstance().getToken(), calculatePrice);
-
-        customerPresenter.setObserverPriseResponse(observer);
+        return observer;
+        // mCustomerPresenter.setObserverPriseResponse(observer);
     }
 }
