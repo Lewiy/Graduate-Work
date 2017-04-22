@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
@@ -56,12 +57,18 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
 
     @BindView(R.id.value_price)
     TextView valuePrice;
+    @BindView(R.id.value_duration)
+    TextView valueDuration;
+    @BindView(R.id.value_distance)
+    TextView valueDistance;
+
 
     private AddOrderGatherDataSecondWindow addOrderGatherDataSecondWindow;
     private int lastPressed = 0;
     private ImageButton lastPressedB = null;
     private int lastPressedDraw = 0;
     private ArrayList<AdditionalRequirementN> additionalRequirements;
+
 
     public FragmentPage2() {
     }
@@ -260,6 +267,36 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
         if (button != null)
             button.setBackgroundResource(pictures);
     }
+
+
+    /*
+        Seters for view of this
+    //////////////////////////////////////////////////////////////
+     */
+
+    public void setDuration(String duration) {
+        valueDuration.setText(duration);
+    }
+
+    public void setDistance(String distance) {
+        valueDistance.setText(distance);
+    }
+
+    public void setCalculatedPrice(String calculPrice) {
+        valuePrice.setText(calculPrice);
+    }
+
+    public void setError(String error) {
+        Toast.makeText(getContext(), "Error: " + error, Toast.LENGTH_LONG).show();
+    }
+
+    public void setDoneResp(String massage) {
+        Toast.makeText(getContext(), "Done " + massage, Toast.LENGTH_LONG).show();
+    }
+
+    /*
+    /////////////////////////////////////////////////////////////
+     */
 
     public interface AddOrderGatherDataSecondWindow {
 

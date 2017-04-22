@@ -30,6 +30,6 @@ public interface OrderApiCust {
     @PUT("/order/{orderId}")
     Observable<Response<ResponseBody>> updateOrder(@Header("Authorization") String authorization, @Path("orderId") long orderId, @Body AddOrderN updateOrder);
 
-    @POST("order/price")
+    @POST("order/routeinfo")
     Observable<Price> calculatePrice(@Header("Authorization") String authorization, @Body CalculatePrice calculatePrice);
 }

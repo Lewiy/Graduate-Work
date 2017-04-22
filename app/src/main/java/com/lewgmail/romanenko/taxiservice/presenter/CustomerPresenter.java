@@ -93,12 +93,14 @@ public class CustomerPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        viewAddOrder.responseCalculatePrice(e.toString());
+                        viewAddOrder.frag2responseError(e.toString());
                     }
 
                     @Override
                     public void onNext(Price price) {
-                        viewAddOrder.responseCalculatePrice(price.getPrice().toString());
+                        viewAddOrder.frag2responseCalculatedPrice(price.getPrice().toString());
+                        viewAddOrder.frag2responseDistance(price.getDistance().toString());
+                        viewAddOrder.frag2responseDuration(price.getDuration().toString());
                     }
                 });
     }

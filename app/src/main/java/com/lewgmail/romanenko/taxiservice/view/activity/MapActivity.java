@@ -339,6 +339,8 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
                 // searchText.setText(place.getName());
                 //  onMapSearch(place.getAddress().toString());
                 markerOptions = new MarkerOptions().position(place.getLatLng()).title("Marker");
+                longitude = Double.toString(place.getLatLng().longitude);
+                latitude = Double.toString(place.getLatLng().latitude);
                 getAddressFromLatLog(place.getLatLng());
                 mGoogleMap.addMarker(markerOptions);
                 mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));

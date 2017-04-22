@@ -9,6 +9,9 @@ import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -27,6 +30,7 @@ public class FragmentDriverRegistLicen extends android.support.v4.app.Fragment i
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_registration_driver_license, container, false);
         ButterKnife.bind(this, view);
+        // regEX("ФФ 2312 СВ");
         return view;
     }
 
@@ -54,5 +58,14 @@ public class FragmentDriverRegistLicen extends android.support.v4.app.Fragment i
             Toast.makeText(this.getActivity(), R.string.dont_inputed_fields, Toast.LENGTH_SHORT).show();
             return false;
         }
+    }
+
+    private void regEX(String string) {
+        Pattern p = Pattern.compile("([А-Я]{2})/([0-9]{4})/([А-Я]{2})");
+        Matcher m = p.matcher(string);
+
+        String str;
+        if (m.matches())
+            str = string;
     }
 }

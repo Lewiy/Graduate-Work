@@ -72,8 +72,10 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     // view element from fragment2
     private TextView valuePrice;
     private Context contextFragm2;
-    //  private Fragment fragment2res;
 
+    //  private Fragment fragmenObjs;
+    private FragmentPage1 fragmentObj1;
+    private FragmentPage2 fragmentObj2;
 
     // private String
     // private String
@@ -83,10 +85,6 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
         setContentView(R.layout.activity_add_order_);
         routePoints = new ArrayList<>();
         customerPresenter = new CustomerPresenter(this);
-
-
-        // fragment2res = getSupportFragmentManager().findFragmentByTag("android:switcher:2131558517:1");
-
         // customerPresenter.addOrder(12.23, 23.34, 123.34, 1234.3);
         //   Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().setElevation(0);
@@ -95,7 +93,7 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
+        mSectionsPagerAdapter.setHostFragmentReferense(this);
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -131,8 +129,26 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(mViewPager);
+        fragmentObj1 = (FragmentPage1) mSectionsPagerAdapter.getItem(0);
+        fragmentObj2 = (FragmentPage2) mSectionsPagerAdapter.getItem(1);
+        //  fragmentObj1 = (FragmentPage1) FragmentPage1.newInstance(0);
+        // fragmentObj2 = (FragmentPage2) FragmentPage2.newInstance(1);
+        //fragmentObj1 = (FragmentPage1) getSupportFragmentManager().findFragmentByTag("android:switcher:2131558517:0");
+        // fragmentObj2 = (FragmentPage2) getSupportFragmentManager().findFragmentByTag("android:switcher:2131558517:1");
+
     }
 
+    /*
+    Observ fragment referense from SectionsPagerAdapter;
+    */
+
+    public void setFragment1Referense(Fragment fragment1) {
+        this.fragmentObj1 = (FragmentPage1) fragment1;
+    }
+
+    public void setFragment2Referense(Fragment fragment2) {
+        this.fragmentObj2 = (FragmentPage2) fragment2;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -365,11 +381,11 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     }
 
     // Response update view
-    public void responseCalculatePrice(String text) {
+    /*public void responseCalculatePrice(String text) {
         // TextView textView = (TextView)fragment2res.getView().findViewById(R.id.value_price);
         //textView.setText(text);
         valuePrice.setText(text);
-    }
+    }*/
 
     public void responseAddorder(String text) {
 
@@ -377,14 +393,48 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
 
     }
 
+
+    /*
+     Update view fragment from response
+     /////////////////////////////////////////////////////////////////////////
+     */
+    public void frag2responseDuration(String duration) {
+        fragmentObj2.setDuration(duration);
+    }
+
+    public void frag2responseDistance(String distance) {
+        fragmentObj2.setDistance(distance);
+    }
+
+    public void frag2responseCalculatedPrice(String calculatedPrice) {
+        fragmentObj2.setCalculatedPrice(calculatedPrice);
+    }
+
+    public void frag1responseError(String string) {
+        //  fragmentObj1.se
+    }
+
+    public void frag2responseError(String string) {
+        fragmentObj2.setError(string);
+    }
+
+    /*
+    ////////////////////////////////////////////////////////////////////////
+     */
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        private AddOrder addOrderHost;
+
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+        }
+
+        public void setHostFragmentReferense(AddOrder host) {
+            this.addOrderHost = host;
         }
 
         @Override
@@ -396,11 +446,13 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
                     Fragment fragment1 = FragmentPage1.newInstance(position);
                     // FragmentManager fragmentManager = getSupportFragmentManager();
                     // fragmentManager.beginTransaction().add(fragment1,"fragmentAddOrder1").commit();
+                    addOrderHost.setFragment1Referense(fragment1);
                     return fragment1;
                 case 1:
                     Fragment fragment2 = FragmentPage2.newInstance(position);
                     //  FragmentManager fragmentManager2 = getSupportFragmentManager();
                     // fragmentManager2.beginTransaction().add(fragment2,"fragmentAddOrder2").commit();
+                    addOrderHost.setFragment2Referense(fragment2);
                     return fragment2;
                 default:
                     return new Fragment();
