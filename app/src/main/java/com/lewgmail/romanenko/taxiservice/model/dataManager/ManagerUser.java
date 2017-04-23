@@ -4,6 +4,7 @@ import com.lewgmail.romanenko.taxiservice.model.api.Services;
 import com.lewgmail.romanenko.taxiservice.model.api.apiMain.UserServices;
 import com.lewgmail.romanenko.taxiservice.model.pojo.LogInRequest;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Token;
+import com.lewgmail.romanenko.taxiservice.model.pojo.UpdateUser;
 import com.lewgmail.romanenko.taxiservice.model.pojo.User;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UserRegistration;
 
@@ -64,7 +65,7 @@ public class ManagerUser {
         return observer;
     }
 
-    public Observable<Response<ResponseBody>> upDateUser(User user) {
+    public Observable<Response<ResponseBody>> upDateUser(UpdateUser user) {
         UserServices servises = Services.createService(UserServices.class);
         Observable<Response<ResponseBody>> observer = servises.updateUserProfile(LoggedUser.getmInstance().getToken(), user);
         return observer;

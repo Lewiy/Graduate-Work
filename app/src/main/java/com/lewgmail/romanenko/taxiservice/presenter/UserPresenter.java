@@ -3,6 +3,7 @@ package com.lewgmail.romanenko.taxiservice.presenter;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerUser;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Token;
+import com.lewgmail.romanenko.taxiservice.model.pojo.UpdateUser;
 import com.lewgmail.romanenko.taxiservice.model.pojo.User;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UserRegistration;
 import com.lewgmail.romanenko.taxiservice.view.activity.UserOperationInterface;
@@ -72,7 +73,7 @@ public class UserPresenter {
                 });
     }
 
-    public void updateUser(User user) {
+    public void updateUser(UpdateUser user) {
 
         Observable<Response<ResponseBody>> observer = managerUser.upDateUser(user);
 
@@ -181,7 +182,7 @@ public class UserPresenter {
                     @Override
                     public void onNext(User user) {
                         view2.setNameSideBar(user.getName());
-                        view2.setEmailSideBar(user.getEmail());
+                        //  view2.setEmailSideBar(user.getEmail());
                     }
                 });
     }
@@ -209,7 +210,7 @@ public class UserPresenter {
                     @Override
                     public void onNext(User user) {
                         //  if (LoggedUser.getmInstance().getUserType().equals("TAXI_DRIVER")) {
-                        view.setCarId(user.getCar().getCarId());
+                        // view.setCarId(user.getCar().getCarId());
                         view.setUserDriverBrand(user.getCar().getManufacturer());
                         view.setUserDriverModel(user.getCar().getModel());
                         view.setUserDriverCarType(user.getCar().getCarType());
@@ -221,11 +222,21 @@ public class UserPresenter {
                         view.setUserEmail(user.getEmail());
                         //view.setPassword(user.getPassword());
                         // view.setRepeatePassword(user.getPassword());
-                        view.setUserMobileId(user.getMobileNumbers().get(0).getIdMobileNumber());
-                        view.setUserMobileId2(user.getMobileNumbers().get(1).getIdMobileNumber());
-                        view.setUserMobile(user.getMobileNumbers().get(0).getMobileNumber());
-                        view.setUserMobile2(user.getMobileNumbers().get(1).getMobileNumber());
 
+                        if (user.getMobileNumbers().size() > 0) {
+                            view.setUserMobileId(user.getMobileNumbers().get(0).getIdMobileNumber());
+                            view.setUserMobile(user.getMobileNumbers().get(0).getMobileNumber());
+                        }
+                        if (user.getMobileNumbers().size() == 2) {
+                            view.setUserMobileId2(user.getMobileNumbers().get(1).getIdMobileNumber());
+                            view.setUserMobile2(user.getMobileNumbers().get(1).getMobileNumber());
+                        }
+                            /*for (MobileNumbers number: user.getMobileNumbers()) {
+                                view.setUserMobileId(user.getMobileNumbers().get(0).getIdMobileNumber());
+                            }*/
+
+                        view.setExpirationTime(user.getDriverLicense().getExpirationTime());
+                        view.setCodeLicense(user.getDriverLicense().getCode());
                     }
                 });
     }

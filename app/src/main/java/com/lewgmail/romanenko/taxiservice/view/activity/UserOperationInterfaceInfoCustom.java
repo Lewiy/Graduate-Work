@@ -38,4 +38,8 @@ public interface UserOperationInterfaceInfoCustom {
     void showError(String error);
 
     void doneOperation(String done);
+
+    void setCodeLicense(String code);
+
+    void setExpirationTime(String expirationTime);
 }

@@ -12,7 +12,7 @@ import javax.annotation.Generated;
 public class MobileNumbers {
     @SerializedName("idMobileNumber")
     @Expose
-    private int idMobileNumber;
+    private Integer idMobileNumber;
     @SerializedName("mobileNumber")
     @Expose
     private String mobileNumber;
@@ -29,9 +29,8 @@ public class MobileNumbers {
         return idMobileNumber;
     }
 
-    public void setIdMobileNumber(int idMobileNumber) {
+    public void setIdMobileNumber(Integer idMobileNumber) {
         this.idMobileNumber = idMobileNumber;
     }
-
 
 }

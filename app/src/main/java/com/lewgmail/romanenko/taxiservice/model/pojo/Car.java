@@ -24,17 +24,6 @@ public class Car {
     @SerializedName("carType")
     @Expose
     private String carType;
-    @SerializedName("carId")
-    @Expose(serialize = false)
-    private int carId;
-
-    public int getCarId() {
-        return carId;
-    }
-
-    public void setCarId(int carId) {
-        this.carId = carId;
-    }
 
 
     /**

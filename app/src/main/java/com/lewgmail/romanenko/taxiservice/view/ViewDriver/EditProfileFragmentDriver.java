@@ -15,8 +15,10 @@ import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Car;
 import com.lewgmail.romanenko.taxiservice.model.pojo.MobileNumbers;
-import com.lewgmail.romanenko.taxiservice.model.pojo.User;
+import com.lewgmail.romanenko.taxiservice.model.pojo.UpdateUser;
+import com.lewgmail.romanenko.taxiservice.model.pojo.UpdateUserDriverLicense;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
+import com.lewgmail.romanenko.taxiservice.view.ValidationOfFields;
 import com.lewgmail.romanenko.taxiservice.view.activity.UserOperationInterfaceInfoCustom;
 
 import java.util.ArrayList;
@@ -51,10 +53,14 @@ public class EditProfileFragmentDriver extends android.support.v4.app.Fragment i
     EditText platePersonalPage;
     @BindView(R.id.brand_personal_page)
     EditText brandPersonalPage;
+    @BindView(R.id.code_license)
+    EditText codeLicense;
+    @BindView(R.id.expirationTime_license)
+    EditText expirationTimeLicense;
     @BindView(R.id.driver__personal_page)
     FrameLayout driverView;
     private String password;
-    private int idMobile1, idMobile2;
+    private Integer idMobile1, idMobile2;
     private int carId;
     private ArrayAdapter<CharSequence> adapterSpinnerNumPassenger, adapterSpinnerCarType;
     private UserPresenter userPresenter;
@@ -77,6 +83,80 @@ public class EditProfileFragmentDriver extends android.support.v4.app.Fragment i
         return view;
     }
 
+
+    private boolean checkInputedInfo() {
+        boolean checkFlag = true;
+        String massege;
+        massege = ValidationOfFields.checkCodeLicense(this.getContext(), codeLicense.getText().toString());
+        if (!massege.equals("true")) {
+            codeLicense.setError(massege);
+            return false;
+        }
+        massege = ValidationOfFields.checkExpirationTime(this.getContext(), expirationTimeLicense.getText().toString());
+        if (!massege.equals("true")) {
+            expirationTimeLicense.setError(massege);
+            return false;
+        }
+        if (!phoneNumberPersonalPage.getText().toString().matches("")) {
+            massege = ValidationOfFields.checkPhoneNumber(this.getContext(), phoneNumberPersonalPage.getText().toString());
+            if (!massege.equals("true")) {
+                phoneNumberPersonalPage.setError(massege);
+                return false;
+            }
+        }
+
+        if (!phoneNumberSecondPersonalPage.getText().toString().matches("")) {
+            massege = ValidationOfFields.checkPhoneNumber(this.getContext(), phoneNumberSecondPersonalPage.getText().toString());
+            if (!massege.equals("true")) {
+                phoneNumberSecondPersonalPage.setError(massege);
+                return false;
+            }
+        }
+        massege = ValidationOfFields.checkPlateNumber(this.getContext(), platePersonalPage.getText().toString());
+        if (!massege.equals("true")) {
+            platePersonalPage.setError(massege);
+            return false;
+        }
+        checkFlag = validationEmptyField(codeLicense);
+        if (checkFlag == false)
+            return false;
+        checkFlag = validationEmptyField(platePersonalPage);
+        if (checkFlag == false)
+            return false;
+        checkFlag = validationEmptyField(phoneNumberPersonalPage);
+        if (checkFlag == false)
+            return false;
+        checkFlag = validationEmptyField(expirationTimeLicense);
+        if (checkFlag == false)
+            return false;
+        checkFlag = validationEmptyField(namePersonalPage);
+        if (checkFlag == false)
+            return false;
+        checkFlag = validationEmptyField(brandPersonalPage);
+        if (checkFlag == false)
+            return false;
+        checkFlag = validationEmptyField(model_PersonalPage);
+        return checkFlag;
+    }
+
+    private boolean validationField(EditText editTextField) {
+        String massege;
+        massege = ValidationOfFields.checkExpirationTime(this.getContext(), editTextField.getText().toString());
+        if (!massege.equals("true")) {
+            editTextField.setError(massege);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validationEmptyField(EditText editText) {
+        if (editText.getText().toString().matches("")) {
+            editText.setError(getContext().getResources().getString(R.string.validation_obligatory_field));
+            return false;
+        }
+
+        return true;
+    }
     private void initialiseComponent() {
 
         initializeSpinner();
@@ -97,8 +177,10 @@ public class EditProfileFragmentDriver extends android.support.v4.app.Fragment i
     public void onClickButtOk() {
     }
 
+
     @OnClick(R.id.personal_page_button_update)
     public void onClickButtUpDate() {
+        if (checkInputedInfo())
         userPresenter.updateUser(criateUserUpdateObject());
     }
     //////////////////////////////////update view ////////////////////////////////////
@@ -189,32 +271,78 @@ public class EditProfileFragmentDriver extends android.support.v4.app.Fragment i
         Toast.makeText(this.getActivity(), done, Toast.LENGTH_SHORT).show();
     }
 
-    private User criateUserUpdateObject() {
-        User user = new User();
-        user.setUserId(Long.toString(LoggedUser.getmInstance().getUserId()));
+    @Override
+    public void setCodeLicense(String code) {
+        codeLicense.setText(code);
+    }
+
+    @Override
+    public void setExpirationTime(String expirationTime) {
+        expirationTimeLicense.setText(expirationTime);
+    }
+
+    private UpdateUser criateUserUpdateObject() {
+        UpdateUser user = new UpdateUser();
+        // user.setUserId(Long.toString(LoggedUser.getmInstance().getUserId()));
         user.setName(namePersonalPage.getText().toString());
-        user.setEmail(emailPersonalPage.getText().toString());
+        // user.setEmail(emailPersonalPage.getText().toString());
         // user.setPassword(password);
         List<MobileNumbers> mobileNumberses = new ArrayList<>();
-        MobileNumbers mobileNumber1 = new MobileNumbers();
-        mobileNumber1.setIdMobileNumber(idMobile1);
-        mobileNumber1.setMobileNumber(phoneNumberPersonalPage.getText().toString());
-        MobileNumbers mobileNumber2 = new MobileNumbers();
-        mobileNumber2.setIdMobileNumber(idMobile2);
-        mobileNumber2.setMobileNumber(phoneNumberSecondPersonalPage.getText().toString());
-        mobileNumberses.add(mobileNumber1);
-        mobileNumberses.add(mobileNumber2);
+
+        if (!phoneNumberPersonalPage.getText().toString().matches("") && idMobile1 != null) {
+            MobileNumbers mobileNumber1 = new MobileNumbers();
+            mobileNumber1.setIdMobileNumber(idMobile1);
+            mobileNumber1.setMobileNumber(phoneNumberPersonalPage.getText().toString());
+            mobileNumberses.add(mobileNumber1);
+        } else if (idMobile1 != null && phoneNumberPersonalPage.getText().toString().matches("")) {
+            MobileNumbers mobileNumber1 = new MobileNumbers();
+            mobileNumber1.setIdMobileNumber(idMobile1);
+            mobileNumber1.setMobileNumber(null);
+            mobileNumberses.add(mobileNumber1);
+            idMobile1 = null;
+        } else if (idMobile1 == null && !phoneNumberPersonalPage.getText().toString().matches("")) {
+            MobileNumbers mobileNumber1 = new MobileNumbers();
+            mobileNumber1.setIdMobileNumber(idMobile1);
+            mobileNumber1.setMobileNumber(phoneNumberPersonalPage.getText().toString());
+            mobileNumberses.add(mobileNumber1);
+        }
+
+
+        // не понятний айді
+        if (!phoneNumberSecondPersonalPage.getText().toString().matches("") && idMobile2 != null) {
+            MobileNumbers mobileNumber2 = new MobileNumbers();
+            mobileNumber2.setIdMobileNumber(idMobile2);
+            mobileNumber2.setMobileNumber(phoneNumberSecondPersonalPage.getText().toString());
+            mobileNumberses.add(mobileNumber2);
+        } else if (idMobile2 != null && phoneNumberSecondPersonalPage.getText().toString().matches("")) {
+            MobileNumbers mobileNumber1 = new MobileNumbers();
+            mobileNumber1.setIdMobileNumber(idMobile2);
+            mobileNumber1.setMobileNumber(null);
+            mobileNumberses.add(mobileNumber1);
+            idMobile2 = null;
+        } else if (idMobile2 == null && !phoneNumberSecondPersonalPage.getText().toString().matches("")) {
+            MobileNumbers mobileNumber1 = new MobileNumbers();
+            mobileNumber1.setIdMobileNumber(idMobile2);
+            mobileNumber1.setMobileNumber(phoneNumberSecondPersonalPage.getText().toString());
+            mobileNumberses.add(mobileNumber1);
+        }
+
+
         user.setMobileNumbers(mobileNumberses);
-        user.setUserType(LoggedUser.getmInstance().getUserType());
+        //   user.setUserType(LoggedUser.getmInstance().getUserType());
         if (LoggedUser.getmInstance().getUserType().equals("TAXI_DRIVER")) {
             Car car = new Car();
-            car.setCarId(carId);
+            // car.setCarId(carId);
             car.setManufacturer(brandPersonalPage.getText().toString());
             car.setModel(model_PersonalPage.getText().toString());
             car.setPlateNumber(platePersonalPage.getText().toString());
             car.setSeatsNumber(Integer.parseInt(mSpinnerNumPassenger.getSelectedItem().toString()));
             car.setCarType(mSpinnerCarType.getSelectedItem().toString());
             user.setCar(car);
+            UpdateUserDriverLicense driverLicense = new UpdateUserDriverLicense();
+            driverLicense.setCode(codeLicense.getText().toString());
+            driverLicense.setExpirationTime(expirationTimeLicense.getText().toString());
+            user.setDriverLicense(driverLicense);
         }
         return user;
     }

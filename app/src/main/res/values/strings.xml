@@ -30,6 +30,7 @@
     <string name="text_lable_num_passenger">Num passenger</string>
     <string name="text_lable_car_type">Car type</string>
     <string name="driver_license">Driver license</string>
+    <string name="code_license">Code of license</string>
     <string name="license_expiration_date">License expiration date</string>
     <string name="category_license">Category license</string>
     <string name="front_foto_license">Make foto of front your license</string>
@@ -244,7 +245,14 @@
         <item>8</item>
     </string-array>
 
-
+    <!-- Validation field -->
+    <string name="validation_code_driver_license">Valid format: "YYY XXXXXX",where Y - cyrillic symbol, X - digit</string>
+    <string name="validation_plate_number_driver_profile">Should be "XX YYYY XX" where X - cyrillic symbol, Y - digit</string>
+    <string name="validation_phone_number">Should contains 10 digits andcould start from "+38"</string>
+    <string name="validation_expiration_time">Should be "XXXX-XX-XX" where X  - digit</string>
+    <string name="validation_obligatory_field">Obligatory field</string>
+    <string name="validation_email">Email is not correct</string>
+    <string name="validation_password">Password must contain more than 6 characters</string>
     <string name="formatted_place_data">
         Name: %1$s\nAddress: %2$s\nPhone: %3$s\nWebsite: %4$s\nRating: %5$s\nId: %6$s\n
     </string>

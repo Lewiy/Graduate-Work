@@ -1,7 +1,5 @@
 package com.lewgmail.romanenko.taxiservice.model.api;
 
-import android.util.Log;
-
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
@@ -64,7 +62,7 @@ public class Services {
             //   Log.i("req",bodyToString(request));
             // String req = request.body().;
             /////////////////////////////////////////////
-            try {
+           /* try {
                 final Request copy = request.newBuilder().build();
                 final Buffer buffer = new Buffer();
                 copy.body().writeTo(buffer);
@@ -72,7 +70,7 @@ public class Services {
                 Log.i("req", sad);
             } catch (final IOException e) {
               //  return "did not work";
-            }
+            }*/
 
             return chain.proceed(request);
         }

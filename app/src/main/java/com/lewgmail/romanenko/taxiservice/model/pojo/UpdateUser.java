@@ -1,4 +1,3 @@
-
 package com.lewgmail.romanenko.taxiservice.model.pojo;
 
 import com.google.gson.annotations.Expose;
@@ -7,53 +6,32 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Generated;
+/**
+ * Created by Lev on 23.04.2017.
+ */
 
-@Generated("org.jsonschema2pojo")
-public class User {
-
+public class UpdateUser {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("email")
-    @Expose
-    private String email;
-    @SerializedName("password")
-    @Expose(deserialize = false)
-    private String password;
     @SerializedName("mobileNumbers")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     private List<MobileNumbers> mobileNumbers = new ArrayList<MobileNumbers>();
-    @SerializedName("userType")
-    @Expose
-    private String userType;
     @SerializedName("car")
     @Expose(serialize = false, deserialize = false)
     private Car car;
 
-    @SerializedName("userId")
-    @Expose(deserialize = false)
-    private String userId;
-
     @SerializedName("driverLicense")
     @Expose(deserialize = false)
-    private DriverLicense driverLicense;
+    private UpdateUserDriverLicense driverLicense;
 
 
-    public DriverLicense getDriverLicense() {
+    public UpdateUserDriverLicense getDriverLicense() {
         return driverLicense;
     }
 
-    public void setDriverLicense(DriverLicense driverLicense) {
+    public void setDriverLicense(UpdateUserDriverLicense driverLicense) {
         this.driverLicense = driverLicense;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
 
@@ -74,30 +52,6 @@ public class User {
     /**
      * @return The email
      */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email The email
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return The password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * @param password The password
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     /**
      * @return The mobileNumbers
@@ -113,19 +67,6 @@ public class User {
         this.mobileNumbers = mobileNumbers;
     }
 
-    /**
-     * @return The userType
-     */
-    public String getUserType() {
-        return userType;
-    }
-
-    /**
-     * @param userType The userType
-     */
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
 
     /**
      * @return The car
@@ -141,7 +82,7 @@ public class User {
             car.setModel("");
             return car;
         } else
-        return car;
+            return car;
     }
 
     /**
@@ -150,5 +91,4 @@ public class User {
     public void setCar(Car car) {
         this.car = car;
     }
-
 }

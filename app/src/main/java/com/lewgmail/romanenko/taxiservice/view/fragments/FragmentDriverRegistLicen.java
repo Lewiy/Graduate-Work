@@ -5,12 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.lewgmail.romanenko.taxiservice.view.ValidationOfFields;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,21 +48,34 @@ public class FragmentDriverRegistLicen extends android.support.v4.app.Fragment i
     }
 
     private boolean checkInputedFields() {
-        if (!driverLicense.getText().toString().equals("")
-                && !licenseExpirationDate.getText().toString().equals(""))
-            return true;
-        else {
-            Toast.makeText(this.getActivity(), R.string.dont_inputed_fields, Toast.LENGTH_SHORT).show();
+        boolean checkFlag = true;
+        String massege;
+        massege = ValidationOfFields.checkCodeLicense(this.getContext(), driverLicense.getText().toString());
+        if (!massege.equals("true")) {
+            driverLicense.setError(massege);
             return false;
         }
+
+        massege = ValidationOfFields.checkExpirationTime(this.getContext(), licenseExpirationDate.getText().toString());
+        if (!massege.equals("true")) {
+            licenseExpirationDate.setError(massege);
+            return false;
+        }
+
+
+        checkFlag = validationEmptyField(driverLicense);
+        if (checkFlag == false)
+            return false;
+        checkFlag = validationEmptyField(licenseExpirationDate);
+        return checkFlag;
     }
 
-    private void regEX(String string) {
-        Pattern p = Pattern.compile("([А-Я]{2})/([0-9]{4})/([А-Я]{2})");
-        Matcher m = p.matcher(string);
+    private boolean validationEmptyField(EditText editText) {
+        if (editText.getText().toString().matches("")) {
+            editText.setError(getContext().getResources().getString(R.string.validation_obligatory_field));
+            return false;
+        }
 
-        String str;
-        if (m.matches())
-            str = string;
+        return true;
     }
 }

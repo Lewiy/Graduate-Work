@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
+import com.lewgmail.romanenko.taxiservice.view.ValidationOfFields;
 import com.lewgmail.romanenko.taxiservice.view.activity.RegistrationActivityFragm;
 
 import butterknife.BindView;
@@ -110,7 +111,7 @@ public class FragmentPersonRegist extends android.support.v4.app.Fragment implem
     }
 
     public boolean validitionFields() {
-        if (checkInputedFields() && checkEquivalentPasswords())
+        if (checkInputedFields() && checkEquivalentPasswords() && checkInputedInfo())
             return true;
         else
             return false;
@@ -120,7 +121,8 @@ public class FragmentPersonRegist extends android.support.v4.app.Fragment implem
         if (passwordRegistration.getText().toString().equals(repeatPassword.getText().toString()))
             return true;
         else {
-            Toast.makeText(this.getActivity(), R.string.error_not_equals_passwords, Toast.LENGTH_SHORT).show();
+            passwordRegistration.setError(getContext().getResources().getString(R.string.error_not_equals_passwords));
+            repeatPassword.setError(getContext().getResources().getString(R.string.error_not_equals_passwords));
             return false;
         }
     }
@@ -137,6 +139,39 @@ public class FragmentPersonRegist extends android.support.v4.app.Fragment implem
             Toast.makeText(this.getActivity(), R.string.dont_inputed_fields, Toast.LENGTH_SHORT).show();
             return false;
         }
+    }
+
+    private boolean checkInputedInfo() {
+        boolean checkFlag = true;
+        String massege;
+        massege = ValidationOfFields.checkEmail(this.getContext(), emailRegistration.getText().toString());
+        if (!massege.equals("true")) {
+            emailRegistration.setError(massege);
+            return false;
+        }
+        massege = ValidationOfFields.checkPassword(this.getContext(), passwordRegistration.getText().toString());
+        if (!massege.equals("true")) {
+            passwordRegistration.setError(massege);
+            return false;
+        }
+
+        if (!mobNamberRegistration.getText().toString().matches("")) {
+            massege = ValidationOfFields.checkPhoneNumber(this.getContext(), mobNamberRegistration.getText().toString());
+            if (!massege.equals("true")) {
+                mobNamberRegistration.setError(massege);
+                return false;
+            }
+        }
+
+        if (!mobSecondNamber.getText().toString().matches("")) {
+            massege = ValidationOfFields.checkPhoneNumber(this.getContext(), mobSecondNamber.getText().toString());
+            if (!massege.equals("true")) {
+                mobSecondNamber.setError(massege);
+                return false;
+            }
+        }
+
+        return checkFlag;
     }
 
 }

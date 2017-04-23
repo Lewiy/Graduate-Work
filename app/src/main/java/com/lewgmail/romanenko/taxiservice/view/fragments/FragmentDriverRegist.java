@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
+import com.lewgmail.romanenko.taxiservice.view.ValidationOfFields;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterSpinnerLocalization;
 
 import butterknife.BindView;
@@ -68,14 +68,23 @@ public class FragmentDriverRegist extends android.support.v4.app.Fragment implem
     }
 
     private boolean checkInputedFields() {
-        if (!modelRegistration.getText().toString().equals("")
-                && !plateNumberRegistration.getText().toString().equals("")
-                && !brendRegistration.getText().toString().equals(""))
-            return true;
-        else {
-            Toast.makeText(this.getActivity(), R.string.dont_inputed_fields, Toast.LENGTH_SHORT).show();
+        boolean checkFlag = true;
+        String massege;
+        if (modelRegistration.getText().toString().equals("")
+                && plateNumberRegistration.getText().toString().equals("")
+                && brendRegistration.getText().toString().equals("")) {
+            modelRegistration.setError(this.getResources().getString(R.string.validation_obligatory_field));
+            plateNumberRegistration.setError(this.getResources().getString(R.string.validation_obligatory_field));
+            brendRegistration.setError(this.getResources().getString(R.string.validation_obligatory_field));
             return false;
         }
+
+        massege = ValidationOfFields.checkPlateNumber(this.getContext(), plateNumberRegistration.getText().toString());
+        if (!massege.equals("true")) {
+            plateNumberRegistration.setError(massege);
+            return false;
+        }
+        return checkFlag;
     }
 
     private void initializeSpinner() {

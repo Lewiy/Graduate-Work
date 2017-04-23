@@ -190,5 +190,15 @@ public class PassengerAccountInfFragment extends DialogFragment implements UserO
         Toast.makeText(this.getActivity(), done, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void setCodeLicense(String code) {
+
+    }
+
+    @Override
+    public void setExpirationTime(String expirationTime) {
+
+    }
+
 
 }
