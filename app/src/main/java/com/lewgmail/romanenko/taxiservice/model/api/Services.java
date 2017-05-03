@@ -30,11 +30,10 @@ public class Services {
     //  private static final int CONNECT_TIMEOUT = 10;
     private static final OkHttpClient.Builder CLIENT = new OkHttpClient
             .Builder();
-
     private static final GsonBuilder gsonBuilder = new GsonBuilder().serializeNulls();
+    private static boolean flag;
 
     //Gson gson = gsonBuilder.create();
-
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
                     .baseUrl(API_ENDPOINT)
@@ -61,16 +60,22 @@ public class Services {
             // String str = bodyToString(request);
             //   Log.i("req",bodyToString(request));
             // String req = request.body().;
+
             /////////////////////////////////////////////
-           /* try {
-                final Request copy = request.newBuilder().build();
-                final Buffer buffer = new Buffer();
-                copy.body().writeTo(buffer);
-                 String sad = buffer.readUtf8();
-                Log.i("req", sad);
-            } catch (final IOException e) {
-              //  return "did not work";
-            }*/
+            //   if(i == 5) {
+               /* try {
+                    final Request copy = request.newBuilder().build();
+                    final Buffer buffer = new Buffer();
+                        copy.body().writeTo(buffer);
+                        String sad = buffer.readUtf8();
+                        Log.i("req", sad);
+
+                } catch (final IOException e) {
+                    //  return "did not work";
+                }*/
+            //   }
+
+            // i++;*/
 
             return chain.proceed(request);
         }
@@ -114,6 +119,7 @@ public class Services {
      * @return retrofit service with defined endpoint
      */
     public static <S> S createService(Class<S> serviceClass) {
+        //this.flag = flag;
         CLIENT.interceptors().add(interceptor);
         Retrofit retrofit = builder.client(CLIENT.build()).build();
         return retrofit.create(serviceClass);

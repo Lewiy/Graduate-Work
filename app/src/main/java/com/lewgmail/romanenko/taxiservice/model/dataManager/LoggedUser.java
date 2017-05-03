@@ -2,9 +2,6 @@ package com.lewgmail.romanenko.taxiservice.model.dataManager;
 
 import com.lewgmail.romanenko.taxiservice.model.pojo.Car;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Lev on 19.11.2016.
  */
@@ -16,10 +13,10 @@ public class LoggedUser {
     private long userId;
     private String email;
     private String password;
-    private List<String> mobileNumbers = new ArrayList<String>();
     private String userType;
     private Car car;
     private String token;
+    private String PREF_DEVICE_TOKEN = null;
 
     private LoggedUser() {
 
@@ -29,6 +26,14 @@ public class LoggedUser {
         if (mInstance == null)
             mInstance = new LoggedUser();
         return mInstance;
+    }
+
+    public String getPREF_DEVICE_TOKEN() {
+        return PREF_DEVICE_TOKEN;
+    }
+
+    public void setPREF_DEVICE_TOKEN(String PREF_DEVICE_TOKEN) {
+        this.PREF_DEVICE_TOKEN = PREF_DEVICE_TOKEN;
     }
 
     public long getUserId() {
@@ -92,13 +97,6 @@ public class LoggedUser {
         this.car = car;
     }
 
-    public List<String> getMobileNumbers() {
-        return mobileNumbers;
-    }
-
-    public void setMobileNumbers(List<String> mobileNumbers) {
-        this.mobileNumbers = mobileNumbers;
-    }
 
 
 }

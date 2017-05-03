@@ -22,15 +22,21 @@ public class AdapterStatusController {
                     return R.array.change_status_driver_new;
                 case "ACCEPTED":
                     return R.array.change_status_driver_accept;
+                case "WAITING":
+                    return R.array.change_status_driver_waiting;
+                case "PROCESSING":
+                    return R.array.change_status_driver_processing;
             }
         } else {
             switch (status) {
                 case "ADD":
                     return R.array.change_status_client_add;
                 case "ACCEPTED":
-                    return R.array.change_status_client_new_accepted;
+                    return R.array.change_status_client_accepted;
                 case "NEW":
-                    return R.array.change_status_client_new_accepted;
+                    return R.array.change_status_client_new;
+                case "WAITING":
+                    return R.array.change_status_client_waiting;
             }
         }
         return R.array.change_status_driver_done;

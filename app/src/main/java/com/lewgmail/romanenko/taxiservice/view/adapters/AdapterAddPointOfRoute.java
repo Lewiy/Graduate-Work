@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
-import com.lewgmail.romanenko.taxiservice.view.fragments.addOrder.FragmentPage1;
+import com.lewgmail.romanenko.taxiservice.view.activity.AddOrderInterface;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class AdapterAddPointOfRoute extends ArrayAdapter<String> {
     private Context context;
     private TextView addressLine;
     private ImageButton openMap;
-    private FragmentPage1.AddOrderGatherDataFirstWindow activityCallBack;
+    private AddOrderInterface activityCallBack;
     private List<String> listAddresses;
     private int position;
     private long itemId;
@@ -80,7 +80,7 @@ public class AdapterAddPointOfRoute extends ArrayAdapter<String> {
         return convertViewCustom;
     }
 
-    public void setActivityCallBack(FragmentPage1.AddOrderGatherDataFirstWindow activityCallBack) {
+    public void setActivityCallBack(AddOrderInterface activityCallBack) {
         this.activityCallBack = activityCallBack;
     }
 

@@ -25,7 +25,8 @@ public class ListOrdersData {
         itemOfList.add(order.getStartPoint());
         itemOfList.add(order.getEndPoint());
         itemOfList.add(Double.toString(order.getPrice()));
-        ordersList.put(order.getStartPoint(), itemOfList);
+        itemOfList.add(Long.toString(order.getOrderId()));
+        ordersList.put(order.getStartPoint() + "|" + order.getOrderId(), itemOfList);
     }
 
     public HashMap<String, List<String>> getOrdersList() {

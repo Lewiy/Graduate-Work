@@ -22,10 +22,11 @@ import rx.Observable;
 public class ManagerUser {
 
 
-    public Call<Token> logIn(String username, String password) throws IOException {
+    public Call<Token> logIn(String username, String password, String notificationToken) throws IOException {
         LogInRequest logInRequest = new LogInRequest();
         logInRequest.setUserName(username);
         logInRequest.setPassword(password);
+        logInRequest.setNotificationToken(notificationToken);
         UserServices servises = Services.createService(UserServices.class);
         Call<Token> call = servises.logIn(logInRequest);
         //Log.d("My log1"," Токен" +call.execute().body().getAccessToken());

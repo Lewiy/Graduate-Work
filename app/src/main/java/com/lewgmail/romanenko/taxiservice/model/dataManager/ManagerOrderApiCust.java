@@ -1,23 +1,18 @@
 package com.lewgmail.romanenko.taxiservice.model.dataManager;
 
-import android.util.Log;
-
 import com.lewgmail.romanenko.taxiservice.model.api.Services;
 import com.lewgmail.romanenko.taxiservice.model.api.apiMain.OrderApiCust;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AddOrderN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.CalculatePrice;
+import com.lewgmail.romanenko.taxiservice.model.pojo.OrderUpdate;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Price;
 import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.MapGooglePresenter;
 
 import okhttp3.ResponseBody;
 import retrofit2.Response;
-import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
-import rx.Observer;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
 /**
@@ -61,33 +56,13 @@ public class ManagerOrderApiCust {
         return observer;
     }
 
-    public void updateOrder(AddOrderN updateOrder, long orderId) {
+    public Observable<Response<ResponseBody>> updateOrder(OrderUpdate updateOrder, long orderId) {
 
         OrderApiCust servises = Services.createService(OrderApiCust.class);
         Observable<Response<ResponseBody>> observer = servises.updateOrder(LoggedUser.getmInstance().getToken(),
                 orderId,
                 updateOrder);
-        observer.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Response<ResponseBody>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        if (e instanceof HttpException)
-                            Log.d("MyLooooooooooog",e.getMessage());
-                        else
-                            Log.d("MyLooooooooooog",e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        Log.d("MyLooooooooooog", Integer.toString(responseBodyResponse.code()));
-                    }
-                });
+        return observer;
 
     }
 

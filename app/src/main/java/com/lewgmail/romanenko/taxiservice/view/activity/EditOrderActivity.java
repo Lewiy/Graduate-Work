@@ -90,7 +90,7 @@ public class EditOrderActivity extends FragmentActivity implements
         ButterKnife.bind(this);
         mapGooglePresenter = new MapGooglePresenter(this);
         customerPresenter = new CustomerPresenter(this);
-        basePresenter = new BasePresenter(this);
+        //  basePresenter = new BasePresenter(this);
         intentMy = getIntent();
         declineButton.setEnabled(false);
         initializeSpinner("ADD");

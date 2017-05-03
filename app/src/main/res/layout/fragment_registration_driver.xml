@@ -53,7 +53,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/plate_number"
-                android:inputType="number"
                 android:maxLines="1"
                 android:singleLine="true" />
 
@@ -64,8 +63,8 @@
             android:id="@+id/car_info_regis"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginTop="20dp"
             android:layout_below="@id/plate_number_registration"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <LinearLayout

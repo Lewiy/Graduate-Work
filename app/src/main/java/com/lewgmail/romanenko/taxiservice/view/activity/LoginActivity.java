@@ -5,6 +5,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -280,7 +281,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
+            mAuthTask = new UserLoginTask(email, password, getBaseContext());
             mAuthTask.execute((Void) null);
         }
     }
@@ -413,10 +414,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
+        private final Context context;
 
-        UserLoginTask(String email, String password) {
+        UserLoginTask(String email, String password, Context context) {
             mEmail = email;
             mPassword = password;
+            this.context = context;
         }
 
         @Override
@@ -424,8 +427,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: attempt authentication against a network service.
             // Simulate network access.
             // Thread.sleep(2000);
-            String statusLogIn = userPresenter.logIn(mEmail, mPassword);
-
+            //String statusLogIn = userPresenter.logIn(mEmail, mPassword);
+            String statusLogIn = userPresenter.createAndSendDeviceToken(context, mEmail, mPassword);
 
             /*for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");

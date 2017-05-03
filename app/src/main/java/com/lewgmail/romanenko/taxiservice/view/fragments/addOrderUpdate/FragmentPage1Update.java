@@ -1,4 +1,4 @@
-package com.lewgmail.romanenko.taxiservice.view.fragments.addOrder;
+package com.lewgmail.romanenko.taxiservice.view.fragments.addOrderUpdate;
 
 import android.app.Activity;
 import android.app.TimePickerDialog;
@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
@@ -38,11 +39,10 @@ import butterknife.OnClick;
 import static android.content.Context.LOCATION_SERVICE;
 
 /**
- * Created by Lev on 18.03.2017.
+ * Created by Lev on 24.04.2017.
  */
 
-public class FragmentPage1 extends android.support.v4.app.Fragment {
-
+public class FragmentPage1Update extends android.support.v4.app.Fragment {
     @BindView(R.id.radio_button_now)
     RadioButton radioButtonNow;
     @BindView(R.id.radio_button_today)
@@ -59,10 +59,13 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     ListView route;
     @BindView(R.id.time_text)
     TextView time_text;
+    @BindView(R.id.time_text_value)
+    TextView dateOfValue;
 
     @BindView(R.id.start_point_act)
     EditText startPointText;
-
+    @BindView(R.id.end_point_act)
+    EditText endPointText;
 
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
 
@@ -70,19 +73,19 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     // 0 - naw, 1- today, 2- tomorrow;
     private int date;
 
-    private AddOrderGatherDataFirstWindow addOrderGatherDataFirstWindow;
+    private FragmentPage1Update.AddOrderGatherDataFirstWindow addOrderGatherDataFirstWindow;
 
     private AdapterAddPointOfRoute addresessAdapter;
     private ArrayList<String> addresess;
     private LocationManager locationManager;
     private LocationListener locationListener;
 
-    public FragmentPage1() {
+    public FragmentPage1Update() {
     }
 
 
-    public static FragmentPage1 newInstance(int sectionNumber) {
-        FragmentPage1 fragment = new FragmentPage1();
+    public static FragmentPage1Update newInstance(int sectionNumber) {
+        FragmentPage1Update fragment = new FragmentPage1Update();
         Bundle args = new Bundle();
         args.putInt("key", sectionNumber);
         fragment.setArguments(args);
@@ -94,7 +97,7 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_add_order_1, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_add_order_1_update, container, false);
         ButterKnife.bind(this, rootView);
         // init();
         return rootView;
@@ -107,9 +110,35 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         Activity addOrder;
         if (context instanceof Activity) {
             addOrder = (Activity) context;
-            addOrderGatherDataFirstWindow = (AddOrderGatherDataFirstWindow) addOrder;
+            addOrderGatherDataFirstWindow = (FragmentPage1Update.AddOrderGatherDataFirstWindow) addOrder;
         }
     }
+
+
+    /*
+    Set response inform ////////////////////////////////////////////////////////////
+     */
+
+    public void setStartTime(String startTime) {
+
+        dateOfValue.setText(startTime);
+    }
+
+    public void setError(String error) {
+        Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
+    }
+
+    public void setFirstPointOfRoute(String startPoint) {
+        startPointText.setText(startPoint);
+    }
+
+    public void setSecondPointOfRoute(String endPoint) {
+        endPointText.setText(endPoint);
+    }
+    /*
+    //////////////////////////////////////////////////////////////////////////////////
+     */
+
 
     @OnClick(R.id.radio_button_now)
     public void onClickButtonNow() {
@@ -307,6 +336,10 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         addOrderGatherDataFirstWindow.runAutoComplete(addresessAdapter);
     }
 
+    public AdapterAddPointOfRoute getAddressAdapter() {
+        return addresessAdapter;
+    }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -342,7 +375,7 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
 
         void runAutoComplete(AdapterAddPointOfRoute addapterListAddresses);
 
-        // void runAutoCompliteReplaceAddress(int position);
+        //  void runAutoCompliteReplaceAddress(int position);
 
         void startActivityForResultMap(int editTextId);
 

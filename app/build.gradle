@@ -54,4 +54,5 @@ dependencies {
     // Google maps api`s
     compile 'com.google.android.gms:play-services-maps:10.0.0'
     compile 'com.google.android.gms:play-services-places:10.0.0'
+    compile 'com.google.android.gms:play-services-gcm:10.0.0'
 }

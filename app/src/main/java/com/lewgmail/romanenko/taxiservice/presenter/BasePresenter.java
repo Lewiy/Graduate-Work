@@ -3,12 +3,15 @@ package com.lewgmail.romanenko.taxiservice.presenter;
 import android.util.Log;
 
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerOrderApiDrivCust;
+import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
+import com.lewgmail.romanenko.taxiservice.model.pojo.GetOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.MarkOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.OrderId;
-import com.lewgmail.romanenko.taxiservice.presenter.adapters.AdapterAdditionalRequiremnets;
-import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderInterface;
+import com.lewgmail.romanenko.taxiservice.view.activity.AddOrderUpdate;
 import com.lewgmail.romanenko.taxiservice.view.fragmentClient.OrderListFragmentInterface;
+import com.lewgmail.romanenko.taxiservice.view.viewDriver.OrderInf;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,7 +31,8 @@ import rx.subscriptions.Subscriptions;
 
 public class BasePresenter implements BasePresenterInterface {
 
-    private EditOrderInterface view;
+    private AddOrderUpdate viewAddOrderUpdate;
+    private OrderInf viewOrderInfDriver;
     private OrderListFragmentInterface viewOrderListFrag;
     private OrderId orderId;
     private Subscription subscription = Subscriptions.empty();
@@ -38,10 +42,13 @@ public class BasePresenter implements BasePresenterInterface {
     private String responseMsg;
     private int responceCode;
 
-    public BasePresenter(EditOrderInterface view) {
-        this.view = view;
+    public BasePresenter(AddOrderUpdate view) {
+        this.viewAddOrderUpdate = view;
     }
 
+    public BasePresenter(OrderInf viewOrderInfDriver) {
+        this.viewOrderInfDriver = viewOrderInfDriver;
+    }
     public BasePresenter(OrderListFragmentInterface orderListFragment) {
         this.viewOrderListFrag = orderListFragment;
     }
@@ -67,11 +74,11 @@ public class BasePresenter implements BasePresenterInterface {
             subscription.unsubscribe();
         }
 
-        Observable<OrderId> observer = managerOrderApiDrivCust.loadOrderId(orderId);
+        Observable<GetOrder> observer = managerOrderApiDrivCust.loadOrderId(orderId);
 
         observer.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<OrderId>() {
+                .subscribe(new Observer<GetOrder>() {
                     @Override
                     public void onCompleted() {
 
@@ -80,29 +87,40 @@ public class BasePresenter implements BasePresenterInterface {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            view.showError(e.getMessage());
-                        else
+                            viewAddOrderUpdate.responseError("Code:" + ((HttpException) e).code() + "Message:" + e.getMessage());
+                        //  else
                             //  mCustomerPresenter.onFinishRequest(((HttpException) e).code(), e.getMessage());
-                            view.showError(e.getMessage());
+                        //   viewAddOrderUpdate.showError(e.getMessage());
                     }
 
                     @Override
-                    public void onNext(OrderId orderId) {
-                        view.setOrderId(orderId.getOrderId());
-                        view.setCustomerId(orderId.getCustomer().getCustomerId());
-                        view.setDateRide(orderId.getStartTime().substring(0, 10));
-                        view.setTimeRide(orderId.getStartTime().substring(11, 16));
-                        view.setStartPoint(orderId.getStartPoint());
-                        view.setEndPoint(orderId.getEndPoint());
-                        view.setTypeOrder(orderId.getStatus());
-                        view.setNameCastomer(orderId.getCustomer().getName());
-                        view.setNameDriver(orderId.getTaxiDriver().getName());
-                        view.setTypeCar(new AdapterAdditionalRequiremnets().
+                    public void onNext(GetOrder orderId) {
+                        viewAddOrderUpdate.responseStartTime(orderId.getStartTime());
+                        viewAddOrderUpdate.responseRoutePoint(orderId.getRoutePoint());
+                        viewAddOrderUpdate.responseStatusOrder(orderId.getStatus());
+                        viewAddOrderUpdate.responseCustomerId(orderId.getCustomerId());
+                        viewAddOrderUpdate.responseDriverId(orderId.getDriverId());
+                        viewAddOrderUpdate.responseDistance(orderId.getDistance());
+                        viewAddOrderUpdate.responseDuration(orderId.getDuration());
+                        viewAddOrderUpdate.responsePrice(orderId.getPrice());
+                        // viewAddOrderUpdate.responseExtraPrice(orderId.getExtraPrice());
+                        viewAddOrderUpdate.responseComment(orderId.getComment());
+                        viewAddOrderUpdate.responseAdditionalRequirements((ArrayList<AdditionalRequirementN>) orderId.getAdditionalRequirements());
+                       /* viewAddOrderUpdate.setOrderId(orderId.getOrderId());
+                        viewAddOrderUpdate.setCustomerId(orderId.getCustomer().getCustomerId());
+                        viewAddOrderUpdate.setDateRide(orderId.getStartTime().substring(0, 10));
+                        viewAddOrderUpdate.setTimeRide(orderId.getStartTime().substring(11, 16));
+                        viewAddOrderUpdate.setStartPoint(orderId.getStartPoint());
+                        viewAddOrderUpdate.setEndPoint(orderId.getEndPoint());
+                        viewAddOrderUpdate.setTypeOrder(orderId.getStatus());
+                        viewAddOrderUpdate.setNameCastomer(orderId.getCustomer().getName());
+                        viewAddOrderUpdate.setNameDriver(orderId.getTaxiDriver().getName());
+                        viewAddOrderUpdate.setTypeCar(new AdapterAdditionalRequiremnets().
                                 getCar(orderId.getAdditionalRequirements().get(0).getReqValueId()));
-                        view.setPrice(orderId.getPrice());
-                        view.setTypeReckoning(new AdapterAdditionalRequiremnets().
+                        viewAddOrderUpdate.setPrice(orderId.getPrice());
+                        viewAddOrderUpdate.setTypeReckoning(new AdapterAdditionalRequiremnets().
                                 getRecon(orderId.getAdditionalRequirements().get(1).getReqValueId()));
-                        view.setDriverId(orderId.getTaxiDriver().getTaxiDriverId());
+                        viewAddOrderUpdate.setDriverId(orderId.getTaxiDriver().getTaxiDriverId());*/
                     }
                 });
     }
@@ -184,6 +202,8 @@ public class BasePresenter implements BasePresenterInterface {
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         Log.d("MyLooooooooooog", Integer.toString(responseBodyResponse.code()));
+                        int code = responseBodyResponse.code();
+                        int d = 0;
                         //  viewOrderListFrag.showEror(Integer.toString(responseBodyResponse.code()));
                     }
                 });
@@ -198,7 +218,6 @@ public class BasePresenter implements BasePresenterInterface {
 
     private MarkOrder createChangeStatusOrderObject(long userid, String statusOrder) {
         MarkOrder markOrder = new MarkOrder();
-        markOrder.setUserId(userid);
         markOrder.setType(statusOrder);
         return markOrder;
     }

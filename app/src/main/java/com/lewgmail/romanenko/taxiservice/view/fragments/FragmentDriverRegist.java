@@ -70,11 +70,16 @@ public class FragmentDriverRegist extends android.support.v4.app.Fragment implem
     private boolean checkInputedFields() {
         boolean checkFlag = true;
         String massege;
-        if (modelRegistration.getText().toString().equals("")
-                && plateNumberRegistration.getText().toString().equals("")
-                && brendRegistration.getText().toString().equals("")) {
+        if (modelRegistration.getText().toString().equals("")) {
             modelRegistration.setError(this.getResources().getString(R.string.validation_obligatory_field));
+            return false;
+        }
+
+        if (plateNumberRegistration.getText().toString().equals("")) {
             plateNumberRegistration.setError(this.getResources().getString(R.string.validation_obligatory_field));
+            return false;
+        }
+        if (brendRegistration.getText().toString().equals("")) {
             brendRegistration.setError(this.getResources().getString(R.string.validation_obligatory_field));
             return false;
         }

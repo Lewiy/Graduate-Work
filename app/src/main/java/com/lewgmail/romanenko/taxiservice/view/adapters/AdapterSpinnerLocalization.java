@@ -30,7 +30,22 @@ public class AdapterSpinnerLocalization {
                 return "DONE";
             case 4:
                 return "NEW";
+            case 5:
+                return "WAITING";
+            case 6:
+                return "PROCESSING";
         }
         return "ERROR";
     }
+
+    /*public static int adaptStatusesCustomer(String status){
+        switch (status) {
+            case "NEW":
+                return
+        }
+    }
+
+    public static int adaptStatusesCustomer(String status){
+
+    }*/
 }

@@ -70,7 +70,7 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
         progress.show();
         // sdf = intentMy.getStringExtra("keyNumberOfOrder");
         // lol = Integer.parseInt(intentMy.getStringExtra("keyNumberOfOrder"));
-        basePresenter.loadOrderSpecificId(Integer.parseInt(intentMy.getStringExtra("keyNumberOfOrder")));
+//        basePresenter.loadOrderSpecificId(Integer.parseInt(intentMy.getStringExtra("keyNumberOfOrder")));
 
 
     }

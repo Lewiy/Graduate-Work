@@ -9,6 +9,15 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="com.lewgmail.romanenko.taxiservice.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.lewgmail.romanenko.taxiservice.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -22,6 +31,30 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.lewgmail.romanenko.taxiservice.gcm" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.lewgmail.romanenko.taxiservice.view.activity.Notification"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.lewgmail.romanenko.taxiservice.MyInstanceIDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -65,6 +98,13 @@
             android:label="@string/button_back_to_personal_registration" />
         <activity
             android:name=".view.activity.AddOrder"
+            android:label="@string/title_activity_add_order"
+            android:windowSoftInputMode="stateVisible|adjustPan">
+
+        </activity>
+
+        <activity
+            android:name=".view.activity.AddOrderUpdate"
             android:label="@string/title_activity_add_order"
             android:windowSoftInputMode="stateVisible|adjustPan">
 

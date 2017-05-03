@@ -16,6 +16,18 @@ public class LogInRequest {
     @Expose
     private String password;
 
+    @SerializedName("notificationToken")
+    @Expose
+    private String notificationToken;
+
+    public String getNotificationToken() {
+        return notificationToken;
+    }
+
+    public void setNotificationToken(String notificationToken) {
+        this.notificationToken = notificationToken;
+    }
+
     public String getUserName() {
         return userName;
     }

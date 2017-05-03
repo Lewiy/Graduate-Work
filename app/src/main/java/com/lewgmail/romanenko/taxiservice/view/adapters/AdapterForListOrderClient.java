@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
-import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderActivity;
+import com.lewgmail.romanenko.taxiservice.view.activity.AddOrderUpdate;
 import com.lewgmail.romanenko.taxiservice.view.viewDriver.OrderInf;
 
 import java.util.HashMap;
@@ -91,13 +91,22 @@ public class AdapterForListOrderClient extends BaseExpandableListAdapter {
             convertView = mInflater.inflate(R.layout.list_group, null);
             ImageButton buttonOnTitleGroup = (ImageButton) convertView.findViewById(R.id.buttonOnTitleGroup);
             buttonOnTitleGroup.setFocusable(false);
-            buttonOnTitleGroup.setOnClickListener(new MyOnClickListener(listTitle, context));
+            buttonOnTitleGroup.setOnClickListener(new MyOnClickListener(getIdOrder(listTitle), context));
         }
         TextView listTitleTextView = (TextView) convertView
                 .findViewById(R.id.listTitle);
         listTitleTextView.setTypeface(null, Typeface.BOLD);
         listTitleTextView.setText(listTitle);
         return convertView;
+    }
+
+    public String getIdOrder(String string) {
+
+        if (string.indexOf("|") == -1)
+            return string;
+        else {
+            return string.substring(string.indexOf("|") + 1);
+        }
     }
 
     @Override
@@ -134,7 +143,7 @@ class MyOnClickListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (LoggedUser.getmInstance().getUserType().equals("CUSTOMER")) {
-            Intent myIntent = new Intent(context, EditOrderActivity.class);
+            Intent myIntent = new Intent(context, AddOrderUpdate.class);
             myIntent.putExtra("keyUpdate", "update"); //Optional parameters
             myIntent.putExtra("keyNumberOfOrder", copyTitle);
             context.startActivity(myIntent);

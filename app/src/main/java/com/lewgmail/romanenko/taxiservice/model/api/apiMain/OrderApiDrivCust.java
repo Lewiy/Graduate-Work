@@ -1,8 +1,8 @@
 package com.lewgmail.romanenko.taxiservice.model.api.apiMain;
 
+import com.lewgmail.romanenko.taxiservice.model.pojo.GetOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.MarkOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Order;
-import com.lewgmail.romanenko.taxiservice.model.pojo.OrderId;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.PUT;
+import retrofit2.http.PATCH;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -22,9 +22,9 @@ import rx.Observable;
 
 public interface OrderApiDrivCust {
     @GET("order/{orderId}")
-    Observable<OrderId> getOrderId(@Header("Authorization") String authorization, @Path("orderId") long orderId);
+    Observable<GetOrder> getOrderId(@Header("Authorization") String authorization, @Path("orderId") long orderId);
 
-    @PUT("order/{orderId}/status")
+    @PATCH("order/{orderId}/status")
     Observable<Response<ResponseBody>> acceptOrder(@Header("Authorization") String authorization, @Path("orderId") long orderId,
                                                    @Body MarkOrder markOrder);
 

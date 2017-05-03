@@ -1,16 +1,16 @@
 package com.lewgmail.romanenko.taxiservice.presenter;
 
-import android.util.Log;
-
 import com.lewgmail.romanenko.taxiservice.model.DTO.DataGoogleMapDTO;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerOrderApiCust;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AddOrderN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.CalculatePrice;
 import com.lewgmail.romanenko.taxiservice.model.pojo.OrderPriceN;
+import com.lewgmail.romanenko.taxiservice.model.pojo.OrderUpdate;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Price;
 import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointN;
 import com.lewgmail.romanenko.taxiservice.view.activity.AddOrder;
+import com.lewgmail.romanenko.taxiservice.view.activity.AddOrderUpdate;
 import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderInterface;
 
 import java.text.ParseException;
@@ -35,6 +35,8 @@ public class CustomerPresenter {
     private String responseMsg;
     private EditOrderInterface view;
     private AddOrder viewAddOrder;
+    private AddOrderUpdate viewAddOrderUpdate;
+
     private ManagerOrderApiCust managerOrderApiCust = new ManagerOrderApiCust(this);
     private DataGoogleMapDTO dataGoogleMapDTOPres;
 
@@ -48,6 +50,10 @@ public class CustomerPresenter {
 
     public CustomerPresenter(AddOrder viewAddOrder) {
         this.viewAddOrder = viewAddOrder;
+    }
+
+    public CustomerPresenter(AddOrderUpdate viewAddOrderUpdate) {
+        this.viewAddOrderUpdate = viewAddOrderUpdate;
     }
 
     public EditOrderInterface getView() {
@@ -93,20 +99,24 @@ public class CustomerPresenter {
 
                     @Override
                     public void onError(Throwable e) {
+                        if (viewAddOrder != null)
                         viewAddOrder.frag2responseError(e.toString());
+                        else viewAddOrderUpdate.responseError(e.toString());
                     }
 
                     @Override
                     public void onNext(Price price) {
-                        viewAddOrder.frag2responseCalculatedPrice(price.getPrice().toString());
-                        viewAddOrder.frag2responseDistance(price.getDistance().toString());
-                        viewAddOrder.frag2responseDuration(price.getDuration().toString());
+                        if (viewAddOrderUpdate != null) {
+                            viewAddOrder.frag2responseCalculatedPrice(price.getPrice().toString());
+                            viewAddOrder.frag2responseDistance(price.getDistance().toString());
+                            viewAddOrder.frag2responseDuration(price.getDuration().toString());
+                        } else {
+                            viewAddOrderUpdate.responsePrice(price.getPrice());
+                            viewAddOrderUpdate.responseDistance(price.getDistance());
+                            viewAddOrderUpdate.responseDuration(price.getDuration().toString());
+                        }
                     }
                 });
-    }
-
-    public void addOrderResponse() {
-        // createObjectAddOrder();
     }
 
 
@@ -123,25 +133,37 @@ public class CustomerPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            view.showError(e.getMessage().toString());
-                        else
-                            view.showError(e.getMessage().toString());
+                            viewAddOrderUpdate.responseError(e.toString());
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        Log.d("MyLooooooooooog", Integer.toString(responseBodyResponse.code()));
-                        view.showError(Integer.toString(responseBodyResponse.code()));
+                        viewAddOrderUpdate.responseAddorder(new String(Integer.toString(responseBodyResponse.code())));
                     }
                 });
     }
 
-    public void updateOrder() {
-        try {
-            managerOrderApiCust.updateOrder(createObjectAddOrder(), 7);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public void updateOrder(long orderId) {
+        Observable<Response<ResponseBody>> observer = managerOrderApiCust.updateOrder(createOrderUpdate(), orderId);
+        observer.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Response<ResponseBody>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (e instanceof HttpException)
+                            viewAddOrderUpdate.responseAddorder(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<ResponseBody> responseBodyResponse) {
+                        viewAddOrderUpdate.responseAddorder(new String(Integer.toString(responseBodyResponse.code())));
+                    }
+                });
     }
 
     public void onFinishRequest(int codeMsg, String responseMsg) {
@@ -190,8 +212,17 @@ public class CustomerPresenter {
         addOrderN.setStartTime(viewAddOrder.getTime());
         addOrderN.setAdditionalRequirementN(viewAddOrder.getAdditionalRequirementNs());
         addOrderN.setRoutePoint(viewAddOrder.getRoute());
-
         return addOrderN;
+    }
+
+    private OrderUpdate createOrderUpdate() {
+        OrderUpdate orderUpdate = new OrderUpdate();
+        orderUpdate.setQuickRequest(false);
+        orderUpdate.setComment(viewAddOrderUpdate.getComment());
+        orderUpdate.setStartTime(viewAddOrderUpdate.getTime());
+        orderUpdate.setAdditionalRequirementN(viewAddOrderUpdate.getAdditionalRequirementNs());
+        orderUpdate.setRoutePoint(viewAddOrderUpdate.getRoute());
+        return orderUpdate;
     }
 
     private CalculatePrice createCalculatePriceObject() {

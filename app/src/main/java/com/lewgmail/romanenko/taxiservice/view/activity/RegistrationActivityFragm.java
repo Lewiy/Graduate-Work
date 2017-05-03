@@ -184,8 +184,10 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
             MobileNumber mobileNumber2 = new MobileNumber();
             mobileNumber1.setMobileNumber(fragmentPassengerRegist.getPhone1());
             mobiles.add(mobileNumber1);
+            if (!fragmentPassengerRegist.getPhone2().matches("")) {
             mobileNumber2.setMobileNumber(fragmentPassengerRegist.getPhone2());
-            mobiles.add(mobileNumber2);
+                mobiles.add(mobileNumber2);
+            }
             userRegistration.setMobileNumbers(mobiles);
             userRegistration.setUserType("CUSTOMER");
         }

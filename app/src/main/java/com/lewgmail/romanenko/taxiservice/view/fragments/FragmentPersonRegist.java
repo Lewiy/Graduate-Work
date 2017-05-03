@@ -132,8 +132,7 @@ public class FragmentPersonRegist extends android.support.v4.app.Fragment implem
                 && !emailRegistration.getText().toString().equals("")
                 && !passwordRegistration.getText().toString().equals("")
                 && !repeatPassword.getText().toString().equals("")
-                && !mobNamberRegistration.getText().toString().equals("")
-                && !mobSecondNamber.getText().toString().equals(""))
+                && !mobNamberRegistration.getText().toString().equals(""))
             return true;
         else {
             Toast.makeText(this.getActivity(), R.string.dont_inputed_fields, Toast.LENGTH_SHORT).show();

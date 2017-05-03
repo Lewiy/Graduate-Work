@@ -5,6 +5,7 @@ import android.util.Log;
 import com.lewgmail.romanenko.taxiservice.model.DTO.MapperListOrders;
 import com.lewgmail.romanenko.taxiservice.model.api.Services;
 import com.lewgmail.romanenko.taxiservice.model.api.apiMain.OrderApiDrivCust;
+import com.lewgmail.romanenko.taxiservice.model.pojo.GetOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.MarkOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Order;
 import com.lewgmail.romanenko.taxiservice.model.pojo.OrderId;
@@ -38,9 +39,9 @@ public class ManagerOrderApiDrivCust {
 
     }
 
-    public Observable<OrderId> loadOrderId(int orderId) {
+    public Observable<GetOrder> loadOrderId(int orderId) {
         OrderApiDrivCust servises = Services.createService(OrderApiDrivCust.class);
-        Observable<OrderId> observer = servises.getOrderId(LoggedUser.getmInstance().getToken(), orderId);
+        Observable<GetOrder> observer = servises.getOrderId(LoggedUser.getmInstance().getToken(), orderId);
 
       /*  observer.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -70,7 +71,7 @@ public class ManagerOrderApiDrivCust {
 
         // markOrder.setUserId(10);
         Log.d("MyLoooooooooooooogs", markOrder.getType().toString());
-        Log.d("MyLoooooooooooooogs", Long.toString(markOrder.getUserId()));
+        // Log.d("MyLoooooooooooooogs", Long.toString(markOrder.getUserId()));
 
         OrderApiDrivCust servises = Services.createService(OrderApiDrivCust.class);
         Observable<Response<ResponseBody>> observer = servises.acceptOrder(LoggedUser.getmInstance().getToken(), orderId,

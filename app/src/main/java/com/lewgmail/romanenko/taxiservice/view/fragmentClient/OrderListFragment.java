@@ -49,6 +49,7 @@ public class OrderListFragment extends android.support.v4.app.Fragment implement
         initialiseExpList();
         basePresenter = new BasePresenter(this);
         setRetainInstance(true);
+        basePresenter.changeStatusOrder(42, 42, "CANCELLED");
         return view;
     }
 

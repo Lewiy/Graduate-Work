@@ -24,21 +24,29 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
+import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePoint;
 import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointN;
+import com.lewgmail.romanenko.taxiservice.presenter.BasePresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
 import com.lewgmail.romanenko.taxiservice.view.activity.elementsOfActivity.SlidingTabLayout;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
-import com.lewgmail.romanenko.taxiservice.view.fragments.addOrder.FragmentPage1;
-import com.lewgmail.romanenko.taxiservice.view.fragments.addOrder.FragmentPage2;
+import com.lewgmail.romanenko.taxiservice.view.fragments.addOrderUpdate.FragmentPage1Update;
+import com.lewgmail.romanenko.taxiservice.view.fragments.addOrderUpdate.FragmentPage2Update;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrderGatherDataFirstWindow,
-        FragmentPage2.AddOrderGatherDataSecondWindow, AddOrderInterface {
+/**
+ * Created by Lev on 24.04.2017.
+ */
+
+public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Update.AddOrderGatherDataFirstWindow,
+        FragmentPage2Update.AddOrderGatherDataSecondWindow, AddOrderInterface {
 
     final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1,
             MAP_SEARCH_ADDRESS_CODE = 2,
             MAP_SEARCH_ADDRESS_CODE_ROUTE = 3;
+
     AdapterAddPointOfRoute addapterListAddresses;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -48,7 +56,7 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private AddOrderUpdate.SectionsPagerAdapter mSectionsPagerAdapter;
     private SlidingTabLayout tabs;
     private LocationManager locationManager;
     private LocationListener locationListener;
@@ -75,8 +83,20 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     private Context contextFragm2;
 
     //  private Fragment fragmenObjs;
-    private FragmentPage1 fragmentObj1;
-    private FragmentPage2 fragmentObj2;
+    private FragmentPage1Update fragmentObj1Update;
+    private FragmentPage2Update fragmentObj2Update;
+    private BasePresenter basePresenter;
+    private Intent intentMy;
+
+
+    /*
+    metaData from updateOrder///////////////////////////////////////////////////////
+     */
+
+    private long orderId;
+    /*
+    ///////////////////////////////////////////////////////////////////////////////
+     */
 
     // private String
     // private String
@@ -86,6 +106,7 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
         setContentView(R.layout.activity_add_order_);
         routePoints = new ArrayList<>();
         customerPresenter = new CustomerPresenter(this);
+        basePresenter = new BasePresenter(this);
         // customerPresenter.addOrder(12.23, 23.34, 123.34, 1234.3);
         //   Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().setElevation(0);
@@ -120,7 +141,6 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
         tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
         // Setting Custom Color for the Scroll bar indicator of the Tab View
         // TextView textView = (TextView) tabs.getChildAt(0);
-        // textView.setTextColor(getResources().getColor(R.color.tab_color_scrol));
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
@@ -128,14 +148,14 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
             }
         });
 
+        intentMy = getIntent();
         // Setting the ViewPager For the SlidingTabsLayout
+
         tabs.setViewPager(mViewPager);
-        fragmentObj1 = (FragmentPage1) mSectionsPagerAdapter.getItem(0);
-        fragmentObj2 = (FragmentPage2) mSectionsPagerAdapter.getItem(1);
-        //  fragmentObj1 = (FragmentPage1) FragmentPage1.newInstance(0);
-        // fragmentObj2 = (FragmentPage2) FragmentPage2.newInstance(1);
-        //fragmentObj1 = (FragmentPage1) getSupportFragmentManager().findFragmentByTag("android:switcher:2131558517:0");
-        // fragmentObj2 = (FragmentPage2) getSupportFragmentManager().findFragmentByTag("android:switcher:2131558517:1");
+        fragmentObj1Update = (FragmentPage1Update) mSectionsPagerAdapter.getItem(0);
+        fragmentObj2Update = (FragmentPage2Update) mSectionsPagerAdapter.getItem(1);
+
+        basePresenter.loadOrderSpecificId(Integer.parseInt(intentMy.getStringExtra("keyNumberOfOrder")));
 
     }
 
@@ -144,13 +164,166 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     */
 
     public void setFragment1Referense(Fragment fragment1) {
-        this.fragmentObj1 = (FragmentPage1) fragment1;
+        this.fragmentObj1Update = (FragmentPage1Update) fragment1;
     }
 
     public void setFragment2Referense(Fragment fragment2) {
-        this.fragmentObj2 = (FragmentPage2) fragment2;
+        this.fragmentObj2Update = (FragmentPage2Update) fragment2;
     }
 
+    /*
+    Responses for getOrderSpecificID/////////////////////////////////////////////////////
+     */
+
+    public void responseError(String error) {
+        fragmentObj1Update.setError(error);
+    }
+
+    public void responseOrderId(long orderId) {
+        this.orderId = orderId;
+    }
+
+    public void responseStartTime(String dateTime) {
+        if (dateTime == null)
+            fragmentObj1Update.setStartTime(dateTime);
+        else {
+            String time = getTimeFromResponDateTime(dateTime);
+            fragmentObj1Update.setStartTime(time);
+        }
+    }
+
+    public void responseRoutePoint(List<RoutePoint> resRoutePoints) {
+        RoutePointN routePointN1 = new RoutePointN();
+        addapterListAddresses = fragmentObj1Update.getAddressAdapter();
+        addapterListAddresses.setActivityCallBack(this);
+        fragmentObj1Update.setFirstPointOfRoute(addressBilder(resRoutePoints.get(0).getStreet()
+                , resRoutePoints.get(0).getHouseNumber(), resRoutePoints.get(0).getCity()));
+        routePointN1.setLatitude(resRoutePoints.get(0).getLatitude());
+        routePointN1.setLongtitude(resRoutePoints.get(0).getLongtitude());
+        routePoints.add(routePointN1);
+
+        RoutePointN routePointN2 = new RoutePointN();
+        fragmentObj1Update.setSecondPointOfRoute(addressBilder(resRoutePoints.get(1).getStreet()
+                , resRoutePoints.get(1).getHouseNumber(), resRoutePoints.get(1).getCity()));
+        routePointN2.setLatitude(resRoutePoints.get(1).getLatitude());
+        routePointN2.setLongtitude(resRoutePoints.get(1).getLongtitude());
+        routePoints.add(routePointN2);
+
+        for (int i = 2; i <= resRoutePoints.size() - 1; i++) {
+            RoutePointN routePointN3 = new RoutePointN();
+            addapterListAddresses.myAddList(addressBilder(resRoutePoints.get(i).getStreet()
+                    , resRoutePoints.get(i).getHouseNumber(), resRoutePoints.get(i).getCity()));
+            routePointN3.setLatitude(resRoutePoints.get(i).getLatitude());
+            routePointN3.setLongtitude(resRoutePoints.get(i).getLongtitude());
+            routePoints.add(routePointN3);
+        }
+
+    }
+
+    public void responseStatusOrder(String orderStatus) {
+        fragmentObj2Update.setStatus(orderStatus);
+    }
+
+    public void responseCustomerId(int customerId) {
+
+    }
+
+    public void responseDriverId(int driverId) {
+
+    }
+
+    public void responseDistance(double distance) {
+        fragmentObj2Update.setDistance(Double.toString(distance));
+    }
+
+    public void responseDuration(String time) {
+        fragmentObj2Update.setDuration(time);
+    }
+
+    public void responsePrice(double price) {
+        fragmentObj2Update.setCalculatedPrice(Double.toString(price));
+    }
+
+    public void responseExtraPrice(double extraPrice) {
+
+    }
+
+    public void responseComment(String comment) {
+
+    }
+
+    public void responseAdditionalRequirements(ArrayList<AdditionalRequirementN> additionalRequirementNs) {
+
+        this.additionalRequirementNs = additionalRequirementNs;
+        for (AdditionalRequirementN requirementN : additionalRequirementNs) {
+            settersAdditionRequirements(requirementN.getReqId());
+        }
+
+    }
+
+    /*
+    ///////////////////////////////////////////////////////////////////////////////////
+     */
+
+
+    /*
+    Transformation Date//////////////////////////////////////////////////////////////////
+     */
+
+    private String getTimeFromResponDateTime(String dateTime) {
+        return dateTime.substring(dateTime.indexOf("T") + 1, dateTime.indexOf("T") + 5);
+    }
+
+    private String addressBilder(String street, String numberOfHause, String citi) {
+        String address = "";
+        if (citi != null)
+            address = address + citi + " ";
+        if (street != null)
+            address = address + street + " ";
+        if (numberOfHause != null)
+            address = address + numberOfHause + " ";
+        return address;
+    }
+
+    private void settersAdditionRequirements(int idRequirement) {
+        switch (idRequirement) {
+            case 1:
+                fragmentObj2Update.setTYPECAR(additionalRequirementNs.get(searchAdditionReq(idRequirement)).getReqValueId());
+                break;
+            case 2:
+                fragmentObj2Update.setTYPERECKONING(additionalRequirementNs.get(searchAdditionReq(idRequirement)).getReqValueId());
+                break;
+            case 3:
+                fragmentObj2Update.setPETS(additionalRequirementNs.get(searchAdditionReq(idRequirement)).getReqValueId());
+                break;
+            case 4:
+                fragmentObj2Update.setBAGGAGE(additionalRequirementNs.get(searchAdditionReq(idRequirement)).getReqValueId());
+                break;
+            case 5:
+                fragmentObj2Update.setEXTRAPRICE(additionalRequirementNs.get(searchAdditionReq(idRequirement)).getReqValueId());
+                break;
+            case 6:
+                fragmentObj2Update.setDRIVERSERVICE(additionalRequirementNs.get(searchAdditionReq(idRequirement)).getReqValueId());
+                break;
+            case 7:
+                fragmentObj2Update.setNUMBERPASSENGERS(additionalRequirementNs.get(searchAdditionReq(idRequirement)).getReqValueId());
+                break;
+        }
+    }
+
+    private int searchAdditionReq(int idRequirement) {
+        for (int i = 0; i <= additionalRequirementNs.size(); i++) {
+            if (additionalRequirementNs.get(i).getReqId() == idRequirement)
+                return i;
+        }
+        return 0;
+    }
+
+    // private string
+
+    /*
+    /////////////////////////////////////////////////////////////////////////////////
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -185,7 +358,7 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     @Override
     public void runReqaddOrder(Context contextFragm2) {
         this.contextFragm2 = contextFragm2;
-        customerPresenter.addOrder();
+        customerPresenter.updateOrder(orderId);
     }
 
     @Override
@@ -195,11 +368,46 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     }
 
     @Override
+    public void deleteOrder() {
+        customerPresenter.deleteOrder(orderId);
+    }
+
+    @Override
     public void setActivityStartTime(String startTime) {
         this.startTime = startTime;
     }
 
+    /*
+        @Override
+        public void setActivityAdminArea(String adminArea) {
 
+        }
+
+        @Override
+        public void setActivityLatitude(String latitude) {
+
+        }
+
+        @Override
+        public void setActivityLongetude(String longetude) {
+
+        }
+
+        @Override
+        public void setActivityStreet(String street) {
+
+        }
+
+        @Override
+        public void setActivityHouseNumber(String houseNumber) {
+
+        }
+
+        @Override
+        public void setActivityCity(String city) {
+
+        }
+    */
     @Override
     public void runAutoComplete(int viewId, int position) {
         viewIdEditText = viewId;
@@ -370,16 +578,16 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
      Update view fragment from response
      /////////////////////////////////////////////////////////////////////////
      */
-    public void frag2responseDuration(String duration) {
-        fragmentObj2.setDuration(duration);
+  /*  public void frag2responseDuration(String duration) {
+        fragmentObj2Update.setDuration(duration);
     }
 
     public void frag2responseDistance(String distance) {
-        fragmentObj2.setDistance(distance);
+        fragmentObj2Update.setDistance(distance);
     }
 
     public void frag2responseCalculatedPrice(String calculatedPrice) {
-        fragmentObj2.setCalculatedPrice(calculatedPrice);
+        fragmentObj2Update.setCalculatedPrice(calculatedPrice);
     }
 
     public void frag1responseError(String string) {
@@ -387,25 +595,26 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     }
 
     public void frag2responseError(String string) {
-        fragmentObj2.setError(string);
-    }
+        fragmentObj2Update.setError(string);
+    }*/
 
     /*
     ////////////////////////////////////////////////////////////////////////
      */
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        private AddOrder addOrderHost;
+        private AddOrderUpdate addOrderHost;
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
-        public void setHostFragmentReferense(AddOrder host) {
+        public void setHostFragmentReferense(AddOrderUpdate host) {
             this.addOrderHost = host;
         }
 
@@ -415,13 +624,13 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    Fragment fragment1 = FragmentPage1.newInstance(position);
+                    Fragment fragment1 = FragmentPage1Update.newInstance(position);
                     // FragmentManager fragmentManager = getSupportFragmentManager();
                     // fragmentManager.beginTransaction().add(fragment1,"fragmentAddOrder1").commit();
                     addOrderHost.setFragment1Referense(fragment1);
                     return fragment1;
                 case 1:
-                    Fragment fragment2 = FragmentPage2.newInstance(position);
+                    Fragment fragment2 = FragmentPage2Update.newInstance(position);
                     //  FragmentManager fragmentManager2 = getSupportFragmentManager();
                     // fragmentManager2.beginTransaction().add(fragment2,"fragmentAddOrder2").commit();
                     addOrderHost.setFragment2Referense(fragment2);
