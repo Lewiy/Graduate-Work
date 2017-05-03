@@ -32,7 +32,7 @@ public class Notification extends GcmListenerService {
 
     public void showSimpleNotification(String title, String text) {
         mSimpleBuilder.setSmallIcon(R.drawable.ic_taxi)
-                .setContentTitle(title)
+                //.setContentTitle(title)
                 .setContentText(text);
 // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(mContext, LoginActivity.class);
