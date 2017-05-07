@@ -25,7 +25,7 @@ import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePoint;
-import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointN;
+import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointUpdateOrder;
 import com.lewgmail.romanenko.taxiservice.presenter.BasePresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
 import com.lewgmail.romanenko.taxiservice.view.activity.elementsOfActivity.SlidingTabLayout;
@@ -74,7 +74,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
 
     private String startTime;
     private String comment;
-    private ArrayList<RoutePointN> routePoints;
+    private ArrayList<RoutePointUpdateOrder> routePoints;
     private ArrayList<AdditionalRequirementN> additionalRequirementNs;
 
 
@@ -193,28 +193,34 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     }
 
     public void responseRoutePoint(List<RoutePoint> resRoutePoints) {
-        RoutePointN routePointN1 = new RoutePointN();
+        RoutePointUpdateOrder routePointN1 = new RoutePointUpdateOrder();
         addapterListAddresses = fragmentObj1Update.getAddressAdapter();
         addapterListAddresses.setActivityCallBack(this);
         fragmentObj1Update.setFirstPointOfRoute(addressBilder(resRoutePoints.get(0).getStreet()
                 , resRoutePoints.get(0).getHouseNumber(), resRoutePoints.get(0).getCity()));
         routePointN1.setLatitude(resRoutePoints.get(0).getLatitude());
         routePointN1.setLongtitude(resRoutePoints.get(0).getLongtitude());
+        routePointN1.setRoutePointId(resRoutePoints.get(0).getRoutePointId());
+        routePointN1.setRoutePointIndex(new Long(0));
         routePoints.add(routePointN1);
 
-        RoutePointN routePointN2 = new RoutePointN();
+        RoutePointUpdateOrder routePointN2 = new RoutePointUpdateOrder();
         fragmentObj1Update.setSecondPointOfRoute(addressBilder(resRoutePoints.get(1).getStreet()
                 , resRoutePoints.get(1).getHouseNumber(), resRoutePoints.get(1).getCity()));
         routePointN2.setLatitude(resRoutePoints.get(1).getLatitude());
         routePointN2.setLongtitude(resRoutePoints.get(1).getLongtitude());
+        routePointN2.setRoutePointId(resRoutePoints.get(1).getRoutePointId());
+        routePointN2.setRoutePointIndex(new Long(0));
         routePoints.add(routePointN2);
 
         for (int i = 2; i <= resRoutePoints.size() - 1; i++) {
-            RoutePointN routePointN3 = new RoutePointN();
+            RoutePointUpdateOrder routePointN3 = new RoutePointUpdateOrder();
             addapterListAddresses.myAddList(addressBilder(resRoutePoints.get(i).getStreet()
                     , resRoutePoints.get(i).getHouseNumber(), resRoutePoints.get(i).getCity()));
             routePointN3.setLatitude(resRoutePoints.get(i).getLatitude());
             routePointN3.setLongtitude(resRoutePoints.get(i).getLongtitude());
+            routePointN3.setRoutePointId(resRoutePoints.get(i).getRoutePointId());
+            routePointN3.setRoutePointIndex(new Long(0));
             routePoints.add(routePointN3);
         }
 
@@ -373,6 +379,11 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     }
 
     @Override
+    public void changeOrderStatus(String orderStatus) {
+        basePresenter.changeStatusOrder(orderId, orderStatus);
+    }
+
+    @Override
     public void setActivityStartTime(String startTime) {
         this.startTime = startTime;
     }
@@ -462,7 +473,8 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
 
     @Override
     public void removeAddress(int position) {
-        routePoints.remove(position + 2);
+        routePoints.get(position + 2).setRoutePointIndex(null);
+        // routePoints.remove(position + 2);
     }
 
     @Override
@@ -475,7 +487,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
                 if (typeOfViewElement.equals("fragment")) {
 
                     EditText editText = ((EditText) frag1.getView().findViewById(viewIdEditText));
-                    RoutePointN routePointN = new RoutePointN();
+                    RoutePointUpdateOrder routePointN = new RoutePointUpdateOrder();
                     routePointN.setLongtitude(Double.toString(place.getLatLng().longitude));
                     routePointN.setLatitude(Double.toString(place.getLatLng().latitude));
                     if (editText.getText().toString().matches(""))
@@ -486,7 +498,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
                 } else if (typeOfViewElement.equals("List")) {
 
                     addapterListAddresses.myAddList(place.getAddress().toString());
-                    RoutePointN routePointN = new RoutePointN();
+                    RoutePointUpdateOrder routePointN = new RoutePointUpdateOrder();
                     routePointN.setLongtitude(Double.toString(place.getLatLng().longitude));
                     routePointN.setLatitude(Double.toString(place.getLatLng().latitude));
                     routePoints.add(routePointN);
@@ -494,7 +506,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
                 } else {
 
                     addapterListAddresses.replaseItem(place.getAddress().toString(), position);
-                    RoutePointN routePointN = new RoutePointN();
+                    RoutePointUpdateOrder routePointN = new RoutePointUpdateOrder();
                     routePointN.setLongtitude(Double.toString(place.getLatLng().longitude));
                     routePointN.setLatitude(Double.toString(place.getLatLng().latitude));
                     routePoints.set(position + 2, routePointN);
@@ -521,12 +533,12 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
                     Fragment frag1 = getSupportFragmentManager().findFragmentByTag("android:switcher:2131558517:0");
                     EditText editText = ((EditText) frag1.getView().findViewById(viewIdEditText));
                     if (editText.getText().toString().matches("")) {
-                        RoutePointN routePointN = new RoutePointN();
+                        RoutePointUpdateOrder routePointN = new RoutePointUpdateOrder();
                         routePointN.setLongtitude(data.getStringExtra("longitude"));
                         routePointN.setLatitude(data.getStringExtra("latitude"));
                         routePoints.add(routePointN);
                     } else {
-                        RoutePointN routePointN = new RoutePointN();
+                        RoutePointUpdateOrder routePointN = new RoutePointUpdateOrder();
                         routePointN.setLongtitude(data.getStringExtra("longitude"));
                         routePointN.setLatitude(data.getStringExtra("latitude"));
                         routePoints.set(positionFirsSeconAdd, routePointN);
@@ -535,7 +547,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
                     break;
                 case MAP_SEARCH_ADDRESS_CODE_ROUTE:
                     addapterListAddresses.replaseItem(data.getStringExtra("addressFromMap"), position);
-                    RoutePointN routePointN = new RoutePointN();
+                    RoutePointUpdateOrder routePointN = new RoutePointUpdateOrder();
                     routePointN.setLongtitude(data.getStringExtra("longitude"));
                     routePointN.setLatitude(data.getStringExtra("latitude"));
                     routePoints.set(position + 2, routePointN);
@@ -552,7 +564,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
         return comment;
     }
 
-    public ArrayList getRoute() {
+    public ArrayList<RoutePointUpdateOrder> getRoute() {
         return routePoints;
     }
 

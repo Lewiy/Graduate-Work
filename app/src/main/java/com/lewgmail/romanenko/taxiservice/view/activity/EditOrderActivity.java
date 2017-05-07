@@ -275,7 +275,7 @@ public class EditOrderActivity extends FragmentActivity implements
                 // basePresenter.changeStatusOrder(7);
                 //Log.d("My loooooog","click");
                 if (parent.getItemAtPosition(pos).toString().equals("Cancelled")) {
-                    basePresenter.changeStatusOrder(orderId, LoggedUser.getmInstance().getUserId(), parent.getItemAtPosition(pos).toString().toUpperCase());
+                    //basePresenter.changeStatusOrder(orderId, LoggedUser.getmInstance().getUserId(), parent.getItemAtPosition(pos).toString().toUpperCase());
                     finish();
                 }
             }

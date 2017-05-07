@@ -9,6 +9,13 @@ public class RoutePoint {
     @SerializedName("adminArea")
     @Expose
     private String adminArea;
+    @SerializedName("routePointId")
+    @Expose
+    private long routePointId;
+
+    @SerializedName("routePointIndex")
+    @Expose
+    private long routePointIndex;
     @SerializedName("latitude")
     @Expose
     private String latitude;
@@ -24,6 +31,22 @@ public class RoutePoint {
     @SerializedName("city")
     @Expose
     private String city;
+
+    public long getRoutePointId() {
+        return routePointId;
+    }
+
+    public void setRoutePointId(long routePointId) {
+        this.routePointId = routePointId;
+    }
+
+    public long getRoutePointIndex() {
+        return routePointIndex;
+    }
+
+    public void setRoutePointIndex(long routePointIndex) {
+        this.routePointIndex = routePointIndex;
+    }
 
     public String getAdminArea() {
         return adminArea;

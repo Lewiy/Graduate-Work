@@ -28,7 +28,7 @@ public interface OrderApiCust {
     Observable<Response<ResponseBody>> deleteOrder(@Header("Authorization") String authorization,
                                                    @Path("orderId") long orderId);
 
-    @PATCH("/order/{orderId}")
+    @PATCH("order/{orderId}")
     Observable<Response<ResponseBody>> updateOrder(@Header("Authorization") String authorization, @Path("orderId") long orderId, @Body OrderUpdate updateOrder);
 
     @POST("order/routeinfo")

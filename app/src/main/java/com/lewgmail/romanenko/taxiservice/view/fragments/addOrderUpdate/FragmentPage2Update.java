@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
+import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterSpinnerLocalization;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterStatusController;
 
 import java.util.ArrayList;
@@ -90,7 +91,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
     private ImageButton lastPressedB = null;
     private int lastPressedDraw = 0;
     private ArrayList<AdditionalRequirementN> additionalRequirements;
-
+    private boolean flagFirstSelected = false;
     /*
     Set metaData for order/////////////////////////
      */
@@ -255,7 +256,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
         });
     }
 
-    private void initializeSpinnerOrderStatus(int arrayType, Spinner spinner) {
+    private void initializeSpinnerOrderStatus(final int arrayType, Spinner spinner) {
         ArrayAdapter<CharSequence> adapterSpinner =
                 ArrayAdapter.createFromResource(getActivity(), arrayType, android.R.layout.simple_spinner_item);
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -265,6 +266,13 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int pos,
                                        long id) {
                 //addAdditioanlRequirements(pos,typeRequirements);
+                if (flagFirstSelected != false) {
+                    addOrderGatherDataSecondWindow.changeOrderStatus(new AdapterSpinnerLocalization().setChangeStatusOrder(arrayType, pos, "CUSTOMER"));
+
+                }
+                flagFirstSelected = true;
+
+
             }
 
             @Override
@@ -398,5 +406,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
         void runReqCalculayePrice(TextView valuePrice);
 
         void deleteOrder();
+
+        void changeOrderStatus(String orderStatus);
     }
 }

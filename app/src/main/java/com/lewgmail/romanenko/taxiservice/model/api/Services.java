@@ -1,5 +1,7 @@
 package com.lewgmail.romanenko.taxiservice.model.api;
 
+import android.util.Log;
+
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
@@ -32,6 +34,7 @@ public class Services {
             .Builder();
     private static final GsonBuilder gsonBuilder = new GsonBuilder().serializeNulls();
     private static boolean flag;
+    private static int i = 0;
 
     //Gson gson = gsonBuilder.create();
     private static Retrofit.Builder builder =
@@ -62,20 +65,22 @@ public class Services {
             // String req = request.body().;
 
             /////////////////////////////////////////////
-            //   if(i == 5) {
-               /* try {
+            // if(i == 15) {
+            try {
                     final Request copy = request.newBuilder().build();
                     final Buffer buffer = new Buffer();
+                if (copy.body() != null) {
                         copy.body().writeTo(buffer);
                         String sad = buffer.readUtf8();
                         Log.i("req", sad);
+                }
 
                 } catch (final IOException e) {
                     //  return "did not work";
-                }*/
-            //   }
+            }
+            //      }
 
-            // i++;*/
+            //  i++;
 
             return chain.proceed(request);
         }

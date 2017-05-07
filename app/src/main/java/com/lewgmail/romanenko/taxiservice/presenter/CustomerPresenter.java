@@ -3,19 +3,12 @@ package com.lewgmail.romanenko.taxiservice.presenter;
 import com.lewgmail.romanenko.taxiservice.model.DTO.DataGoogleMapDTO;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerOrderApiCust;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AddOrderN;
-import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.CalculatePrice;
-import com.lewgmail.romanenko.taxiservice.model.pojo.OrderPriceN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.OrderUpdate;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Price;
-import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointN;
 import com.lewgmail.romanenko.taxiservice.view.activity.AddOrder;
 import com.lewgmail.romanenko.taxiservice.view.activity.AddOrderUpdate;
 import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderInterface;
-
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Response;
@@ -234,106 +227,4 @@ public class CustomerPresenter {
         return price;
     }
 
-    private AddOrderN createObjectAddOrder(/*double distanse*/) throws ParseException {
-
-        //   List<AdditionalRequirementN> list = new ArrayList<>();
-
-
-        //   AddOrderN addOrderN = new AddOrderN();
-
-
-
-       /* List<AdditionalRequirementN> list = new ArrayList<>();
-        AdditionalRequirementN additionalRequirementCar = new AdditionalRequirementN();
-        additionalRequirementCar.setReqId(1);
-        additionalRequirementCar.setReqValueId(new AdapterAdditionalRequiremnets().getCarRev(getTypeCar()));
-        list.add(additionalRequirementCar);
-
-        AdditionalRequirementN additionalRequirementReckoning = new AdditionalRequirementN();
-        additionalRequirementReckoning.setReqId(2);
-        additionalRequirementReckoning.setReqValueId(new AdapterAdditionalRequiremnets().getRecRev(getTypeReckoning()));
-        list.add(additionalRequirementReckoning);
-
-        OrderPriceN orderPrice = new OrderPriceN();
-        orderPrice.setAdditionalRequirements(list);
-        double distanse1 = distanse / 1000;
-        orderPrice.setDistance(distanse1);
-
-        String dateString = convertDateTime(getDate() + " " + getTime());
-        AddOrderN addOrder = new AddOrderN();
-        addOrder.setCustomerId(LoggedUser.getmInstance().getUserId());
-        String string = getDate() + " " + getTime();
-        String dateTime = convertDateTime(string);
-        addOrder.setStartTime(dateTime);
-        addOrder.setStartPoint(getStartPoint());
-        addOrder.setEndPoint(getEndPoint());
-        addOrder.setOrderPrice(orderPrice);*/
-
-        List<AdditionalRequirementN> list = new ArrayList<>();
-        AdditionalRequirementN additionalRequirementCar = new AdditionalRequirementN();
-        additionalRequirementCar.setReqId(1);
-        additionalRequirementCar.setReqValueId(2);
-        list.add(additionalRequirementCar);
-        AdditionalRequirementN additionalRequirementC = new AdditionalRequirementN();
-        additionalRequirementC.setReqId(2);
-        additionalRequirementC.setReqValueId(1);
-        list.add(additionalRequirementC);
-
-
-        OrderPriceN orderPrice = new OrderPriceN();
-        orderPrice.setAdditionalRequirements(list);
-        double distanse1 = 1000;
-        orderPrice.setDistance(distanse1);
-
-
-        // String dateString = convertDateTime(getDate() + " " + getTime());
-        AddOrderN addOrder = new AddOrderN();
-        //  String string = getDate() + " " + getTime();
-        //  String dateTime = convertDateTime(string);
-        addOrder.setStartTime("2017-08-09T18:31:42");
-        addOrder.setComment("dlfgjkldnfgdfklgjdlkgjklfg");
-        //addOrder.setOrderPrice(orderPrice);
-
-        RoutePointN routePointN = new RoutePointN();
-        // routePointN.setAdminArea("dfgdfgfg");
-        routePointN.setLongtitude("34.123");
-        routePointN.setLatitude("34.1233");
-        // routePointN.setStreet("sdfsdfsdf");
-        //  routePointN.setCity("sdfsdf");
-        //  routePointN.setHouseNumber("3");
-
-        List<RoutePointN> listRoute = new ArrayList<>();
-
-        listRoute.add(routePointN);
-        listRoute.add(routePointN);
-        addOrder.setRoutePoint(listRoute);
-        // return null;
-        return addOrder;
-    }
-
-    /////////////////////////////////////////get data from fields////////////////////////////
-
-   /* private String getTime() {
-        return view.getTime();
-    }
-
-    private String getDate() {
-        return view.getDate();
-    }
-
-    private String getStartPoint() {
-        return view.getStartPoint();
-    }
-
-    private String getEndPoint() {
-        return view.getEndPoint();
-    }
-
-    private String getTypeCar() {
-        return view.getTypeCar();
-    }
-
-    private String getTypeReckoning() {
-        return view.getTypeReckoning();
-    }*/
 }

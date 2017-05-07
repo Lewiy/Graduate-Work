@@ -254,9 +254,9 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
                 Log.d(" caunter ", Integer.toString(counterMy));
                 if (!spinnerStatusChange.getSelectedItem().toString().equals("Nothing selected"))
                     if (spinnerStatusChange.getSelectedItem().toString().equals("Cancel")) {
-                        basePresenter.changeStatusOrder(orderId, 2, "NEW");
-                    } else
-                        basePresenter.changeStatusOrder(orderId, LoggedUser.getmInstance().getUserId(), parent.getItemAtPosition(pos).toString().toUpperCase());
+                        // basePresenter.changeStatusOrder(orderId, 2, "NEW");
+                    }
+                // basePresenter.changeStatusOrder(orderId, LoggedUser.getmInstance().getUserId(), parent.getItemAtPosition(pos).toString().toUpperCase());
 
             }
 

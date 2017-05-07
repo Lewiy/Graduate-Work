@@ -22,7 +22,7 @@ public class OrderUpdate {
     private String comment;
     @SerializedName("routePoints")
     @Expose
-    private List<RoutePointN> routePoint = null;
+    private List<RoutePointUpdateOrder> routePoint = null;
     @SerializedName("additionalRequirements")
     @Expose
     private List<AdditionalRequirementN> additionalRequirementN;
@@ -52,11 +52,11 @@ public class OrderUpdate {
         this.comment = comment;
     }
 
-    public List<RoutePointN> getRoutePoint() {
+    public List<RoutePointUpdateOrder> getRoutePoint() {
         return routePoint;
     }
 
-    public void setRoutePoint(List<RoutePointN> routePoint) {
+    public void setRoutePoint(List<RoutePointUpdateOrder> routePoint) {
         this.routePoint = routePoint;
     }
 

@@ -1,5 +1,7 @@
 package com.lewgmail.romanenko.taxiservice.view.adapters;
 
+import com.lewgmail.romanenko.taxiservice.R;
+
 /**
  * Created by Lev on 09.03.2017.
  */
@@ -38,14 +40,76 @@ public class AdapterSpinnerLocalization {
         return "ERROR";
     }
 
-    /*public static int adaptStatusesCustomer(String status){
-        switch (status) {
-            case "NEW":
-                return
+    public static String setChangeStatusOrder(int typeSpinerStatus, int pos, String typeUser) {
+
+        if (typeUser.equals("TAXI_DRIVER")) {
+            switch (typeSpinerStatus) {
+                case R.array.change_status_driver_new:
+                    switch (pos) {
+                        case 0:
+                            return "NEW";
+                        case 1:
+                            return "ACCEPTED";
+                    }
+                case R.array.change_status_driver_accept:
+                    switch (pos) {
+                        case 0:
+                            return "ACCEPTED";
+                        case 1:
+                            return "WAITING";
+                        case 2:
+                            return "NEW";
+                    }
+                case R.array.change_status_driver_waiting:
+                    switch (pos) {
+                        case 0:
+                            return "WAITING";
+                        case 1:
+                            return "PROCESSING";
+                        case 2:
+                            return "NEW";
+                        case 3:
+                            return "ACCEPTED";
+                    }
+                case R.array.change_status_driver_processing:
+                    switch (pos) {
+                        case 0:
+                            return "PROCESSING";
+                        case 1:
+                            return "DONE";
+                    }
+            }
+        } else {
+            switch (typeSpinerStatus) {
+                case R.array.change_status_client_add:
+                    switch (pos) {
+                        case 0:
+                            return "NEW";
+                    }
+                case R.array.change_status_client_accepted:
+                    switch (pos) {
+                        case 0:
+                            return "ACCEPTED";
+                        case 1:
+                            return "NEW";
+                    }
+                case R.array.change_status_client_new:
+                    switch (pos) {
+                        case 0:
+                            return "NEW";
+                        case 1:
+                            return "NEW";
+                    }
+                case R.array.change_status_client_waiting:
+                    switch (pos) {
+                        case 0:
+                            return "WAITING";
+                        case 1:
+                            return "NEW";
+                    }
+            }
         }
+
+        return "ERROR";
     }
-
-    public static int adaptStatusesCustomer(String status){
-
-    }*/
 }

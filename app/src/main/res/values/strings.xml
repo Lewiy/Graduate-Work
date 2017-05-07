@@ -283,6 +283,10 @@
     <string name="account_driver">About driver</string>
     <string name="date_of_order">Date of order:   </string>
     <string name="delete_order">Delete</string>
+    <string name="code_from_email">Code from your email</string>
+    <string name="new_password">New password</string>
+    <string name="new_password_repeat">Repeat new password</string>
+    <string name="code_for_reset_will_be_send">Code for reset password will be sent to your email</string>
     <string name="formatted_place_data">
         Name: %1$s\nAddress: %2$s\nPhone: %3$s\nWebsite: %4$s\nRating: %5$s\nId: %6$s\n
     </string>

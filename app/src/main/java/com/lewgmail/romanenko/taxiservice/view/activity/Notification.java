@@ -20,28 +20,24 @@ public class Notification extends GcmListenerService {
     private NotificationCompat.Builder mSimpleBuilder;
     private Context mContext;
 
-    public Notification(Context context) {
-        this.mContext = context;
-        this.mSimpleBuilder =
-                new NotificationCompat.Builder(context);
-    }
-
     public Notification() {
 
     }
 
     public void showSimpleNotification(String title, String text) {
+        this.mSimpleBuilder =
+                new NotificationCompat.Builder(getBaseContext());
         mSimpleBuilder.setSmallIcon(R.drawable.ic_taxi)
-                //.setContentTitle(title)
+                .setContentTitle(title)
                 .setContentText(text);
 // Creates an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(mContext, LoginActivity.class);
+        Intent resultIntent = new Intent(getBaseContext(), LoginActivity.class);
 
 // The stack builder object will contain an artificial back stack for the
 // started Activity.
 // This ensures that navigating backward from the Activity leads out of
 // your application to the Home screen.
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(mContext);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getBaseContext());
 // Adds the back stack for the Intent (but not the Intent itself)
         stackBuilder.addParentStack(LoginActivity.class);
 // Adds the Intent that starts the Activity to the top of the stack
@@ -53,14 +49,14 @@ public class Notification extends GcmListenerService {
                 );
         mSimpleBuilder.setContentIntent(resultPendingIntent);
         NotificationManager mNotificationManager =
-                (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+                (NotificationManager) getBaseContext().getSystemService(Context.NOTIFICATION_SERVICE);
 // mId allows you to update the notification later on.
         mNotificationManager.notify(1, mSimpleBuilder.build());
     }
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        String message = data.getString("message");
+        String message = data.getString("orderStatus");
         //  Log.d(TAG, "From: " + from);
         //  Log.d(TAG, "Message: " + message);
 

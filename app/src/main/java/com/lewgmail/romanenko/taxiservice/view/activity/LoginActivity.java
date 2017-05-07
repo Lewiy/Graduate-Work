@@ -187,7 +187,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @OnClick(R.id.notification)
     public void Onclick() {
-        new Notification(this).showSimpleNotification("Повідомлення", "заглушка повідомлень");
+        //new Notification(this).showSimpleNotification("Повідомлення", "заглушка повідомлень");
     }
 
     private void populateAutoComplete() {

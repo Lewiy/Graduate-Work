@@ -1,19 +1,42 @@
-
 package com.lewgmail.romanenko.taxiservice.model.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RoutePointN {
+/**
+ * Created by Lev on 04.05.2017.
+ */
 
-
+public class RoutePointUpdateOrder {
     @SerializedName("latitude")
     @Expose
     private String latitude;
     @SerializedName("longtitude")
     @Expose
     private String longtitude;
+    @SerializedName("routePointId")
+    @Expose
+    private long routePointId;
 
+    @SerializedName("routePointIndex")
+    @Expose
+    private Long routePointIndex;
+
+    public long getRoutePointId() {
+        return routePointId;
+    }
+
+    public void setRoutePointId(long routePointId) {
+        this.routePointId = routePointId;
+    }
+
+    public Long getRoutePointIndex() {
+        return routePointIndex;
+    }
+
+    public void setRoutePointIndex(Long routePointIndex) {
+        this.routePointIndex = routePointIndex;
+    }
 
     public String getLatitude() {
         return latitude;

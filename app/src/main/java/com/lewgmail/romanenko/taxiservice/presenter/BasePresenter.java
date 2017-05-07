@@ -1,7 +1,5 @@
 package com.lewgmail.romanenko.taxiservice.presenter;
 
-import android.util.Log;
-
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerOrderApiDrivCust;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.GetOrder;
@@ -106,6 +104,7 @@ public class BasePresenter implements BasePresenterInterface {
                         // viewAddOrderUpdate.responseExtraPrice(orderId.getExtraPrice());
                         viewAddOrderUpdate.responseComment(orderId.getComment());
                         viewAddOrderUpdate.responseAdditionalRequirements((ArrayList<AdditionalRequirementN>) orderId.getAdditionalRequirements());
+                        viewAddOrderUpdate.responseOrderId(orderId.getOrderId());
                        /* viewAddOrderUpdate.setOrderId(orderId.getOrderId());
                         viewAddOrderUpdate.setCustomerId(orderId.getCustomer().getCustomerId());
                         viewAddOrderUpdate.setDateRide(orderId.getStartTime().substring(0, 10));
@@ -180,9 +179,9 @@ public class BasePresenter implements BasePresenterInterface {
                 });
     }
 
-    public void changeStatusOrder(long orderId, long userId, String statusOrder) {
-
-        Observable<Response<ResponseBody>> observer = managerOrderApiDrivCust.acceptRefuseDoneOrder(orderId, createChangeStatusOrderObject(userId, statusOrder));
+    public void changeStatusOrder(long orderId, String statusOrder) {
+        statusOrder = "CANCELLED";
+        Observable<Response<ResponseBody>> observer = managerOrderApiDrivCust.acceptRefuseDoneOrder(orderId, createChangeStatusOrderObject(statusOrder));
         observer.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Response<ResponseBody>>() {
@@ -194,17 +193,12 @@ public class BasePresenter implements BasePresenterInterface {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewOrderListFrag.showEror(e.getMessage());
-                        else
-                            viewOrderListFrag.showEror(e.getMessage());
+                            viewAddOrderUpdate.responseError("Code:" + ((HttpException) e).code() + "Message:" + e.getMessage());
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        Log.d("MyLooooooooooog", Integer.toString(responseBodyResponse.code()));
-                        int code = responseBodyResponse.code();
-                        int d = 0;
-                        //  viewOrderListFrag.showEror(Integer.toString(responseBodyResponse.code()));
+                        viewAddOrderUpdate.responseError("Code:" + responseBodyResponse.code());
                     }
                 });
     }
@@ -216,7 +210,7 @@ public class BasePresenter implements BasePresenterInterface {
         }
     }
 
-    private MarkOrder createChangeStatusOrderObject(long userid, String statusOrder) {
+    private MarkOrder createChangeStatusOrderObject(String statusOrder) {
         MarkOrder markOrder = new MarkOrder();
         markOrder.setType(statusOrder);
         return markOrder;
