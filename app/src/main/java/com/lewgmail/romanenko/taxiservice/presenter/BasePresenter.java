@@ -180,7 +180,7 @@ public class BasePresenter implements BasePresenterInterface {
     }
 
     public void changeStatusOrder(long orderId, String statusOrder) {
-        statusOrder = "CANCELLED";
+        //  statusOrder = "CANCELLED";
         Observable<Response<ResponseBody>> observer = managerOrderApiDrivCust.acceptRefuseDoneOrder(orderId, createChangeStatusOrderObject(statusOrder));
         observer.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

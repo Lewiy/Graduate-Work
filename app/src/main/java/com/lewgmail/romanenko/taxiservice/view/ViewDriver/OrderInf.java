@@ -8,13 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
-import com.lewgmail.romanenko.taxiservice.presenter.BasePresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.LoadOrderForDriverPresenter;
 import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderInterface;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterStatusController;
 
@@ -30,27 +32,33 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
 
     @BindView(R.id.spinner_driver_inf_order)
     Spinner spinnerStatusChange;
-    @BindView(R.id.inf_order_driv_persone)
-    TextView personeInf;
-    @BindView(R.id.inf_order_driv_status)
-    TextView statusInf;
-    @BindView(R.id.inf_order_driv_date)
-    TextView dateInf;
-    @BindView(R.id.inf_order_driv_time)
-    TextView timeInf;
-    @BindView(R.id.inf_order_driv_type_reckoning)
-    TextView typeReckoningInf;
-    @BindView(R.id.inf_order_driv_type_car)
-    TextView typeCarInf;
-    @BindView(R.id.inf_order_driv_point1)
-    TextView point1Inform;
-    @BindView(R.id.inf_order_driv_point2)
-    TextView point2Inform;
-    @BindView(R.id.inf_order_driv_prise)
-    TextView priceInf;
-    @BindView(R.id.inf_order_driv_driv)
-    TextView driverInf;
-    private BasePresenter basePresenter;
+    @BindView(R.id.inf_time_ride)
+    TextView timeOfRideField;
+    @BindView(R.id.inf_driver_route)
+    ListView route;
+    @BindView(R.id.value_distance)
+    TextView distance;
+    @BindView(R.id.value_duration)
+    TextView duration;
+    @BindView(R.id.value_price)
+    TextView price;
+    @BindView(R.id.text_view_addit_baggage)
+    TextView baggage;
+    @BindView(R.id.text_view_type_reckoning)
+    TextView reckoning;
+    @BindView(R.id.text_view_extra_price)
+    TextView extraPrice;
+    @BindView(R.id.text_view_pets)
+    TextView pets;
+    @BindView(R.id.text_view_driver_service)
+    TextView service;
+    @BindView(R.id.text_view_type_car)
+    TextView typeCar;
+    @BindView(R.id.text_view_number_passengers)
+    TextView numberOfPassengers;
+    @BindView(R.id.comment_element)
+    EditText comment;
+    private LoadOrderForDriverPresenter loadOrderForDriverPresenter;
     private Intent intentMy;
     private int counterMy;
     private long customerId, orderId;
@@ -61,17 +69,46 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_inf_driver);
         ButterKnife.bind(this);
-        basePresenter = new BasePresenter(this);
+        loadOrderForDriverPresenter = new LoadOrderForDriverPresenter(this);
         intentMy = getIntent();
         progress = new ProgressDialog(this);
         progress.setTitle("Loading");
         progress.setMessage("Wait while loading...");
-        progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+        progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
         progress.show();
         // sdf = intentMy.getStringExtra("keyNumberOfOrder");
         // lol = Integer.parseInt(intentMy.getStringExtra("keyNumberOfOrder"));
-//        basePresenter.loadOrderSpecificId(Integer.parseInt(intentMy.getStringExtra("keyNumberOfOrder")));
+        loadOrderForDriverPresenter.loadOrderSpecificId(Integer.parseInt(intentMy.getStringExtra("keyNumberOfOrder")));
 
+
+    }
+
+    private void init() {
+        /*addresess = new ArrayList<>();
+        addresessAdapter = new AdapterAddPointOfRoute(this, R.layout.address_point, addresess, route);
+        /*SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        route,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+
+                                    addresess.remove(position);
+                                    addresessAdapter.notifyDataSetChanged();
+                                    addOrderGatherDataFirstWindow.removeAddress(position);
+
+                                }
+                            }
+                        });*/
+        //  addresessAdapter.setActivityCallBack();
+       /* route.setAdapter(addresessAdapter);
+        route.setOnTouchListener(touchListener);*/
 
     }
 
@@ -89,86 +126,53 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
         passengerInfFragment.show(getFragmentManager(), "ldld");
     }
 
-    /*public void setSpinnerStatusChange(String spinnerStatusChange) {
-        this.spinnerStatusChange = spinnerStatusChange;
-    }*/
-
-    public void setPersoneInf(String personeInf) {
-        this.personeInf.setText(personeInf);
+    public void setSpinnerStatusChange(String spinnerStatusChange) {
+        //   this.spinnerStatusChange = spinnerStatusChange;
     }
 
-    public void setStatusInf(String statusInf) {
-        this.statusInf.setText(statusInf);
-    }
 
-    public void setDateInf(String dateInf) {
-        this.dateInf.setText(dateInf);
-    }
-
-    public void setTimeInf(String timeInf) {
-        this.timeInf.setText(timeInf);
-    }
-
-    public void setTypeReckoningInf(String typeReckoningInf) {
-        this.typeReckoningInf.setText(typeReckoningInf);
-    }
-
-    public void setTypeCarInf(String typeCarInf) {
-        this.typeCarInf.setText(typeCarInf);
-    }
-
-    public void setPoint1Inform(String point1Inform) {
-        this.point1Inform.setText(point1Inform);
-    }
-
-    public void setPoint2Inform(String point2Inform) {
-        this.point2Inform.setText(point2Inform);
-    }
-
-    public void setPriceInf(String priceInf) {
-        this.priceInf.setText(priceInf);
-    }
 
     public void setDistanceInf(String distanceInf) {
     }
 
     @Override
     public void setDistance(String value) {
-
+        this.distance.setText(value);
     }
 
     @Override
     public void setDuration(String duration) {
+        this.duration.setText(duration);
     }
 
     @Override
     public void setPrice(double price) {
-        this.priceInf.setText(Double.toString(price));
+        this.price.setText(Double.toString(price));
     }
 
     @Override
     public void setDateRide(String date) {
-        this.dateInf.setText(date);
+        this.timeOfRideField.setText(date);
     }
 
     @Override
     public void setTimeRide(String time) {
-        this.timeInf.setText(time);
+
     }
 
     @Override
     public void setNameCastomer(String info) {
-        this.personeInf.setText(info);
+
     }
 
     @Override
     public void setNameDriver(String name) {
-        this.driverInf.setText(name);
+        //this.driverInf.setText(name);
     }
 
     @Override
     public void setTypeOrder(String status) {
-        this.statusInf.setText(status);
+        //  this.statusInf.setText(status);
         initializeComponent(status);
         progress.dismiss();
     }
@@ -180,7 +184,7 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
 
     @Override
     public void setStartPoint(String startPoint) {
-        this.point1Inform.setText(startPoint);
+        // this.point1Inform.setText(startPoint);
     }
 
     @Override
@@ -190,7 +194,7 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
 
     @Override
     public void setEndPoint(String endPoint) {
-        this.point2Inform.setText(endPoint);
+        //this.point2Inform.setText(endPoint);
     }
 
     @Override
@@ -200,7 +204,7 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
 
     @Override
     public void setTypeCar(String typeCar) {
-        this.typeCarInf.setText(typeCar);
+        // this.typeCarInf.setText(typeCar);
     }
 
     @Override
@@ -210,7 +214,7 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
 
     @Override
     public void setTypeReckoning(String typeReckoning) {
-        this.typeReckoningInf.setText(typeReckoning);
+        //this.typeReckoningInf.setText(typeReckoning);
     }
 
     @Override

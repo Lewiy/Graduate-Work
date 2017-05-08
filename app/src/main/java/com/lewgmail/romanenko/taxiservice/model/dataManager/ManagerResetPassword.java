@@ -15,9 +15,9 @@ import rx.Observable;
 
 public class ManagerResetPassword {
 
-    public Observable<String> sendEmail(SendEmailResetPassword sendEmailResetPassword) {
+    public Observable<ResponseBody> sendEmail(SendEmailResetPassword sendEmailResetPassword) {
         ResetPasswordApi services = Services.createService(ResetPasswordApi.class);
-        Observable<String> observer = services.sendEmail(sendEmailResetPassword);
+        Observable<ResponseBody> observer = services.sendEmail(sendEmailResetPassword);
         return observer;
     }
 

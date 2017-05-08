@@ -5,6 +5,8 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.SendCodeResetPassword;
 import com.lewgmail.romanenko.taxiservice.model.pojo.SendEmailResetPassword;
 import com.lewgmail.romanenko.taxiservice.view.activity.ResetPassword;
 
+import java.io.IOException;
+
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
@@ -29,10 +31,10 @@ public class ResetPasswordPresenter {
 
     public void sendEmailReq() {
 
-        Observable<String> observer = managerResetPassword.sendEmail(createObjectSendEmail());
+        Observable<ResponseBody> observer = managerResetPassword.sendEmail(createObjectSendEmail());
         observer.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
+                .subscribe(new Observer<ResponseBody>() {
                     @Override
                     public void onCompleted() {
 
@@ -40,14 +42,26 @@ public class ResetPasswordPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (e instanceof HttpException)
-                            resetPasswordView.showError(e.toString());
+                        if (e instanceof HttpException) {
+                            HttpException exception = (HttpException) e;
+                            Response response = exception.response();
+                            try {
+                                resetPasswordView.showError(response.errorBody().string());
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+
                     }
 
                     @Override
-                    public void onNext(String responseBodyResponse) {
+                    public void onNext(ResponseBody responseBodyResponse) {
                         // viewAddOrder.responseAddorder(new String(Integer.toString(responseBodyResponse.code())));
-                        restoreIdRequest = responseBodyResponse;
+                        try {
+                            restoreIdRequest = responseBodyResponse.string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         showPasswordFields();
                     }
                 });

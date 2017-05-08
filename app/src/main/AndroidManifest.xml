@@ -83,7 +83,6 @@
         <activity
             android:name=".view.activity.MapActivity"
             android:label="@string/title_activity_client_account" />
-        <activity android:name=".view.activity.EditOrderActivity" />
         <activity
             android:name=".view.viewDriver.DriverAccount"
             android:label="@string/title_activity_driver_account"

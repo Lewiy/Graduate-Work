@@ -1,13 +1,12 @@
 package com.lewgmail.romanenko.taxiservice.view.dialogFragment;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 
-import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderActivity;
-
 import java.util.Calendar;
+
+//import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderActivity;
 
 /**
  * Created by Lev on 03.12.2016.
@@ -37,6 +36,6 @@ public class DatePickerFragment extends DialogFragment {
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), (EditOrderActivity) getActivity(), year, month, day);
+        return null;//new DatePickerDialog(getActivity(), (EditOrderActivity) getActivity(), year, month, day);
     }
 }

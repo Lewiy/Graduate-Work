@@ -17,7 +17,7 @@ import rx.Observable;
 public interface ResetPasswordApi {
 
     @POST("user/password")
-    Observable<String> sendEmail(@Body SendEmailResetPassword sendEmailResetPassword);
+    Observable<ResponseBody> sendEmail(@Body SendEmailResetPassword sendEmailResetPassword);
 
     @POST("user/password/{requestId}")
     Observable<Response<ResponseBody>> sendNewPassword(@Body SendCodeResetPassword sendCodeResetPassword, @Path("requestId") String requestId);

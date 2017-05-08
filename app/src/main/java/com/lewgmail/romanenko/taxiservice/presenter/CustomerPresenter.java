@@ -6,9 +6,13 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.AddOrderN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.CalculatePrice;
 import com.lewgmail.romanenko.taxiservice.model.pojo.OrderUpdate;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Price;
+import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointN;
+import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointUpdateOrder;
 import com.lewgmail.romanenko.taxiservice.view.activity.AddOrder;
 import com.lewgmail.romanenko.taxiservice.view.activity.AddOrderUpdate;
 import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderInterface;
+
+import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Response;
@@ -99,7 +103,7 @@ public class CustomerPresenter {
 
                     @Override
                     public void onNext(Price price) {
-                        if (viewAddOrderUpdate != null) {
+                        if (viewAddOrder != null) {
                             viewAddOrder.frag2responseCalculatedPrice(price.getPrice().toString());
                             viewAddOrder.frag2responseDistance(price.getDistance().toString());
                             viewAddOrder.frag2responseDuration(price.getDuration().toString());
@@ -219,12 +223,30 @@ public class CustomerPresenter {
     }
 
     private CalculatePrice createCalculatePriceObject() {
-
         CalculatePrice price = new CalculatePrice();
-        price.setRoutePoint(viewAddOrder.getRoute());
-        price.setAdditionalRequirementN(viewAddOrder.getAdditionalRequirementNs());
+        if (viewAddOrder != null) {
+            price.setRoutePoint(viewAddOrder.getRoute());
+            price.setAdditionalRequirementN(viewAddOrder.getAdditionalRequirementNs());
+        }
+        if (viewAddOrderUpdate != null) {
+            price.setRoutePoint(convertRoutePoints(viewAddOrderUpdate.getRoute()));
+            price.setAdditionalRequirementN(viewAddOrderUpdate.getAdditionalRequirementNs());
+        }
 
         return price;
+    }
+
+    private ArrayList<RoutePointN> convertRoutePoints(ArrayList<RoutePointUpdateOrder> routePointUpdateOrders) {
+        ArrayList<RoutePointN> routePointNs = new ArrayList<>();
+        for (RoutePointUpdateOrder routePointUpdateOrder : routePointUpdateOrders) {
+            if (routePointUpdateOrder.getRoutePointIndex() != null) {
+                RoutePointN routePoint = new RoutePointN();
+                routePoint.setLatitude(routePointUpdateOrder.getLatitude());
+                routePoint.setLongtitude(routePointUpdateOrder.getLongtitude());
+                routePointNs.add(routePoint);
+            }
+        }
+        return routePointNs;
     }
 
 }

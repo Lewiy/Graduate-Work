@@ -30,6 +30,7 @@ public class ResetPassword extends AppCompatActivity implements UserOperationInt
 
 
     private ResetPasswordPresenter resetPasswordPresenter;
+    private boolean sendCodeReadyFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +44,12 @@ public class ResetPassword extends AppCompatActivity implements UserOperationInt
     @OnClick(R.id.reset_password_button)
     public void onClickResetPasswordButton() {
         if (checkEmailValue()) {
-            getEmailValueReset();
-            Toast.makeText(this, "Пройшло", Toast.LENGTH_LONG).show();
+            // getEmailValueReset();
+            //  Toast.makeText(this, "Пройшло", Toast.LENGTH_LONG).show();
+            if (sendCodeReadyFlag)
+                resetPasswordPresenter.sendNewPasswordReq();
+            else
+                resetPasswordPresenter.sendEmailReq();
         }
     }
 
@@ -93,6 +98,7 @@ public class ResetPassword extends AppCompatActivity implements UserOperationInt
 
     public void showHideCodeNewPasswordField() {
         frameLayoutStep2.setVisibility(View.VISIBLE);
+        sendCodeReadyFlag = true;
     }
 
     @Override

@@ -75,6 +75,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     private String startTime;
     private String comment;
     private ArrayList<RoutePointUpdateOrder> routePoints;
+    // private ArrayList<RoutePointN> routePointsForCalculatePrice;
     private ArrayList<AdditionalRequirementN> additionalRequirementNs;
 
 
@@ -388,37 +389,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
         this.startTime = startTime;
     }
 
-    /*
-        @Override
-        public void setActivityAdminArea(String adminArea) {
 
-        }
-
-        @Override
-        public void setActivityLatitude(String latitude) {
-
-        }
-
-        @Override
-        public void setActivityLongetude(String longetude) {
-
-        }
-
-        @Override
-        public void setActivityStreet(String street) {
-
-        }
-
-        @Override
-        public void setActivityHouseNumber(String houseNumber) {
-
-        }
-
-        @Override
-        public void setActivityCity(String city) {
-
-        }
-    */
     @Override
     public void runAutoComplete(int viewId, int position) {
         viewIdEditText = viewId;
@@ -567,6 +538,10 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     public ArrayList<RoutePointUpdateOrder> getRoute() {
         return routePoints;
     }
+
+   /* public ArrayList<RoutePointN> getRouteForCalculatePrice(){
+        return
+    }*/
 
     public ArrayList getAdditionalRequirementNs() {
         return additionalRequirementNs;
