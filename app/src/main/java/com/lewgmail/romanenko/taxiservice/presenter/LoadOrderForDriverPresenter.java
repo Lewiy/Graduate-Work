@@ -2,10 +2,12 @@ package com.lewgmail.romanenko.taxiservice.presenter;
 
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerOrderApiDrivCust;
 import com.lewgmail.romanenko.taxiservice.model.pojo.GetOrder;
+import com.lewgmail.romanenko.taxiservice.model.pojo.MarkOrder;
 import com.lewgmail.romanenko.taxiservice.view.viewDriver.OrderInf;
 
 import java.io.IOException;
 
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
@@ -62,6 +64,13 @@ public class LoadOrderForDriverPresenter {
                         orderInfView.setDistanceInf(Double.toString(orderId.getDistance()));
                         orderInfView.setDuration(orderId.getDuration());
                         orderInfView.setPrice(orderId.getPrice());
+                        orderInfView.setRoute(orderId.getRoutePoint());
+                        orderInfView.setTimeRide(orderId.getStartTime());
+                        orderInfView.setOrderId(orderId.getOrderId());
+                        orderInfView.setStatus(orderId.getStatus());
+                        orderInfView.setComments(orderId.getComment());
+                        //orderInfView.setBaggage(orderId);
+                        orderInfView.setAdditionalRequirements(orderId.getAdditionalRequirements());
                        /* viewAddOrderUpdate.responseStartTime(orderId.getStartTime());
                         viewAddOrderUpdate.responseRoutePoint(orderId.getRoutePoint());
                         viewAddOrderUpdate.responseStatusOrder(orderId.getStatus());
@@ -91,5 +100,39 @@ public class LoadOrderForDriverPresenter {
                         viewAddOrderUpdate.setDriverId(orderId.getTaxiDriver().getTaxiDriverId());*/
                     }
                 });
+    }
+
+    public void changeStatusOrder(long orderId, String statusOrder) {
+        String stat = new String();
+        stat = statusOrder;
+        Observable<Response<ResponseBody>> observer = managerOrderApiDrivCust.acceptRefuseDoneOrder(orderId, createChangeStatusOrderObject(statusOrder));
+        observer.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Response<ResponseBody>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (e instanceof HttpException)
+                            orderInfView.showError("Code:" + ((HttpException) e).code() + "Message:" + e.getMessage());
+
+                    }
+
+                    @Override
+                    public void onNext(Response<ResponseBody> responseBodyResponse) {
+                        orderInfView.showError("Code:" + responseBodyResponse.code());
+                       /* if(responseBodyResponse.code() != 200)
+                            orderInfView.resStatusOrderNotChanged();*/
+                    }
+                });
+    }
+
+    private MarkOrder createChangeStatusOrderObject(String statusOrder) {
+        MarkOrder markOrder = new MarkOrder();
+        markOrder.setType(statusOrder);
+        return markOrder;
     }
 }

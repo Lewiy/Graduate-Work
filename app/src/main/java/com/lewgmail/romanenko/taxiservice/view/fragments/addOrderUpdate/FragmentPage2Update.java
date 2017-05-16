@@ -268,7 +268,6 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
                 //addAdditioanlRequirements(pos,typeRequirements);
                 if (flagFirstSelected != false) {
                     addOrderGatherDataSecondWindow.changeOrderStatus(new AdapterSpinnerLocalization().setChangeStatusOrder(arrayType, pos, "CUSTOMER"));
-
                 }
                 flagFirstSelected = true;
 
@@ -280,6 +279,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
             }
         });
     }
+
 
 
     private void addAdditioanlRequirements(int pos, int typeRequirements) {
@@ -388,6 +388,10 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
 
     public void setNUMBERPASSENGERS(int pos) {
         spinnerNumberPassenger.setSelection(pos);
+    }
+
+    public void setSpinnerNotChangedStatus() {
+        spinnerStatusOrder.setSelection(0);
     }
 
 

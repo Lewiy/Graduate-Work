@@ -4,11 +4,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,9 +18,19 @@ import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
+import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
+import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePoint;
+import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointUpdateOrder;
 import com.lewgmail.romanenko.taxiservice.presenter.LoadOrderForDriverPresenter;
 import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderInterface;
+import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
+import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAdditionalReqDriverView;
+import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterSpinnerLocalization;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterStatusController;
+import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterTimeDate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +63,7 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
     @BindView(R.id.text_view_pets)
     TextView pets;
     @BindView(R.id.text_view_driver_service)
-    TextView service;
+    TextView driverService;
     @BindView(R.id.text_view_type_car)
     TextView typeCar;
     @BindView(R.id.text_view_number_passengers)
@@ -63,12 +75,16 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
     private int counterMy;
     private long customerId, orderId;
     private ProgressDialog progress;
+    private List<String> addresess;
+    private AdapterAddPointOfRoute addresessAdapter;
+    private boolean flagFirstSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_inf_driver);
         ButterKnife.bind(this);
+        init();
         loadOrderForDriverPresenter = new LoadOrderForDriverPresenter(this);
         intentMy = getIntent();
         progress = new ProgressDialog(this);
@@ -84,9 +100,9 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
     }
 
     private void init() {
-        /*addresess = new ArrayList<>();
+        addresess = new ArrayList<>();
         addresessAdapter = new AdapterAddPointOfRoute(this, R.layout.address_point, addresess, route);
-        /*SwipeDismissListViewTouchListener touchListener =
+       /* SwipeDismissListViewTouchListener touchListener =
                 new SwipeDismissListViewTouchListener(
                         route,
                         new SwipeDismissListViewTouchListener.DismissCallbacks() {
@@ -106,9 +122,9 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
                                 }
                             }
                         });*/
-        //  addresessAdapter.setActivityCallBack();
-       /* route.setAdapter(addresessAdapter);
-        route.setOnTouchListener(touchListener);*/
+        // addresessAdapter.setActivityCallBack(this);
+        route.setAdapter(addresessAdapter);
+        // route.setOnTouchListener(touchListener);*/
 
     }
 
@@ -126,13 +142,19 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
         passengerInfFragment.show(getFragmentManager(), "ldld");
     }
 
-    public void setSpinnerStatusChange(String spinnerStatusChange) {
-        //   this.spinnerStatusChange = spinnerStatusChange;
+    public void setAdditionalRequirements(List<AdditionalRequirementN> additionalRequirementN) {
+        typeCar.setText(AdapterAdditionalReqDriverView.getReq(1, additionalRequirementN.get(0).getReqValueId(), this));
+        reckoning.setText(AdapterAdditionalReqDriverView.getReq(2, additionalRequirementN.get(1).getReqValueId(), this));
+        pets.setText(AdapterAdditionalReqDriverView.getReq(3, additionalRequirementN.get(2).getReqValueId(), this));
+        baggage.setText(AdapterAdditionalReqDriverView.getReq(4, additionalRequirementN.get(3).getReqValueId(), this));
+        extraPrice.setText(AdapterAdditionalReqDriverView.getReq(5, additionalRequirementN.get(4).getReqValueId(), this));
+        driverService.setText(AdapterAdditionalReqDriverView.getReq(6, additionalRequirementN.get(5).getReqValueId(), this));
+        numberOfPassengers.setText(AdapterAdditionalReqDriverView.getReq(7, additionalRequirementN.get(6).getReqValueId(), this));
     }
 
 
-
     public void setDistanceInf(String distanceInf) {
+        this.distance.setText(distanceInf);
     }
 
     @Override
@@ -152,11 +174,30 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
 
     @Override
     public void setDateRide(String date) {
-        this.timeOfRideField.setText(date);
+        // this.timeOfRideField.setText(date);
+    }
+
+    public void setRoute(List<RoutePoint> resRoutePoints) {
+        // addresessAdapter.setActivityCallBack(this);
+        route.setLayoutParams(new LinearLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, resRoutePoints.size() * 200));
+        // RelativeLayout.LayoutParams mParam = new RelativeLayout.LayoutParams(LinearLayoutCompat.LayoutParams.WRAP_CONTENT,(resRoutePoints.size()*100));
+        // route.setLayoutParams(mParam);
+        for (int i = 0; i < resRoutePoints.size(); i++) {
+            RoutePointUpdateOrder routePointN3 = new RoutePointUpdateOrder();
+            addresessAdapter.myAddList(addressBilder(resRoutePoints.get(i).getStreet()
+                    , resRoutePoints.get(i).getHouseNumber(), resRoutePoints.get(i).getCity()));
+            routePointN3.setLatitude(resRoutePoints.get(i).getLatitude());
+            routePointN3.setLongtitude(resRoutePoints.get(i).getLongtitude());
+            routePointN3.setRoutePointId(resRoutePoints.get(i).getRoutePointId());
+            routePointN3.setRoutePointIndex(new Long(0));
+            //route.add(routePointN3);
+        }
     }
 
     @Override
-    public void setTimeRide(String time) {
+    public void setTimeRide(String dateTime) {
+        AdapterTimeDate adapterTimeDate = new AdapterTimeDate(dateTime, this);
+        this.timeOfRideField.setText(adapterTimeDate.getData() + " " + adapterTimeDate.getTime());
 
     }
 
@@ -173,7 +214,7 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
     @Override
     public void setTypeOrder(String status) {
         //  this.statusInf.setText(status);
-        initializeComponent(status);
+        // initializeComponent(status);
         progress.dismiss();
     }
 
@@ -204,7 +245,27 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
 
     @Override
     public void setTypeCar(String typeCar) {
-        // this.typeCarInf.setText(typeCar);
+        this.typeCar.setText(typeCar);
+    }
+
+    public void setBaggage() {
+
+    }
+
+    public void setPets() {
+
+    }
+
+    public void setNumberOfPassengers() {
+
+    }
+
+    public void setComments(String comment) {
+        this.comment.setText(comment);
+    }
+
+    public void setStatus(String status) {
+        initializeSpinnerOrderStatus(new AdapterStatusController("TAXI_DRIVER", status).typeStatus(), spinnerStatusChange);
     }
 
     @Override
@@ -214,7 +275,7 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
 
     @Override
     public void setTypeReckoning(String typeReckoning) {
-        //this.typeReckoningInf.setText(typeReckoning);
+        this.reckoning.setText(typeReckoning);
     }
 
     @Override
@@ -273,8 +334,43 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
 
     }
 
+    private void initializeSpinnerOrderStatus(final int arrayType, Spinner spinner) {
+        ArrayAdapter<CharSequence> adapterSpinner =
+                ArrayAdapter.createFromResource(this, arrayType, android.R.layout.simple_spinner_item);
+        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapterSpinner);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos,
+                                       long id) {
+                //addAdditioanlRequirements(pos,typeRequirements);
+                if (flagFirstSelected != false) {
+                    loadOrderForDriverPresenter.changeStatusOrder(orderId, new AdapterSpinnerLocalization().setChangeStatusOrder(arrayType, pos, "TAXI_DRIVER"));
+                }
+                flagFirstSelected = true;
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+    }
+
     @Override
     public void showError(String error) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
+
+    private String addressBilder(String street, String numberOfHause, String citi) {
+        String address = "";
+        if (citi != null)
+            address = address + citi + " ";
+        if (street != null)
+            address = address + street + " ";
+        if (numberOfHause != null)
+            address = address + numberOfHause + " ";
+        return address;
     }
 }

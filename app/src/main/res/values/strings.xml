@@ -74,7 +74,7 @@
     <string name="price">price</string>
     <string name="statis">status</string>
     <string name="time_ride">time ride</string>
-    <string name="date_ride">date ride</string>
+    <string name="date_ride">Date ride:</string>
 
     <!--fragment personal page (edit) -->
     <string name="name_personal_page">Name</string>
@@ -287,6 +287,7 @@
     <string name="new_password">New password</string>
     <string name="new_password_repeat">Repeat new password</string>
     <string name="code_for_reset_will_be_send">Code for reset password will be sent to your email</string>
+    <string name="time_order_for_now">Now</string>
     <string name="formatted_place_data">
         Name: %1$s\nAddress: %2$s\nPhone: %3$s\nWebsite: %4$s\nRating: %5$s\nId: %6$s\n
     </string>

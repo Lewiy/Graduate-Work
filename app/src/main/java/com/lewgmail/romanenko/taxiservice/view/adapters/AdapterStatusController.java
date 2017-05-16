@@ -27,7 +27,8 @@ public class AdapterStatusController {
                 case "PROCESSING":
                     return R.array.change_status_driver_processing;
             }
-        } else {
+        }
+        if (typeUser.equals("CUSTOMER")) {
             switch (status) {
                 case "ADD":
                     return R.array.change_status_client_add;
@@ -39,6 +40,25 @@ public class AdapterStatusController {
                     return R.array.change_status_client_waiting;
             }
         }
+
         return R.array.change_status_driver_done;
+    }
+
+    public int typeStatusDriver() {
+
+        switch (status) {
+            case "NEW":
+                return 2;
+            case "ACCEPTED":
+                return R.array.change_status_driver_accept;
+            case "WAITING":
+                return R.array.change_status_driver_waiting;
+            case "PROCESSING":
+                return R.array.change_status_driver_processing;
+            default:
+                return R.array.change_status_driver_done;
+        }
+
+
     }
 }

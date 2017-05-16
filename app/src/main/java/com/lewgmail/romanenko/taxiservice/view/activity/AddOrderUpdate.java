@@ -231,6 +231,10 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
         fragmentObj2Update.setStatus(orderStatus);
     }
 
+    public void resStatusOrderNotChanged() {
+        fragmentObj2Update.setSpinnerNotChangedStatus();
+    }
+
     public void responseCustomerId(int customerId) {
 
     }
@@ -263,7 +267,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
 
         this.additionalRequirementNs = additionalRequirementNs;
         for (AdditionalRequirementN requirementN : additionalRequirementNs) {
-            settersAdditionRequirements(requirementN.getReqId());
+            setersAdditionRequirements(requirementN.getReqId());
         }
 
     }
@@ -292,7 +296,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
         return address;
     }
 
-    private void settersAdditionRequirements(int idRequirement) {
+    private void setersAdditionRequirements(int idRequirement) {
         switch (idRequirement) {
             case 1:
                 fragmentObj2Update.setTYPECAR(additionalRequirementNs.get(searchAdditionReq(idRequirement)).getReqValueId());

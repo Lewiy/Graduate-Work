@@ -161,7 +161,7 @@ public class TestOrderApi extends BaseTest {
     public void acceptRefuseDoneOrder() throws Exception {
 
         MarkOrder markOrder = new MarkOrder();
-        markOrder.setUserId(100);
+        // markOrder.setUserId(100);
         markOrder.setType(OrderStatus.ACCEPTED.toString());
         manager.acceptRefuseDoneOrder(95, markOrder);
         /////////////////////Test Error////////////////////////////

@@ -91,21 +91,21 @@ public class AdapterSpinnerLocalization {
                         case 0:
                             return "ACCEPTED";
                         case 1:
-                            return "NEW";
+                            return "CANCELLED";
                     }
                 case R.array.change_status_client_new:
                     switch (pos) {
                         case 0:
                             return "NEW";
                         case 1:
-                            return "NEW";
+                            return "CANCELLED";
                     }
                 case R.array.change_status_client_waiting:
                     switch (pos) {
                         case 0:
                             return "WAITING";
                         case 1:
-                            return "NEW";
+                            return "CANCELLED";
                     }
             }
         }

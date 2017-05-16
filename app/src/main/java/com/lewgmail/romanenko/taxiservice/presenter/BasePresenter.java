@@ -194,11 +194,14 @@ public class BasePresenter implements BasePresenterInterface {
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
                             viewAddOrderUpdate.responseError("Code:" + ((HttpException) e).code() + "Message:" + e.getMessage());
+
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         viewAddOrderUpdate.responseError("Code:" + responseBodyResponse.code());
+                        if (responseBodyResponse.code() != 200)
+                            viewAddOrderUpdate.resStatusOrderNotChanged();
                     }
                 });
     }
