@@ -19,6 +19,7 @@ import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterSpinnerLocalization;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterStatusController;
+import com.lewgmail.romanenko.taxiservice.view.viewDriver.AccountInfUserFrag;
 
 import java.util.ArrayList;
 
@@ -92,6 +93,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
     private int lastPressedDraw = 0;
     private ArrayList<AdditionalRequirementN> additionalRequirements;
     private boolean flagFirstSelected = false;
+    private long driverId;
     /*
     Set metaData for order/////////////////////////
      */
@@ -239,6 +241,15 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
         // initializeSpinner(R.array.type_number_passengers, 7);
     }
 
+    @OnClick(R.id.show_account_driver)
+    public void onClickShowDriverInfo() {
+        AccountInfUserFrag passengerInfFragment = new AccountInfUserFrag();
+        Bundle args = new Bundle();
+        args.putLong("userId", driverId);
+        passengerInfFragment.setArguments(args);
+        passengerInfFragment.show(getActivity().getFragmentManager(), "sdf");
+    }
+
     private void initializeSpinner(int arrayType, final int typeRequirements, Spinner spinner) {
         ArrayAdapter<CharSequence> adapterSpinner =
                 ArrayAdapter.createFromResource(getActivity(), arrayType, android.R.layout.simple_spinner_item);
@@ -350,6 +361,10 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
 
     public void setError(String error) {
         Toast.makeText(getContext(), "Error: " + error, Toast.LENGTH_LONG).show();
+    }
+
+    public void setDriverId(long driverId) {
+        this.driverId = driverId;
     }
 
     public void setDoneResp(String massage) {

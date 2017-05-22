@@ -1,7 +1,7 @@
 package com.lewgmail.romanenko.taxiservice.api;
 
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerGoogleMaps;
-import com.lewgmail.romanenko.taxiservice.presenter.BasePresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.DriverCustPresenter;
 import com.squareup.okhttp.HttpUrl;
 import com.squareup.okhttp.mockwebserver.Dispatcher;
 import com.squareup.okhttp.mockwebserver.MockResponse;
@@ -83,8 +83,8 @@ public class TestApiGoogleMap extends BaseTest {
 
     @Test
     public void testDistanceGoogleMap() throws InterruptedException {
-        BasePresenter basePresenter = new BasePresenter();
-        ManagerGoogleMaps managerGoogleMaps = new ManagerGoogleMaps(basePresenter);
+        DriverCustPresenter driverCustPresenter = new DriverCustPresenter();
+        ManagerGoogleMaps managerGoogleMaps = new ManagerGoogleMaps(driverCustPresenter);
 
         managerGoogleMaps.getDistance(50.45466, 30.52380, 49.59373, 34.54073);
         TimeUnit.SECONDS.sleep(5);

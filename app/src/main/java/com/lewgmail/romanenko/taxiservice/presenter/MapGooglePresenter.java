@@ -7,10 +7,20 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.CalculatePrice;
 import com.lewgmail.romanenko.taxiservice.presenter.adapters.AdapterAdditionalRequiremnets;
 import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderInterface;
+import com.lewgmail.romanenko.taxiservice.view.activity.MapActivity;
+import com.lewgmail.romanenko.taxiservice.view.adapters.DTORoute;
 
+import org.w3c.dom.Document;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.Observer;
@@ -27,14 +37,13 @@ public class MapGooglePresenter implements BasePresenterInterface {
 
     private ManagerGoogleMaps managerGoogleMaps = new ManagerGoogleMaps();
     private ManagerOrderApiCust managerOrderApiCust;
-    private EditOrderInterface view;
+    private MapActivity mapActivityView;
     private Subscription subscription = Subscriptions.empty();
     private DataGoogleMapDTO dataGoogleMapDTOPres;
     private CustomerPresenter customerPresenter;
 
-    public MapGooglePresenter(EditOrderInterface view) {
-        this.view = view;
-        managerOrderApiCust = new ManagerOrderApiCust(this);
+    public MapGooglePresenter(MapActivity mapActivityView) {
+        this.mapActivityView = mapActivityView;
     }
 
     private void onPutMapMarkers(double longitude1, double latitude1, double longitude2, double latitude2) {
@@ -56,17 +65,17 @@ public class MapGooglePresenter implements BasePresenterInterface {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (e instanceof HttpException)
+                       /* if (e instanceof HttpException)
                             view.showError(e.getMessage().toString());
                         else
-                            view.showError(e.getMessage().toString());
+                            view.showError(e.getMessage().toString());*/
                     }
 
                     @Override
                     public void onNext(DataGoogleMapDTO dataGoogleMapDTO) {
                         dataGoogleMapDTOPres = dataGoogleMapDTO;
-                        view.setDistance(dataGoogleMapDTO.getDistanceTx());
-                        view.setDuration(dataGoogleMapDTO.getDuration());
+                        //  view.setDistance(dataGoogleMapDTO.getDistanceTx());
+                        //  view.setDuration(dataGoogleMapDTO.getDuration());
                         //  managerOrderApiCust.calculatePrice(createRequestCalcPrice(dataGoogleMapDTO.getDistance(), customerPresenter.getView()), customerPresenter);
                     }
                 });
@@ -110,6 +119,43 @@ public class MapGooglePresenter implements BasePresenterInterface {
         list.add(additionalRequirement2);
         //  calculatePrice.setAdditionalRequirements(list);
         return calculatePrice;
+    }
+
+    public void getRoute(List<DTORoute> route) {
+        Observable<Response<ResponseBody>> observer = managerGoogleMaps.getRoute(route);
+        observer.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Response<ResponseBody>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (e instanceof HttpException)
+                            mapActivityView.showError("Code:" + ((HttpException) e).code() + "Message:" + e.getMessage());
+
+                    }
+
+                    @Override
+                    public void onNext(Response<ResponseBody> bodyResponse) {
+                        String string = bodyResponse.toString();
+
+                        try {
+                            InputStream in = bodyResponse.body().byteStream();
+                            DocumentBuilder builder = DocumentBuilderFactory.newInstance()
+                                    .newDocumentBuilder();
+                            Document doc = builder.parse(in);
+                            mapActivityView.buildRoute(doc);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                        // Document doc = builder.parse(in);
+                    }
+                });
     }
 
 

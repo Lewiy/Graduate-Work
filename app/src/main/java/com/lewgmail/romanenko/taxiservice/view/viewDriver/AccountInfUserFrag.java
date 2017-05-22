@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
-import com.lewgmail.romanenko.taxiservice.view.activity.UserOperationInterfaceInfoCustom;
+import com.lewgmail.romanenko.taxiservice.view.activity.InfoUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  * Created by Lev on 17.12.2016.
  */
 
-public class PassengerAccountInfFragment extends DialogFragment implements UserOperationInterfaceInfoCustom {
+public class AccountInfUserFrag extends DialogFragment implements InfoUser {
 
     @BindView(R.id.name_var)
     TextView name;
@@ -47,6 +47,7 @@ public class PassengerAccountInfFragment extends DialogFragment implements UserO
     private UserPresenter userPresenter;
     private long customerId;
     private ProgressDialog progress1;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -63,7 +64,7 @@ public class PassengerAccountInfFragment extends DialogFragment implements UserO
         ButterKnife.bind(this, view);
         adapterUserSettings();
         userPresenter = new UserPresenter(this);
-        customerId = getArguments().getLong("customerId");
+        customerId = getArguments().getLong("userId");
         userPresenter.getUserId(customerId);
         return builder.create();
     }

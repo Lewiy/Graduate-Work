@@ -183,14 +183,14 @@
     <string name="customer_account_info">Customer info</string>
 
     <!-- account info customer driver taxi -->
-    <string name="name_info">Name:</string>
-    <string name="email_info">Email:</string>
-    <string name="mobile_number_inf">Mobile:</string>
-    <string name="manufacturer_inf">Brand:</string>
-    <string name="model_inf">Model:</string>
-    <string name="plate_number_inf">Plate number:</string>
-    <string name="seats_number_inf">Seats number:</string>
-    <string name="car_type_inf">car type:</string>
+    <string name="name_info">Name: </string>
+    <string name="email_info">Email: </string>
+    <string name="mobile_number_inf">Mobile: </string>
+    <string name="manufacturer_inf">Brand: </string>
+    <string name="model_inf">Model: </string>
+    <string name="plate_number_inf">Plate number: </string>
+    <string name="seats_number_inf">Seats number: </string>
+    <string name="car_type_inf">Car type: </string>
 
     <!--- new of adding to localization -->
 
@@ -280,6 +280,7 @@
     <string name="validation_password">Password must contain more than 6 characters</string>
 
 
+
     <string name="account_driver">About driver</string>
     <string name="date_of_order">Date of order:   </string>
     <string name="delete_order">Delete</string>
@@ -288,6 +289,24 @@
     <string name="new_password_repeat">Repeat new password</string>
     <string name="code_for_reset_will_be_send">Code for reset password will be sent to your email</string>
     <string name="time_order_for_now">Now</string>
+    <string name="turn_on_notification">Notification</string>
+
+
+    <!-- notification string -->
+    <string name="new_order_notification">New order</string>
+    <string name="notific_when">When: </string>
+    <string name="notific_where">Where: </string>
+    <string name="notific_price">Price: </string>
+
+    <string name="notific_waiting_driver">Driver is waiting</string>
+    <string name="notific_plate_number">Plate number:</string>
+    <string name="notific_model">Model:</string>
+    <string name="notific_manufacturer">Brend:</string>
+    <string name="notific_name">Name:</string>
+
+    <string name="notific_changed_order_status">Changed order status</string>
+    <string name="notific_order_status">Order status:</string>
+
     <string name="formatted_place_data">
         Name: %1$s\nAddress: %2$s\nPhone: %3$s\nWebsite: %4$s\nRating: %5$s\nId: %6$s\n
     </string>

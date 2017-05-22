@@ -37,7 +37,9 @@ import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
+import com.lewgmail.romanenko.taxiservice.model.pojo.NotificationObjAddedOrder;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
+import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterTimeDate;
 import com.lewgmail.romanenko.taxiservice.view.viewDriver.DriverAccount;
 
 import java.util.ArrayList;
@@ -187,7 +189,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @OnClick(R.id.notification)
     public void Onclick() {
-        //new Notification(this).showSimpleNotification("Повідомлення", "заглушка повідомлень");
+        String messageNewOrder = "12";
+        NotificationObjAddedOrder notificationObjAddedOrder = new NotificationObjAddedOrder();
+        notificationObjAddedOrder.setOrderId(Integer.parseInt(messageNewOrder));
+        messageNewOrder = "startPoint";
+        notificationObjAddedOrder.setStartPoint(messageNewOrder);
+        messageNewOrder = "endPoint";
+        notificationObjAddedOrder.setEndPoint(messageNewOrder);
+        messageNewOrder = "2017-05-17T00:00:00";
+        notificationObjAddedOrder.setStartTime(new AdapterTimeDate(messageNewOrder, this));
+        messageNewOrder = "price";
+        notificationObjAddedOrder.setPrice(messageNewOrder);
+        // new MyNotification(this).showNotification(notificationObjAddedOrder);
+        // new MyNotification(this).showNotificChangeOrderStatus();
     }
 
     private void populateAutoComplete() {

@@ -11,8 +11,8 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.Token;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UpdateUser;
 import com.lewgmail.romanenko.taxiservice.model.pojo.User;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UserRegistration;
+import com.lewgmail.romanenko.taxiservice.view.activity.InfoUser;
 import com.lewgmail.romanenko.taxiservice.view.activity.UserOperationInterface;
-import com.lewgmail.romanenko.taxiservice.view.activity.UserOperationInterfaceInfoCustom;
 
 import java.io.IOException;
 
@@ -44,12 +44,12 @@ public class UserPresenter {
     // Флаг, отвечающий за то, отправлен токен на сервер или нет
     private static final String PREF_DEVICE_TOKEN_SENT = "DeviceTokenSent";
     private ManagerUser managerUser = new ManagerUser();
-    private UserOperationInterfaceInfoCustom view;
+    private InfoUser view;
     private UserOperationInterface view2;
     private Subscription subscription = Subscriptions.empty();
     private String statusLogIn = null;
 
-    public UserPresenter(UserOperationInterfaceInfoCustom view) {
+    public UserPresenter(InfoUser view) {
         this.view = view;
     }
     public UserPresenter(UserOperationInterface view2) {

@@ -9,7 +9,7 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.GetOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.MarkOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Order;
 import com.lewgmail.romanenko.taxiservice.model.pojo.OrderId;
-import com.lewgmail.romanenko.taxiservice.presenter.BasePresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.DriverCustPresenter;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +25,7 @@ import rx.functions.Func1;
 
 public class ManagerOrderApiDrivCust {
 
-    private BasePresenter mBasePresenter;
+    private DriverCustPresenter mDriverCustPresenter;
     /* for test*/
     private OrderId orderIdTEST;
 
@@ -33,9 +33,9 @@ public class ManagerOrderApiDrivCust {
 
     }
 
-    public ManagerOrderApiDrivCust(BasePresenter presenter) {
+    public ManagerOrderApiDrivCust(DriverCustPresenter presenter) {
 
-        this.mBasePresenter = presenter;
+        this.mDriverCustPresenter = presenter;
 
     }
 
@@ -54,14 +54,14 @@ public class ManagerOrderApiDrivCust {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            mBasePresenter.onFinishRequest(((HttpException) e).code(), e.getMessage());
-                        else mBasePresenter.onFinishRequest(0, e.getMessage());
+                            mDriverCustPresenter.onFinishRequest(((HttpException) e).code(), e.getMessage());
+                        else mDriverCustPresenter.onFinishRequest(0, e.getMessage());
                     }
 
                     @Override
                     public void onNext(OrderId orderId) {
                         System.out.println(" Дані пришли - кастомер" + orderId.getCustomer());
-                        mBasePresenter.setOrderSpecificId(orderId);
+                        mDriverCustPresenter.setOrderSpecificId(orderId);
                     }
                 });*/
         return observer;

@@ -4,7 +4,9 @@ package com.lewgmail.romanenko.taxiservice.model.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RoutePointN {
+import java.io.Serializable;
+
+public class RoutePointN implements Serializable {
 
 
     @SerializedName("latitude")
@@ -13,6 +15,17 @@ public class RoutePointN {
     @SerializedName("longtitude")
     @Expose
     private String longtitude;
+
+    private String address;
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
 
     public String getLatitude() {

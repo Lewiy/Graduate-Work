@@ -42,7 +42,7 @@
         </receiver>
 
         <service
-            android:name="com.lewgmail.romanenko.taxiservice.view.activity.Notification"
+            android:name="com.lewgmail.romanenko.taxiservice.view.activity.MyNotification"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />

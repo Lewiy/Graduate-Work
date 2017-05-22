@@ -4,7 +4,7 @@ package com.lewgmail.romanenko.taxiservice.view.activity;
  * Created by Lev on 19.12.2016.
  */
 
-public interface UserOperationInterfaceInfoCustom {
+public interface InfoUser {
     void setUserName(String name);
 
     void setUserEmail(String email);

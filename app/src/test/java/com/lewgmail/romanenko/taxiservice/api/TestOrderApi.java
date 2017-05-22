@@ -6,8 +6,8 @@ import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerOrderApiDrivC
 import com.lewgmail.romanenko.taxiservice.model.pojo.MarkOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.OrderStatus;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Token;
-import com.lewgmail.romanenko.taxiservice.presenter.BasePresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.DriverCustPresenter;
 import com.squareup.okhttp.HttpUrl;
 import com.squareup.okhttp.mockwebserver.Dispatcher;
 import com.squareup.okhttp.mockwebserver.MockResponse;
@@ -38,9 +38,9 @@ public class TestOrderApi extends BaseTest {
 
     private com.google.gson.stream.JsonReader jsonReader;
     private UserServices service;
-    private BasePresenter basePresenter = new BasePresenter();
+    private DriverCustPresenter driverCustPresenter = new DriverCustPresenter();
 
-    private ManagerOrderApiDrivCust manager = new ManagerOrderApiDrivCust(basePresenter);
+    private ManagerOrderApiDrivCust manager = new ManagerOrderApiDrivCust(driverCustPresenter);
 
 
     @Before
@@ -138,7 +138,7 @@ public class TestOrderApi extends BaseTest {
         assertEquals("21334sfg23", request.getHeader("Authorization"));
         TimeUnit.SECONDS.sleep(3);
         // Testing errors
-        //  assertEquals("HTTP 404 OK", basePresenter.getResponseMsg());
+        //  assertEquals("HTTP 404 OK", driverCustPresenter.getResponseMsg());
 
 
         //////////////////    /// test data///////////////////////////////////
@@ -151,9 +151,9 @@ public class TestOrderApi extends BaseTest {
         assertEquals("21334sfg23", request.getHeader("Authorization"));
         TimeUnit.SECONDS.sleep(3);
         // Received data
-        assertEquals(121, basePresenter.getOrderSpecificId().getOrderId());
-        assertEquals(321, basePresenter.getOrderSpecificId().getAdditionalRequirements().get(0).getReqValueId());
-        assertEquals("пупсовод", basePresenter.getOrderSpecificId().getTaxiDriver().getName());
+        assertEquals(121, driverCustPresenter.getOrderSpecificId().getOrderId());
+        assertEquals(321, driverCustPresenter.getOrderSpecificId().getAdditionalRequirements().get(0).getReqValueId());
+        assertEquals("пупсовод", driverCustPresenter.getOrderSpecificId().getTaxiDriver().getName());
 
     }
 
@@ -175,7 +175,7 @@ public class TestOrderApi extends BaseTest {
                 "}", request.getBody().readUtf8());
         TimeUnit.SECONDS.sleep(3);
         /////////////////////Test Data/////////////////////////////
-        assertEquals(0, basePresenter.getResponceCode());
+        assertEquals(0, driverCustPresenter.getResponceCode());
     }
 
     @Test
@@ -312,10 +312,10 @@ public class TestOrderApi extends BaseTest {
     public void testGetAllOrders() throws Exception {
 
         // Test data
-        BasePresenter basePresenter
-                = new BasePresenter();
+        DriverCustPresenter driverCustPresenter
+                = new DriverCustPresenter();
         ManagerOrderApiDrivCust managerOrderApiDriver
-                = new ManagerOrderApiDrivCust(basePresenter);
+                = new ManagerOrderApiDrivCust(driverCustPresenter);
         managerOrderApiDriver.getAllOrdersType("new");
 
         // Test request

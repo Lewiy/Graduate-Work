@@ -135,7 +135,7 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
 
     @OnClick(R.id.customer_account_info)
     public void customerInfoClickButton() {
-        PassengerAccountInfFragment passengerInfFragment = new PassengerAccountInfFragment();
+        AccountInfUserFrag passengerInfFragment = new AccountInfUserFrag();
         Bundle args = new Bundle();
         args.putLong("customerId", customerId);
         passengerInfFragment.setArguments(args);
@@ -197,7 +197,7 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
     @Override
     public void setTimeRide(String dateTime) {
         AdapterTimeDate adapterTimeDate = new AdapterTimeDate(dateTime, this);
-        this.timeOfRideField.setText(adapterTimeDate.getData() + " " + adapterTimeDate.getTime());
+        this.timeOfRideField.setText(adapterTimeDate.getDate() + " " + adapterTimeDate.getTime());
 
     }
 

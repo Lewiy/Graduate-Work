@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
@@ -65,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
@@ -92,14 +92,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
+                    android:maxLines="1"
                     android:text="@string/email_info"
                     android:textColor="@color/colorPrimaryDark" />
+
 
                 <TextView
                     android:id="@+id/email_var"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_weight="12"
                     android:text="@string/action_sign_in" />
             </LinearLayout>
 
@@ -114,7 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
@@ -164,7 +166,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="20dp"
         android:visibility="visible">
 
         <LinearLayout

@@ -15,6 +15,8 @@ public class AdapterTimeDate {
 
     private String date;
     private String time;
+    private String shortDate;
+
 
     public AdapterTimeDate(String dateTime, Context context) {
         this.dateTime = dateTime;
@@ -22,15 +24,24 @@ public class AdapterTimeDate {
         devideDataTime();
     }
 
+    public String getShortDate() {
+        return shortDate;
+    }
+
+    public void setShortDate(String shortDate) {
+        this.shortDate = shortDate;
+    }
+
     private void devideDataTime() {
         date = dateTime.substring(0, dateTime.indexOf("T") - 1);
         time = dateTime.substring(dateTime.indexOf("T") + 1, 16);
+        shortDate = date.substring(date.indexOf("-") + 1);
         if (time.equals("00:00"))
             time = context.getResources().getString(R.string.time_order_for_now);
 
     }
 
-    public String getData() {
+    public String getDate() {
         return date;
     }
 

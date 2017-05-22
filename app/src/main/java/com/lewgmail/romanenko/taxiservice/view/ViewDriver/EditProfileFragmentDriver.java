@@ -19,7 +19,7 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.UpdateUser;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UpdateUserDriverLicense;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
 import com.lewgmail.romanenko.taxiservice.view.ValidationOfFields;
-import com.lewgmail.romanenko.taxiservice.view.activity.UserOperationInterfaceInfoCustom;
+import com.lewgmail.romanenko.taxiservice.view.activity.InfoUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ import butterknife.OnClick;
  * Created by Lev on 13.12.2016.
  */
 
-public class EditProfileFragmentDriver extends android.support.v4.app.Fragment implements UserOperationInterfaceInfoCustom {
+public class EditProfileFragmentDriver extends android.support.v4.app.Fragment implements InfoUser {
     // @BindView(R.id.driver__personal_page)
     // FrameLayout checkBoxDriverRegistration;
     @BindView(R.id.set_num_passenger_personal_page)

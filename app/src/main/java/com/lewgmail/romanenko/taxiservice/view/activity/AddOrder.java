@@ -28,6 +28,7 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointN;
 import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
 import com.lewgmail.romanenko.taxiservice.view.activity.elementsOfActivity.SlidingTabLayout;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
+import com.lewgmail.romanenko.taxiservice.view.adapters.DTORoute;
 import com.lewgmail.romanenko.taxiservice.view.fragments.addOrder.FragmentPage1;
 import com.lewgmail.romanenko.taxiservice.view.fragments.addOrder.FragmentPage2;
 
@@ -40,6 +41,7 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
             MAP_SEARCH_ADDRESS_CODE = 2,
             MAP_SEARCH_ADDRESS_CODE_ROUTE = 3;
     AdapterAddPointOfRoute addapterListAddresses;
+    ArrayList<DTORoute> dtoRoute = new ArrayList<>();
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -63,7 +65,6 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     private int position;
     // position first s
     private int positionFirsSeconAdd;
-
     private String startTime;
     private String comment;
     private ArrayList<RoutePointN> routePoints;
@@ -242,13 +243,30 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     public void startActivityForResultMap(int viewId) {
         viewIdEditText = viewId;
         Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("Route", dtoRoute);
+        transferRouteToMap();
         startActivityForResult(intent, MAP_SEARCH_ADDRESS_CODE);
+    }
+
+    private void transferRouteToMap() {
+        for (int i = 0; i < routePoints.size(); i++) {
+            DTORoute dtoRoute1 = new DTORoute();
+            dtoRoute1.setLat(Double.parseDouble(routePoints.get(i).getLatitude()));
+            dtoRoute1.setLng(Double.parseDouble(routePoints.get(i).getLongtitude()));
+            dtoRoute1.setAddress(routePoints.get(i).getAddress());
+            dtoRoute.add(dtoRoute1);
+        }
     }
 
     @Override
     public void startActivityForResultMapRoute(int position) {
         this.position = position;
+
         Intent intent = new Intent(this, MapActivity.class);
+
+        intent.putExtra("Route", dtoRoute);
+        transferRouteToMap();
+
         startActivityForResult(intent, MAP_SEARCH_ADDRESS_CODE_ROUTE);
     }
 
@@ -270,6 +288,7 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
                     RoutePointN routePointN = new RoutePointN();
                     routePointN.setLongtitude(Double.toString(place.getLatLng().longitude));
                     routePointN.setLatitude(Double.toString(place.getLatLng().latitude));
+                    routePointN.setAddress(place.getAddress().toString());
                     if (editText.getText().toString().matches(""))
                         routePoints.add(routePointN);
                     else routePoints.set(positionFirsSeconAdd, routePointN);
@@ -281,6 +300,7 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
                     RoutePointN routePointN = new RoutePointN();
                     routePointN.setLongtitude(Double.toString(place.getLatLng().longitude));
                     routePointN.setLatitude(Double.toString(place.getLatLng().latitude));
+                    routePointN.setAddress(place.getAddress().toString());
                     routePoints.add(routePointN);
 
                 } else {
@@ -289,6 +309,7 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
                     RoutePointN routePointN = new RoutePointN();
                     routePointN.setLongtitude(Double.toString(place.getLatLng().longitude));
                     routePointN.setLatitude(Double.toString(place.getLatLng().latitude));
+                    routePointN.setAddress(place.getAddress().toString());
                     routePoints.set(position + 2, routePointN);
 
                 }
@@ -316,11 +337,13 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
                         RoutePointN routePointN = new RoutePointN();
                         routePointN.setLongtitude(data.getStringExtra("longitude"));
                         routePointN.setLatitude(data.getStringExtra("latitude"));
+                        routePointN.setAddress(data.getStringExtra("addressFromMap"));
                         routePoints.add(routePointN);
                     } else {
                         RoutePointN routePointN = new RoutePointN();
                         routePointN.setLongtitude(data.getStringExtra("longitude"));
                         routePointN.setLatitude(data.getStringExtra("latitude"));
+                        routePointN.setAddress(data.getStringExtra("addressFromMap"));
                         routePoints.set(positionFirsSeconAdd, routePointN);
                     }
                     editText.setText(data.getStringExtra("addressFromMap"));
@@ -330,6 +353,7 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
                     RoutePointN routePointN = new RoutePointN();
                     routePointN.setLongtitude(data.getStringExtra("longitude"));
                     routePointN.setLatitude(data.getStringExtra("latitude"));
+                    routePointN.setAddress(data.getStringExtra("addressFromMap"));
                     routePoints.set(position + 2, routePointN);
 
             }

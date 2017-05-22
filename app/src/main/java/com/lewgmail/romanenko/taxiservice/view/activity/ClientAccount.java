@@ -21,6 +21,7 @@ import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
 import com.lewgmail.romanenko.taxiservice.view.fragmentClient.OrderListFragment;
+import com.lewgmail.romanenko.taxiservice.view.fragments.FragmentSettings;
 import com.lewgmail.romanenko.taxiservice.view.viewDriver.EditProfileFragmentDriver;
 
 import butterknife.ButterKnife;
@@ -137,7 +138,8 @@ public class ClientAccount extends AppCompatActivity
             fragmentClass = EditProfileFragmentDriver.class;
             createFragment(fragment, item, fragmentClass);
         } else if (id == R.id.settings) {
-
+            fragmentClass = FragmentSettings.class;
+            createFragment(fragment, item, fragmentClass);
         } else if (id == R.id.log_out) {
 
             userPresenter.logOut();

@@ -1,8 +1,11 @@
 package com.lewgmail.romanenko.taxiservice.presenter;
 
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerOrderApiDrivCust;
+import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerUser;
 import com.lewgmail.romanenko.taxiservice.model.pojo.GetOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.MarkOrder;
+import com.lewgmail.romanenko.taxiservice.model.pojo.User;
+import com.lewgmail.romanenko.taxiservice.view.activity.InfoUser;
 import com.lewgmail.romanenko.taxiservice.view.viewDriver.OrderInf;
 
 import java.io.IOException;
@@ -21,11 +24,19 @@ import rx.schedulers.Schedulers;
 
 public class LoadOrderForDriverPresenter {
 
-    private ManagerOrderApiDrivCust managerOrderApiDrivCust = new ManagerOrderApiDrivCust();
+    private ManagerOrderApiDrivCust managerOrderApiDrivCust;
+    private ManagerUser managerUser;
     private OrderInf orderInfView;
+    private InfoUser viewInfoUser;
 
     public LoadOrderForDriverPresenter(OrderInf orderInf) {
         this.orderInfView = orderInf;
+        this.managerOrderApiDrivCust = new ManagerOrderApiDrivCust();
+    }
+
+    public LoadOrderForDriverPresenter(InfoUser viewInfoUser) {
+        this.viewInfoUser = viewInfoUser;
+        this.managerUser = new ManagerUser();
     }
 
     public void loadOrderSpecificId(int orderId) {
@@ -69,35 +80,10 @@ public class LoadOrderForDriverPresenter {
                         orderInfView.setOrderId(orderId.getOrderId());
                         orderInfView.setStatus(orderId.getStatus());
                         orderInfView.setComments(orderId.getComment());
-                        //orderInfView.setBaggage(orderId);
+                        //orderInfView.setDriverId(orderId.getDriverId());
+                        orderInfView.setCustomerId(orderId.getCustomerId());
                         orderInfView.setAdditionalRequirements(orderId.getAdditionalRequirements());
-                       /* viewAddOrderUpdate.responseStartTime(orderId.getStartTime());
-                        viewAddOrderUpdate.responseRoutePoint(orderId.getRoutePoint());
-                        viewAddOrderUpdate.responseStatusOrder(orderId.getStatus());
-                        viewAddOrderUpdate.responseCustomerId(orderId.getCustomerId());
-                        viewAddOrderUpdate.responseDriverId(orderId.getDriverId());
-                        viewAddOrderUpdate.responseDistance(orderId.getDistance());
-                        viewAddOrderUpdate.responseDuration(orderId.getDuration());
-                        viewAddOrderUpdate.responsePrice(orderId.getPrice());
-                        // viewAddOrderUpdate.responseExtraPrice(orderId.getExtraPrice());
-                        viewAddOrderUpdate.responseComment(orderId.getComment());
-                        viewAddOrderUpdate.responseAdditionalRequirements((ArrayList<AdditionalRequirementN>) orderId.getAdditionalRequirements());
-                        viewAddOrderUpdate.responseOrderId(orderId.getOrderId());*/
-                       /* viewAddOrderUpdate.setOrderId(orderId.getOrderId());
-                        viewAddOrderUpdate.setCustomerId(orderId.getCustomer().getCustomerId());
-                        viewAddOrderUpdate.setDateRide(orderId.getStartTime().substring(0, 10));
-                        viewAddOrderUpdate.setTimeRide(orderId.getStartTime().substring(11, 16));
-                        viewAddOrderUpdate.setStartPoint(orderId.getStartPoint());
-                        viewAddOrderUpdate.setEndPoint(orderId.getEndPoint());
-                        viewAddOrderUpdate.setTypeOrder(orderId.getStatus());
-                        viewAddOrderUpdate.setNameCastomer(orderId.getCustomer().getName());
-                        viewAddOrderUpdate.setNameDriver(orderId.getTaxiDriver().getName());
-                        viewAddOrderUpdate.setTypeCar(new AdapterAdditionalRequiremnets().
-                                getCar(orderId.getAdditionalRequirements().get(0).getReqValueId()));
-                        viewAddOrderUpdate.setPrice(orderId.getPrice());
-                        viewAddOrderUpdate.setTypeReckoning(new AdapterAdditionalRequiremnets().
-                                getRecon(orderId.getAdditionalRequirements().get(1).getReqValueId()));
-                        viewAddOrderUpdate.setDriverId(orderId.getTaxiDriver().getTaxiDriverId());*/
+
                     }
                 });
     }
@@ -126,6 +112,60 @@ public class LoadOrderForDriverPresenter {
                         orderInfView.showError("Code:" + responseBodyResponse.code());
                        /* if(responseBodyResponse.code() != 200)
                             orderInfView.resStatusOrderNotChanged();*/
+                    }
+                });
+    }
+
+    public void getUserId(long id) {
+
+        Observable<User> observer = managerUser.getUserProfile(id);
+
+        observer.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<User>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (e instanceof HttpException)
+                            viewInfoUser.showError(e.getMessage().toString());
+                        else
+                            viewInfoUser.showError(e.getMessage().toString());
+                    }
+
+                    @Override
+                    public void onNext(User user) {
+                        //  if (LoggedUser.getmInstance().getUserType().equals("TAXI_DRIVER")) {
+                        // view.setCarId(user.getCar().getCarId());
+                        viewInfoUser.setUserDriverBrand(user.getCar().getManufacturer());
+                        viewInfoUser.setUserDriverModel(user.getCar().getModel());
+                        viewInfoUser.setUserDriverCarType(user.getCar().getCarType());
+                        viewInfoUser.setUserDriverPlateNumber(user.getCar().getPlateNumber());
+                        viewInfoUser.setUserDriverSeatsNumber(Integer.toString(user.getCar().getSeatsNumber()));
+                        //  }
+
+                        viewInfoUser.setUserName(user.getName());
+                        viewInfoUser.setUserEmail(user.getEmail());
+                        //view.setPassword(user.getPassword());
+                        // view.setRepeatePassword(user.getPassword());
+
+                        if (user.getMobileNumbers().size() > 0) {
+                            viewInfoUser.setUserMobileId(user.getMobileNumbers().get(0).getIdMobileNumber());
+                            viewInfoUser.setUserMobile(user.getMobileNumbers().get(0).getMobileNumber());
+                        }
+                        if (user.getMobileNumbers().size() == 2) {
+                            viewInfoUser.setUserMobileId2(user.getMobileNumbers().get(1).getIdMobileNumber());
+                            viewInfoUser.setUserMobile2(user.getMobileNumbers().get(1).getMobileNumber());
+                        }
+                            /*for (MobileNumbers number: user.getMobileNumbers()) {
+                                view.setUserMobileId(user.getMobileNumbers().get(0).getIdMobileNumber());
+                            }*/
+
+                        viewInfoUser.setExpirationTime(user.getDriverLicense().getExpirationTime());
+                        viewInfoUser.setCodeLicense(user.getDriverLicense().getCode());
                     }
                 });
     }

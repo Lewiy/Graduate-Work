@@ -26,10 +26,11 @@ import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePoint;
 import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointUpdateOrder;
-import com.lewgmail.romanenko.taxiservice.presenter.BasePresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.DriverCustPresenter;
 import com.lewgmail.romanenko.taxiservice.view.activity.elementsOfActivity.SlidingTabLayout;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
+import com.lewgmail.romanenko.taxiservice.view.adapters.DTORoute;
 import com.lewgmail.romanenko.taxiservice.view.fragments.addOrderUpdate.FragmentPage1Update;
 import com.lewgmail.romanenko.taxiservice.view.fragments.addOrderUpdate.FragmentPage2Update;
 
@@ -48,6 +49,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
             MAP_SEARCH_ADDRESS_CODE_ROUTE = 3;
 
     AdapterAddPointOfRoute addapterListAddresses;
+    ArrayList<DTORoute> dtoRoute = new ArrayList<>();
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -71,11 +73,9 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     private int position;
     // position first s
     private int positionFirsSeconAdd;
-
     private String startTime;
     private String comment;
     private ArrayList<RoutePointUpdateOrder> routePoints;
-    // private ArrayList<RoutePointN> routePointsForCalculatePrice;
     private ArrayList<AdditionalRequirementN> additionalRequirementNs;
 
 
@@ -86,7 +86,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     //  private Fragment fragmenObjs;
     private FragmentPage1Update fragmentObj1Update;
     private FragmentPage2Update fragmentObj2Update;
-    private BasePresenter basePresenter;
+    private DriverCustPresenter driverCustPresenter;
     private Intent intentMy;
 
 
@@ -107,7 +107,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
         setContentView(R.layout.activity_add_order_);
         routePoints = new ArrayList<>();
         customerPresenter = new CustomerPresenter(this);
-        basePresenter = new BasePresenter(this);
+        driverCustPresenter = new DriverCustPresenter(this);
         // customerPresenter.addOrder(12.23, 23.34, 123.34, 1234.3);
         //   Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().setElevation(0);
@@ -156,7 +156,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
         fragmentObj1Update = (FragmentPage1Update) mSectionsPagerAdapter.getItem(0);
         fragmentObj2Update = (FragmentPage2Update) mSectionsPagerAdapter.getItem(1);
 
-        basePresenter.loadOrderSpecificId(Integer.parseInt(intentMy.getStringExtra("keyNumberOfOrder")));
+        driverCustPresenter.loadOrderSpecificId(Integer.parseInt(intentMy.getStringExtra("keyNumberOfOrder")));
 
     }
 
@@ -205,6 +205,13 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
         routePointN1.setRoutePointIndex(new Long(0));
         routePoints.add(routePointN1);
 
+        DTORoute pointRoute1 = new DTORoute();
+        pointRoute1.setLat(Double.parseDouble(resRoutePoints.get(0).getLatitude()));
+        pointRoute1.setLng(Double.parseDouble(resRoutePoints.get(0).getLongtitude()));
+        pointRoute1.setAddress(addressBilder(resRoutePoints.get(0).getStreet()
+                , resRoutePoints.get(0).getHouseNumber(), resRoutePoints.get(0).getCity()));
+        dtoRoute.add(pointRoute1);
+
         RoutePointUpdateOrder routePointN2 = new RoutePointUpdateOrder();
         fragmentObj1Update.setSecondPointOfRoute(addressBilder(resRoutePoints.get(1).getStreet()
                 , resRoutePoints.get(1).getHouseNumber(), resRoutePoints.get(1).getCity()));
@@ -213,6 +220,13 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
         routePointN2.setRoutePointId(resRoutePoints.get(1).getRoutePointId());
         routePointN2.setRoutePointIndex(new Long(0));
         routePoints.add(routePointN2);
+
+        DTORoute pointRoute2 = new DTORoute();
+        pointRoute2.setLat(Double.parseDouble(resRoutePoints.get(1).getLatitude()));
+        pointRoute2.setLng(Double.parseDouble(resRoutePoints.get(1).getLongtitude()));
+        pointRoute2.setAddress(addressBilder(resRoutePoints.get(1).getStreet()
+                , resRoutePoints.get(1).getHouseNumber(), resRoutePoints.get(1).getCity()));
+        dtoRoute.add(pointRoute2);
 
         for (int i = 2; i <= resRoutePoints.size() - 1; i++) {
             RoutePointUpdateOrder routePointN3 = new RoutePointUpdateOrder();
@@ -223,6 +237,13 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
             routePointN3.setRoutePointId(resRoutePoints.get(i).getRoutePointId());
             routePointN3.setRoutePointIndex(new Long(0));
             routePoints.add(routePointN3);
+
+            DTORoute pointRoute3 = new DTORoute();
+            pointRoute3.setLat(Double.parseDouble(resRoutePoints.get(i).getLatitude()));
+            pointRoute3.setLng(Double.parseDouble(resRoutePoints.get(i).getLongtitude()));
+            pointRoute3.setAddress(addressBilder(resRoutePoints.get(i).getStreet()
+                    , resRoutePoints.get(i).getHouseNumber(), resRoutePoints.get(i).getCity()));
+            dtoRoute.add(pointRoute3);
         }
 
     }
@@ -240,7 +261,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     }
 
     public void responseDriverId(int driverId) {
-
+        fragmentObj2Update.setDriverId(driverId);
     }
 
     public void responseDistance(double distance) {
@@ -385,7 +406,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
 
     @Override
     public void changeOrderStatus(String orderStatus) {
-        basePresenter.changeStatusOrder(orderId, orderStatus);
+        driverCustPresenter.changeStatusOrder(orderId, orderStatus);
     }
 
     @Override
@@ -436,6 +457,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     public void startActivityForResultMap(int viewId) {
         viewIdEditText = viewId;
         Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("Route", dtoRoute);
         startActivityForResult(intent, MAP_SEARCH_ADDRESS_CODE);
     }
 
@@ -443,6 +465,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     public void startActivityForResultMapRoute(int position) {
         this.position = position;
         Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("Route", dtoRoute);
         startActivityForResult(intent, MAP_SEARCH_ADDRESS_CODE_ROUTE);
     }
 
@@ -511,6 +534,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
                         RoutePointUpdateOrder routePointN = new RoutePointUpdateOrder();
                         routePointN.setLongtitude(data.getStringExtra("longitude"));
                         routePointN.setLatitude(data.getStringExtra("latitude"));
+
                         routePoints.add(routePointN);
                     } else {
                         RoutePointUpdateOrder routePointN = new RoutePointUpdateOrder();

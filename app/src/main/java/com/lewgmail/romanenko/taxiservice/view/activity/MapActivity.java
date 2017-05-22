@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationListener;
@@ -35,10 +36,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.presenter.MapGooglePresenter;
+import com.lewgmail.romanenko.taxiservice.view.GMapV2Direction;
+import com.lewgmail.romanenko.taxiservice.view.adapters.DTORoute;
+
+import org.w3c.dom.Document;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -63,7 +70,7 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
     private MapFragment googleMap;
     private LatLng position;
     private Geocoder geo;
-    private MapGooglePresenter mapGooglePresenter;
+    //private MapGooglePresenter mapGooglePresenter;
     private SharedPreferences sPref;
     private Intent intentMy;
     // Business object
@@ -73,6 +80,8 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
     private MarkerOptions markerOptions;
     private String transferAddress;
     private String longitude, latitude;
+    private ArrayList<DTORoute> routePoints = new ArrayList<>();
+    private MapGooglePresenter mapGooglePresenter = new MapGooglePresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +90,35 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
         ButterKnife.bind(this);
         intentMy = getIntent();
         createMapView();
+        routePoints = (ArrayList<DTORoute>) intentMy.getSerializableExtra("Route");
         setElementLocationOnMapActivity();
         initializeSearchPlaceFragment();
         //  mapGooglePresenter = new MapGooglePresenter(this);
         // addMarker();
+
+
+    }
+
+    public void buildRoute(Document doc) {
+        GMapV2Direction md = new GMapV2Direction();
+        ArrayList<LatLng> directionPoint = md.getDirection(doc);
+        PolylineOptions rectLine = new PolylineOptions().width(15).color(
+                Color.RED);
+
+        for (int i = 0; i < directionPoint.size(); i++) {
+            rectLine.add(directionPoint.get(i));
+        }
+        mGoogleMap.addPolyline(rectLine);
+
+        for (int i = 0; i < routePoints.size(); i++) {
+            MarkerOptions markerOptions = new MarkerOptions();
+            LatLng latLng = new LatLng(routePoints.get(i).getLat(), routePoints.get(i).getLng());
+            // Setting the position for the marker
+            markerOptions.position(latLng);
+
+            markerOptions.title("Point: " + Integer.toString(i) + " " + routePoints.get(i).getAddress());
+            mGoogleMap.addMarker(markerOptions).showInfoWindow();
+        }
     }
 
     @Override
@@ -93,7 +127,31 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(50.448541, 30.507144), 10));
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        //  PolylineOptions lineOptions = new PolylineOptions();
+//        LatLng latLng1 = new LatLng(routePoints.get(0).getLat(),routePoints.get(0).getLng());
+        ///  LatLng latLng2 = new LatLng(routePoints.get(1).getLat(),routePoints.get(1).getLng());
 
+        if (routePoints.size() > 2)
+            mapGooglePresenter.getRoute(routePoints);
+        // lineOptions.add(latLng1,latLng2);
+        ////////////////////////////////////////////////////////////////////////
+
+        /*mMap = ((SupportMapFragment) getFragmentManager()
+                .findFragmentById(R.id.map)).getMap();*/
+       /* Document doc = md.getDocument(latLng1, latLng2,
+                GMapV2Direction.MODE_DRIVING);
+
+        ArrayList<LatLng> directionPoint = md.getDirection(doc);
+        PolylineOptions rectLine = new PolylineOptions().width(3).color(
+                Color.RED);
+
+        for (int i = 0; i < directionPoint.size(); i++) {
+            rectLine.add(directionPoint.get(i));
+        }
+        Polyline polylin = mGoogleMap.addPolyline(rectLine);*/
+        //////////////////////////////////////////////////////////////////////////
+
+        //  mGoogleMap.addPolyline(lineOptions);
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -119,6 +177,7 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
                 // Placing a marker on the touched position
                 mGoogleMap.addMarker(markerOptions);
                 getAddressFromLatLog(latLng);
+
 
             }
         });

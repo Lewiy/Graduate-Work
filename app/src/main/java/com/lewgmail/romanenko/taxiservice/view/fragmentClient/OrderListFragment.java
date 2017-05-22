@@ -13,7 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
-import com.lewgmail.romanenko.taxiservice.presenter.BasePresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.DriverCustPresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.adapters.TestDataForList;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterForListOrderClient;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterSpinnerLocalization;
@@ -38,7 +38,7 @@ public class OrderListFragment extends android.support.v4.app.Fragment implement
     ExpandableListAdapter expListAdapter;
     List<String> expListTitle;
     private HashMap<String, List<String>> expListDetail;
-    private BasePresenter basePresenter;
+    private DriverCustPresenter driverCustPresenter;
     private ProgressDialog progress;
 
 
@@ -47,9 +47,9 @@ public class OrderListFragment extends android.support.v4.app.Fragment implement
         View view = inflater.inflate(R.layout.order_list_client, container, false);
         ButterKnife.bind(this, view);
         initialiseExpList();
-        basePresenter = new BasePresenter(this);
+        driverCustPresenter = new DriverCustPresenter(this);
         setRetainInstance(true);
-        // basePresenter.changeStatusOrder(42, 42, "CANCELLED");
+        // driverCustPresenter.changeStatusOrder(42, 42, "CANCELLED");
         return view;
     }
 
@@ -109,7 +109,7 @@ public class OrderListFragment extends android.support.v4.app.Fragment implement
                 progress.setMessage(getResources().getString(R.string.text_of_loading));
                 progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
                 progress.show();
-                basePresenter.loadOrdersList(AdapterSpinnerLocalization.adaptSpinnerTypeOrder(sortSpinner.getSelectedItemPosition()));
+                driverCustPresenter.loadOrdersList(AdapterSpinnerLocalization.adaptSpinnerTypeOrder(sortSpinner.getSelectedItemPosition()));
             }
 
             @Override
