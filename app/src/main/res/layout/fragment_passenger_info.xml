@@ -372,7 +372,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_car_type" />
+                    android:src="@drawable/ic_car_type_yellow" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -59,7 +59,8 @@
     <!--reset password -->
     <string name="title_reset_password_activity">Forgot password?</string>
     <string name="email_reset_password_activity">Email</string>
-    <string name="button_reset_password_activity">Reset Password</string>
+    <string name="button_reset_password_activity">Reset</string>
+    <string name="button_send_request">Send</string>
     <string name="title_activity_client_account">ClientAccount</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -75,6 +76,9 @@
     <string name="statis">status</string>
     <string name="time_ride">time ride</string>
     <string name="date_ride">Date ride:</string>
+    <string name="route">Route inf</string>
+    <string name="additional_requirements">Additional requirements</string>
+    <string name="route_info">Route inf</string>
 
     <!--fragment personal page (edit) -->
     <string name="name_personal_page">Name</string>

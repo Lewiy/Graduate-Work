@@ -195,7 +195,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="5"
-                    android:background="@color/more_light_gray"
+                    android:background="@color/gold"
                     android:focusableInTouchMode="false"
                     android:isScrollContainer="false"
                     android:orientation="vertical">
@@ -507,16 +507,21 @@
                 <Button
                     android:id="@+id/customer_account_info"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/main_button"
                     android:text="@string/customer_account_info"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="11dp" />
 
                 <Button
                     android:id="@+id/buttn_order_driv_ok"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="1dp"
                     android:layout_weight="1"
+                    android:background="@drawable/main_button"
                     android:text="@string/button_ok"
                     android:textColor="@color/colorPrimaryDark" />
 

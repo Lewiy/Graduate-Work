@@ -27,7 +27,11 @@
                 android:textAlignment="gravity" />
         </LinearLayout>
 
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/route_info" />
         <LinearLayout
             android:id="@+id/information_bar"
             android:layout_width="match_parent"
@@ -36,6 +40,7 @@
             android:layout_weight="5"
             android:focusableInTouchMode="false"
             android:orientation="horizontal">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -112,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:background="@color/more_light_gray"
+            android:background="@color/gold"
             android:focusableInTouchMode="false"
             android:isScrollContainer="false"
             android:orientation="vertical">
@@ -122,8 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/additional_request"
-                android:textColor="@color/black" />
+                android:text="@string/additional_requirements" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -252,57 +256,34 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:layout_gravity="bottom|left"
-            android:background="@color/light_gray">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:text="@string/prise_label_add_order"
-                    android:textColor="@color/black"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:text="@string/value"
-                    android:textColor="@color/black"
-                    android:textSize="20dp" />
-            </LinearLayout>
+            android:background="@color/colorPrimaryDark">
 
             <Button
                 android:id="@+id/calculate_price_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="2dp"
                 android:layout_weight="1"
-                android:text="@string/calculate_price"
-                android:textColor="@color/black" />
+                android:background="@drawable/main_button_white"
+                android:text="@string/route"
+                android:textColor="@color/element_color"
+                android:textSize="12dp" />
 
             <Button
                 android:id="@+id/add_order"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="1dp"
                 android:layout_weight="1"
+                android:background="@drawable/main_button_white"
                 android:text="@string/add_order"
-                android:textColor="@color/black" />
+                android:textColor="@color/element_color"
+                android:textSize="12dp" />
         </LinearLayout>
     </LinearLayout>
 

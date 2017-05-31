@@ -1,6 +1,5 @@
 package com.lewgmail.romanenko.taxiservice.model.api.apiGoogleMaps;
 
-import com.lewgmail.romanenko.taxiservice.model.pojo.localAddress.Result;
 import com.lewgmail.romanenko.taxiservice.model.pojo.pojoResponseDistance.DistanceGoogleResponse;
 
 import okhttp3.ResponseBody;
@@ -27,8 +26,5 @@ public interface ApiGoogleMaps {
                                                 @Query("units") String units,
                                                 @Query("mode") String modeRoute);
 
-    @GET("json")
-    Observable<Result> getLocalAddress(@Query("latlng") String latlng,
-                                       @Query("sensor") String sensValue,
-                                       @Query("language") String language);
+
 }

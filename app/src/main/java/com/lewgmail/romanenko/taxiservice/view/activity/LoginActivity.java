@@ -37,16 +37,13 @@ import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
-import com.lewgmail.romanenko.taxiservice.model.pojo.NotificationObjAddedOrder;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
-import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterTimeDate;
 import com.lewgmail.romanenko.taxiservice.view.viewDriver.DriverAccount;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.R.attr.value;
@@ -187,7 +184,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
 
-    @OnClick(R.id.notification)
+   /* @OnClick(R.id.notification)
     public void Onclick() {
         String messageNewOrder = "12";
         NotificationObjAddedOrder notificationObjAddedOrder = new NotificationObjAddedOrder();
@@ -202,7 +199,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         notificationObjAddedOrder.setPrice(messageNewOrder);
         // new MyNotification(this).showNotification(notificationObjAddedOrder);
         // new MyNotification(this).showNotificChangeOrderStatus();
-    }
+    }*/
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {

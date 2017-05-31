@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ee9a00</color>
+    <color name="colorPrimary">#c19341</color>
     <color name="colorPrimaryDark">#ee9a00</color>
     <color name="colorAccent">#FF4081</color>
     <color name="main_color">#CD8500</color>
@@ -12,4 +12,5 @@
     <color name="black">#000000</color>
     <color name="tab_color_scrol">#fffafa</color>
     <color name="wite_transporent">#C0fafa</color>
+    <color name="gold">#ffcc80</color>
 </resources>

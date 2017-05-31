@@ -1,19 +1,20 @@
 package com.lewgmail.romanenko.taxiservice.model.dataManager;
 
-import com.lewgmail.romanenko.taxiservice.model.DTO.DataGoogleMapDTO;
-import com.lewgmail.romanenko.taxiservice.model.DTO.Mapper;
 import com.lewgmail.romanenko.taxiservice.model.api.ServicesGoogleMaps;
+import com.lewgmail.romanenko.taxiservice.model.api.ServicesLocalizeAddress;
 import com.lewgmail.romanenko.taxiservice.model.api.apiGoogleMaps.ApiGoogleMaps;
-import com.lewgmail.romanenko.taxiservice.model.pojo.pojoResponseDistance.DistanceGoogleResponse;
+import com.lewgmail.romanenko.taxiservice.model.api.apiGoogleMaps.ApiLocalizeAddress;
+import com.lewgmail.romanenko.taxiservice.model.pojo.localAddress.LocalAddress;
 import com.lewgmail.romanenko.taxiservice.presenter.DriverCustPresenter;
 import com.lewgmail.romanenko.taxiservice.view.adapters.DTORoute;
 
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.Response;
 import rx.Observable;
-import rx.functions.Func1;
 
 /**
  * Created by Lev on 28.11.2016.
@@ -33,14 +34,14 @@ public class ManagerGoogleMaps {
     public ManagerGoogleMaps(DriverCustPresenter driverCustPresenter) {
         this.driverCustPresenter = driverCustPresenter;
     }
-    public Observable<DataGoogleMapDTO> getDistance(double longitude1, double latitude1, double longitude2, double latitude2) {
+  /*  public Observable<DataGoogleMapDTO> getDistance(double longitude1, double latitude1, double longitude2, double latitude2) {
 
         ApiGoogleMaps servises = ServicesGoogleMaps.createService(ApiGoogleMaps.class);
         Observable<DistanceGoogleResponse> observer = servises.getDistace(
                 Double.valueOf(longitude1) + "," + Double.valueOf(latitude1),
                 Double.valueOf(longitude2) + "," + Double.valueOf(latitude2));
 
-        /*observer.subscribeOn(Schedulers.newThread())
+        observer.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<DistanceGoogleResponse>() {
                     @Override
@@ -64,7 +65,7 @@ public class ManagerGoogleMaps {
                         System.out.println(
                                 s.getRows().get(0).getElements().get(0).getDistance().getText());
                     }
-                });*/
+                });
 
         return observer.map(new Func1<DistanceGoogleResponse, DataGoogleMapDTO>() {
             @Override
@@ -72,7 +73,7 @@ public class ManagerGoogleMaps {
                 return new Mapper(distanceGoogleResponse).getDTO();
             }
         });
-    }
+    }*/
 
     public Observable<Response<ResponseBody>> getRoute(List<DTORoute> route) {
         ApiGoogleMaps servises = ServicesGoogleMaps.createService(ApiGoogleMaps.class);
@@ -84,14 +85,13 @@ public class ManagerGoogleMaps {
         return observer;
     }
 
-   /* public Observable<Result> getLocalAddress(){
+    public Call<LocalAddress> getLocalAddress(String latLng) {
 
-        ApiGoogleMaps servises = ServicesGoogleMaps.createService(ApiGoogleMaps.class);
-        Observable<Response<ResponseBody>> observer =
-                servises.getLocalAddress(,Locale.getDefault().getLanguage());
-        return observer;
-
-    }*/
+        ApiLocalizeAddress servises = ServicesLocalizeAddress.createService(ApiLocalizeAddress.class);
+        Call<LocalAddress> call =
+                servises.getLocalAddress(latLng, SENSOR, Locale.getDefault().getLanguage());
+        return call;
+    }
 
     private String prepareWaypoints(List<DTORoute> route) {
         String wayPoints = "";

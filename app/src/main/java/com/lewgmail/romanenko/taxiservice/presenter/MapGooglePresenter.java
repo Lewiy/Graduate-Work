@@ -52,7 +52,7 @@ public class MapGooglePresenter implements BasePresenterInterface {
             subscription.unsubscribe();
         }
 
-        Observable<DataGoogleMapDTO> observer = managerGoogleMaps.getDistance(longitude1, latitude1, longitude2, latitude2);
+      /*  Observable<DataGoogleMapDTO> observer = managerGoogleMaps.getDistance(longitude1, latitude1, longitude2, latitude2);
 
         subscription = observer
                 .subscribeOn(Schedulers.newThread())
@@ -68,7 +68,7 @@ public class MapGooglePresenter implements BasePresenterInterface {
                        /* if (e instanceof HttpException)
                             view.showError(e.getMessage().toString());
                         else
-                            view.showError(e.getMessage().toString());*/
+                            view.showError(e.getMessage().toString());
                     }
 
                     @Override
@@ -78,7 +78,7 @@ public class MapGooglePresenter implements BasePresenterInterface {
                         //  view.setDuration(dataGoogleMapDTO.getDuration());
                         //  managerOrderApiCust.calculatePrice(createRequestCalcPrice(dataGoogleMapDTO.getDistance(), customerPresenter.getView()), customerPresenter);
                     }
-                });
+                });*/
 
 
     }

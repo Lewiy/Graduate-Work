@@ -171,17 +171,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/show_account_driver"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="bottom"
                     android:layout_marginTop="15dp"
-                    android:text="@string/account_driver"
-                    android:textSize="15dp" />
+                    android:background="@drawable/main_button"
+                    android:text="@string/driver_name"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="11dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -189,7 +191,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:background="@color/more_light_gray"
+            android:background="@color/gold"
             android:focusableInTouchMode="false"
             android:isScrollContainer="false"
             android:orientation="vertical">
@@ -463,40 +465,43 @@
             android:layout_height="match_parent"
             android:layout_gravity="bottom|left"
             android:layout_weight="7"
-            android:background="@color/light_gray">
+            android:background="@color/colorPrimaryDark">
 
             <Button
                 android:id="@+id/delete_order"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:background="@drawable/main_button_white"
                 android:text="@string/delete_order"
-                android:textColor="@color/black"
-                android:textSize="13dp" />
+                android:textColor="@color/element_color"
+                android:textSize="11dp" />
 
             <Button
                 android:id="@+id/calculate_price_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="@string/calculate_price"
-                android:textColor="@color/black"
-                android:textSize="13dp" />
+                android:background="@drawable/main_button_white"
+                android:text="@string/route"
+                android:textColor="@color/element_color"
+                android:textSize="10dp" />
 
             <Button
                 android:id="@+id/add_order"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:background="@drawable/main_button_white"
                 android:text="@string/update_personal_page"
-                android:textColor="@color/black"
-                android:textSize="13dp" />
+                android:textColor="@color/element_color"
+                android:textSize="11dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

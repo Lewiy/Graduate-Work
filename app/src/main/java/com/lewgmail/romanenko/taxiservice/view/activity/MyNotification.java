@@ -14,6 +14,7 @@ import com.google.android.gms.gcm.GcmListenerService;
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.pojo.NotificationObjAddedOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.NotificationObjDriverWaiting;
+import com.lewgmail.romanenko.taxiservice.presenter.LocalizeAddress;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterTimeDate;
 
 import java.text.SimpleDateFormat;
@@ -33,6 +34,8 @@ public class MyNotification extends GcmListenerService {
     }
 
     public void showNotificAddOrder(NotificationObjAddedOrder notifObjAddedOrder) {
+        LocalizeAddress localizeAddress = new LocalizeAddress();
+
         Resources res = mContext.getResources();
 
         RemoteViews contentView = new RemoteViews(mContext.getPackageName(), R.layout.notific_new_order);
@@ -41,11 +44,18 @@ public class MyNotification extends GcmListenerService {
         if (notifObjAddedOrder.getStartTime().getTime().equals("Now"))
             contentView.setTextViewText(R.id.notific_when, notifObjAddedOrder.getStartTime().getTime());
         else
-            contentView.setTextViewText(R.id.notific_when, notifObjAddedOrder.getStartTime().getDate()
-                    + "-" + notifObjAddedOrder.getStartTime().getTime());
+            contentView.setTextViewText(R.id.notific_when,
+                    notifObjAddedOrder.getStartTime().getDate() + "-"
+                            + notifObjAddedOrder.getStartTime().getTime());
+
+        notifObjAddedOrder.setEndPoint(localizeAddress.LocalizeAddress(notifObjAddedOrder.getEndPoint()));
+        notifObjAddedOrder.setStartPoint(localizeAddress.LocalizeAddress(notifObjAddedOrder.getStartPoint()));
+
+
         contentView.setTextViewText(R.id.notific_where, notifObjAddedOrder.getStartPoint()
                 + "-" + notifObjAddedOrder.getEndPoint());
         contentView.setTextViewText(R.id.notific_price, notifObjAddedOrder.getPrice());
+
 
         this.mSimpleBuilder =
                 new NotificationCompat.Builder(mContext);
