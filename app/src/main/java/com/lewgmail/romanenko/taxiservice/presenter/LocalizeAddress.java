@@ -1,9 +1,11 @@
 package com.lewgmail.romanenko.taxiservice.presenter;
 
 import com.lewgmail.romanenko.taxiservice.model.dataManager.ManagerGoogleMaps;
+import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePoint;
 import com.lewgmail.romanenko.taxiservice.model.pojo.localAddress.LocalAddress;
 
 import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
 
@@ -30,5 +32,12 @@ public class LocalizeAddress {
             return "ERROR";
         }
         return "ERROR";
+    }
+
+    public List<RoutePoint> LocalizeAddress(List<RoutePoint> listRoute) {
+        for (RoutePoint point : listRoute) {
+            point.setStreet(LocalizeAddress(point.getLatitude() + "," + point.getLongtitude()));
+        }
+        return listRoute;
     }
 }

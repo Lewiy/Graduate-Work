@@ -10,9 +10,11 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.MarkOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.Order;
 import com.lewgmail.romanenko.taxiservice.model.pojo.OrderId;
 import com.lewgmail.romanenko.taxiservice.presenter.DriverCustPresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.LocalizeAddress;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.ResponseBody;
 import retrofit2.Response;
@@ -64,7 +66,13 @@ public class ManagerOrderApiDrivCust {
                         mDriverCustPresenter.setOrderSpecificId(orderId);
                     }
                 });*/
-        return observer;
+        return observer.map(new Func1<GetOrder, GetOrder>() {
+            @Override
+            public GetOrder call(GetOrder order) {
+                order.setRoutePoint(new LocalizeAddress().LocalizeAddress(order.getRoutePoint()));
+                return order;
+            }
+        });
     }
 
     public Observable<Response<ResponseBody>> acceptRefuseDoneOrder(long orderId,MarkOrder markOrder) {
@@ -81,9 +89,14 @@ public class ManagerOrderApiDrivCust {
     }
 
     public Observable<HashMap<String, List<String>>> getAllOrdersType(String orderStatus) {
+        boolean typeAddressLocal = false;
+        if (Locale.getDefault().getDisplayLanguage() != "en") {
+            typeAddressLocal = true;
+        }
 
         OrderApiDrivCust servises = Services.createService(OrderApiDrivCust.class);
-        Observable<List<Order>> observer = servises.getAllOrderType(LoggedUser.getmInstance().getToken(), orderStatus);
+        Observable<List<Order>> observer = servises.getAllOrderType(LoggedUser.getmInstance().getToken(), orderStatus,
+                typeAddressLocal);
 
        /* observer.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

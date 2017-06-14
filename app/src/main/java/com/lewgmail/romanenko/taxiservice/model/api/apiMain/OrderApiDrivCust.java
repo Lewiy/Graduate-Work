@@ -29,5 +29,6 @@ public interface OrderApiDrivCust {
                                                    @Body MarkOrder markOrder);
 
     @GET("order")
-    Observable<List<Order>> getAllOrderType(@Header("Authorization") String authorization, @Query("orderStatus") String orderStatus);
+    Observable<List<Order>> getAllOrderType(@Header("Authorization") String authorization, @Query("orderStatus") String orderStatus,
+                                            @Query("use-coordinates") boolean value);
 }

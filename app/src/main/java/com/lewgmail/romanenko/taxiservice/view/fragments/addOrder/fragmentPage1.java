@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,8 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
 
     @BindView(R.id.start_point_act)
     EditText startPointText;
-
+    @BindView(R.id.end_point_act)
+    EditText endPointText;
 
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
 
@@ -118,6 +120,18 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         showHideClock();
     }
 
+    private boolean check2Addresses() {
+
+        if (startPointText.getText().toString().matches("")) {
+            startPointText.setError(getResources().getString(R.string.not_inputted_2_point));
+            return false;
+        }
+        if (endPointText.getText().toString().matches("")) {
+            endPointText.setError(getResources().getString(R.string.not_inputted_2_point));
+            return false;
+        } else return true;
+    }
+
     @OnClick(R.id.point1_map)
     public void onClickMap() {
         startMapActivity(R.id.start_point_act);
@@ -165,6 +179,7 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
 
     @OnClick(R.id.add_address_btn)
     public void addAddress() {
+        if (check2Addresses())
         addAddressPoint();
     }
 
@@ -264,7 +279,8 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
                             @Override
                             public void onDismiss(ListView listView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-
+                                    route.setLayoutParams(new LinearLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT,
+                                            (route.getAdapter().getCount() - 1) * 200));
                                     addresess.remove(position);
                                     addresessAdapter.notifyDataSetChanged();
                                     addOrderGatherDataFirstWindow.removeAddress(position);
@@ -275,7 +291,6 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         //  addresessAdapter.setActivityCallBack();
         route.setAdapter(addresessAdapter);
         route.setOnTouchListener(touchListener);
-
     }
 
     private void showHideClock() {
@@ -304,7 +319,10 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     private void addAddressPoint() {
         //run
         //  addresessAdapter.add("sdfklnfg");
+        route.setLayoutParams(new LinearLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT,
+                (route.getAdapter().getCount() + 1) * 200));
         addOrderGatherDataFirstWindow.runAutoComplete(addresessAdapter);
+
     }
 
 

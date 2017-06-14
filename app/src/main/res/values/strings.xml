@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">TaxiService</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="app_name">Taxi</string>
+    <string name="title_activity_login">Taxi</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -314,4 +314,7 @@
     <string name="formatted_place_data">
         Name: %1$s\nAddress: %2$s\nPhone: %3$s\nWebsite: %4$s\nRating: %5$s\nId: %6$s\n
     </string>
+
+
+    <string name="not_inputted_2_point">Required point not entered</string>
 </resources>

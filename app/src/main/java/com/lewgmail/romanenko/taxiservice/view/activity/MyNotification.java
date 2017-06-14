@@ -39,7 +39,7 @@ public class MyNotification extends GcmListenerService {
         Resources res = mContext.getResources();
 
         RemoteViews contentView = new RemoteViews(mContext.getPackageName(), R.layout.notific_new_order);
-        contentView.setImageViewResource(R.id.notific_image, R.drawable.default_license);
+        // contentView.setImageViewResource(R.id.notific_image, R.drawable.main_theme);
         contentView.setTextViewText(R.id.notif_time_resive, getCurrentDate());
         if (notifObjAddedOrder.getStartTime().getTime().equals("Now"))
             contentView.setTextViewText(R.id.notific_when, notifObjAddedOrder.getStartTime().getTime());
@@ -85,7 +85,7 @@ public class MyNotification extends GcmListenerService {
         Resources res = mContext.getResources();
 
         RemoteViews contentView = new RemoteViews(mContext.getPackageName(), R.layout.notific_changed_order_status);
-        contentView.setImageViewResource(R.id.notific_image, R.drawable.default_license);
+        // contentView.setImageViewResource(R.id.notific_image, R.drawable.default_license);
         contentView.setTextViewText(R.id.notif_time_resive, getCurrentDate());
         contentView.setTextViewText(R.id.notific_changed_status, orderStatus);
         contentView.setTextViewText(R.id.notific_name, name);
@@ -118,7 +118,7 @@ public class MyNotification extends GcmListenerService {
         Resources res = mContext.getResources();
 
         RemoteViews contentView = new RemoteViews(mContext.getPackageName(), R.layout.notific_driver_is_waiting);
-        contentView.setImageViewResource(R.id.notific_image, R.drawable.default_license);
+        //  contentView.setImageViewResource(R.id.notific_image, R.drawable.default_license);
         contentView.setTextViewText(R.id.notif_time_resive, getCurrentDate());
         contentView.setTextViewText(R.id.notific_plate_number, notifObjDriverWaiting.getPlateNumber());
         contentView.setTextViewText(R.id.notific_model, notifObjDriverWaiting.getModel());

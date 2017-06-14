@@ -9,6 +9,12 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class Order {
 
+    @SerializedName("startPointCoordinates")
+    @Expose(deserialize = false)
+    ListOrdersCordinates startPointCords;
+    @SerializedName("endPointCoordinates")
+    @Expose(deserialize = false)
+    ListOrdersCordinates endPointCords;
     @SerializedName("orderId")
     @Expose
     private long orderId;
@@ -16,10 +22,10 @@ public class Order {
     @Expose
     private String startTime;
     @SerializedName("startPoint")
-    @Expose
+    @Expose(deserialize = false)
     private String startPoint;
     @SerializedName("endPoint")
-    @Expose
+    @Expose(deserialize = false)
     private String endPoint;
     @SerializedName("price")
     @Expose
@@ -28,6 +34,13 @@ public class Order {
     @Expose
     private String status;
 
+    public ListOrdersCordinates getStartPointCords() {
+        return startPointCords;
+    }
+
+    public ListOrdersCordinates getEndPointCords() {
+        return endPointCords;
+    }
 
     public String getStatus() {
         return status;

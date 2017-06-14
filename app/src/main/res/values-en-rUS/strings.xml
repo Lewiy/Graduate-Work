@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TaxiService</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">TaxiService</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

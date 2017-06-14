@@ -197,8 +197,9 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
         RoutePointUpdateOrder routePointN1 = new RoutePointUpdateOrder();
         addapterListAddresses = fragmentObj1Update.getAddressAdapter();
         addapterListAddresses.setActivityCallBack(this);
-        fragmentObj1Update.setFirstPointOfRoute(addressBilder(resRoutePoints.get(0).getStreet()
-                , resRoutePoints.get(0).getHouseNumber(), resRoutePoints.get(0).getCity()));
+        fragmentObj1Update.setFirstPointOfRoute(resRoutePoints.get(0).getStreet());
+        /*fragmentObj1Update.setFirstPointOfRoute(addressBilder(resRoutePoints.get(0).getStreet()
+                , resRoutePoints.get(0).getHouseNumber(), resRoutePoints.get(0).getCity()));*/
         routePointN1.setLatitude(resRoutePoints.get(0).getLatitude());
         routePointN1.setLongtitude(resRoutePoints.get(0).getLongtitude());
         routePointN1.setRoutePointId(resRoutePoints.get(0).getRoutePointId());

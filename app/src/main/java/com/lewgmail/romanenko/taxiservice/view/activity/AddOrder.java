@@ -293,6 +293,7 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
                         routePoints.add(routePointN);
                     else routePoints.set(positionFirsSeconAdd, routePointN);
                     editText.setText(place.getAddress());
+                    editText.setError(null);
 
                 } else if (typeOfViewElement.equals("List")) {
 
