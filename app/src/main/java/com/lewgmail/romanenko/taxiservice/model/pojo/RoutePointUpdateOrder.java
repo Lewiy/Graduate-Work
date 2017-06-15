@@ -16,17 +16,17 @@ public class RoutePointUpdateOrder {
     private String longtitude;
     @SerializedName("routePointId")
     @Expose
-    private long routePointId;
+    private Long routePointId;
 
     @SerializedName("routePointIndex")
     @Expose
     private Long routePointIndex;
 
-    public long getRoutePointId() {
+    public Long getRoutePointId() {
         return routePointId;
     }
 
-    public void setRoutePointId(long routePointId) {
+    public void setRoutePointId(Long routePointId) {
         this.routePointId = routePointId;
     }
 

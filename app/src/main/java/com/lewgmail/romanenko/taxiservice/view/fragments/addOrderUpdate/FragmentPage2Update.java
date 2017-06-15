@@ -149,7 +149,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
 
     @OnClick(R.id.delete_order)
     public void onClickDeleteOrder() {
-        addOrderGatherDataSecondWindow.deleteOrder();
+        addOrderGatherDataSecondWindow.deleteOrder(getContext());
     }
 
     @OnClick(R.id.add_order)
@@ -378,7 +378,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
     }
 
     public void setBAGGAGE(int pos) {
-        spinnerAdditBaggage.setSelection(pos + 1);
+        spinnerAdditBaggage.setSelection(pos);
     }
 
     public void setTYPERECKONING(int pos) {
@@ -386,15 +386,15 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
     }
 
     public void setEXTRAPRICE(int pos) {
-        spinnerExtraPrice.setSelection(pos + 1);
+        spinnerExtraPrice.setSelection(pos);
     }
 
     public void setPETS(int pos) {
-        spinnerPets.setSelection(pos + 1);
+        spinnerPets.setSelection(pos);
     }
 
     public void setDRIVERSERVICE(int pos) {
-        spinnerDriverService.setSelection(pos + 1);
+        spinnerDriverService.setSelection(pos);
     }
 
     public void setTYPECAR(int pos) {
@@ -424,7 +424,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
 
         void runReqCalculayePrice(TextView valuePrice);
 
-        void deleteOrder();
+        void deleteOrder(Context contextFragm2);
 
         void changeOrderStatus(String orderStatus);
     }

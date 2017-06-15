@@ -34,6 +34,9 @@ import com.lewgmail.romanenko.taxiservice.view.fragments.addOrder.FragmentPage2;
 
 import java.util.ArrayList;
 
+import static com.lewgmail.romanenko.taxiservice.R.id.end_point_act;
+import static com.lewgmail.romanenko.taxiservice.R.id.start_point_act;
+
 public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrderGatherDataFirstWindow,
         FragmentPage2.AddOrderGatherDataSecondWindow, AddOrderInterface {
 
@@ -186,12 +189,28 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
     @Override
     public void runReqaddOrder(Context contextFragm2) {
         this.contextFragm2 = contextFragm2;
+
+        if (check2PointOfRoute(contextFragm2))
         customerPresenter.addOrder();
     }
 
+    private boolean check2PointOfRoute(Context contextFragm2) {
+        EditText firstPoint = (EditText) fragmentObj1.getView().findViewById(start_point_act);
+        EditText secondPoint = (EditText) fragmentObj1.getView().findViewById(end_point_act);
+        if (firstPoint.getText().toString().matches("") ||
+                secondPoint.getText().toString().matches("")) {
+            Toast.makeText(contextFragm2, getResources().getString(R.string.not_inputted_2_point),
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        } else
+            return true;
+
+    }
+
     @Override
-    public void runReqCalculayePrice(TextView valuePrice) {
+    public void runReqCalculayePrice(TextView valuePrice, Context contextFragm2) {
         this.valuePrice = valuePrice;
+        if (check2PointOfRoute(contextFragm2))
         customerPresenter.calculatePrice();
     }
 

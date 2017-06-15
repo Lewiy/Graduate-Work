@@ -3,6 +3,7 @@ package com.lewgmail.romanenko.taxiservice.view.dialogFragment;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 
 import java.util.Calendar;
 
@@ -24,7 +25,7 @@ public class TimePickerFragment extends android.support.v4.app.DialogFragment {
         int minutes = c.get(Calendar.MINUTE);
         int hours = c.get(Calendar.HOUR);
 
-        return new TimePickerDialog(getActivity(), ondateSet, minutes, hours, true);
+        return new TimePickerDialog(getActivity(), ondateSet, minutes, hours, DateFormat.is24HourFormat(getActivity()));
     }
 
 }

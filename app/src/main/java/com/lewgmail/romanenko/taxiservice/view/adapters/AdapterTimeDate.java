@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.lewgmail.romanenko.taxiservice.R;
 
+import java.util.Locale;
+
 /**
  * Created by Lev on 16.05.2017.
  */
@@ -24,6 +26,11 @@ public class AdapterTimeDate {
         devideDataTime();
     }
 
+    public AdapterTimeDate(String dateTime) {
+        this.dateTime = dateTime;
+        devideDataTime1();
+    }
+
     public String getShortDate() {
         return shortDate;
     }
@@ -38,6 +45,21 @@ public class AdapterTimeDate {
         shortDate = date.substring(date.indexOf("-") + 1);
         if (time.equals("00:00"))
             time = context.getResources().getString(R.string.time_order_for_now);
+
+    }
+
+    private void devideDataTime1() {
+        date = dateTime.substring(0, dateTime.indexOf("T") - 1);
+        time = dateTime.substring(dateTime.indexOf("T") + 1, 16);
+        shortDate = date.substring(date.indexOf("-") + 1);
+        String locale = Locale.getDefault().getLanguage();
+        if (time.equals("00:00"))
+            if (locale.equals("en"))
+                time = "now";
+        if (locale.equals("ru"))
+            time = "Сейчас";
+        if (locale.equals("ua"))
+            time = "Зараз";
 
     }
 

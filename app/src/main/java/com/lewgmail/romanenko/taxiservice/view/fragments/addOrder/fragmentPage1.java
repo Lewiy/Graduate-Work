@@ -193,7 +193,7 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         TimePickerDialog.OnTimeSetListener onTimeListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                time_text.setText(Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
+                time_text.setText(convertTimeToShow(hourOfDay, minute));
 
                 addOrderGatherDataFirstWindow.setActivityStartTime(
                         convertDateTime(Integer.toString(hourOfDay) + ":" + Integer.toString(minute), date));
@@ -202,6 +202,24 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
         TimePickerFragment time = new TimePickerFragment();
         time.setCallBack(onTimeListener);
         time.show(getFragmentManager(), "Time Picker");
+    }
+
+    private String convertTimeToShow(int hour, int minute) {
+        String formattedTime = "";
+        String sHour = "00";
+        if (hour < 10) {
+            sHour = "0" + hour;
+        } else {
+            sHour = String.valueOf(hour);
+        }
+        String sMinute = "00";
+        if (minute < 10) {
+            sMinute = "0" + minute;
+        } else {
+            sMinute = String.valueOf(minute);
+        }
+
+        return formattedTime = sHour + ":" + sMinute;
     }
 
     private String convertDateTime(String dateTime, int dateFlag) {

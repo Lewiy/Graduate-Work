@@ -115,7 +115,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
     @OnClick(R.id.calculate_price_button)
     public void onClickCalculatePrice() {
         addOrderGatherDataSecondWindow.setActivityAdditionalRequirements(additionalRequirements);
-        addOrderGatherDataSecondWindow.runReqCalculayePrice(valuePrice);
+        addOrderGatherDataSecondWindow.runReqCalculayePrice(valuePrice, getContext());
     }
 
     public String getComment() {
@@ -306,6 +306,6 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
 
         void runReqaddOrder(Context contextFragm2);
 
-        void runReqCalculayePrice(TextView valuePrice);
+        void runReqCalculayePrice(TextView valuePrice, Context contextFragm2);
     }
 }

@@ -327,7 +327,8 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
                 fragmentObj2Update.setTYPERECKONING(additionalRequirementNs.get(searchAdditionReq(idRequirement)).getReqValueId());
                 break;
             case 3:
-                fragmentObj2Update.setPETS(additionalRequirementNs.get(searchAdditionReq(idRequirement)).getReqValueId());
+                int a = additionalRequirementNs.get(searchAdditionReq(idRequirement)).getReqValueId();
+                fragmentObj2Update.setPETS(a);
                 break;
             case 4:
                 fragmentObj2Update.setBAGGAGE(additionalRequirementNs.get(searchAdditionReq(idRequirement)).getReqValueId());
@@ -401,7 +402,8 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     }
 
     @Override
-    public void deleteOrder() {
+    public void deleteOrder(Context contextFragm2) {
+        this.contextFragm2 = contextFragm2;
         customerPresenter.deleteOrder(orderId);
     }
 
