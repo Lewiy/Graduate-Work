@@ -16,6 +16,7 @@ import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UserRegistration;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UserRegistrationCar;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.adapters.AdapterCodeFromServer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -251,13 +252,13 @@ public class RegistrationActivity extends AppCompatActivity implements UserOpera
     }
 
     @Override
-    public void showError(String error) {
-        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    public void showError(int code) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void doneOperation(int responseCod, String done) {
+    public void doneOperation(int responseCod) {
         progress.dismiss();
-        Toast.makeText(this, done, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responseCod, this), Toast.LENGTH_LONG).show();
     }
 }

@@ -15,6 +15,7 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.MobileNumber;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UserRegistration;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UserRegistrationCar;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.adapters.AdapterCodeFromServer;
 import com.lewgmail.romanenko.taxiservice.view.fragments.FragmentDriverRegist;
 import com.lewgmail.romanenko.taxiservice.view.fragments.FragmentDriverRegistLicen;
 import com.lewgmail.romanenko.taxiservice.view.fragments.FragmentPersonRegist;
@@ -145,13 +146,13 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
     }
 
     @Override
-    public void showError(String error) {
-        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    public void showError(int code) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void doneOperation(int responceCod, String done) {
-        Toast.makeText(this, done, Toast.LENGTH_SHORT).show();
+    public void doneOperation(int responceCod) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responceCod, this), Toast.LENGTH_SHORT).show();
         if (responceCod == 200)
             runLogInActyvity();
     }

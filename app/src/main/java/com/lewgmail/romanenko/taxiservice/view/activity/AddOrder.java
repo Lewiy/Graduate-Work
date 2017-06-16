@@ -26,6 +26,7 @@ import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointN;
 import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.adapters.AdapterCodeFromServer;
 import com.lewgmail.romanenko.taxiservice.view.activity.elementsOfActivity.SlidingTabLayout;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
 import com.lewgmail.romanenko.taxiservice.view.adapters.DTORoute;
@@ -403,9 +404,10 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
         valuePrice.setText(text);
     }*/
 
-    public void responseAddorder(String text) {
+    public void responseAddorder(int code) {
 
-        Toast.makeText(contextFragm2, "Code of Operation:" + text, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(contextFragm2, "Code of Operation:" + text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(contextFragm2, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -430,8 +432,8 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
         //  fragmentObj1.se
     }
 
-    public void frag2responseError(String string) {
-        fragmentObj2.setError(string);
+    public void frag2responseError(int code) {
+        fragmentObj2.setError(AdapterCodeFromServer.AdapterCode(code, this));
     }
 
     /*

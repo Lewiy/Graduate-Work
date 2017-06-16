@@ -29,6 +29,7 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePoint;
 import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointUpdateOrder;
 import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.DriverCustPresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.adapters.AdapterCodeFromServer;
 import com.lewgmail.romanenko.taxiservice.view.activity.elementsOfActivity.SlidingTabLayout;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterTimeDate;
@@ -184,8 +185,8 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     Responses for getOrderSpecificID/////////////////////////////////////////////////////
      */
 
-    public void responseError(String error) {
-        fragmentObj1Update.setError(error);
+    public void responseError(int code) {
+        fragmentObj1Update.setError(AdapterCodeFromServer.AdapterCode(code, this));
     }
 
     public void responseOrderId(long orderId) {
@@ -600,9 +601,10 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
         valuePrice.setText(text);
     }*/
 
-    public void responseAddorder(String text) {
+    public void responseAddorder(int code) {
 
-        Toast.makeText(contextFragm2, "Code of Operation:" + text, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(contextFragm2, "Code of Operation:" + text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(contextFragm2, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
 
     }
 

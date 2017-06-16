@@ -71,12 +71,13 @@ public class CustomerPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewAddOrder.responseAddorder(e.getMessage());
+                            viewAddOrder.responseAddorder(((HttpException) e).code());
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        viewAddOrder.responseAddorder(new String(Integer.toString(responseBodyResponse.code())));
+                        // viewAddOrder.responseAddorder(new String(Integer.toString(responseBodyResponse.code())));
+                        viewAddOrder.responseAddorder(responseBodyResponse.code());
                     }
                 });
 
@@ -97,8 +98,8 @@ public class CustomerPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (viewAddOrder != null)
-                        viewAddOrder.frag2responseError(e.toString());
-                        else viewAddOrderUpdate.responseError(e.toString());
+                            viewAddOrder.frag2responseError(((HttpException) e).code());
+                        else viewAddOrderUpdate.responseError(((HttpException) e).code());
                     }
 
                     @Override
@@ -130,12 +131,12 @@ public class CustomerPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewAddOrderUpdate.responseError(e.toString());
+                            viewAddOrderUpdate.responseError(((HttpException) e).code());
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        viewAddOrderUpdate.responseAddorder(new String(Integer.toString(responseBodyResponse.code())));
+                        viewAddOrderUpdate.responseAddorder(responseBodyResponse.code());
                     }
                 });
     }
@@ -153,12 +154,12 @@ public class CustomerPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewAddOrderUpdate.responseAddorder(e.getMessage());
+                            viewAddOrderUpdate.responseAddorder(((HttpException) e).code());
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        viewAddOrderUpdate.responseAddorder(new String(Integer.toString(responseBodyResponse.code())));
+                        viewAddOrderUpdate.responseAddorder(responseBodyResponse.code());
                     }
                 });
     }
@@ -191,9 +192,9 @@ public class CustomerPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            view.showError(e.getMessage().toString());
+                            view.showError(((HttpException) e).code());
                         else
-                            view.showError(e.getMessage().toString());
+                            view.showError(((HttpException) e).code());
                     }
 
                     @Override

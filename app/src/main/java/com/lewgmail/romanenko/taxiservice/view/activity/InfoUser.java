@@ -35,9 +35,9 @@ public interface InfoUser {
 
     void setUserDriverId();
 
-    void showError(String error);
+    void showError(int code);
 
-    void doneOperation(String done);
+    void doneOperation(int code);
 
     void setCodeLicense(String code);
 

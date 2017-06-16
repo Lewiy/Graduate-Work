@@ -18,6 +18,7 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.MobileNumbers;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UpdateUser;
 import com.lewgmail.romanenko.taxiservice.model.pojo.UpdateUserDriverLicense;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.adapters.AdapterCodeFromServer;
 import com.lewgmail.romanenko.taxiservice.view.ValidationOfFields;
 import com.lewgmail.romanenko.taxiservice.view.activity.InfoUser;
 
@@ -262,13 +263,13 @@ public class EditProfileFragmentDriver extends android.support.v4.app.Fragment i
     }
 
     @Override
-    public void showError(String error) {
-        Toast.makeText(this.getActivity(), error, Toast.LENGTH_SHORT).show();
+    public void showError(int code) {
+        Toast.makeText(this.getActivity(), AdapterCodeFromServer.AdapterCode(code, this.getActivity()), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void doneOperation(String done) {
-        Toast.makeText(this.getActivity(), done, Toast.LENGTH_SHORT).show();
+    public void doneOperation(int code) {
+        Toast.makeText(this.getActivity(), AdapterCodeFromServer.AdapterCode(code, this.getActivity()), Toast.LENGTH_SHORT).show();
     }
 
     @Override

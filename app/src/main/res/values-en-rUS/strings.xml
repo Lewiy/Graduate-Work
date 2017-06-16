@@ -10,7 +10,7 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password or email is incorrect</string>
+    <string name="error_incorrect_password">Password or email is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
@@ -143,7 +143,7 @@
     <string name="without_requirement">Without additional requir</string>
     <string name="spinner_change_sing">Change status menu</string>
     <string name="title_info_order_driver"> ORDER INFO </string>
-    <string name="customer_account_info">Customer info</string>
+    <string name="customer_account_info">Cust info</string>
     <string-array name="change_status_driver_new">
         <item>Nothing selected</item>
         <item>Accepted</item>
@@ -198,8 +198,8 @@
     <!-- additional  requirements-->
     <string-array name="type_car">
         <item>Type of car</item>
-        <item>Track</item>
         <item>Passenger car</item>
+        <item>Track</item>
         <item>Mini bus</item>
     </string-array>
     <string-array name="type_reconing">
@@ -209,13 +209,13 @@
     </string-array>
     <string-array name="type_pets">
         <item>Pets</item>
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
     <string-array name="type_baggage">
         <item>Big baggage</item>
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
     <string-array name="type_extra_price">
         <item>Extra price</item>
@@ -228,8 +228,8 @@
     </string-array>
     <string-array name="type_driver_services">
         <item>Driver services</item>
-        <item>Yes</item>
         <item>No</item>
+        <item>Yes</item>
     </string-array>
     <string-array name="type_number_passengers">
         <item>Number of passengers</item>

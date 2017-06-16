@@ -86,7 +86,8 @@ public class DriverCustPresenter implements BasePresenterInterface {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewAddOrderUpdate.responseError("Code:" + ((HttpException) e).code() + "Message:" + e.getMessage());
+                            //viewAddOrderUpdate.responseError("Code:" + ((HttpException) e).code() + "Message:" + e.getMessage());
+                            viewAddOrderUpdate.responseError(((HttpException) e).code());
                         //  else
                         //  mCustomerPresenter.onFinishRequest(((HttpException) e).code(), e.getMessage());
                         //   viewAddOrderUpdate.showError(e.getMessage());
@@ -194,13 +195,13 @@ public class DriverCustPresenter implements BasePresenterInterface {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewAddOrderUpdate.responseError("Code:" + ((HttpException) e).code() + "Message:" + e.getMessage());
+                            viewAddOrderUpdate.responseError(((HttpException) e).code());
 
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        viewAddOrderUpdate.responseError("Code:" + responseBodyResponse.code());
+                        viewAddOrderUpdate.responseError(responseBodyResponse.code());
                         if (responseBodyResponse.code() != 200)
                             viewAddOrderUpdate.resStatusOrderNotChanged();
                     }

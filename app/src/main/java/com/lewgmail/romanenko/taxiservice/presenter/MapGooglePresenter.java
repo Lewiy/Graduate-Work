@@ -134,7 +134,7 @@ public class MapGooglePresenter implements BasePresenterInterface {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            mapActivityView.showError("Code:" + ((HttpException) e).code() + "Message:" + e.getMessage());
+                            mapActivityView.showError(((HttpException) e).code());
 
                     }
 

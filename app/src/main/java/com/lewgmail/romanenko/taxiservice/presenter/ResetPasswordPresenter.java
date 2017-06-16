@@ -45,11 +45,9 @@ public class ResetPasswordPresenter {
                         if (e instanceof HttpException) {
                             HttpException exception = (HttpException) e;
                             Response response = exception.response();
-                            try {
-                                resetPasswordView.showError(response.errorBody().string());
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
+
+                            resetPasswordView.showError(response.code());
+
                         }
 
                     }
@@ -81,12 +79,12 @@ public class ResetPasswordPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            resetPasswordView.showError(e.toString());
+                            resetPasswordView.showError(((HttpException) e).code());
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBody) {
-                        resetPasswordView.doneOperation(responseBody.code(), new String(Integer.toString(responseBody.code())));
+                        resetPasswordView.doneOperation(responseBody.code());
                     }
                 });
     }

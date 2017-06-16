@@ -22,6 +22,7 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.AdditionalRequirementN;
 import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePoint;
 import com.lewgmail.romanenko.taxiservice.model.pojo.RoutePointUpdateOrder;
 import com.lewgmail.romanenko.taxiservice.presenter.LoadOrderForDriverPresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.adapters.AdapterCodeFromServer;
 import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderInterface;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAdditionalReqDriverView;
@@ -144,9 +145,9 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
 
     public void setAdditionalRequirements(List<AdditionalRequirementN> additionalRequirementN) {
         typeCar.setText(AdapterAdditionalReqDriverView.getReq(1, additionalRequirementN.get(0).getReqValueId(), this));
-        reckoning.setText(AdapterAdditionalReqDriverView.getReq(2, additionalRequirementN.get(1).getReqValueId(), this));
-        pets.setText(AdapterAdditionalReqDriverView.getReq(3, additionalRequirementN.get(2).getReqValueId(), this));
-        baggage.setText(AdapterAdditionalReqDriverView.getReq(4, additionalRequirementN.get(3).getReqValueId(), this));
+        reckoning.setText(AdapterAdditionalReqDriverView.getReq(2, additionalRequirementN.get(1).getReqValueId() + 1, this));
+        pets.setText(AdapterAdditionalReqDriverView.getReq(3, additionalRequirementN.get(2).getReqValueId() + 1, this));
+        baggage.setText(AdapterAdditionalReqDriverView.getReq(4, additionalRequirementN.get(3).getReqValueId() + 1, this));
         extraPrice.setText(AdapterAdditionalReqDriverView.getReq(5, additionalRequirementN.get(4).getReqValueId(), this));
         driverService.setText(AdapterAdditionalReqDriverView.getReq(6, additionalRequirementN.get(5).getReqValueId(), this));
         numberOfPassengers.setText(AdapterAdditionalReqDriverView.getReq(7, additionalRequirementN.get(6).getReqValueId(), this));
@@ -192,6 +193,7 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
             routePointN3.setRoutePointIndex(new Long(0));
             //route.add(routePointN3);
         }
+        progress.dismiss();
     }
 
     @Override
@@ -359,8 +361,9 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
     }
 
     @Override
-    public void showError(String error) {
-        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    public void showError(int code) {
+        //Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
     }
 
     private String addressBilder(String street, String numberOfHause, String citi) {

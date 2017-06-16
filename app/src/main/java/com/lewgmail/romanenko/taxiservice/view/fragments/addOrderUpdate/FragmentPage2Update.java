@@ -299,13 +299,21 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
             boolean flag = true;
             AdditionalRequirementN additionalRequirementN = new AdditionalRequirementN();
             additionalRequirementN.setReqId(typeRequirements);
+            if (typeRequirements == 7 || typeRequirements == 5)
             additionalRequirementN.setReqValueId(pos);
+            else
+                additionalRequirementN.setReqValueId(pos - 1);
+            int index = 0;
             for (AdditionalRequirementN i : additionalRequirements) {
-                if (i.getReqId() == typeRequirements)
+                if (i.getReqId() == typeRequirements) {
                     flag = false;
+                    index = additionalRequirements.indexOf(i);
+                }
             }
             if (flag)
                 additionalRequirements.add(additionalRequirementN);
+            if (!flag)
+                additionalRequirements.set(index, additionalRequirementN);
         }
     }
 
@@ -379,7 +387,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
     }
 
     public void setBAGGAGE(int pos) {
-        spinnerAdditBaggage.setSelection(pos);
+        spinnerAdditBaggage.setSelection(pos + 1);
     }
 
     public void setTYPERECKONING(int pos) {
@@ -391,11 +399,11 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
     }
 
     public void setPETS(int pos) {
-        spinnerPets.setSelection(pos);
+        spinnerPets.setSelection(pos + 1);
     }
 
     public void setDRIVERSERVICE(int pos) {
-        spinnerDriverService.setSelection(pos);
+        spinnerDriverService.setSelection(pos + 1);
     }
 
     public void setTYPECAR(int pos) {
@@ -403,7 +411,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
     }
 
     public void setNUMBERPASSENGERS(int pos) {
-        spinnerNumberPassenger.setSelection(pos + 1);
+        spinnerNumberPassenger.setSelection(pos);
     }
 
     public void setSpinnerNotChangedStatus() {

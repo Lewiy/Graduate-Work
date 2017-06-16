@@ -39,6 +39,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.presenter.MapGooglePresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.adapters.AdapterCodeFromServer;
 import com.lewgmail.romanenko.taxiservice.view.GMapV2Direction;
 import com.lewgmail.romanenko.taxiservice.view.adapters.DTORoute;
 
@@ -289,10 +290,10 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
 
     ///////////////////////////////////// Up date View  ////////////////////////////////////
     @Override
-    public void showError(String error) {
+    public void showError(int code) {
         Toast.makeText(
                 MapActivity.this,
-                error,
+                AdapterCodeFromServer.AdapterCode(code, this),
                 Toast.LENGTH_LONG).show();
     }
 

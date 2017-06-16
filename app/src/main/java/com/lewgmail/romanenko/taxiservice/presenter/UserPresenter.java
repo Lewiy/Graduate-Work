@@ -122,16 +122,16 @@ public class UserPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            view2.showError(e.getMessage().toString());
+                            view2.showError(((HttpException) e).code());
                         else
-                            view2.showError(e.getMessage().toString());
+                            view2.showError(((HttpException) e).code());
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         Integer.toString(responseBodyResponse.code());
                         responseBodyResponse.message().toString();
-                        view2.doneOperation(responseBodyResponse.code(), Integer.toString(responseBodyResponse.code()) + "successfully");
+                        view2.doneOperation(responseBodyResponse.code());
                     }
                 });
     }
@@ -152,16 +152,16 @@ public class UserPresenter {
                     public void onError(Throwable e) {
 
                         if (e instanceof HttpException)
-                            view.showError(e.getMessage().toString());
+                            view.showError(((HttpException) e).code());
                         else
-                            view.showError(e.getMessage().toString());
+                            view.showError(((HttpException) e).code());
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         Integer.toString(responseBodyResponse.code());
                         responseBodyResponse.message().toString();
-                        view.showError(Integer.toString(responseBodyResponse.code()) + "Done");
+                        view.showError(responseBodyResponse.code());
 
                     }
                 });
@@ -251,16 +251,16 @@ public class UserPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            view2.showError(e.getMessage().toString());
+                            view2.showError(((HttpException) e).code());
                         else
-                            view2.showError(e.getMessage().toString());
+                            view2.showError(((HttpException) e).code());
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         Integer.toString(responseBodyResponse.code());
                         responseBodyResponse.message().toString();
-                        view2.doneOperation(responseBodyResponse.code(), Integer.toString(responseBodyResponse.code()) + "Done");
+                        view2.doneOperation(responseBodyResponse.code());
                     }
                 });
     }
@@ -279,9 +279,9 @@ public class UserPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            view2.showError(e.getMessage().toString());
+                            view2.showError(((HttpException) e).code());
                         else
-                            view2.showError(e.getMessage().toString());
+                            view2.showError(((HttpException) e).code());
                     }
 
                     @Override
@@ -307,9 +307,9 @@ public class UserPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            view.showError(e.getMessage().toString());
+                            view.showError(((HttpException) e).code());
                         else
-                            view.showError(e.getMessage().toString());
+                            view.showError(((HttpException) e).code());
                     }
 
                     @Override
@@ -339,9 +339,10 @@ public class UserPresenter {
                             /*for (MobileNumbers number: user.getMobileNumbers()) {
                                 view.setUserMobileId(user.getMobileNumbers().get(0).getIdMobileNumber());
                             }*/
-
-                        view.setExpirationTime(user.getDriverLicense().getExpirationTime());
-                        view.setCodeLicense(user.getDriverLicense().getCode());
+                        if (LoggedUser.getmInstance().getUserType().equals("TAXI_DRIVER")) {
+                            view.setExpirationTime(user.getDriverLicense().getExpirationTime());
+                            view.setCodeLicense(user.getDriverLicense().getCode());
+                        }
                     }
                 });
     }

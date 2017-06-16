@@ -39,13 +39,13 @@ public class SettinNotificPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewSettings.showError("Code:" + ((HttpException) e).code() + "Message:" + e.getMessage());
+                            viewSettings.showError(((HttpException) e).code());
 
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        viewSettings.showError("Code:" + responseBodyResponse.code());
+                        viewSettings.showError(responseBodyResponse.code());
                        /* if(responseBodyResponse.code() != 200)
                             orderInfView.resStatusOrderNotChanged();*/
                     }
@@ -65,7 +65,7 @@ public class SettinNotificPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewSettings.showError("Code:" + ((HttpException) e).code() + "Message:" + e.getMessage());
+                            viewSettings.showError(((HttpException) e).code());
 
                     }
 

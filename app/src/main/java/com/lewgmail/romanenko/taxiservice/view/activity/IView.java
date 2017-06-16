@@ -6,5 +6,5 @@ package com.lewgmail.romanenko.taxiservice.view.activity;
 
 public interface IView {
 
-    void showError(String error);
+    void showError(int code);
 }

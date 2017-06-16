@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
+import com.lewgmail.romanenko.taxiservice.presenter.adapters.AdapterCodeFromServer;
 import com.lewgmail.romanenko.taxiservice.view.fragmentClient.OrderListFragment;
 import com.lewgmail.romanenko.taxiservice.view.fragments.FragmentSettings;
 import com.lewgmail.romanenko.taxiservice.view.viewDriver.EditProfileFragmentDriver;
@@ -184,12 +185,12 @@ public class ClientAccount extends AppCompatActivity
     }
 
     @Override
-    public void showError(String error) {
-        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    public void showError(int code) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void doneOperation(int responseCode, String done) {
-        Toast.makeText(this, done, Toast.LENGTH_SHORT).show();
+    public void doneOperation(int responseCode) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responseCode, this), Toast.LENGTH_SHORT).show();
     }
 }

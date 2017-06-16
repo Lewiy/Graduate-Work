@@ -8,8 +8,6 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.User;
 import com.lewgmail.romanenko.taxiservice.view.activity.InfoUser;
 import com.lewgmail.romanenko.taxiservice.view.viewDriver.OrderInf;
 
-import java.io.IOException;
-
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
@@ -58,11 +56,10 @@ public class LoadOrderForDriverPresenter {
                         if (e instanceof HttpException) {
                             HttpException exception = (HttpException) e;
                             Response response = exception.response();
-                            try {
-                                orderInfView.showError(response.errorBody().string());
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
+
+                            //orderInfView.showError(response.errorBody().string());
+                            orderInfView.showError(response.code());
+
                         }
                         //  else
                         //  mCustomerPresenter.onFinishRequest(((HttpException) e).code(), e.getMessage());
@@ -103,13 +100,13 @@ public class LoadOrderForDriverPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            orderInfView.showError("Code:" + ((HttpException) e).code() + "Message:" + e.getMessage());
+                            orderInfView.showError(((HttpException) e).code());
 
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        orderInfView.showError("Code:" + responseBodyResponse.code());
+                        orderInfView.showError(responseBodyResponse.code());
                        /* if(responseBodyResponse.code() != 200)
                             orderInfView.resStatusOrderNotChanged();*/
                     }
@@ -131,9 +128,9 @@ public class LoadOrderForDriverPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewInfoUser.showError(e.getMessage().toString());
+                            viewInfoUser.showError(((HttpException) e).code());
                         else
-                            viewInfoUser.showError(e.getMessage().toString());
+                            viewInfoUser.showError(((HttpException) e).code());
                     }
 
                     @Override
