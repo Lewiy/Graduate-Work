@@ -1,5 +1,6 @@
 package com.lewgmail.romanenko.taxiservice.view.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationListener;
@@ -30,6 +31,7 @@ import com.lewgmail.romanenko.taxiservice.presenter.CustomerPresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.DriverCustPresenter;
 import com.lewgmail.romanenko.taxiservice.view.activity.elementsOfActivity.SlidingTabLayout;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
+import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterTimeDate;
 import com.lewgmail.romanenko.taxiservice.view.adapters.DTORoute;
 import com.lewgmail.romanenko.taxiservice.view.fragments.addOrderUpdate.FragmentPage1Update;
 import com.lewgmail.romanenko.taxiservice.view.fragments.addOrderUpdate.FragmentPage2Update;
@@ -88,6 +90,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     private FragmentPage2Update fragmentObj2Update;
     private DriverCustPresenter driverCustPresenter;
     private Intent intentMy;
+    private ProgressDialog progress;
 
 
     /*
@@ -105,6 +108,11 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_order_);
+        progress = new ProgressDialog(this);
+        progress.setTitle(getResources().getString(R.string.main_theme_loading));
+        progress.setMessage(getResources().getString(R.string.text_of_loading));
+        progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
+        progress.show();
         routePoints = new ArrayList<>();
         customerPresenter = new CustomerPresenter(this);
         driverCustPresenter = new DriverCustPresenter(this);
@@ -185,15 +193,20 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     }
 
     public void responseStartTime(String dateTime) {
-        if (dateTime == null)
+
+        AdapterTimeDate adapterTimeDate = new AdapterTimeDate(dateTime);
+        fragmentObj1Update.setStartTime(" " + adapterTimeDate.getDate() + " "
+                + adapterTimeDate.getTime());
+        /*if (dateTime == null)
             fragmentObj1Update.setStartTime(dateTime);
         else {
             String time = getTimeFromResponDateTime(dateTime);
             fragmentObj1Update.setStartTime(time);
-        }
+        }*/
     }
 
     public void responseRoutePoint(List<RoutePoint> resRoutePoints) {
+
         RoutePointUpdateOrder routePointN1 = new RoutePointUpdateOrder();
         addapterListAddresses = fragmentObj1Update.getAddressAdapter();
         addapterListAddresses.setActivityCallBack(this);
@@ -246,7 +259,9 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
                     , resRoutePoints.get(i).getHouseNumber(), resRoutePoints.get(i).getCity()));
             dtoRoute.add(pointRoute3);
         }
+        fragmentObj1Update.setSizeListView(dtoRoute.size() - 2);
 
+        progress.dismiss();
     }
 
     public void responseStatusOrder(String orderStatus) {

@@ -1,5 +1,6 @@
 package com.lewgmail.romanenko.taxiservice.view.activity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -27,6 +28,7 @@ public class ResetPassword extends AppCompatActivity implements UserOperationInt
     EditText resetPasswordNewPassword;
     @BindView(R.id.reset_password_field_password_repeat)
     EditText repeateNewPassword;
+    private ProgressDialog progress;
 
 
     private ResetPasswordPresenter resetPasswordPresenter;
@@ -46,10 +48,18 @@ public class ResetPassword extends AppCompatActivity implements UserOperationInt
         if (checkEmailValue()) {
             // getEmailValueReset();
             //  Toast.makeText(this, "Пройшло", Toast.LENGTH_LONG).show();
-            if (sendCodeReadyFlag)
+            if (sendCodeReadyFlag) {
                 resetPasswordPresenter.sendNewPasswordReq();
-            else
+
+            } else {
+                progress = new ProgressDialog(this);
+                progress.setTitle(getResources().getString(R.string.main_theme_loading));
+                progress.setMessage(getResources().getString(R.string.text_of_loading));
+                progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
+                progress.show();
                 resetPasswordPresenter.sendEmailReq();
+            }
+
         }
     }
 
@@ -98,6 +108,7 @@ public class ResetPassword extends AppCompatActivity implements UserOperationInt
 
     public void showHideCodeNewPasswordField() {
         frameLayoutStep2.setVisibility(View.VISIBLE);
+        progress.dismiss();
         sendCodeReadyFlag = true;
     }
 

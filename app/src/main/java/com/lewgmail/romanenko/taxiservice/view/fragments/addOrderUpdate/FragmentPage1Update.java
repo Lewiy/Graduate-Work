@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,6 +119,9 @@ public class FragmentPage1Update extends android.support.v4.app.Fragment {
     /*
     Set response inform ////////////////////////////////////////////////////////////
      */
+    public void setSizeListView(int resRoutePoints) {
+        route.setLayoutParams(new LinearLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, resRoutePoints * 200));
+    }
 
     public void setStartTime(String startTime) {
 
@@ -293,7 +297,8 @@ public class FragmentPage1Update extends android.support.v4.app.Fragment {
                             @Override
                             public void onDismiss(ListView listView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-
+                                    route.setLayoutParams(new LinearLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT,
+                                            (route.getAdapter().getCount() - 1) * 200));
                                     addresess.remove(position);
                                     addresessAdapter.notifyDataSetChanged();
                                     addOrderGatherDataFirstWindow.removeAddress(position);
@@ -333,6 +338,8 @@ public class FragmentPage1Update extends android.support.v4.app.Fragment {
     private void addAddressPoint() {
         //run
         //  addresessAdapter.add("sdfklnfg");
+        route.setLayoutParams(new LinearLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT,
+                (route.getAdapter().getCount() + 1) * 200));
         addOrderGatherDataFirstWindow.runAutoComplete(addresessAdapter);
     }
 

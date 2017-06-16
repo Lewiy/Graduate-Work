@@ -72,6 +72,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
     Spinner spinnerTypeCar;
     @BindView(R.id.spinner_number_passengers)
     Spinner spinnerNumberPassenger;
+
     /////////////////////////////////////////////
 
     @BindView(R.id.delete_order)
@@ -298,7 +299,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
             boolean flag = true;
             AdditionalRequirementN additionalRequirementN = new AdditionalRequirementN();
             additionalRequirementN.setReqId(typeRequirements);
-            additionalRequirementN.setReqValueId(pos - 1);
+            additionalRequirementN.setReqValueId(pos);
             for (AdditionalRequirementN i : additionalRequirements) {
                 if (i.getReqId() == typeRequirements)
                     flag = false;
@@ -402,12 +403,13 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
     }
 
     public void setNUMBERPASSENGERS(int pos) {
-        spinnerNumberPassenger.setSelection(pos);
+        spinnerNumberPassenger.setSelection(pos + 1);
     }
 
     public void setSpinnerNotChangedStatus() {
         spinnerStatusOrder.setSelection(0);
     }
+
 
 
     /*

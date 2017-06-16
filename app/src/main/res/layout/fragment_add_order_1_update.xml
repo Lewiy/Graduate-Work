@@ -218,7 +218,7 @@
                         android:id="@+id/end_point_act"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/end_point"
+                        android:hint="@string/next_point"
                         android:inputType="text"
                         android:maxLines="1"
                         android:singleLine="true" />
@@ -245,7 +245,7 @@
         <ListView
             android:id="@+id/route"
             android:layout_width="match_parent"
-            android:layout_height="150dp"></ListView>
+            android:layout_height="0dp"></ListView>
 
         <ImageButton
             android:id="@+id/add_address_btn"

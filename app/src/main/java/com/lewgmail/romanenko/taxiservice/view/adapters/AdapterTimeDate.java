@@ -40,7 +40,7 @@ public class AdapterTimeDate {
     }
 
     private void devideDataTime() {
-        date = dateTime.substring(0, dateTime.indexOf("T") - 1);
+        date = dateTime.substring(0, dateTime.indexOf("T"));
         time = dateTime.substring(dateTime.indexOf("T") + 1, 16);
         shortDate = date.substring(date.indexOf("-") + 1);
         if (time.equals("00:00"))
@@ -49,7 +49,7 @@ public class AdapterTimeDate {
     }
 
     private void devideDataTime1() {
-        date = dateTime.substring(0, dateTime.indexOf("T") - 1);
+        date = dateTime.substring(0, dateTime.indexOf("T"));
         time = dateTime.substring(dateTime.indexOf("T") + 1, 16);
         shortDate = date.substring(date.indexOf("-") + 1);
         String locale = Locale.getDefault().getLanguage();
