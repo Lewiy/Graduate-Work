@@ -177,8 +177,9 @@
                 <Button
                     android:id="@+id/show_account_driver"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="bottom"
+                    android:layout_marginRight="5dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/main_button"
                     android:text="@string/driver_name"
@@ -472,6 +473,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/main_button_white"
@@ -485,6 +487,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
+
                 android:layout_weight="1"
                 android:background="@drawable/main_button_white"
                 android:text="@string/route"

@@ -200,8 +200,8 @@
     <!-- additional  requirements-->
     <string-array name="type_car">
         <item>Тип автомобіля</item>
-        <item>Вантажний</item>
         <item>Легкова</item>
+        <item>Вантажний</item>
         <item>Мікроавтобус</item>
     </string-array>
     <string-array name="type_reconing">
@@ -211,13 +211,13 @@
     </string-array>
     <string-array name="type_pets">
         <item>Улюбленець</item>
-        <item>Так</item>
         <item>Ні</item>
+        <item>Так</item>
     </string-array>
     <string-array name="type_baggage">
         <item>Великогабаритний багаж</item>
-        <item>Так</item>
         <item>Ні</item>
+        <item>Так</item>
     </string-array>
     <string-array name="type_extra_price">
         <item>Екстра ціна</item>
@@ -230,8 +230,8 @@
     </string-array>
     <string-array name="type_driver_services">
         <item>Виклик водія</item>
-        <item>Так</item>
         <item>Ні</item>
+        <item>Так</item>
     </string-array>
     <string-array name="type_number_passengers">
         <item>Кількість пасажирів</item>
@@ -243,4 +243,54 @@
         <item>7</item>
         <item>8</item>
     </string-array>
+
+
+    <string name="validation_code_driver_license">Правильний формат: "YYY XXXXXX",де Y - кирилиця, X - цифра</string>
+    <string name="validation_plate_number_driver_profile">Правильний формат: "XX YYYY XX" де X - кирилиця, Y - цифра</string>
+    <string name="validation_phone_number">Повинно містити 10 цифр та починатися з "+38"</string>
+    <string name="validation_expiration_time">Правильний формат: "XXXX-XX-XX" де X  - цифра</string>
+    <string name="validation_obligatory_field">Обов`язкове поле</string>
+    <string name="validation_email">Неправильний формат пошти</string>
+    <string name="validation_password">Пароль повинен містити більше 6 символів</string>
+
+
+    <string name="account_driver">Водій інфо</string>
+    <string name="date_of_order">Дата замовлення:</string>
+    <string name="delete_order">Видалити</string>
+    <string name="code_from_email">Секретний код</string>
+    <string name="new_password">Новий пароль</string>
+    <string name="new_password_repeat">Підтвердити новий пароль</string>
+    <string name="code_for_reset_will_be_send">Секретний код було надіслано на пошту</string>
+    <string name="time_order_for_now">Зараз</string>
+    <string name="turn_on_notification">Сповіщення</string>
+
+
+    <!-- notification string -->
+    <string name="new_order_notification">Нове замовлення</string>
+    <string name="notific_when">Коли: </string>
+    <string name="notific_where">Куди: </string>
+    <string name="notific_price">Ціна: </string>
+
+    <string name="notific_waiting_driver">Водій чекає</string>
+    <string name="notific_plate_number">Реєстрац. номер:</string>
+    <string name="notific_model">Модель:</string>
+    <string name="notific_manufacturer">Марка:</string>
+    <string name="notific_name">Ім`я:</string>
+
+    <string name="notific_changed_order_status">Статус замовлення змінено</string>
+    <string name="notific_order_status">Статус замовлення:</string>
+
+    <string name="formatted_place_data">
+        Name: %1$s\nAddress: %2$s\nPhone: %3$s\nWebsite: %4$s\nRating: %5$s\nId: %6$s\n
+    </string>
+
+
+    <string name="not_inputted_2_point">Обов`язковий пункт не введений</string>
+    <string name="next_point">наступний пункт</string>
+
+
+    <string name="operation_completed">Операція завершена</string>
+    <string name="cant_perform">Операція не може бути виконана</string>
+    <string name="problems_on_the_server">Проблеми на сервері</string>
+    <string name="something_happened">Щось сталося</string>
 </resources>

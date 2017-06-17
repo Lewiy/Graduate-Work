@@ -38,7 +38,7 @@ public class ListOrdersData {
                     + "," + Double.toString(order.getEndPointCords().getLongtitude())));
         }
 
-        itemOfList.add(Double.toString(order.getPrice()));
+        itemOfList.add(Double.toString(order.getPrice()) + " UAH");
         // itemOfList.add(Long.toString(order.getOrderId()));
         ordersList.put(StartAddress + "|" + order.getOrderId(), itemOfList);
     }

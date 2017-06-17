@@ -239,4 +239,55 @@
         <item>7</item>
         <item>8</item>
     </string-array>
+
+
+    <!-- Validation field -->
+    <string name="validation_code_driver_license">Правильный формат: "YYY XXXXXX",где Y - кириллица, X - цыфра</string>
+    <string name="validation_plate_number_driver_profile">Правильный формат: "XX YYYY XX" где X - кириллица, Y - цыфра</string>
+    <string name="validation_phone_number">Должно содержать 10 цыфр и начинаться с "+38"</string>
+    <string name="validation_expiration_time">Правильный формат: "XXXX-XX-XX" где X  - цыфра</string>
+    <string name="validation_obligatory_field">Обязательное поле</string>
+    <string name="validation_email">Неправильная почта</string>
+    <string name="validation_password">Пароль должен состоять минимум с 6 цыфр</string>
+
+
+    <string name="account_driver">Водитель</string>
+    <string name="date_of_order">Дата заказа:</string>
+    <string name="delete_order">Удалить</string>
+    <string name="code_from_email">Код с електронной почти</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="new_password_repeat">Подтверждения пароля</string>
+    <string name="code_for_reset_will_be_send">Код для сброса пароля  послан на електронную почту</string>
+    <string name="time_order_for_now">Новый</string>
+    <string name="turn_on_notification">Уведомление</string>
+
+
+    <!-- notification string -->
+    <string name="new_order_notification">Новый заказ</string>
+    <string name="notific_when">Когда: </string>
+    <string name="notific_where">Где: </string>
+    <string name="notific_price">Цена: </string>
+
+    <string name="notific_waiting_driver">Водитель ожидает</string>
+    <string name="notific_plate_number">Регистрационный номер:</string>
+    <string name="notific_model">Модель:</string>
+    <string name="notific_manufacturer">Марка:</string>
+    <string name="notific_name">Им`я:</string>
+
+    <string name="notific_changed_order_status">Статус заказа изменен</string>
+    <string name="notific_order_status">Статус заказа:</string>
+
+    <string name="formatted_place_data">
+        Name: %1$s\nAddress: %2$s\nPhone: %3$s\nWebsite: %4$s\nRating: %5$s\nId: %6$s\n
+    </string>
+
+
+    <string name="not_inputted_2_point">Обязательная точка не указана</string>
+    <string name="next_point">следующая точка</string>
+
+
+    <string name="operation_completed">Операция завершена</string>
+    <string name="cant_perform">Операция не может быть выполнена</string>
+    <string name="problems_on_the_server">Проблемы на сервере</string>
+    <string name="something_happened">Что то случилось</string>
 </resources>
