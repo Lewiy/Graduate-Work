@@ -45,7 +45,7 @@ public class MyNotification extends GcmListenerService {
             contentView.setTextViewText(R.id.notific_when, notifObjAddedOrder.getStartTime().getTime());
         else
             contentView.setTextViewText(R.id.notific_when,
-                    notifObjAddedOrder.getStartTime().getDate() + "-"
+                    notifObjAddedOrder.getStartTime().getDate() + "  "
                             + notifObjAddedOrder.getStartTime().getTime());
 
         notifObjAddedOrder.setEndPoint(localizeAddress.LocalizeAddress(notifObjAddedOrder.getEndPoint()));
@@ -53,8 +53,8 @@ public class MyNotification extends GcmListenerService {
 
 
         contentView.setTextViewText(R.id.notific_where, notifObjAddedOrder.getStartPoint()
-                + "-" + notifObjAddedOrder.getEndPoint());
-        contentView.setTextViewText(R.id.notific_price, notifObjAddedOrder.getPrice());
+                + " " + getResources().getString(R.string.to) + " " + notifObjAddedOrder.getEndPoint());
+        contentView.setTextViewText(R.id.notific_price, notifObjAddedOrder.getPrice() + " " + getResources().getString(R.string.UAH));
 
 
         this.mSimpleBuilder =

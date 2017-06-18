@@ -44,8 +44,8 @@ public class FragmentSettings extends android.support.v4.app.Fragment implements
         return false;
     }
 
-    public void showError(int code) {
-        Toast.makeText(getActivity(), AdapterCodeFromServer.AdapterCode(code, getContext()), Toast.LENGTH_LONG).show();
+    public void showError(int code, String fromServer) {
+        Toast.makeText(getActivity(), AdapterCodeFromServer.AdapterCode(code, getContext(), fromServer), Toast.LENGTH_LONG).show();
     }
 
     @OnCheckedChanged(R.id.set_settings_notif)

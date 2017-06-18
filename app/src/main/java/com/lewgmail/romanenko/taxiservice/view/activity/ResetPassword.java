@@ -124,13 +124,13 @@ public class ResetPassword extends AppCompatActivity implements UserOperationInt
     }
 
     @Override
-    public void showError(int code) {
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
+    public void showError(int code, String fromServer) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this, fromServer), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void doneOperation(int responseCod) {
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responseCod, this), Toast.LENGTH_SHORT).show();
+    public void doneOperation(int responseCod, String fromServer) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responseCod, this, fromServer), Toast.LENGTH_SHORT).show();
     }
 
 

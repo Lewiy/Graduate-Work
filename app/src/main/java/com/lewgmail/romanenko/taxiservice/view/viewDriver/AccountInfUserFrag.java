@@ -17,6 +17,7 @@ import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
 import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.adapters.AdapterCodeFromServer;
 import com.lewgmail.romanenko.taxiservice.view.activity.InfoUser;
+import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterSpinnerLocalization;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -170,7 +171,7 @@ public class AccountInfUserFrag extends DialogFragment implements InfoUser {
 
     @Override
     public void setUserDriverCarType(String carType) {
-        this.carType.setText(carType);
+        this.carType.setText(AdapterSpinnerLocalization.adaptTypeCar(carType, getContext()));
     }
 
     @Override
@@ -183,13 +184,13 @@ public class AccountInfUserFrag extends DialogFragment implements InfoUser {
     }
 
     @Override
-    public void showError(int code) {
-        Toast.makeText(this.getActivity(), AdapterCodeFromServer.AdapterCode(code, this.getActivity()), Toast.LENGTH_SHORT).show();
+    public void showError(int code, String fromServer) {
+        Toast.makeText(this.getActivity(), AdapterCodeFromServer.AdapterCode(code, this.getActivity(), fromServer), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void doneOperation(int code) {
-        Toast.makeText(this.getActivity(), AdapterCodeFromServer.AdapterCode(code, this.getActivity()), Toast.LENGTH_SHORT).show();
+    public void doneOperation(int code, String fromServer) {
+        Toast.makeText(this.getActivity(), AdapterCodeFromServer.AdapterCode(code, this.getActivity(), fromServer), Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -66,6 +66,12 @@ public class ManagerUser {
         return observer;
     }
 
+    public Call<User> checkTocken(long id) {
+        UserServices services = Services.createService(UserServices.class);
+        Call<User> call = services.checkTocken(LoggedUser.getmInstance().getToken(), id);
+        return call;
+    }
+
     public Observable<Response<ResponseBody>> upDateUser(UpdateUser user) {
         UserServices servises = Services.createService(UserServices.class);
         Observable<Response<ResponseBody>> observer = servises.updateUserProfile(LoggedUser.getmInstance().getToken(), user);

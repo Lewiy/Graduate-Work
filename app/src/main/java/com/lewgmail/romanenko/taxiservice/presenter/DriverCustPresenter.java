@@ -9,6 +9,7 @@ import com.lewgmail.romanenko.taxiservice.view.activity.AddOrderUpdate;
 import com.lewgmail.romanenko.taxiservice.view.fragmentClient.OrderListFragmentInterface;
 import com.lewgmail.romanenko.taxiservice.view.viewDriver.OrderInf;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +88,11 @@ public class DriverCustPresenter implements BasePresenterInterface {
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
                             //viewAddOrderUpdate.responseError("Code:" + ((HttpException) e).code() + "Message:" + e.getMessage());
-                            viewAddOrderUpdate.responseError(((HttpException) e).code());
+                            try {
+                                viewAddOrderUpdate.responseError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
                         //  else
                         //  mCustomerPresenter.onFinishRequest(((HttpException) e).code(), e.getMessage());
                         //   viewAddOrderUpdate.showError(e.getMessage());
@@ -195,13 +200,21 @@ public class DriverCustPresenter implements BasePresenterInterface {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewAddOrderUpdate.responseError(((HttpException) e).code());
+                            try {
+                                viewAddOrderUpdate.responseError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
 
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        viewAddOrderUpdate.responseError(responseBodyResponse.code());
+                        try {
+                            viewAddOrderUpdate.responseError(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         if (responseBodyResponse.code() != 200)
                             viewAddOrderUpdate.resStatusOrderNotChanged();
                     }

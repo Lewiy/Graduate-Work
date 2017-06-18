@@ -12,6 +12,7 @@ import com.lewgmail.romanenko.taxiservice.view.activity.AddOrder;
 import com.lewgmail.romanenko.taxiservice.view.activity.AddOrderUpdate;
 import com.lewgmail.romanenko.taxiservice.view.activity.EditOrderInterface;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
@@ -71,13 +72,17 @@ public class CustomerPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewAddOrder.responseAddorder(((HttpException) e).code());
+                            viewAddOrder.responseAddorder(((HttpException) e).code(), ((HttpException) e).message());
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         // viewAddOrder.responseAddorder(new String(Integer.toString(responseBodyResponse.code())));
-                        viewAddOrder.responseAddorder(responseBodyResponse.code());
+                        try {
+                            viewAddOrder.responseAddorder(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 
@@ -98,8 +103,9 @@ public class CustomerPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (viewAddOrder != null)
-                            viewAddOrder.frag2responseError(((HttpException) e).code());
-                        else viewAddOrderUpdate.responseError(((HttpException) e).code());
+                            viewAddOrder.frag2responseError(((HttpException) e).code(), ((HttpException) e).message());
+                        else
+                            viewAddOrderUpdate.responseError(((HttpException) e).code(), ((HttpException) e).message());
                     }
 
                     @Override
@@ -131,12 +137,20 @@ public class CustomerPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewAddOrderUpdate.responseError(((HttpException) e).code());
+                            try {
+                                viewAddOrderUpdate.responseError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        viewAddOrderUpdate.responseAddorder(responseBodyResponse.code());
+                        try {
+                            viewAddOrderUpdate.responseAddorder(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
     }
@@ -154,12 +168,16 @@ public class CustomerPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewAddOrderUpdate.responseAddorder(((HttpException) e).code());
+                            viewAddOrderUpdate.responseAddorder(((HttpException) e).code(), e.getMessage());
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        viewAddOrderUpdate.responseAddorder(responseBodyResponse.code());
+                        try {
+                            viewAddOrderUpdate.responseAddorder(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
     }
@@ -179,7 +197,7 @@ public class CustomerPresenter {
         return responseMsg;
     }
 
-    public void setObserverPriseResponse(Observable<Price> observer) {
+   /* public void setObserverPriseResponse(Observable<Price> observer) {
 
         observer.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -202,7 +220,7 @@ public class CustomerPresenter {
                         view.setPrice(price.getPrice());
                     }
                 });
-    }
+    }*/
 
     private AddOrderN createOrder() {
         AddOrderN addOrderN = new AddOrderN();

@@ -102,7 +102,7 @@ public class DriverAccount extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.driver_account, menu);
+        //getMenuInflater().inflate(R.menu.driver_account, menu);
         return true;
     }
 
@@ -181,12 +181,12 @@ public class DriverAccount extends AppCompatActivity
     }
 
     @Override
-    public void showError(int code) {
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
+    public void showError(int code, String fromServer) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this, fromServer), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void doneOperation(int code) {
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
+    public void doneOperation(int code, String fromServer) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this, fromServer), Toast.LENGTH_SHORT).show();
     }
 }

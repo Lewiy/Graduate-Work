@@ -8,6 +8,8 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.User;
 import com.lewgmail.romanenko.taxiservice.view.activity.InfoUser;
 import com.lewgmail.romanenko.taxiservice.view.viewDriver.OrderInf;
 
+import java.io.IOException;
+
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
@@ -58,7 +60,7 @@ public class LoadOrderForDriverPresenter {
                             Response response = exception.response();
 
                             //orderInfView.showError(response.errorBody().string());
-                            orderInfView.showError(response.code());
+                            orderInfView.showError(response.code(), response.message());
 
                         }
                         //  else
@@ -100,13 +102,17 @@ public class LoadOrderForDriverPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            orderInfView.showError(((HttpException) e).code());
+                            orderInfView.showError(((HttpException) e).code(), ((HttpException) e).getMessage());
 
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        orderInfView.showError(responseBodyResponse.code());
+                        try {
+                            orderInfView.showError(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                        /* if(responseBodyResponse.code() != 200)
                             orderInfView.resStatusOrderNotChanged();*/
                     }
@@ -128,9 +134,9 @@ public class LoadOrderForDriverPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            viewInfoUser.showError(((HttpException) e).code());
+                            viewInfoUser.showError(((HttpException) e).code(), ((HttpException) e).message());
                         else
-                            viewInfoUser.showError(((HttpException) e).code());
+                            viewInfoUser.showError(((HttpException) e).code(), ((HttpException) e).message());
                     }
 
                     @Override

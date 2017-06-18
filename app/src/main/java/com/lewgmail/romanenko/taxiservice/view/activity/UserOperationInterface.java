@@ -10,7 +10,7 @@ public interface UserOperationInterface {
 
     void setEmailSideBar(String email);
 
-    void showError(int code);
+    void showError(int code, String fromServer);
 
-    void doneOperation(int code);
+    void doneOperation(int code, String fromServer);
 }

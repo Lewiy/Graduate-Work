@@ -146,13 +146,13 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
     }
 
     @Override
-    public void showError(int code) {
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
+    public void showError(int code, String fromServer) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this, fromServer), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void doneOperation(int responceCod) {
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responceCod, this), Toast.LENGTH_SHORT).show();
+    public void doneOperation(int responceCod, String fromServer) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responceCod, this, fromServer), Toast.LENGTH_SHORT).show();
         if (responceCod == 200)
             runLogInActyvity();
     }

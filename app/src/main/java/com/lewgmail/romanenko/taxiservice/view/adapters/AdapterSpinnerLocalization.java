@@ -1,5 +1,7 @@
 package com.lewgmail.romanenko.taxiservice.view.adapters;
 
+import android.content.Context;
+
 import com.lewgmail.romanenko.taxiservice.R;
 
 /**
@@ -16,6 +18,18 @@ public class AdapterSpinnerLocalization {
                 return "TRUCK";
             case 2:
                 return "MINIBUS";
+        }
+        return "ERROR";
+    }
+
+    public static String adaptTypeCar(String carType, Context context) {
+        switch (carType) {
+            case "PASSENGER_CAR":
+                return context.getResources().getString(R.string.passenger_car);
+            case "TRUCK":
+                return context.getResources().getString(R.string.truck);
+            case "MINIBUS":
+                return context.getResources().getString(R.string.minibus);
         }
         return "ERROR";
     }
@@ -67,9 +81,8 @@ public class AdapterSpinnerLocalization {
                         case 1:
                             return "PROCESSING";
                         case 2:
-                            return "NEW";
-                        case 3:
-                            return "ACCEPTED";
+                            return "CANCELLED";
+
                     }
                 case R.array.change_status_driver_processing:
                     switch (pos) {

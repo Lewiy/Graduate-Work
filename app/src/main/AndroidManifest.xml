@@ -62,16 +62,16 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyABwkE5VMlPKq74Sfdm4lVly3H46e193uY" />
 
-        <activity android:name=".view.activity.MainActivity" />
-        <activity
-            android:name=".view.activity.LoginActivity"
-            android:label="@string/title_activity_login">
+        <activity android:name=".view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".view.activity.LoginActivity"
+            android:label="@string/title_activity_login"></activity>
         <activity android:name=".view.activity.RegistrationActivity" />
         <activity android:name=".view.activity.ResetPassword" />
         <activity
@@ -94,7 +94,7 @@
             android:label="@string/title_activity_client_account" />
         <activity
             android:name=".view.activity.RegistrationActivityFragm"
-            android:label="@string/button_back_to_personal_registration" />
+            android:label="@string/registration" />
         <activity
             android:name=".view.activity.AddOrder"
             android:label="@string/title_activity_add_order"
@@ -104,7 +104,7 @@
 
         <activity
             android:name=".view.activity.AddOrderUpdate"
-            android:label="@string/title_activity_add_order"
+            android:label="@string/title_update_order"
             android:windowSoftInputMode="stateVisible|adjustPan">
 
         </activity>

@@ -22,20 +22,20 @@
     <string name="button_next_to_driver_registration">Next</string>
     <string name="password_registration"> Password </string>
     <string name="repeat_password">Repeat password</string>
-    <string name="numbre_registration">Number (phone1)</string>
-    <string name="second_number_registration">Second number (phone2)</string>
+    <string name="numbre_registration">Mobile number</string>
+    <string name="second_number_registration">Second mobile number</string>
     <string name="model_registration">Model</string>
-    <string name="manufacturer_registration">Brend</string>
+    <string name="manufacturer_registration">Brand</string>
     <string name="plate_number">Plate number</string>
     <string name="sign_up">Sign up</string>
-    <string name="text_lable_num_passenger">Num passenger</string>
+    <string name="text_lable_num_passenger">Passengers count</string>
     <string name="text_lable_car_type">Car type</string>
     <string name="driver_license">Driver license</string>
     <string name="license_expiration_date">License expiration date</string>
     <string name="category_license">Category license</string>
     <string name="front_foto_license">Make foto of front your license</string>
     <string name="back_foto_license">make foto of back yor license</string>
-    <string name="i_am_driver">I am driver</string>
+    <string name="i_am_driver">I am a driver</string>
     <!--spinner resurses-->
     <string name="car_type_title">type car</string>
     <string-array name="set_num_passenger">
@@ -51,16 +51,16 @@
 
     <string name="num_passenger_title">number passenger</string>
     <string-array name="set_car_type">
-        <item>PASSENGER_CAR</item>
-        <item>TRUCK</item>
-        <item>MINIBUS</item>
+        <item>Passenger car</item>
+        <item>Truck</item>
+        <item>Minibus</item>
     </string-array>
 
     <!--reset password -->
     <string name="title_reset_password_activity">Forgot password?</string>
     <string name="email_reset_password_activity">Email</string>
     <string name="button_reset_password_activity">Reset Password</string>
-    <string name="title_activity_client_account">ClientAccount</string>
+    <string name="title_activity_client_account">Client account</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -85,9 +85,9 @@
     <string name="update_personal_page">update</string>
     <string name="ok_personal_page">Ok</string>
     <string name="model_personal_page">Model</string>
-    <string name="manufacturer_personal_page">Brend</string>
+    <string name="manufacturer_personal_page">Brand</string>
     <string name="plate_personal_page">Plate number</string>
-    <string name="text_lable_num_passenger_personal_page">Num passenger</string>
+    <string name="text_lable_num_passenger_personal_page">Passengers count</string>
     <string name="text_lable_car_type_personal_page">Car type</string>
     <string name="car_characteristics"> Car characteristics </string>
 
@@ -95,7 +95,7 @@
     <string name="title_item_list">Time and date of order</string>
 
     <!-- edit order client -->
-    <string name="calculate_price"> culculate price</string>
+    <string name="calculate_price">calculate price</string>
     <string name="km_distance">distance</string>
     <string name="customer_name"> customer </string>
     <string name="driver_name"> driver </string>
@@ -119,11 +119,50 @@
     </string-array>
     <!-- update order -->
 
+    <string-array name="change_status_client_new">
+        <item>New</item>
+        <item>Cancelled</item>
+    </string-array>
+
+    <string-array name="change_status_client_accepted">
+        <item>Accepted</item>
+        <item>Cancelled</item>
+    </string-array>
+
+    <string-array name="change_status_client_waiting">
+        <item>Waiting</item>
+        <item>Cancelled</item>
+    </string-array>
+
+
+    <string-array name="change_status_driver_accept">
+        <item>Accept</item>
+        <item>Waiting</item>
+        <item>New</item>
+    </string-array>
+
+    <string-array name="change_status_driver_waiting">
+        <item>Waiting</item>
+        <item>Processing</item>
+        <item>Cancelled</item>
+
+    </string-array>
+
+    <string-array name="change_status_driver_processing">
+        <item>Processing</item>
+        <item>Done</item>
+    </string-array>
+
+    <string-array name="change_status_driver_new">
+        <item>New</item>
+        <item>Accepted</item>
+    </string-array>
+    <!-- update order -->
+
     <string-array name="set_type_reckoning">
         <item>Cash</item>
         <item>Credit Card</item>
     </string-array>
-
 
     <!--google map -->
     <string name="button_ok"> OK </string>
@@ -135,28 +174,18 @@
         <item>Cancelled</item>
         <item>Done</item>
         <item>New</item>
+        <item>Waiting</item>
+        <item>Processing</item>
     </string-array>
     <!-- driver accaunt -->
-    <string name="title_activity_driver_account">DriverAccount</string>
+    <string name="title_activity_driver_account">Driver account</string>
     <!-- order information driver -->
     <string name="value_order">Inform order</string>
-    <string name="without_requirement">Without additional requir</string>
+    <string name="without_requirement">Without additional requir.</string>
     <string name="spinner_change_sing">Change status menu</string>
     <string name="title_info_order_driver"> ORDER INFO </string>
     <string name="customer_account_info">Cust info</string>
-    <string-array name="change_status_driver_new">
-        <item>Nothing selected</item>
-        <item>Accepted</item>
-    </string-array>
-    <string-array name="change_status_driver_accept">
-        <item>Nothing selected</item>
-        <item>Cancel</item>
-        <item>Done</item>
-    </string-array>
 
-    <string-array name="change_status_driver_done">
-        <item>Nothing selected</item>
-    </string-array>
 
     <!-- account info customer driver taxi -->
     <string name="name_info">Name:</string>
@@ -165,7 +194,7 @@
     <string name="manufacturer_inf">Brand:</string>
     <string name="model_inf">Model:</string>
     <string name="plate_number_inf">Plate number:</string>
-    <string name="seats_number_inf">Seats number:</string>
+    <string name="seats_number_inf">Passengers count:</string>
     <string name="car_type_inf">car type:</string>
 
     <string name="error_not_equals_passwords">Passwords do not match </string>
@@ -190,7 +219,7 @@
     <string name="time_text">00:00:00</string>
     <string name="prise_label_add_order">Total price:</string>
     <string name="additional_request">Additional request</string>
-    <string name="title_activity_add_order">AddOrder</string>
+    <string name="title_activity_add_order">Add order</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="tab_main_settings">Main settings</string>
     <string name="tab_addition_requirest">Additional</string>
@@ -244,7 +273,7 @@
     </string-array>
     <string name="validation_code_driver_license">Valid format: "YYY XXXXXX",where Y - cyrillic symbol, X - digit</string>
     <string name="validation_plate_number_driver_profile">Should be "XX YYYY XX" where X - cyrillic symbol, Y - digit</string>
-    <string name="validation_phone_number">Should contains 10 digits andcould start from "+38"</string>
+    <string name="validation_phone_number">Should contains 10 digits and could start from "+38"</string>
     <string name="validation_expiration_time">Should be "XXXX-XX-XX" where X  - digit</string>
     <string name="validation_obligatory_field">Obligatory field</string>
     <string name="validation_email">Email is not correct</string>
@@ -259,7 +288,7 @@
     <string name="new_password_repeat">Repeat new password</string>
     <string name="code_for_reset_will_be_send">Code for reset password will be sent to your email</string>
     <string name="time_order_for_now">Now</string>
-    <string name="turn_on_notification">Notification</string>
+    <string name="turn_on_notification">Notifications</string>
 
 
     <!-- notification string -->
@@ -271,7 +300,7 @@
     <string name="notific_waiting_driver">Driver is waiting</string>
     <string name="notific_plate_number">Plate number:</string>
     <string name="notific_model">Model:</string>
-    <string name="notific_manufacturer">Brend:</string>
+    <string name="notific_manufacturer">Brand:</string>
     <string name="notific_name">Name:</string>
 
     <string name="notific_changed_order_status">Changed order status</string>

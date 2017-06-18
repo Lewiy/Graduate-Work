@@ -404,10 +404,10 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
         valuePrice.setText(text);
     }*/
 
-    public void responseAddorder(int code) {
+    public void responseAddorder(int code, String fromServer) {
 
         // Toast.makeText(contextFragm2, "Code of Operation:" + text, Toast.LENGTH_SHORT).show();
-        Toast.makeText(contextFragm2, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
+        Toast.makeText(contextFragm2, AdapterCodeFromServer.AdapterCode(code, this, fromServer), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -432,8 +432,8 @@ public class AddOrder extends AppCompatActivity implements FragmentPage1.AddOrde
         //  fragmentObj1.se
     }
 
-    public void frag2responseError(int code) {
-        fragmentObj2.setError(AdapterCodeFromServer.AdapterCode(code, this));
+    public void frag2responseError(int code, String fromServer) {
+        fragmentObj2.setError(AdapterCodeFromServer.AdapterCode(code, this, fromServer));
     }
 
     /*

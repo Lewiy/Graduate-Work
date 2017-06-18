@@ -290,10 +290,10 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
 
     ///////////////////////////////////// Up date View  ////////////////////////////////////
     @Override
-    public void showError(int code) {
+    public void showError(int code, String fromServer) {
         Toast.makeText(
                 MapActivity.this,
-                AdapterCodeFromServer.AdapterCode(code, this),
+                AdapterCodeFromServer.AdapterCode(code, this, fromServer),
                 Toast.LENGTH_LONG).show();
     }
 

@@ -122,16 +122,28 @@ public class UserPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            view2.showError(((HttpException) e).code());
+                            try {
+                                view2.showError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
                         else
-                            view2.showError(((HttpException) e).code());
+                            try {
+                                view2.showError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         Integer.toString(responseBodyResponse.code());
                         responseBodyResponse.message().toString();
-                        view2.doneOperation(responseBodyResponse.code());
+                        try {
+                            view2.doneOperation(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
     }
@@ -152,16 +164,28 @@ public class UserPresenter {
                     public void onError(Throwable e) {
 
                         if (e instanceof HttpException)
-                            view.showError(((HttpException) e).code());
+                            try {
+                                view.showError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
                         else
-                            view.showError(((HttpException) e).code());
+                            try {
+                                view.showError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         Integer.toString(responseBodyResponse.code());
                         responseBodyResponse.message().toString();
-                        view.showError(responseBodyResponse.code());
+                        try {
+                            view.showError(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 });
@@ -184,6 +208,7 @@ public class UserPresenter {
                 LoggedUser.getmInstance().setUserType(token.getUserType());
                 LoggedUser.getmInstance().setUserId(token.getUserid());
                 setDeviceTokenSend(context, true);
+                LoggedUser.getmInstance().setPREF_DEVICE_TOKEN(token.getTokenType() + " " + token.getmToken(), context, token.getUserid());
             }
 
         } catch (IOException e) {
@@ -200,7 +225,7 @@ public class UserPresenter {
 // Если токена не существует, создает его.
     public String createAndSendDeviceToken(final Context context, final String username, final String password) {
         // Если токен уже отправлен на сервер, то ничего не делаем
-        String tok = LoggedUser.getmInstance().getPREF_DEVICE_TOKEN();
+
        /* if(isDeviceTokenSent(context)) {
             statusLogIn = logIn(context,username,password,LoggedUser.getmInstance().getPREF_DEVICE_TOKEN());
             return statusLogIn;
@@ -235,6 +260,9 @@ public class UserPresenter {
             }
         }.execute();*/
         return statusLogIn;
+
+
+
     }
 
     public void logOut() {
@@ -251,16 +279,28 @@ public class UserPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            view2.showError(((HttpException) e).code());
+                            try {
+                                view2.showError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
                         else
-                            view2.showError(((HttpException) e).code());
+                            try {
+                                view2.showError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
                     }
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         Integer.toString(responseBodyResponse.code());
                         responseBodyResponse.message().toString();
-                        view2.doneOperation(responseBodyResponse.code());
+                        // try {
+                        view2.doneOperation(responseBodyResponse.code(), responseBodyResponse.message());
+                        //    } catch (IOException e) {
+                        //       e.printStackTrace();
+                        //    }
                     }
                 });
     }
@@ -279,17 +319,37 @@ public class UserPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            view2.showError(((HttpException) e).code());
+                            view2.showError(((HttpException) e).code(), ((HttpException) e).message());
                         else
-                            view2.showError(((HttpException) e).code());
+                            view2.showError(((HttpException) e).code(), ((HttpException) e).message());
+
                     }
 
                     @Override
                     public void onNext(User user) {
                         view2.setNameSideBar(user.getName());
-                        //  view2.setEmailSideBar(user.getEmail());
+                        view2.setEmailSideBar(user.getEmail());
                     }
                 });
+    }
+
+    public void checkTocken(long id, final Context context) {
+        Call<User> call = null;
+        User user = null;
+        try {
+            call = managerUser.checkTocken(id);
+
+            user = call.execute().body();
+            if (user != null) {
+                LoggedUser.getmInstance().setUserType(user.getUserType());
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //  view2.setEmailSideBar(user.getEmail());
+
     }
 
     public void getUserId(long id) {
@@ -307,9 +367,9 @@ public class UserPresenter {
                     @Override
                     public void onError(Throwable e) {
                         if (e instanceof HttpException)
-                            view.showError(((HttpException) e).code());
+                            view.showError(((HttpException) e).code(), ((HttpException) e).message());
                         else
-                            view.showError(((HttpException) e).code());
+                            view.showError(((HttpException) e).code(), ((HttpException) e).message());
                     }
 
                     @Override

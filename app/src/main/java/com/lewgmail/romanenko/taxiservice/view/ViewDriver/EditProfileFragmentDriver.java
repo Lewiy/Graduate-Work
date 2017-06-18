@@ -263,13 +263,13 @@ public class EditProfileFragmentDriver extends android.support.v4.app.Fragment i
     }
 
     @Override
-    public void showError(int code) {
-        Toast.makeText(this.getActivity(), AdapterCodeFromServer.AdapterCode(code, this.getActivity()), Toast.LENGTH_SHORT).show();
+    public void showError(int code, String fromServer) {
+        Toast.makeText(this.getActivity(), AdapterCodeFromServer.AdapterCode(code, this.getActivity(), fromServer), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void doneOperation(int code) {
-        Toast.makeText(this.getActivity(), AdapterCodeFromServer.AdapterCode(code, this.getActivity()), Toast.LENGTH_SHORT).show();
+    public void doneOperation(int code, String fromServer) {
+        Toast.makeText(this.getActivity(), AdapterCodeFromServer.AdapterCode(code, this.getActivity(), fromServer), Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -21,13 +21,13 @@
     <string name="button_next_to_driver_registration">Next</string>
     <string name="password_registration"> Password </string>
     <string name="repeat_password">Repeat password</string>
-    <string name="numbre_registration">Number (phone1)</string>
-    <string name="second_number_registration">Second number (phone2)</string>
+    <string name="numbre_registration">Mobile number</string>
+    <string name="second_number_registration">Second mobile number</string>
     <string name="model_registration">Model</string>
-    <string name="manufacturer_registration">Brend</string>
+    <string name="manufacturer_registration">Brand</string>
     <string name="plate_number">Plate number</string>
     <string name="sign_up">Sign up</string>
-    <string name="text_lable_num_passenger">Num passenger</string>
+    <string name="text_lable_num_passenger">Passengers count</string>
     <string name="text_lable_car_type">Car type</string>
     <string name="driver_license">Driver license</string>
     <string name="code_license">Code of license</string>
@@ -49,11 +49,11 @@
         <item>8</item>
     </string-array>
 
-    <string name="num_passenger_title">number passenger</string>
+    <string name="num_passenger_title">Passengers count</string>
     <string-array name="set_car_type">
-        <item>PASSENGER_CAR</item>
-        <item>TRUCK</item>
-        <item>MINIBUS</item>
+        <item>Passenger car</item>
+        <item>Truck</item>
+        <item>Minibus</item>
     </string-array>
 
     <!--reset password -->
@@ -74,24 +74,24 @@
     <string name="end_point">end point</string>
     <string name="price">price</string>
     <string name="statis">status</string>
-    <string name="time_ride">time ride</string>
+    <string name="time_ride">Time ride</string>
     <string name="date_ride">Date ride:</string>
-    <string name="route">Route inf</string>
+
     <string name="additional_requirements">Additional requirements</string>
-    <string name="route_info">Route inf</string>
+
 
     <!--fragment personal page (edit) -->
     <string name="name_personal_page">Name</string>
     <string name="password_personal_page"> Password </string>
     <string name="repeat_personal_page">Repeat password</string>
-    <string name="numbre_personal_page">Number</string>
-    <string name="second_number_personal_page">Second number</string>
+    <string name="numbre_personal_page">Mobile number</string>
+    <string name="second_number_personal_page">Second mobile number</string>
     <string name="update_personal_page">update</string>
     <string name="ok_personal_page">Ok</string>
     <string name="model_personal_page">Model</string>
-    <string name="manufacturer_personal_page">Brend</string>
+    <string name="manufacturer_personal_page">Brand</string>
     <string name="plate_personal_page">Plate number</string>
-    <string name="text_lable_num_passenger_personal_page">Num passenger</string>
+    <string name="text_lable_num_passenger_personal_page">Passengers count</string>
     <string name="text_lable_car_type_personal_page">Car type</string>
     <string name="car_characteristics"> Car characteristics </string>
 
@@ -99,7 +99,7 @@
     <string name="title_item_list">Time and date of order</string>
 
     <!-- edit order client -->
-    <string name="calculate_price"> culculate price</string>
+    <string name="calculate_price"> calculate price</string>
     <string name="km_distance">distance</string>
     <string name="customer_name"> customer </string>
     <string name="driver_name"> driver </string>
@@ -143,8 +143,8 @@
     <string-array name="change_status_driver_waiting">
         <item>Waiting</item>
         <item>Processing</item>
-        <item>New</item>
-        <item>Accepted</item>
+        <item>Cancelled</item>
+
     </string-array>
 
     <string-array name="change_status_driver_processing">
@@ -193,7 +193,7 @@
     <string name="manufacturer_inf">Brand: </string>
     <string name="model_inf">Model: </string>
     <string name="plate_number_inf">Plate number: </string>
-    <string name="seats_number_inf">Seats number: </string>
+    <string name="seats_number_inf">Passengers count: </string>
     <string name="car_type_inf">Car type: </string>
 
     <!--- new of adding to localization -->
@@ -221,7 +221,7 @@
     <string name="time_text">00:00:00</string>
     <string name="prise_label_add_order">Total price:</string>
     <string name="additional_request">Additional request</string>
-    <string name="title_activity_add_order">AddOrder</string>
+    <string name="title_activity_add_order">Add order</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="tab_main_settings">Main settings</string>
     <string name="tab_addition_requirest">Additional</string>
@@ -263,7 +263,7 @@
         <item>Yes</item>
     </string-array>
     <string-array name="type_number_passengers">
-        <item>Number of passengers</item>
+        <item>Passengers count</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -293,7 +293,7 @@
     <string name="new_password_repeat">Repeat new password</string>
     <string name="code_for_reset_will_be_send">Code for reset password will be sent to your email</string>
     <string name="time_order_for_now">Now</string>
-    <string name="turn_on_notification">Notification</string>
+    <string name="turn_on_notification">Notifications</string>
 
 
     <!-- notification string -->
@@ -305,7 +305,7 @@
     <string name="notific_waiting_driver">Driver is waiting</string>
     <string name="notific_plate_number">Plate number:</string>
     <string name="notific_model">Model:</string>
-    <string name="notific_manufacturer">Brend:</string>
+    <string name="notific_manufacturer">Brand:</string>
     <string name="notific_name">Name:</string>
 
     <string name="notific_changed_order_status">Changed order status</string>
@@ -324,5 +324,19 @@
     <string name="cant_perform">Can`t perform an operation</string>
     <string name="problems_on_the_server">Problems on the server</string>
     <string name="something_happened">Something happened</string>
+
+
+    <string name="UAH">UAH</string>
+    <string name="to">TO</string>
+
+    <string name="passenger_car">Passenger car</string>
+    <string name="truck">Truck</string>
+    <string name="minibus">Minibus</string>
+
+    <string name="registration">Registration</string>
+    <string name="title_update_order">Update order</string>
+
+    <string name="route">Route info</string>
+    <string name="route_info">Route info</string>
 
 </resources>

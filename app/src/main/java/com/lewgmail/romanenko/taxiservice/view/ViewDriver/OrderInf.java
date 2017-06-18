@@ -361,9 +361,9 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
     }
 
     @Override
-    public void showError(int code) {
+    public void showError(int code, String fromServer) {
         //Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this, fromServer), Toast.LENGTH_SHORT).show();
     }
 
     private String addressBilder(String street, String numberOfHause, String citi) {

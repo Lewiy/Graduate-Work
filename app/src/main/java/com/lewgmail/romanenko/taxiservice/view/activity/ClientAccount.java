@@ -95,7 +95,7 @@ public class ClientAccount extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.client_account, menu);
+        // getMenuInflater().inflate(R.menu.client_account, menu);
         return true;
     }
 
@@ -185,12 +185,12 @@ public class ClientAccount extends AppCompatActivity
     }
 
     @Override
-    public void showError(int code) {
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
+    public void showError(int code, String fromServer) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this, fromServer), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void doneOperation(int responseCode) {
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responseCode, this), Toast.LENGTH_SHORT).show();
+    public void doneOperation(int responseCode, String fromServer) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responseCode, this, fromServer), Toast.LENGTH_SHORT).show();
     }
 }

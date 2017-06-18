@@ -185,8 +185,8 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     Responses for getOrderSpecificID/////////////////////////////////////////////////////
      */
 
-    public void responseError(int code) {
-        fragmentObj1Update.setError(AdapterCodeFromServer.AdapterCode(code, this));
+    public void responseError(int code, String fromServer) {
+        fragmentObj1Update.setError(AdapterCodeFromServer.AdapterCode(code, this, fromServer));
     }
 
     public void responseOrderId(long orderId) {
@@ -601,10 +601,10 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
         valuePrice.setText(text);
     }*/
 
-    public void responseAddorder(int code) {
+    public void responseAddorder(int code, String fromServer) {
 
         //Toast.makeText(contextFragm2, "Code of Operation:" + text, Toast.LENGTH_SHORT).show();
-        Toast.makeText(contextFragm2, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
+        Toast.makeText(contextFragm2, AdapterCodeFromServer.AdapterCode(code, this, fromServer), Toast.LENGTH_SHORT).show();
 
     }
 

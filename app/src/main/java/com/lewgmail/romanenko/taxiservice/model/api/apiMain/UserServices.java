@@ -32,6 +32,9 @@ public interface UserServices {
     @GET("user/{userId}")
     Observable<User> getUserProfile(@Header("Authorization") String authorization, @Path("userId") long id);
 
+    @GET("user/{userId}")
+    Call<User> checkTocken(@Header("Authorization") String authorization, @Path("userId") long id);
+
     @PATCH("user")
     Observable<Response<ResponseBody>> updateUserProfile(@Header("Authorization") String authorization, @Body UpdateUser user);
 

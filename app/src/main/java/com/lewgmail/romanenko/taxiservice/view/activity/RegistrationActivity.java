@@ -252,13 +252,13 @@ public class RegistrationActivity extends AppCompatActivity implements UserOpera
     }
 
     @Override
-    public void showError(int code) {
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this), Toast.LENGTH_SHORT).show();
+    public void showError(int code, String fromServer) {
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this, fromServer), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void doneOperation(int responseCod) {
+    public void doneOperation(int responseCod, String fromServer) {
         progress.dismiss();
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responseCod, this), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responseCod, this, fromServer), Toast.LENGTH_LONG).show();
     }
 }

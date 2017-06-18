@@ -1,5 +1,9 @@
 package com.lewgmail.romanenko.taxiservice.model.dataManager;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.lewgmail.romanenko.taxiservice.model.pojo.Car;
 
 /**
@@ -28,12 +32,22 @@ public class LoggedUser {
         return mInstance;
     }
 
-    public String getPREF_DEVICE_TOKEN() {
+    public String getPREF_DEVICE_TOKEN(Context context) {
+        SharedPreferences settings = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        PREF_DEVICE_TOKEN = settings.getString("TOKEN", "ERROR");
+        userId = settings.getLong("userId", 0);
         return PREF_DEVICE_TOKEN;
     }
 
-    public void setPREF_DEVICE_TOKEN(String PREF_DEVICE_TOKEN) {
+    public void setPREF_DEVICE_TOKEN(String PREF_DEVICE_TOKEN, Context context, long userId) {
         this.PREF_DEVICE_TOKEN = PREF_DEVICE_TOKEN;
+        SharedPreferences settings = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("TOKEN", PREF_DEVICE_TOKEN);
+        editor.putLong("userId", userId);
+        editor.commit();
     }
 
     public long getUserId() {
