@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements UserOperationInte
         protected void onPostExecute(final Boolean success) {
             if (LoggedUser.getmInstance().getUserType() != null) {
 
-
+                LoggedUser.getmInstance().setTokenFromPref_Device_Token();
                 if (LoggedUser.getmInstance().getUserType().equals("CUSTOMER")) {
                     progress.dismiss();
                     Intent myIntent = new Intent(MainActivity.this, ClientAccount.class);

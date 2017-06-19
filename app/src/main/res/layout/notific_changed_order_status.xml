@@ -21,7 +21,7 @@
                 android:id="@+id/notific_image"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:background="@drawable/default_license" />
+                android:background="@drawable/main_theme" />
         </LinearLayout>
 
         <TextView

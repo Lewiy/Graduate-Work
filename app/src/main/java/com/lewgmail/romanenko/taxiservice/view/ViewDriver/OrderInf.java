@@ -131,14 +131,14 @@ public class OrderInf extends AppCompatActivity implements EditOrderInterface {
 
     @OnClick(R.id.buttn_order_driv_ok)
     public void okClickButton() {
-
+        finish();
     }
 
     @OnClick(R.id.customer_account_info)
     public void customerInfoClickButton() {
         AccountInfUserFrag passengerInfFragment = new AccountInfUserFrag();
         Bundle args = new Bundle();
-        args.putLong("customerId", customerId);
+        args.putLong("userId", customerId);
         passengerInfFragment.setArguments(args);
         passengerInfFragment.show(getFragmentManager(), "ldld");
     }

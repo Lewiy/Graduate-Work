@@ -6,19 +6,19 @@
         <item
             android:id="@+id/order_list"
             android:icon="@drawable/ic_purchase_order_100"
-            android:title="Order List" />
+            android:title="@string/order_list_menu" />
 
         <item
             android:id="@+id/edit_profile"
             android:icon="@drawable/ic_edit_user_male_100"
-            android:title="Edit profile" />
+            android:title="@string/edit_profile_menu" />
         <item
             android:id="@+id/settings"
             android:icon="@drawable/ic_settings_100"
-            android:title="Settings" />
+            android:title="@string/settings_menu" />
         <item
             android:id="@+id/log_out"
             android:icon="@drawable/ic_exit_100"
-            android:title="Log out" />
+            android:title="@string/log_out_menu" />
     </group>
 </menu>

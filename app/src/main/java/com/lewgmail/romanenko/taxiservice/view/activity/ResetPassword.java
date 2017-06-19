@@ -1,6 +1,7 @@
 package com.lewgmail.romanenko.taxiservice.view.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.lewgmail.romanenko.taxiservice.view.ValidationOfFields;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static android.R.attr.value;
 
 public class ResetPassword extends AppCompatActivity implements UserOperationInterface {
 
@@ -51,6 +54,12 @@ public class ResetPassword extends AppCompatActivity implements UserOperationInt
             //  Toast.makeText(this, "Пройшло", Toast.LENGTH_LONG).show();
             if (sendCodeReadyFlag) {
                 resetPasswordPresenter.sendNewPasswordReq();
+                progress = new ProgressDialog(this);
+                progress.setTitle(getResources().getString(R.string.main_theme_loading));
+                progress.setMessage(getResources().getString(R.string.text_of_loading));
+                progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
+                progress.show();
+                // resetPasswordPresenter.sendEmailReq();
 
             } else {
                 progress = new ProgressDialog(this);
@@ -113,6 +122,14 @@ public class ResetPassword extends AppCompatActivity implements UserOperationInt
         sendCodeReadyFlag = true;
     }
 
+    public void doneReset() {
+        progress.dismiss();
+        Toast.makeText(this, getResources().getString(R.string.reset_password_toast), Toast.LENGTH_SHORT).show();
+        Intent myIntent = new Intent(this, LoginActivity.class);
+        myIntent.putExtra("key", value); //Optional parameters
+        this.startActivity(myIntent);
+    }
+
     @Override
     public void setNameSideBar(String name) {
 
@@ -125,12 +142,12 @@ public class ResetPassword extends AppCompatActivity implements UserOperationInt
 
     @Override
     public void showError(int code, String fromServer) {
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this, fromServer), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this, fromServer), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void doneOperation(int responseCod, String fromServer) {
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responseCod, this, fromServer), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responseCod, this, fromServer), Toast.LENGTH_LONG).show();
     }
 
 

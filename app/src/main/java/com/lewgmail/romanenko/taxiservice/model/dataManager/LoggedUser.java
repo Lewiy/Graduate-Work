@@ -40,6 +40,16 @@ public class LoggedUser {
         return PREF_DEVICE_TOKEN;
     }
 
+    public void setTokenFromPref_Device_Token() {
+        token = PREF_DEVICE_TOKEN;
+    }
+
+    public String getPrefToken() {
+        return PREF_DEVICE_TOKEN;
+    }
+
+
+
     public void setPREF_DEVICE_TOKEN(String PREF_DEVICE_TOKEN, Context context, long userId) {
         this.PREF_DEVICE_TOKEN = PREF_DEVICE_TOKEN;
         SharedPreferences settings = PreferenceManager
@@ -58,7 +68,13 @@ public class LoggedUser {
         this.userId = userId;
     }
 
-    public void logOut() {
+    public void logOut(Context context) {
+        SharedPreferences settings = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("TOKEN", "ERROR");
+        editor.putLong("userId", 0);
+        editor.commit();
         mInstance = null;
     }
 

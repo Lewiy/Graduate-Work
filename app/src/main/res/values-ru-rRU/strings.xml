@@ -49,8 +49,8 @@
 
     <string name="num_passenger_title">Количество пасажиров</string>
     <string-array name="set_car_type">
-        <item>Легковая машина</item>
-        <item>Грузовая машина</item>
+        <item>Легковой</item>
+        <item>Грузовой</item>
         <item>Микроавтобус</item>
     </string-array>
 
@@ -195,28 +195,28 @@
 
     <!-- additional  requirements-->
     <string-array name="type_car">
-        <item>Type of car</item>
-        <item>Track</item>
-        <item>Passenger car</item>
-        <item>Mini bus</item>
+        <item>Тип автомобіля</item>
+        <item>Легковой</item>
+        <item>Грузовой</item>
+        <item>Микроавтобус</item>
     </string-array>
     <string-array name="type_reconing">
-        <item>Type payment</item>
-        <item>Cash</item>
-        <item>Card</item>
+        <item>Тип оплаты</item>
+        <item>Наличные</item>
+        <item>Карточка</item>
     </string-array>
     <string-array name="type_pets">
-        <item>Pets</item>
-        <item>Yes</item>
-        <item>No</item>
+        <item>Животные</item>
+        <item>Нет</item>
+        <item>Да</item>
     </string-array>
     <string-array name="type_baggage">
-        <item>Big baggage</item>
-        <item>Yes</item>
-        <item>No</item>
+        <item>Груз</item>
+        <item>Нет</item>
+        <item>Да</item>
     </string-array>
     <string-array name="type_extra_price">
-        <item>Extra price</item>
+        <item>Екстра цена</item>
         <item>30</item>
         <item>50</item>
         <item>70</item>
@@ -225,12 +225,12 @@
         <item>150</item>
     </string-array>
     <string-array name="type_driver_services">
-        <item>Driver services</item>
-        <item>Yes</item>
-        <item>No</item>
+        <item>Услуги водителя</item>
+        <item>Нет</item>
+        <item>Да</item>
     </string-array>
     <string-array name="type_number_passengers">
-        <item>Number of passengers</item>
+        <item>Число пасажиров</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
@@ -290,4 +290,30 @@
     <string name="cant_perform">Операция не может быть выполнена</string>
     <string name="problems_on_the_server">Проблемы на сервере</string>
     <string name="something_happened">Что то случилось</string>
+
+    <string name="UAH">грн</string>
+    <string name="to"> ДО </string>
+
+    <string name="passenger_car">Легковой</string>
+    <string name="truck">Грузовой</string>
+    <string name="minibus">Микроавтобус</string>
+
+    <string name="registration">Регистрация</string>
+    <string name="title_update_order">обновления заказ</string>
+
+    <string name="route">О маршруте</string>
+    <string name="route_info">О маршруте</string>
+    <string name="session_time">Время сессии истекло</string>
+
+    <string name="add_order_menu">Создать заказ</string>
+    <string name="order_list_menu">Список заказов</string>
+    <string name="edit_profile_menu">Редактировать профиль</string>
+    <string name="settings_menu">Настройки</string>
+    <string name="log_out_menu">Выйти</string>
+
+
+    <string name="code_license">Номер удостоверения</string>
+
+    <string name="regist">Регист</string>
+    <string name="reset_password_toast">Пароль изменён</string>
 </resources>

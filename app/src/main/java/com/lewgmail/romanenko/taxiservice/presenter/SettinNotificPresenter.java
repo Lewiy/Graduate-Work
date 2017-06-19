@@ -79,6 +79,8 @@ public class SettinNotificPresenter {
                             e.printStackTrace();
                         }
 
+                        //  LoggedUser.getmInstance().setToken("sdf");
+
                     }
                 });
     }

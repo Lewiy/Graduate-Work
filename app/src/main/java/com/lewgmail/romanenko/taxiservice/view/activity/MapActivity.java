@@ -117,7 +117,8 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
             // Setting the position for the marker
             markerOptions.position(latLng);
 
-            markerOptions.title("Point: " + Integer.toString(i) + " " + routePoints.get(i).getAddress());
+            // markerOptions.title("Point: " + Integer.toString(i) + " " + routePoints.get(i).getAddress());
+            markerOptions.title(routePoints.get(i).getAddress());
             mGoogleMap.addMarker(markerOptions).showInfoWindow();
         }
     }

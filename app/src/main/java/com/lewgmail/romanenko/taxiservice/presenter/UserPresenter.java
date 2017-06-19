@@ -168,12 +168,14 @@ public class UserPresenter {
                                 view.showError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
                             } catch (IOException e1) {
                                 e1.printStackTrace();
+                                view.showError(((HttpException) e).code(), " ");
                             }
                         else
                             try {
                                 view.showError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
                             } catch (IOException e1) {
                                 e1.printStackTrace();
+                                view.showError(((HttpException) e).code(), " ");
                             }
                     }
 
@@ -181,11 +183,9 @@ public class UserPresenter {
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
                         Integer.toString(responseBodyResponse.code());
                         responseBodyResponse.message().toString();
-                        try {
-                            view.showError(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+
+                        view.showError(responseBodyResponse.code(), null);
+
 
                     }
                 });
@@ -400,8 +400,10 @@ public class UserPresenter {
                                 view.setUserMobileId(user.getMobileNumbers().get(0).getIdMobileNumber());
                             }*/
                         if (LoggedUser.getmInstance().getUserType().equals("TAXI_DRIVER")) {
-                            view.setExpirationTime(user.getDriverLicense().getExpirationTime());
-                            view.setCodeLicense(user.getDriverLicense().getCode());
+                            if (user.getDriverLicense() != null) {
+                                view.setExpirationTime(user.getDriverLicense().getExpirationTime());
+                                view.setCodeLicense(user.getDriverLicense().getCode());
+                            }
                         }
                     }
                 });

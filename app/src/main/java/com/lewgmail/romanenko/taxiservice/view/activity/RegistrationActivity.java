@@ -86,8 +86,8 @@ public class RegistrationActivity extends AppCompatActivity implements UserOpera
         if (checkInputedFields()) {
             userPresenter.registerUser(createUser());
             progress = new ProgressDialog(this);
-            progress.setTitle("Loading");
-            progress.setMessage("Wait while loading...");
+            progress.setTitle(getResources().getString(R.string.main_theme_loading));
+            progress.setMessage(getResources().getString(R.string.text_of_loading));
             progress.setCancelable(true); // disable dismiss by tapping outside of the dialog*/
             progress.show();
         }
@@ -106,7 +106,7 @@ public class RegistrationActivity extends AppCompatActivity implements UserOpera
         }
 
         if (checkPasswordsEquals()) {
-            Toast.makeText(this, "Please check your password fields", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.input_all_fields), Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

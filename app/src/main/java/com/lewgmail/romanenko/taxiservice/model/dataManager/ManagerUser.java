@@ -68,7 +68,8 @@ public class ManagerUser {
 
     public Call<User> checkTocken(long id) {
         UserServices services = Services.createService(UserServices.class);
-        Call<User> call = services.checkTocken(LoggedUser.getmInstance().getToken(), id);
+        String token = LoggedUser.getmInstance().getToken();
+        Call<User> call = services.checkTocken(LoggedUser.getmInstance().getPrefToken(), id);
         return call;
     }
 

@@ -141,7 +141,7 @@ public class DriverAccount extends AppCompatActivity
         } else if (id == R.id.log_out) {
 
             userPresentr.logOut();
-            LoggedUser.getmInstance().logOut();
+            LoggedUser.getmInstance().logOut(this);
 
             Intent myIntent = new Intent(DriverAccount.this, LoginActivity.class);
             myIntent.putExtra("key", value); //Optional parameters

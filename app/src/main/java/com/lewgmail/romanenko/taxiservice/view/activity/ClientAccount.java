@@ -144,7 +144,7 @@ public class ClientAccount extends AppCompatActivity
         } else if (id == R.id.log_out) {
 
             userPresenter.logOut();
-            LoggedUser.getmInstance().logOut();
+            LoggedUser.getmInstance().logOut(this);
 
             Intent myIntent = new Intent(ClientAccount.this, LoginActivity.class);
             myIntent.putExtra("key", value); //Optional parameters

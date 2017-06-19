@@ -21,6 +21,7 @@ import com.lewgmail.romanenko.taxiservice.presenter.UserPresenter;
 import com.lewgmail.romanenko.taxiservice.presenter.adapters.AdapterCodeFromServer;
 import com.lewgmail.romanenko.taxiservice.view.ValidationOfFields;
 import com.lewgmail.romanenko.taxiservice.view.activity.InfoUser;
+import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterSpinnerLocalization;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,6 +141,36 @@ public class EditProfileFragmentDriver extends android.support.v4.app.Fragment i
         return checkFlag;
     }
 
+    private boolean checkInputedInfoCustomer() {
+        boolean checkFlag = true;
+        String massege;
+        if (!phoneNumberPersonalPage.getText().toString().matches("")) {
+            massege = ValidationOfFields.checkPhoneNumber(this.getContext(), phoneNumberPersonalPage.getText().toString());
+            if (!massege.equals("true")) {
+                phoneNumberPersonalPage.setError(massege);
+                return false;
+            }
+        }
+
+        if (!phoneNumberSecondPersonalPage.getText().toString().matches("")) {
+            massege = ValidationOfFields.checkPhoneNumber(this.getContext(), phoneNumberSecondPersonalPage.getText().toString());
+            if (!massege.equals("true")) {
+                phoneNumberSecondPersonalPage.setError(massege);
+                return false;
+            }
+        }
+
+
+        checkFlag = validationEmptyField(phoneNumberPersonalPage);
+        if (checkFlag == false)
+            return false;
+        checkFlag = validationEmptyField(namePersonalPage);
+        if (checkFlag == false)
+            return false;
+
+        return checkFlag;
+    }
+
     private boolean validationField(EditText editTextField) {
         String massege;
         massege = ValidationOfFields.checkExpirationTime(this.getContext(), editTextField.getText().toString());
@@ -168,19 +199,37 @@ public class EditProfileFragmentDriver extends android.support.v4.app.Fragment i
                 ArrayAdapter.createFromResource(this.getActivity(), R.array.set_car_type, android.R.layout.simple_spinner_item);
         adapterSpinnerCarType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinnerCarType.setAdapter(adapterSpinnerCarType);
+
+       /* mSpinnerCarType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos,
+                                       long id) {
+
+                progress = new ProgressDialog(getActivity());
+                progress.setTitle(R.string.main_theme_loading);
+                progress.setMessage(getResources().getString(R.string.text_of_loading));
+                progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
+                progress.show();
+                driverCustPresenter.loadOrdersList(AdapterSpinnerLocalization.adaptSpinnerTypeOrder( mSpinnerCarType.getSelectedItemPosition()));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });*/
         adapterSpinnerNumPassenger =
                 ArrayAdapter.createFromResource(this.getActivity(), R.array.set_num_passenger, android.R.layout.simple_spinner_item);
         adapterSpinnerCarType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinnerNumPassenger.setAdapter(adapterSpinnerNumPassenger);
     }
 
-    @OnClick(R.id.personal_page_button_ok)
-    public void onClickButtOk() {
-    }
-
 
     @OnClick(R.id.personal_page_button_update)
     public void onClickButtUpDate() {
+        if (LoggedUser.getmInstance().getUserType().equals("CUSTOMER"))
+            if (checkInputedInfoCustomer())
+                userPresenter.updateUser(criateUserUpdateObject());
         if (checkInputedInfo())
         userPresenter.updateUser(criateUserUpdateObject());
     }
@@ -249,7 +298,9 @@ public class EditProfileFragmentDriver extends android.support.v4.app.Fragment i
 
     @Override
     public void setUserDriverCarType(String carType) {
-        this.mSpinnerCarType.setSelection(adapterSpinnerCarType.getPosition(carType));
+        String str = AdapterSpinnerLocalization.adaptTypeCar(carType, getActivity());
+        int pos = adapterSpinnerCarType.getPosition(str);
+        this.mSpinnerCarType.setSelection(pos);
     }
 
     @Override
@@ -338,7 +389,7 @@ public class EditProfileFragmentDriver extends android.support.v4.app.Fragment i
             car.setModel(model_PersonalPage.getText().toString());
             car.setPlateNumber(platePersonalPage.getText().toString());
             car.setSeatsNumber(Integer.parseInt(mSpinnerNumPassenger.getSelectedItem().toString()));
-            car.setCarType(mSpinnerCarType.getSelectedItem().toString());
+            car.setCarType(AdapterSpinnerLocalization.adaptSpinnerTypeCar(mSpinnerCarType.getSelectedItemPosition()));
             user.setCar(car);
             UpdateUserDriverLicense driverLicense = new UpdateUserDriverLicense();
             driverLicense.setCode(codeLicense.getText().toString());

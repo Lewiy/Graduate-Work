@@ -253,25 +253,14 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/personal_page_button_ok"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/main_button"
-                    android:text="@string/ok_personal_page"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/personal_page_button_update"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:background="@drawable/main_button"

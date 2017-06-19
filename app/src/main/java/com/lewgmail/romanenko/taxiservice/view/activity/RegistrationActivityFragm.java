@@ -98,7 +98,7 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
             }
 
             if (fragment instanceof FragmentDriverRegistLicen)
-                registrationButton.setText(R.string.sign_up);
+                registrationButton.setText(R.string.regist);
 
             // Вставляем фрагмент, заменяя текущий фрагмент
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -128,7 +128,7 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
         if (checkBoxDriver)
             registrationButton.setText(R.string.button_next_to_driver_registration);
         else
-            registrationButton.setText(R.string.sign_up);
+            registrationButton.setText(R.string.regist);
     }
 
     private void submit() {

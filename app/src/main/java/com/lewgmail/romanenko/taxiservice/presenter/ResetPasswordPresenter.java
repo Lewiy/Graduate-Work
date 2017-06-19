@@ -91,8 +91,12 @@ public class ResetPasswordPresenter {
                         try {
                             resetPasswordView.doneOperation(responseBody.code(), responseBody.errorBody().string());
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            resetPasswordView.doneOperation(responseBody.code(), "");
+                        } finally {
+                            if (responseBody.code() == 200)
+                                resetPasswordView.doneReset();
                         }
+
                     }
                 });
     }

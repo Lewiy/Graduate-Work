@@ -35,7 +35,7 @@
     <string name="category_license">Category license</string>
     <string name="front_foto_license">Make foto of front your license</string>
     <string name="back_foto_license">make foto of back yor license</string>
-    <string name="i_am_driver">I am driver</string>
+    <string name="i_am_driver">I am a driver</string>
     <!--spinner resurses-->
     <string name="car_type_title">type car</string>
     <string-array name="set_num_passenger">
@@ -61,7 +61,7 @@
     <string name="email_reset_password_activity">Email</string>
     <string name="button_reset_password_activity">Reset</string>
     <string name="button_send_request">Send</string>
-    <string name="title_activity_client_account">ClientAccount</string>
+    <string name="title_activity_client_account">Client account</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -178,7 +178,7 @@
         <item>Processing</item>
     </string-array>
     <!-- driver accaunt -->
-    <string name="title_activity_driver_account">DriverAccount</string>
+    <string name="title_activity_driver_account">Driver account</string>
     <!-- order information driver -->
     <string name="value_order">Inform order</string>
     <string name="without_requirement">Without additional requir</string>
@@ -338,5 +338,9 @@
 
     <string name="route">Route info</string>
     <string name="route_info">Route info</string>
+    <string name="session_time">Time expired session</string>
 
+    <string name="regist">Sign up</string>
+
+    <string name="reset_password_toast">Your password has been reset successfully</string>
 </resources>

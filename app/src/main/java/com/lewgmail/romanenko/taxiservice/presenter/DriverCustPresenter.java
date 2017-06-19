@@ -214,6 +214,7 @@ public class DriverCustPresenter implements BasePresenterInterface {
                             viewAddOrderUpdate.responseError(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
                         } catch (IOException e) {
                             e.printStackTrace();
+                            viewAddOrderUpdate.responseError(responseBodyResponse.code(), null);
                         }
                         if (responseBodyResponse.code() != 200)
                             viewAddOrderUpdate.resStatusOrderNotChanged();

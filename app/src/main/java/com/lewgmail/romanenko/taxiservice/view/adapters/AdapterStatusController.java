@@ -26,6 +26,8 @@ public class AdapterStatusController {
                     return R.array.change_status_driver_waiting;
                 case "PROCESSING":
                     return R.array.change_status_driver_processing;
+                case "DONE":
+                    return R.array.change_status_driver_done;
             }
         }
         if (typeUser.equals("CUSTOMER")) {
@@ -38,6 +40,8 @@ public class AdapterStatusController {
                     return R.array.change_status_client_new;
                 case "WAITING":
                     return R.array.change_status_client_waiting;
+                case "DONE":
+                    return R.array.change_status_client_done;
             }
         }
 

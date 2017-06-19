@@ -21,8 +21,8 @@
     <string name="button_next_to_driver_registration">Далі</string>
     <string name="password_registration">Пароль</string>
     <string name="repeat_password">Підтвердження паролю</string>
-    <string name="numbre_registration">Телефон 1</string>
-    <string name="second_number_registration">Телефо 2</string>
+    <string name="numbre_registration">Телефон </string>
+    <string name="second_number_registration">Додатковий телефон </string>
     <string name="model_registration">Модель</string>
     <string name="manufacturer_registration">Марка</string>
     <string name="plate_number">Номер автомобіля</string>
@@ -50,7 +50,7 @@
 
     <string name="num_passenger_title">Число пасажирів</string>
     <string-array name="set_car_type">
-        <item>Легковий автомобіль</item>
+        <item>Легковий</item>
         <item>Вантажний</item>
         <item>Мікроавтобус</item>
     </string-array>
@@ -134,6 +134,8 @@
         <item>Скасовані</item>
         <item>Виконані</item>
         <item>Нові</item>
+        <item>Водій чекає</item>
+        <item>В процесі виконання</item>
     </string-array>
     <!-- driver accaunt -->
     <string name="title_activity_driver_account">Кабінет водія</string>
@@ -200,7 +202,7 @@
     <!-- additional  requirements-->
     <string-array name="type_car">
         <item>Тип автомобіля</item>
-        <item>Легкова</item>
+        <item>Легковий</item>
         <item>Вантажний</item>
         <item>Мікроавтобус</item>
     </string-array>
@@ -293,4 +295,30 @@
     <string name="cant_perform">Операція не може бути виконана</string>
     <string name="problems_on_the_server">Проблеми на сервері</string>
     <string name="something_happened">Щось сталося</string>
+
+
+    <string name="UAH">грн</string>
+    <string name="to"> ДО </string>
+
+    <string name="passenger_car">Легковий</string>
+    <string name="truck">Вантажний</string>
+    <string name="minibus">Мікроавтобус</string>
+
+    <string name="registration">Реєстрація</string>
+    <string name="title_update_order">Оновлення замовлення</string>
+
+    <string name="route">Про маршрут</string>
+    <string name="route_info">Про маршрут</string>
+    <string name="session_time">Час сесії минув</string>
+
+    <string name="add_order_menu">Додати замовлення</string>
+    <string name="order_list_menu">Список замовлень</string>
+    <string name="edit_profile_menu">Редагувати профіль</string>
+    <string name="settings_menu">Налаштування</string>
+    <string name="log_out_menu">Вийти</string>
+
+    <string name="code_license">Номер посвідчення</string>
+
+    <string name="regist">Реєстр</string>
+    <string name="reset_password_toast">Пароль змінено </string>
 </resources>
