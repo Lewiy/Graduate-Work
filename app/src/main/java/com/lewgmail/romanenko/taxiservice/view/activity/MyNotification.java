@@ -96,8 +96,8 @@ public class MyNotification extends GcmListenerService {
         mSimpleBuilder.setSmallIcon(R.drawable.ic_taxi)
                 .setCustomBigContentView(contentView);
 
-        Intent resultIntent = new Intent(mContext, LoginActivity.class);
-
+        Intent resultIntent = new Intent(mContext, AddOrderUpdate.class);
+        resultIntent.putExtra("keyNumberOfOrder", orderId);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(mContext);
 
         stackBuilder.addParentStack(LoginActivity.class);

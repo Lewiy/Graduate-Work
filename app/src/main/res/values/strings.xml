@@ -346,4 +346,24 @@
     <string name="comments">Comments</string>
 
     <string name="match_point_address">Maximum addresses</string>
+
+    <string-array name="change_status_client_new_accepted">
+        <item>Ничего не выбрано</item>
+        <item>Отменен</item>
+    </string-array>
+
+    <string-array name="change_status_driver_done">
+        <item>Выполнено</item>
+    </string-array>
+
+    <string name="add_order_menu">Создать заказ</string>
+
+    <string name="order_list_menu">Список заказов</string>
+    <string name="edit_profile_menu">Редактировать профиль</string>
+    <string name="settings_menu">Настройки</string>
+    <string name="log_out_menu">Выйти</string>
+
+    <string-array name="change_status_client_done">
+        <item>Выполнено</item>
+    </string-array>
 </resources>

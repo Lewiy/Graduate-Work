@@ -74,10 +74,16 @@
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_weight="6"
             android:text="@string/notific_where"
             android:textColor="@color/colorPrimary" />
 
@@ -85,8 +91,9 @@
             android:id="@+id/notific_where"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_weight="2"
             android:textColor="@color/main_grey" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

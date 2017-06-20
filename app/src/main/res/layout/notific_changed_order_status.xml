@@ -64,7 +64,7 @@
             android:id="@+id/notific_changed_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:textColor="@color/main_grey" />
     </LinearLayout>
 
@@ -78,7 +78,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="2"
             android:text="@string/notific_name"
             android:textColor="@color/colorPrimary" />
 
@@ -86,7 +86,7 @@
             android:id="@+id/notific_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:textColor="@color/main_grey" />
     </LinearLayout>
 

@@ -24,7 +24,7 @@ public class LocalizeAddress {
 
             result = call.execute().body();
             if (result != null) {
-                return result.getResults().get(0).getFormattedAddress();
+                return normalAddress(result.getResults().get(0).getFormattedAddress());
             }
 
         } catch (IOException e) {
@@ -39,5 +39,17 @@ public class LocalizeAddress {
             point.setStreet(LocalizeAddress(point.getLatitude() + "," + point.getLongtitude()));
         }
         return listRoute;
+    }
+
+    private String normalAddress(String address) {
+        String addresses = null;
+        int index = 0;
+        for (int i = 0; i < 3; i++) {
+            index = address.indexOf(",", index + 1);
+
+        }
+
+        addresses = address.substring(0, index);
+        return addresses;
     }
 }

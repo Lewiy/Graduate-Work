@@ -113,10 +113,7 @@
     <string-array name="change_status_client_add">
         <item>New</item>
     </string-array>
-    <string-array name="change_status_client_new_accepted">
-        <item>Accepted</item>
-        <item>Cancelled</item>
-    </string-array>
+
     <!-- update order -->
 
     <string-array name="change_status_client_new">
@@ -333,21 +330,6 @@
     <string name="route_info">Route info</string>
     <string name="session_time">Time expired session</string>
 
-
-    <string-array name="change_status_driver_done">
-        <item>Done</item>
-    </string-array>
-
-    <string-array name="change_status_client_done">
-        <item>Done</item>
-    </string-array>
-
-
-    <string name="add_order_menu">Add order</string>
-    <string name="order_list_menu">Order list</string>
-    <string name="edit_profile_menu">Edit profile</string>
-    <string name="settings_menu">Settings</string>
-    <string name="log_out_menu">Log out</string>
 
     <string name="code_license">Code of license</string>
 
