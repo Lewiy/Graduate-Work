@@ -112,6 +112,9 @@ public class LoadOrderForDriverPresenter {
                             orderInfView.showError(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
                         } catch (IOException e) {
                             e.printStackTrace();
+                        } finally {
+                            if (responseBodyResponse.code() == 200)
+                                orderInfView.showError(responseBodyResponse.code(), "");
                         }
                        /* if(responseBodyResponse.code() != 200)
                             orderInfView.resStatusOrderNotChanged();*/

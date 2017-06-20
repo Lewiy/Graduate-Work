@@ -20,8 +20,8 @@
     <string name="button_next_to_driver_registration">Далее</string>
     <string name="password_registration">Пароль</string>
     <string name="repeat_password">Подтверждение пароля</string>
-    <string name="numbre_registration">Телефон 1</string>
-    <string name="second_number_registration">Телефон 2</string>
+    <string name="numbre_registration">Телефон</string>
+    <string name="second_number_registration">Второй телефон</string>
     <string name="model_registration">Модель</string>
     <string name="manufacturer_registration">Марка</string>
     <string name="plate_number">Номер автомобиля</string>
@@ -67,7 +67,7 @@
 
     <!--fragment add order client-->
     <string name="order_name"></string>
-    <string name="start_point">Откуда</string>
+    <string name="start_point">откуда</string>
     <string name="end_point">Куда</string>
     <string name="price">Цена</string>
     <string name="statis">Статус</string>
@@ -97,7 +97,7 @@
     <string name="km_distance">Расстояние</string>
     <string name="customer_name">Заказчик</string>
     <string name="driver_name">Водитель</string>
-    <string name="value">По умолчанию</string>
+    <string name="value">0</string>
     <string name="accept">Подтвердитьt</string>
     <string name="decline">Отменить</string>
     <string name="type_status_order">Статус заказа</string>
@@ -128,11 +128,13 @@
 
     <!-- list of order -->
     <string-array name="sort_value">
-        <item>Все</item>
+        <item>Новые</item>
         <item>Подтвержденные</item>
         <item>Отмененные</item>
-        <item>Выполнение</item>
-        <item>Новые</item>
+        <item>Выполненные</item>
+        <item>Все</item>
+        <item>В ожидании</item>
+        <item>В процессе</item>
     </string-array>
     <!-- driver accaunt -->
     <string name="title_activity_driver_account">Кабинет водителя</string>
@@ -141,15 +143,15 @@
     <string name="without_requirement">Без дополнительных услуг</string>
     <string name="spinner_change_sing">Сменить статус меню</string>
     <string name="title_info_order_driver">Информация о заказе</string>
-    <string name="customer_account_info">Информация о пассажире</string>
+    <string name="customer_account_info">Пассажир</string>
     <string-array name="change_status_driver_new">
         <item>Ничего не выбрано</item>
         <item>Подтвержденные</item>
     </string-array>
     <string-array name="change_status_driver_accept">
         <item>Ничего не выбрано</item>
-        <item>Отмененные</item>
-        <item>Выполнение</item>
+        <item>Отменить</item>
+        <item>Выполненныий</item>
     </string-array>
 
 
@@ -179,20 +181,20 @@
     <string name="log_out">Выйти</string>
 
     <!-- element menu addOrder             =============================================-вап-->
-    <string name="radio_button_now">Now</string>
-    <string name="radio_button_today">Today</string>
-    <string name="radio_button_tomorrow">Tomorrow</string>
+    <string name="radio_button_now">Сейчас</string>
+    <string name="radio_button_today">Сегодня</string>
+    <string name="radio_button_tomorrow">Завтра</string>
     <string name="time_text">00:00:00</string>
-    <string name="prise_label_add_order">Total price:</string>
-    <string name="additional_request">Additional request</string>
-    <string name="title_activity_add_order">AddOrder</string>
+    <string name="prise_label_add_order">Цена:</string>
+    <string name="additional_request">Дополнительные требования</string>
+    <string name="title_activity_add_order">Заказать</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="tab_main_settings">Main settings</string>
-    <string name="tab_addition_requirest">Additional</string>
+    <string name="tab_main_settings">Главные настр.</string>
+    <string name="tab_addition_requirest">Дополнительные настр.</string>
 
     <!-- additional  requirements-->
     <string-array name="type_car">
-        <item>Тип автомобіля</item>
+        <item>Тип автомобиля</item>
         <item>Легковой</item>
         <item>Грузовой</item>
         <item>Микроавтобус</item>
@@ -252,12 +254,12 @@
     <string name="account_driver">Водитель</string>
     <string name="date_of_order">Дата заказа:</string>
     <string name="delete_order">Удалить</string>
-    <string name="code_from_email">Код с електронной почти</string>
+    <string name="code_from_email">Код с почты</string>
     <string name="new_password">Новый пароль</string>
     <string name="new_password_repeat">Подтверждения пароля</string>
-    <string name="code_for_reset_will_be_send">Код для сброса пароля  послан на електронную почту</string>
+    <string name="code_for_reset_will_be_send">Код для сброса пароля отослан на электронную почту</string>
     <string name="time_order_for_now">Новый</string>
-    <string name="turn_on_notification">Уведомление</string>
+    <string name="turn_on_notification">Уведомления</string>
 
 
     <!-- notification string -->
@@ -285,7 +287,7 @@
 
 
     <string name="operation_completed">Операция завершена</string>
-    <string name="cant_perform">Операция не может быть выполнена</string>
+    <string name="cant_perform">Проверьте введенные данные</string>
     <string name="problems_on_the_server">Проблемы на сервере</string>
     <string name="something_happened">Что то случилось</string>
 
@@ -299,7 +301,7 @@
     <string name="registration">Регистрация</string>
     <string name="title_update_order">обновления заказ</string>
 
-    <string name="route">О маршруте</string>
+    <string name="route">Маршрут</string>
     <string name="route_info">О маршруте</string>
     <string name="session_time">Время сессии истекло</string>
 
@@ -322,4 +324,10 @@
 
     <string name="regist">Регист</string>
     <string name="reset_password_toast">Пароль изменён</string>
+
+    <string name="additional_requirements">Дополнительные требования</string>
+    <string name="comments">Коментарий</string>
+    <string name="button_send_request">Отослать</string>
+
+    <string name="match_point_address">Максимум адресов</string>
 </resources>

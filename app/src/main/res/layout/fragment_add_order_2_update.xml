@@ -23,7 +23,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/tab_color_scrol"
                 android:gravity="top"
-                android:hint="Comments..."
+                android:hint="@string/comments"
                 android:textAlignment="gravity" />
         </LinearLayout>
 

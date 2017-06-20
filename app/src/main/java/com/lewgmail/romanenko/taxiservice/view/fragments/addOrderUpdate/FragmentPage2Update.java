@@ -302,7 +302,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
             if (typeRequirements == 7 || typeRequirements == 5)
             additionalRequirementN.setReqValueId(pos);
             else
-                additionalRequirementN.setReqValueId(pos - 1);
+                additionalRequirementN.setReqValueId(pos - 1);////////////////////////////////////////////////
             int index = 0;
             for (AdditionalRequirementN i : additionalRequirements) {
                 if (i.getReqId() == typeRequirements) {

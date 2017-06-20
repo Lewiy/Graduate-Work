@@ -104,7 +104,7 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
         GMapV2Direction md = new GMapV2Direction();
         ArrayList<LatLng> directionPoint = md.getDirection(doc);
         PolylineOptions rectLine = new PolylineOptions().width(15).color(
-                Color.RED);
+                Color.RED).visible(true).geodesic(true);
 
         for (int i = 0; i < directionPoint.size(); i++) {
             rectLine.add(directionPoint.get(i));
@@ -274,14 +274,15 @@ public class MapActivity extends Activity implements OnMapReadyCallback, IView, 
         //  returnIntent.putExtra(SECONF_CORD, 30.5238000);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();*/
-
-        Intent returnIntent = getIntent();
-        intentMy.putExtra("addressFromMap", transferAddress);
-        intentMy.putExtra("longitude", longitude);
-        intentMy.putExtra("latitude", latitude);
-        setResult(RESULT_OK, returnIntent);
+        if (transferAddress != null) {
+            Intent returnIntent = getIntent();
+            intentMy.putExtra("addressFromMap", transferAddress);
+            intentMy.putExtra("longitude", longitude);
+            intentMy.putExtra("latitude", latitude);
+            setResult(RESULT_OK, returnIntent);
+            finish();
+        } else
         finish();
-        //  checkLocationPermission();
     }
 
 

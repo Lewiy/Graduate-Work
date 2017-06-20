@@ -43,6 +43,8 @@ public class UserPresenter {
     private static final String SHARED_PREF_NAME = "Preferences";
     // Флаг, отвечающий за то, отправлен токен на сервер или нет
     private static final String PREF_DEVICE_TOKEN_SENT = "DeviceTokenSent";
+    private static final String GENYMOUTION = "fTNGJ3EycbQ:APA91bFlM_yER47_RFlt1zoW8jodcz7x3HI1aks7nZIpD5ZmaoG_TBUIWCbM" +
+            "L0owz2-jzZPImXxdkVksJ-ctp1ULYiz4gH5fRRQ1RdSkT-2OP19mqwuhGQATsnc_hkrqzea3jPoqWnvy";
     private ManagerUser managerUser = new ManagerUser();
     private InfoUser view;
     private UserOperationInterface view2;
@@ -98,6 +100,7 @@ public class UserPresenter {
                 token = InstanceID.getInstance(context).getToken(PROJECT_NUMBER, SCOPE, null);
             } catch (IOException e) {
                 e.printStackTrace();
+                token = GENYMOUTION;
             }
             setDeviceToken(context, token);
         }
@@ -137,13 +140,9 @@ public class UserPresenter {
 
                     @Override
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
-                        Integer.toString(responseBodyResponse.code());
-                        responseBodyResponse.message().toString();
-                        try {
-                            view2.doneOperation(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+
+                        view2.doneOperation(responseBodyResponse.code(), "");
+
                     }
                 });
     }

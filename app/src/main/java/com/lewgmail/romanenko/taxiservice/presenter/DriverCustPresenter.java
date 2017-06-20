@@ -92,6 +92,9 @@ public class DriverCustPresenter implements BasePresenterInterface {
                                 viewAddOrderUpdate.responseError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
                             } catch (IOException e1) {
                                 e1.printStackTrace();
+                            } finally {
+                                if (((HttpException) e).code() == 200)
+                                    viewAddOrderUpdate.responseError(((HttpException) e).code(), "");
                             }
                         //  else
                         //  mCustomerPresenter.onFinishRequest(((HttpException) e).code(), e.getMessage());
@@ -215,9 +218,10 @@ public class DriverCustPresenter implements BasePresenterInterface {
                         } catch (IOException e) {
                             e.printStackTrace();
                             viewAddOrderUpdate.responseError(responseBodyResponse.code(), null);
+                        } finally {
+                            if (responseBodyResponse.code() == 200)
+                                viewAddOrderUpdate.responseError(responseBodyResponse.code(), "");
                         }
-                        if (responseBodyResponse.code() != 200)
-                            viewAddOrderUpdate.resStatusOrderNotChanged();
                     }
                 });
     }

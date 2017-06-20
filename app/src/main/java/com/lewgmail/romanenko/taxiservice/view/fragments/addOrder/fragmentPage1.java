@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterAddPointOfRoute;
@@ -180,7 +181,10 @@ public class FragmentPage1 extends android.support.v4.app.Fragment {
     @OnClick(R.id.add_address_btn)
     public void addAddress() {
         if (check2Addresses())
-        addAddressPoint();
+            if (route.getAdapter().getCount() < 3)
+                addAddressPoint();
+            else
+                Toast.makeText(getActivity(), getResources().getString(R.string.match_point_address), Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.time_text)

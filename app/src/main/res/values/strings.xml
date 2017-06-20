@@ -343,4 +343,7 @@
     <string name="regist">Sign up</string>
 
     <string name="reset_password_toast">Your password has been reset successfully</string>
+    <string name="comments">Comments</string>
+
+    <string name="match_point_address">Maximum addresses</string>
 </resources>

@@ -129,11 +129,11 @@
 
     <!-- list of order -->
     <string-array name="sort_value">
-        <item>Всі</item>
+        <item>Нові</item>
         <item>Підтверджені</item>
         <item>Скасовані</item>
         <item>Виконані</item>
-        <item>Нові</item>
+        <item>Всі</item>
         <item>Водій чекає</item>
         <item>В процесі виконання</item>
     </string-array>
@@ -290,7 +290,7 @@
 
 
     <string name="operation_completed">Операція завершена</string>
-    <string name="cant_perform">Операція не може бути виконана</string>
+    <string name="cant_perform">Перевірте введені дані</string>
     <string name="problems_on_the_server">Проблеми на сервері</string>
     <string name="something_happened">Щось сталося</string>
 
@@ -327,4 +327,10 @@
 
     <string name="regist">Реєстр</string>
     <string name="reset_password_toast">Пароль змінено </string>
+
+    <string name="additional_requirements">Додаткові вимоги</string>
+    <string name="comments">Коментар</string>
+    <string name="button_send_request">Відіслати</string>
+
+    <string name="match_point_address">Максимум адресов</string>
 </resources>

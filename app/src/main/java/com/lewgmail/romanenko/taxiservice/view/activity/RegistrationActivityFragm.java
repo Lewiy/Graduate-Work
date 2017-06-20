@@ -115,7 +115,12 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
         super.onBackPressed();
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
+        } else {
+            Intent myIntent = new Intent(RegistrationActivityFragm.this, LoginActivity.class);
+            myIntent.putExtra("key", value); //Optional parameters
+            RegistrationActivityFragm.this.startActivity(myIntent);
         }
+
     }
 
     /**

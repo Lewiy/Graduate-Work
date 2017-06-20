@@ -23,7 +23,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/tab_color_scrol"
                 android:gravity="top"
-                android:hint="Comments..."
+                android:hint="@string/comments"
                 android:textAlignment="gravity" />
         </LinearLayout>
 
@@ -281,7 +281,7 @@
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
                 android:background="@drawable/main_button_white"
-                android:text="@string/add_order"
+                android:text="@string/title_activity_add_order"
                 android:textColor="@color/element_color"
                 android:textSize="12dp" />
         </LinearLayout>

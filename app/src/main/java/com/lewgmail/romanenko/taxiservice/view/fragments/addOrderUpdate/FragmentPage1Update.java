@@ -198,7 +198,23 @@ public class FragmentPage1Update extends android.support.v4.app.Fragment {
 
     @OnClick(R.id.add_address_btn)
     public void addAddress() {
-        addAddressPoint();
+        if (check2Addresses())
+            if (route.getAdapter().getCount() < 3)
+                addAddressPoint();
+            else
+                Toast.makeText(getActivity(), getResources().getString(R.string.match_point_address), Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean check2Addresses() {
+
+        if (startPointText.getText().toString().matches("")) {
+            startPointText.setError(getResources().getString(R.string.not_inputted_2_point));
+            return false;
+        }
+        if (endPointText.getText().toString().matches("")) {
+            endPointText.setError(getResources().getString(R.string.not_inputted_2_point));
+            return false;
+        } else return true;
     }
 
     @OnClick(R.id.time_text)

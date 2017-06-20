@@ -54,8 +54,8 @@ public class FragmentSettings extends android.support.v4.app.Fragment implements
     }
 
     private void onCheckedChanged(boolean isChecked) {
-        Toast.makeText(getActivity(), "The Switch is " + (isChecked ? "on" : "off"),
-                Toast.LENGTH_SHORT).show();
+       /* Toast.makeText(getActivity(), "The Switch is " + (isChecked ? "on" : "off"),
+                Toast.LENGTH_SHORT).show();*/
         settinNotificPresenter.setSettingNotific();
     }
 

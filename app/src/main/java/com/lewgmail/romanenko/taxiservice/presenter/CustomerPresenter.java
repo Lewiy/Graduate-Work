@@ -154,6 +154,9 @@ public class CustomerPresenter {
                             viewAddOrderUpdate.responseAddorder(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
                         } catch (IOException e) {
                             e.printStackTrace();
+                        } finally {
+                            if (responseBodyResponse.code() == 200)
+                                viewAddOrderUpdate.responseAddorder(responseBodyResponse.code(), "");
                         }
                     }
                 });
@@ -181,6 +184,9 @@ public class CustomerPresenter {
                             viewAddOrderUpdate.responseAddorder(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
                         } catch (IOException e) {
                             e.printStackTrace();
+                        } finally {
+                            if (responseBodyResponse.code() == 200)
+                                viewAddOrderUpdate.responseAddorder(responseBodyResponse.code(), "");
                         }
                     }
                 });

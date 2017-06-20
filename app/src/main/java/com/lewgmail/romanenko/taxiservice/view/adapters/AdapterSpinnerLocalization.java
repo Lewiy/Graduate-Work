@@ -37,7 +37,7 @@ public class AdapterSpinnerLocalization {
     public static String adaptSpinnerTypeOrder(int index) {
         switch (index) {
             case 0:
-                return "ALL";
+                return "NEW";
             case 1:
                 return "ACCEPTED";
             case 2:
@@ -45,7 +45,7 @@ public class AdapterSpinnerLocalization {
             case 3:
                 return "DONE";
             case 4:
-                return "NEW";
+                return "ALL";
             case 5:
                 return "WAITING";
             case 6:

@@ -213,7 +213,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
                     boolean flag = true;
                     AdditionalRequirementN additionalRequirementN = new AdditionalRequirementN();
                     additionalRequirementN.setReqId(typeRequirements);
-                    additionalRequirementN.setReqValueId(pos - 1);
+                    additionalRequirementN.setReqValueId(pos);
                     for (AdditionalRequirementN i : additionalRequirements) {
                         if (i.getReqId() == typeRequirements)
                             flag = false;

@@ -168,11 +168,11 @@
 
     <!-- list of order -->
     <string-array name="sort_value">
-        <item>All</item>
+        <item>New</item>
         <item>Accepted</item>
         <item>Cancelled</item>
         <item>Done</item>
-        <item>New</item>
+        <item>All</item>
         <item>Waiting</item>
         <item>Processing</item>
     </string-array>
@@ -315,7 +315,7 @@
 
 
     <string name="operation_completed">Operation completed</string>
-    <string name="cant_perform">Can`t perform an operation</string>
+    <string name="cant_perform">Check inputted data</string>
     <string name="problems_on_the_server">Problems on the server</string>
     <string name="something_happened">Something happened</string>
 
@@ -353,4 +353,10 @@
 
     <string name="regist">Sign up</string>
     <string name="reset_password_toast">Your password has been reset successfully</string>
+
+    <string name="additional_requirements">Additional requirements</string>
+    <string name="comments">Comments</string>
+
+    <string name="match_point_address">Maximum addresses</string>
+
 </resources>
