@@ -81,7 +81,11 @@ public class CustomerPresenter {
                         try {
                             viewAddOrder.responseAddorder(responseBodyResponse.code(), responseBodyResponse.errorBody().string());
                         } catch (IOException e) {
+
                             e.printStackTrace();
+                        } finally {
+                            if (responseBodyResponse.code() == 200)
+                                viewAddOrder.responseAddorder(responseBodyResponse.code(), "");
                         }
                     }
                 });

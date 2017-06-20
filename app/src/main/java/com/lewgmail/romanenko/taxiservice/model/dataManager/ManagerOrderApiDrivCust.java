@@ -41,7 +41,7 @@ public class ManagerOrderApiDrivCust {
 
     }
 
-    public Observable<GetOrder> loadOrderId(int orderId) {
+    public Observable<GetOrder> loadOrderId(long orderId) {
         OrderApiDrivCust servises = Services.createService(OrderApiDrivCust.class);
         Observable<GetOrder> observer = servises.getOrderId(LoggedUser.getmInstance().getToken(), orderId);
 

@@ -39,7 +39,7 @@ public class LoadOrderForDriverPresenter {
         this.managerUser = new ManagerUser();
     }
 
-    public void loadOrderSpecificId(int orderId) {
+    public void loadOrderSpecificId(long orderId) {
 
         Observable<GetOrder> observer = managerOrderApiDrivCust.loadOrderId(orderId);
 

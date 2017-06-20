@@ -98,7 +98,7 @@
     <string name="km_distance">Відстань</string>
     <string name="customer_name">Пасажир</string>
     <string name="driver_name">Водій</string>
-    <string name="value">За замовчуванням</string>
+    <string name="value">0</string>
     <string name="accept">Підтвердити</string>
     <string name="decline">Скасувати</string>
     <string name="type_status_order">Статус замовлення</string>
@@ -147,7 +147,7 @@
     <string name="customer_account_info">Пасажир</string>
     <string-array name="change_status_driver_new">
         <item>Не вибрано</item>
-        <item>Підтверджені</item>
+        <item>Підтвердити</item>
     </string-array>
     <string-array name="change_status_driver_accept">
         <item>Не вибрано</item>
@@ -155,9 +155,6 @@
         <item>Виконані</item>
     </string-array>
 
-    <string-array name="change_status_driver_done">
-        <item>Не вибрано</item>
-    </string-array>
 
     <!-- account info customer driver taxi -->
     <string name="name_info">Ім`я:</string>
@@ -237,6 +234,7 @@
     </string-array>
     <string-array name="type_number_passengers">
         <item>Кількість пасажирів</item>
+        <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
@@ -310,6 +308,14 @@
     <string name="route">Про маршрут</string>
     <string name="route_info">Про маршрут</string>
     <string name="session_time">Час сесії минув</string>
+
+    <string-array name="change_status_driver_done">
+        <item>Виконано</item>
+    </string-array>
+
+    <string-array name="change_status_client_done">
+        <item>Виконано</item>
+    </string-array>
 
     <string name="add_order_menu">Додати замовлення</string>
     <string name="order_list_menu">Список замовлень</string>
