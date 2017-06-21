@@ -224,7 +224,7 @@
     <string-array name="type_car">
         <item>Type of car</item>
         <item>Passenger car</item>
-        <item>Track</item>
+        <item>Truck</item>
         <item>Mini bus</item>
     </string-array>
     <string-array name="type_reconing">
@@ -343,5 +343,9 @@
 
     <string name="waiting_operation">Operation is in progress</string>
     <string name="pliase_wait">Please wait</string>
+
+    <string-array name="change_status_driver_done">
+        <item>Done</item>
+    </string-array>
 
 </resources>

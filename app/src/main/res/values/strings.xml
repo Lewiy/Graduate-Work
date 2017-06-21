@@ -230,7 +230,7 @@
     <string-array name="type_car">
         <item>Type of car</item>
         <item>Passenger car</item>
-        <item>Track</item>
+        <item>Truck</item>
         <item>Mini bus</item>
     </string-array>
     <string-array name="type_reconing">
@@ -353,18 +353,18 @@
     </string-array>
 
     <string-array name="change_status_driver_done">
-        <item>Выполнено</item>
+        <item>Done</item>
     </string-array>
 
-    <string name="add_order_menu">Создать заказ</string>
+    <string name="add_order_menu">Add order</string>
 
-    <string name="order_list_menu">Список заказов</string>
-    <string name="edit_profile_menu">Редактировать профиль</string>
-    <string name="settings_menu">Настройки</string>
-    <string name="log_out_menu">Выйти</string>
+    <string name="order_list_menu">List</string>
+    <string name="edit_profile_menu">Edit profile</string>
+    <string name="settings_menu">Settings</string>
+    <string name="log_out_menu">Log out</string>
 
     <string-array name="change_status_client_done">
-        <item>Выполнено</item>
+        <item>Done</item>
     </string-array>
 
     <string name="waiting_operation">Operation is in progress</string>

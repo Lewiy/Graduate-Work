@@ -336,18 +336,18 @@
 
 
     <string-array name="change_status_client_new">
-        <item>New</item>
-        <item>Cancelled</item>
+        <item>Новий</item>
+        <item>Скасувати</item>
     </string-array>
 
     <string-array name="change_status_client_accepted">
-        <item>Accepted</item>
-        <item>Cancelled</item>
+        <item>Прийнятий</item>
+        <item>Скасувати</item>
     </string-array>
 
     <string-array name="change_status_client_waiting">
-        <item>Waiting</item>
-        <item>Cancelled</item>
+        <item>Воді чекає</item>
+        <item>Скасувати</item>
     </string-array>
 
 
