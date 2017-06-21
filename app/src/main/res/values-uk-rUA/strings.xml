@@ -150,9 +150,9 @@
         <item>Підтвердити</item>
     </string-array>
     <string-array name="change_status_driver_accept">
-        <item>Не вибрано</item>
-        <item>Скасовані</item>
-        <item>Виконані</item>
+        <item>Підтверджено</item>
+        <item>Очікування</item>
+
     </string-array>
 
 
@@ -256,7 +256,7 @@
 
     <string name="account_driver">Водій інфо</string>
     <string name="date_of_order">Дата замовлення:</string>
-    <string name="delete_order">Видалити</string>
+    <string name="delete_order">Видал</string>
     <string name="code_from_email">Секретний код</string>
     <string name="new_password">Новий пароль</string>
     <string name="new_password_repeat">Підтвердити новий пароль</string>
@@ -305,8 +305,8 @@
     <string name="registration">Реєстрація</string>
     <string name="title_update_order">Оновлення замовлення</string>
 
-    <string name="route">Про маршрут</string>
-    <string name="route_info">Про маршрут</string>
+    <string name="route">Маршрут</string>
+    <string name="route_info">Маршрут</string>
     <string name="session_time">Час сесії минув</string>
 
     <string-array name="change_status_driver_done">
@@ -352,16 +352,15 @@
 
 
     <string-array name="change_status_driver_waiting">
-        <item>Waiting</item>
-        <item>Processing</item>
-        <item>Cancelled</item>
-
+        <item>Водій чекає</item>
+        <item>Виконання</item>
     </string-array>
 
     <string-array name="change_status_driver_processing">
-        <item>Processing</item>
-        <item>Done</item>
+        <item>Виконання</item>
+        <item>Виконано</item>
     </string-array>
 
-
+    <string name="waiting_operation">Виконання операції</string>
+    <string name="pliase_wait">Будь-ласка почекайте</string>
 </resources>

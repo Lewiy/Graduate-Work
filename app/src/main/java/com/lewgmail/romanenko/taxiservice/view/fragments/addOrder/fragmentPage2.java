@@ -1,6 +1,7 @@
 package com.lewgmail.romanenko.taxiservice.view.fragments.addOrder;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -68,6 +69,7 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
     private ImageButton lastPressedB = null;
     private int lastPressedDraw = 0;
     private ArrayList<AdditionalRequirementN> additionalRequirements;
+    private ProgressDialog progress;
 
 
     public FragmentPage2() {
@@ -107,6 +109,11 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
 
     @OnClick(R.id.add_order)
     public void onClickAddOrder() {
+        progress = new ProgressDialog(this.getActivity());
+        progress.setTitle(getResources().getString(R.string.waiting_operation));
+        progress.setMessage(getResources().getString(R.string.pliase_wait));
+        progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
+        progress.show();
         addOrderGatherDataSecondWindow.setActivityAdditionalRequirements(additionalRequirements);
         addOrderGatherDataSecondWindow.setActivityComment(commentField.getText().toString());
         addOrderGatherDataSecondWindow.runReqaddOrder(getContext());
@@ -114,6 +121,11 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
 
     @OnClick(R.id.calculate_price_button)
     public void onClickCalculatePrice() {
+        progress = new ProgressDialog(this.getActivity());
+        progress.setTitle(getResources().getString(R.string.waiting_operation));
+        progress.setMessage(getResources().getString(R.string.pliase_wait));
+        progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
+        progress.show();
         addOrderGatherDataSecondWindow.setActivityAdditionalRequirements(additionalRequirements);
         addOrderGatherDataSecondWindow.runReqCalculayePrice(valuePrice, getContext());
     }
@@ -292,6 +304,10 @@ public class FragmentPage2 extends android.support.v4.app.Fragment {
 
     public void setDoneResp(String massage) {
         Toast.makeText(getContext(), "Done " + massage, Toast.LENGTH_LONG).show();
+    }
+
+    public void setErrorProgress() {
+        progress.dismiss();
     }
 
     /*

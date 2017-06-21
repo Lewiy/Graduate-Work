@@ -129,12 +129,14 @@ public class UserPresenter {
                                 view2.showError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
                             } catch (IOException e1) {
                                 e1.printStackTrace();
+                                view2.showError(((HttpException) e).code(), "");
                             }
                         else
                             try {
                                 view2.showError(((HttpException) e).code(), ((HttpException) e).response().errorBody().string());
                             } catch (IOException e1) {
                                 e1.printStackTrace();
+                                view2.showError(((HttpException) e).code(), "");
                             }
                     }
 
@@ -142,6 +144,7 @@ public class UserPresenter {
                     public void onNext(Response<ResponseBody> responseBodyResponse) {
 
                         view2.doneOperation(responseBodyResponse.code(), "");
+
 
                     }
                 });

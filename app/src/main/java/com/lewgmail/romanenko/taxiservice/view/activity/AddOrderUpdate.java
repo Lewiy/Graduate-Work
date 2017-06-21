@@ -186,6 +186,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
      */
 
     public void responseError(int code, String fromServer) {
+        fragmentObj2Update.setErrorProgress();
         fragmentObj1Update.setError(AdapterCodeFromServer.AdapterCode(code, this, fromServer));
     }
 
@@ -290,11 +291,12 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
     }
 
     public void responsePrice(double price) {
+
         fragmentObj2Update.setCalculatedPrice(Double.toString(price));
     }
 
-    public void responseExtraPrice(double extraPrice) {
-
+    public void responseProgressDismis() {
+        fragmentObj2Update.setErrorProgress();
     }
 
     public void responseComment(String comment) {
@@ -603,7 +605,7 @@ public class AddOrderUpdate extends AppCompatActivity implements FragmentPage1Up
 
     public void responseAddorder(int code, String fromServer) {
 
-        //Toast.makeText(contextFragm2, "Code of Operation:" + text, Toast.LENGTH_SHORT).show();
+        fragmentObj2Update.setErrorProgress();
         Toast.makeText(contextFragm2, AdapterCodeFromServer.AdapterCode(code, this, fromServer), Toast.LENGTH_SHORT).show();
 
     }

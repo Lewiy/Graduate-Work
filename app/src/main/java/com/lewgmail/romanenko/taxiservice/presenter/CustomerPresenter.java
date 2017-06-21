@@ -122,6 +122,7 @@ public class CustomerPresenter {
                             viewAddOrderUpdate.responsePrice(price.getPrice());
                             viewAddOrderUpdate.responseDistance(price.getDistance());
                             viewAddOrderUpdate.responseDuration(price.getDuration().toString());
+                            viewAddOrderUpdate.responseProgressDismis();
                         }
                     }
                 });

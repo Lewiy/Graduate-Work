@@ -53,13 +53,15 @@ public class AdapterTimeDate {
         time = dateTime.substring(dateTime.indexOf("T") + 1, 16);
         shortDate = date.substring(date.indexOf("-") + 1);
         String locale = Locale.getDefault().getLanguage();
-        if (time.equals("00:00"))
+        if (time.equals("00:00")) {
             if (locale.equals("en"))
                 time = "now";
-        if (locale.equals("ru"))
-            time = "Сейчас";
-        if (locale.equals("ua"))
-            time = "Зараз";
+            if (locale.equals("ru"))
+                time = "Сейчас";
+            if (locale.equals("uk"))
+                time = "Зараз";
+        }
+
 
     }
 

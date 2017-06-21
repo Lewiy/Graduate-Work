@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lewgmail.romanenko.taxiservice.R;
+import com.lewgmail.romanenko.taxiservice.model.dataManager.LoggedUser;
 import com.lewgmail.romanenko.taxiservice.view.activity.AddOrderInterface;
 
 import java.util.List;
@@ -74,6 +75,7 @@ public class AdapterAddPointOfRoute extends ArrayAdapter<String> {
                 // Intent myIntent = new Intent(context, MapActivity.class);
                 //Optional parameters
                 //  context.startActivity(myIntent);
+                if (!LoggedUser.getmInstance().getUserType().equals("TAXI_DRIVER"))
                 activityCallBack.startActivityForResultMapRoute(position);
             }
         });

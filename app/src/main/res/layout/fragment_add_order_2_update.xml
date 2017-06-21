@@ -479,7 +479,7 @@
                 android:background="@drawable/main_button_white"
                 android:text="@string/delete_order"
                 android:textColor="@color/element_color"
-                android:textSize="11dp" />
+                android:textSize="10dp" />
 
             <Button
                 android:id="@+id/calculate_price_button"
@@ -504,7 +504,7 @@
                 android:background="@drawable/main_button_white"
                 android:text="@string/update_personal_page"
                 android:textColor="@color/element_color"
-                android:textSize="11dp" />
+                android:textSize="10dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.lewgmail.romanenko.taxiservice.view.fragments.addOrderUpdate;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -80,6 +81,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
     @BindView(R.id.comment_element)
     EditText commentField;
 
+
     @BindView(R.id.value_price)
     TextView valuePrice;
     @BindView(R.id.value_duration)
@@ -95,6 +97,7 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
     private ArrayList<AdditionalRequirementN> additionalRequirements;
     private boolean flagFirstSelected = false;
     private long driverId;
+    private ProgressDialog progress;
     /*
     Set metaData for order/////////////////////////
      */
@@ -148,13 +151,27 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
 
     }
 
+    public void setErrorProgress() {
+        progress.dismiss();
+    }
+
     @OnClick(R.id.delete_order)
     public void onClickDeleteOrder() {
+        progress = new ProgressDialog(this.getActivity());
+        progress.setTitle(getResources().getString(R.string.waiting_operation));
+        progress.setMessage(getResources().getString(R.string.pliase_wait));
+        progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
+        progress.show();
         addOrderGatherDataSecondWindow.deleteOrder(getContext());
     }
 
     @OnClick(R.id.add_order)
     public void onClickAddOrder() {
+        progress = new ProgressDialog(this.getActivity());
+        progress.setTitle(getResources().getString(R.string.waiting_operation));
+        progress.setMessage(getResources().getString(R.string.pliase_wait));
+        progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
+        progress.show();
         addOrderGatherDataSecondWindow.setActivityAdditionalRequirements(additionalRequirements);
         addOrderGatherDataSecondWindow.setActivityComment(commentField.getText().toString());
         addOrderGatherDataSecondWindow.runReqaddOrder(getContext());
@@ -162,6 +179,11 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
 
     @OnClick(R.id.calculate_price_button)
     public void onClickCalculatePrice() {
+        progress = new ProgressDialog(this.getActivity());
+        progress.setTitle(getResources().getString(R.string.waiting_operation));
+        progress.setMessage(getResources().getString(R.string.pliase_wait));
+        progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
+        progress.show();
         addOrderGatherDataSecondWindow.setActivityAdditionalRequirements(additionalRequirements);
         addOrderGatherDataSecondWindow.runReqCalculayePrice(valuePrice);
     }
@@ -369,8 +391,10 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
     }
 
     public void setError(String error) {
+        progress.dismiss();
         Toast.makeText(getContext(), "Error: " + error, Toast.LENGTH_LONG).show();
     }
+
 
     public void setDriverId(long driverId) {
         this.driverId = driverId;
@@ -381,6 +405,8 @@ public class FragmentPage2Update extends android.support.v4.app.Fragment {
     }
 
     public void setStatus(String status) {
+        if (status.equals("NEW") || status.equals("CANCELLED"))
+            showAccountDriver.setEnabled(false);
         this.orderStatus = status;
         initializeSpinnerOrderStatus(new AdapterStatusController("CUSTOMER", status).typeStatus(), spinnerStatusOrder);
 

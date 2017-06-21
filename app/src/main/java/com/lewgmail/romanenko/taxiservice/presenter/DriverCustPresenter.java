@@ -103,6 +103,7 @@ public class DriverCustPresenter implements BasePresenterInterface {
 
                     @Override
                     public void onNext(GetOrder orderId) {
+                        viewAddOrderUpdate.responseOrderId(orderId.getOrderId());
                         viewAddOrderUpdate.responseStartTime(orderId.getStartTime());
                         viewAddOrderUpdate.responseRoutePoint(orderId.getRoutePoint());
                         viewAddOrderUpdate.responseStatusOrder(orderId.getStatus());
@@ -114,7 +115,7 @@ public class DriverCustPresenter implements BasePresenterInterface {
                         // viewAddOrderUpdate.responseExtraPrice(orderId.getExtraPrice());
                         viewAddOrderUpdate.responseComment(orderId.getComment());
                         viewAddOrderUpdate.responseAdditionalRequirements((ArrayList<AdditionalRequirementN>) orderId.getAdditionalRequirements());
-                        viewAddOrderUpdate.responseOrderId(orderId.getOrderId());
+
                        /* viewAddOrderUpdate.setOrderId(orderId.getOrderId());
                         viewAddOrderUpdate.setCustomerId(orderId.getCustomer().getCustomerId());
                         viewAddOrderUpdate.setDateRide(orderId.getStartTime().substring(0, 10));

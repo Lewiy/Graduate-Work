@@ -366,4 +366,8 @@
     <string-array name="change_status_client_done">
         <item>Выполнено</item>
     </string-array>
+
+    <string name="waiting_operation">Operation is in progress</string>
+    <string name="pliase_wait">Please wait</string>
+
 </resources>

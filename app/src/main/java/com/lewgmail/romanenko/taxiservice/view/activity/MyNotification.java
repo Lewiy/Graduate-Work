@@ -16,7 +16,6 @@ import com.lewgmail.romanenko.taxiservice.model.pojo.NotificationObjAddedOrder;
 import com.lewgmail.romanenko.taxiservice.model.pojo.NotificationObjDriverWaiting;
 import com.lewgmail.romanenko.taxiservice.presenter.LocalizeAddress;
 import com.lewgmail.romanenko.taxiservice.view.adapters.AdapterTimeDate;
-import com.lewgmail.romanenko.taxiservice.view.viewDriver.OrderInf;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -63,8 +62,8 @@ public class MyNotification extends GcmListenerService {
         mSimpleBuilder.setSmallIcon(R.drawable.ic_taxi)
                 .setCustomBigContentView(contentView);
 
-        Intent resultIntent = new Intent(mContext, OrderInf.class);
-        resultIntent.putExtra("keyNumberOfOrder", notifObjAddedOrder.getOrderId());
+        Intent resultIntent = new Intent(mContext, MainActivity.class);
+        //resultIntent.putExtra("keyNumberOfOrder", notifObjAddedOrder.getOrderId());
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(mContext);
 
         stackBuilder.addParentStack(LoginActivity.class);
@@ -96,7 +95,7 @@ public class MyNotification extends GcmListenerService {
         mSimpleBuilder.setSmallIcon(R.drawable.ic_taxi)
                 .setCustomBigContentView(contentView);
 
-        Intent resultIntent = new Intent(mContext, AddOrderUpdate.class);
+        Intent resultIntent = new Intent(mContext, MainActivity.class);
         resultIntent.putExtra("keyNumberOfOrder", orderId);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(mContext);
 
@@ -131,7 +130,7 @@ public class MyNotification extends GcmListenerService {
         mSimpleBuilder.setSmallIcon(R.drawable.ic_taxi)
                 .setCustomBigContentView(contentView);
 
-        Intent resultIntent = new Intent(mContext, LoginActivity.class);
+        Intent resultIntent = new Intent(mContext, MainActivity.class);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(mContext);
 

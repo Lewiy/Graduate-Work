@@ -341,4 +341,7 @@
 
     <string name="match_point_address">Maximum addresses</string>
 
+    <string name="waiting_operation">Operation is in progress</string>
+    <string name="pliase_wait">Please wait</string>
+
 </resources>

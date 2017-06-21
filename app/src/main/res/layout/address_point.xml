@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_weight="5">
+            android:layout_weight="9">
 
             <ImageView
                 android:layout_width="35dp"
@@ -45,6 +45,7 @@
                     android:id="@+id/address_point"
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
+                    android:maxLength="30"
                     android:maxLines="1" />
 
                 <ImageButton
@@ -52,7 +53,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="right|center_vertical"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="15dp"
                     android:background="@drawable/ic_pick_point" />
             </FrameLayout>
         </LinearLayout>

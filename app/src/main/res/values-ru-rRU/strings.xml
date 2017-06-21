@@ -149,9 +149,8 @@
         <item>Подтвержденные</item>
     </string-array>
     <string-array name="change_status_driver_accept">
-        <item>Ничего не выбрано</item>
-        <item>Отменить</item>
-        <item>Выполненныий</item>
+        <item>Принятый</item>
+        <item>Ожидание</item>
     </string-array>
 
 
@@ -349,17 +348,18 @@
 
 
     <string-array name="change_status_driver_waiting">
-        <item>Waiting</item>
-        <item>Processing</item>
-        <item>Cancelled</item>
-
+        <item>Ожидание</item>
+        <item>Исполнение</item>
     </string-array>
 
     <string-array name="change_status_driver_processing">
-        <item>Processing</item>
-        <item>Done</item>
+        <item>Исполнение</item>
+        <item>Готово</item>
     </string-array>
 
     <string name="order_list_menu">Список заказов</string>
+
+    <string name="waiting_operation">Выполнение операции</string>
+    <string name="pliase_wait">Пожалуйста подождите</string>
 
 </resources>

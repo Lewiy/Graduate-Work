@@ -62,7 +62,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyABwkE5VMlPKq74Sfdm4lVly3H46e193uY" />
 
-        <activity android:name=".view.activity.MainActivity">
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -71,33 +73,44 @@
         </activity>
         <activity
             android:name=".view.activity.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
-        <activity android:name=".view.activity.RegistrationActivity" />
-        <activity android:name=".view.activity.ResetPassword" />
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".view.activity.RegistrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.ResetPassword"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.ClientAccount"
             android:label="@string/title_activity_client_account"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity
             android:name=".view.activity.MapActivity"
-            android:label="@string/title_activity_client_account" />
+            android:label="@string/title_activity_client_account"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.viewDriver.DriverAccount"
             android:label="@string/title_activity_driver_account"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity
             android:name=".view.viewDriver.OrderInf"
-            android:label="@string/title_activity_driver_account" />
+            android:label="@string/title_activity_driver_account"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.RegistrationActivityFragm"
-            android:label="@string/registration" />
+            android:label="@string/registration"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.AddOrder"
             android:label="@string/title_activity_add_order"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustPan">
 
         </activity>
@@ -105,6 +118,7 @@
         <activity
             android:name=".view.activity.AddOrderUpdate"
             android:label="@string/title_update_order"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustPan">
 
         </activity>

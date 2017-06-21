@@ -1,5 +1,6 @@
 package com.lewgmail.romanenko.taxiservice.view.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -46,6 +47,7 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
     private UserPresenter userPresenter;
     private int indexCurrentFragment = 1;
     private boolean flagRunActivity = false;
+    private ProgressDialog progress;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,7 +76,7 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
         switch (getSupportFragmentManager().getBackStackEntryCount()) {
             case 1:
                 if (!checkBoxDriver && validationFragment(fragment)) {
-                    submit();
+                    submit(fragment);
                     flagRunActivity = true;
                 } else
                     fragmentClass = FragmentDriverRegist.class;
@@ -84,7 +86,7 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
                 break;
             case 3:
                 if (validationFragment(fragment)) {
-                    submit();
+                    submit(fragment);
                     flagRunActivity = true;
                 }
                 break;
@@ -136,7 +138,12 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
             registrationButton.setText(R.string.regist);
     }
 
-    private void submit() {
+    private void submit(Fragment fragment) {
+        progress = new ProgressDialog(fragment.getActivity());
+        progress.setTitle(getResources().getString(R.string.waiting_operation));
+        progress.setMessage(getResources().getString(R.string.pliase_wait));
+        progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
+        progress.show();
         userPresenter.registerUser(userRegistration);
     }
 
@@ -152,14 +159,22 @@ public class RegistrationActivityFragm extends AppCompatActivity implements Read
 
     @Override
     public void showError(int code, String fromServer) {
+        progress.dismiss();
         Toast.makeText(this, AdapterCodeFromServer.AdapterCode(code, this, fromServer), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void doneOperation(int responceCod, String fromServer) {
-        Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responceCod, this, fromServer), Toast.LENGTH_SHORT).show();
-        if (responceCod == 200)
+        if (responceCod != 200) {
+            progress.dismiss();
+            Toast.makeText(this, AdapterCodeFromServer.AdapterCode(responceCod, this, fromServer), Toast.LENGTH_SHORT).show();
+        }
+
+        if (responceCod == 200) {
+            progress.dismiss();
             runLogInActyvity();
+        }
+
     }
 
     /**
