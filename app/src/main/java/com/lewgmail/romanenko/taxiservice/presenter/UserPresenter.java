@@ -43,8 +43,8 @@ public class UserPresenter {
     private static final String SHARED_PREF_NAME = "Preferences";
     // Флаг, отвечающий за то, отправлен токен на сервер или нет
     private static final String PREF_DEVICE_TOKEN_SENT = "DeviceTokenSent";
-    private static final String GENYMOUTION = "fTNGJ3EycbQ:APA91bFlM_yER47_RFlt1zoW8jodcz7x3HI1aks7nZIpD5ZmaoG_TBUIWCbM" +
-            "L0owz2-jzZPImXxdkVksJ-ctp1ULYiz4gH5fRRQ1RdSkT-2OP19mqwuhGQATsnc_hkrqzea3jPoqWnvy";
+    private static final String GENYMOUTION = "f0VhB2dF2ac:APA91bGq90yMZufouOVLLSJYKBNNa0BzTxdPuSR2AxKxiZUCiu0nMbtu4" +
+            "bgG8GtEjJmxfTcen4EGtEL3FZR_JnbRkCke3sfpp_igssfJiJtqOEoe9HbeMqetzWO68t2O1KZcJgtSvWdp";
     private ManagerUser managerUser = new ManagerUser();
     private InfoUser view;
     private UserOperationInterface view2;
